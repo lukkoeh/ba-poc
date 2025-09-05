@@ -1,0 +1,169 @@
+{
+  "id": "20250902_134211_57b910",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 83,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_da",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rollenklärung",
+          "goal": "Verstehen, wie Security- und Data-Engineering-Rollen im Helios Datalake zusammenwirken.",
+          "sample_questions": [
+            "Können Sie kurz den Scope des Helios Datalake Projekts aus Ihrer Sicht zusammenfassen?",
+            "Welche Rolle spielen Sie im Tagesgeschäft, speziell in Bezug auf SLA-HEL-01?",
+            "Wie interagieren Sie cross-funktional zwischen Security und Data Engineering?"
+          ]
+        },
+        {
+          "title": "Security Controls & Least Privilege",
+          "goal": "Evaluieren, wie POL-SEC-001 in der ELT-Pipeline umgesetzt wird.",
+          "sample_questions": [
+            "Wie setzen Sie Least Privilege in Airflow DAGs um?",
+            "Welche JIT Access Mechanismen sind für dbt Deployments aktiv?",
+            "Wie werden Secrets für Kafka Ingestion gesichert?"
+          ]
+        },
+        {
+          "title": "Data Pipeline Reliability & Compliance",
+          "goal": "Verknüpfen von Security-Anforderungen mit Data Reliability und regulatorischen Vorgaben.",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass RPO und RTO im Ingestion Failover (RB-ING-042) eingehalten werden?",
+            "Welche Audit Trails existieren für Schema-Änderungen?",
+            "Wie werden Incident Response Playbooks zwischen Data und Security abgestimmt?"
+          ]
+        },
+        {
+          "title": "Cross-System Abhängigkeiten",
+          "goal": "Ermitteln komplexer Abhängigkeiten, z.B. zwischen Helios Datalake und Nimbus Observability.",
+          "sample_questions": [
+            "Wie nutzen Sie Observability-Daten (z.B. aus P-NIM) zur Security-Überwachung?",
+            "Gibt es Feedback-Loops zwischen Anomalie-Erkennung in Quasar Billing und Data Security?",
+            "Wie priorisieren Sie Fixes, wenn mehrere Subsysteme betroffen sind?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Risiken",
+          "goal": "Diskutieren, wie Entscheidungen unter Unsicherheit getroffen werden und welche Evidenz genutzt wird.",
+          "sample_questions": [
+            "Gab es Situationen, in denen Sie Availability gegen Security abwägen mussten?",
+            "Wie dokumentieren Sie solche Entscheidungen (RFCs, Tickets)?",
+            "Welche Lessons Learned aus einem Incident würden Sie in das Runbook RB-ING-042 aufnehmen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26657,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

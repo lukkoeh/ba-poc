@@ -1,0 +1,163 @@
+{
+  "id": "20250902_110651_e75bf5",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 50,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rolle",
+          "goal": "Frühes Verständnis der Rolle des Interviewees im Orion Edge Gateway Projekt und Abgleich mit SLA-Zielen",
+          "sample_questions": [
+            "Können Sie kurz Ihre Hauptverantwortlichkeiten im Orion Edge Gateway Build-Phase schildern?",
+            "Wie haben Sie die SLA-ORI-02 Vorgabe (p95 Latency < 120ms) in Ihre Arbeitspakete integriert?",
+            "Welche Schnittstellen zu anderen Teams (z.B. Security, SRE) sind für Sie im Projektalltag relevant?"
+          ]
+        },
+        {
+          "title": "Technische Umsetzung & Automatisierung",
+          "goal": "Tiefe Einblicke in IaC- und Pipeline-Ansätze zur Bereitstellung und Wartung des API Gateways gewinnen",
+          "sample_questions": [
+            "Welche IaC-Tools nutzen Sie für die Provisionierung der Gateway-Infrastruktur?",
+            "Wie haben Sie Rolling Deployments gemäß RB-GW-011 umgesetzt?",
+            "Können Sie ein Beispiel für eine Pipeline-Optimierung nennen, die die Deployment-Zeit reduziert hat?"
+          ]
+        },
+        {
+          "title": "Fehlerbehandlung & Incident Response",
+          "goal": "Verstehen, wie der Interviewee mit kritischen Bugs umgeht, z.B. MTLS Handshake Bug (GW-4821)",
+          "sample_questions": [
+            "Wie sind Sie beim Incident GW-4821 vorgegangen, um den MTLS Handshake Bug zu isolieren?",
+            "Welche Monitoring- und Observability-Maßnahmen haben Sie implementiert, um ähnliche Probleme früh zu erkennen?",
+            "Wie binden Sie Runbooks in den Incident Response Prozess ein?"
+          ]
+        },
+        {
+          "title": "Cross-Project Abhängigkeiten",
+          "goal": "Ermitteln, wie der Interviewee Abhängigkeiten zu Projekten wie Aegis IAM oder Poseidon Networking managt",
+          "sample_questions": [
+            "Wie haben Sie IAM-Policies aus Aegis IAM ins Orion Gateway integriert?",
+            "Gab es Herausforderungen bei der mTLS Policy Abstimmung mit Poseidon Networking?",
+            "Können Sie ein Beispiel geben, wo eine Änderung in einem anderen Projekt direkte Auswirkungen auf Orion hatte?"
+          ]
+        },
+        {
+          "title": "Optimierung & Skalierung",
+          "goal": "Diskussion zu Performance-Optimierungen und Skalierungsstrategien im Gateway",
+          "sample_questions": [
+            "Welche Metriken sind für Sie entscheidend, um zu entscheiden, ob ein Gateway-Knoten skaliert werden muss?",
+            "Wie priorisieren Sie Performance-Verbesserungen unter Berücksichtigung der BLAST_RADIUS-Reduktion?",
+            "Gab es Trade-offs zwischen Rate Limiting und User Experience?"
+          ]
+        },
+        {
+          "title": "Risikomanagement & Entscheidungen",
+          "goal": "Analyse von Entscheidungsprozessen und Abwägungen unter Beachtung der Unternehmenswerte und Policies",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass Änderungen den 'Safety First'-Wert erfüllen?",
+            "Welche Risiken sehen Sie bei der Einführung neuer Auth-Mechanismen im Gateway?",
+            "Können Sie eine Entscheidung beschreiben, bei der Sie bewusst eine SLA-Risikoabwägung vorgenommen haben?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27171,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

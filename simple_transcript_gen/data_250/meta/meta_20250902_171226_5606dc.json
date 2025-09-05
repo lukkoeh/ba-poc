@@ -1,0 +1,168 @@
+{
+  "id": "20250902_171226_5606dc",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 143,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_po",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & strategische Ziele",
+          "goal": "Frühes Verständnis der Helios Datalake-Initiative und ihrer Rolle im Gesamtportfolio klären",
+          "sample_questions": [
+            "Können Sie kurz beschreiben, wie Helios Datalake die Unternehmensmission 'Cloud-native Data & Platform Engineering für regulierte Industrien' unterstützt?",
+            "Welche Key-Metriken oder SLOs sind für Sie aktuell am kritischsten?",
+            "Wie ist die aktuelle Skalierungsstrategie im Kontext der Snowflake-Integration?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Abhängigkeiten",
+          "goal": "Verstehen, wie ELT, dbt-Modelle und Kafka-Ingestion zusammenspielen und welche Subsysteme involviert sind",
+          "sample_questions": [
+            "Wie greifen die dbt-Modelle auf die Kafka-Ingestion-Pipelines zu, und welche Latenzbudgets existieren?",
+            "Gibt es eine Verbindung zwischen Helios und anderen Projekten wie Borealis ETL oder Nimbus Observability?",
+            "Welche Runbooks oder RFCs (z. B. RB-ING-042, RFC-1287) sind für kritische Pfade maßgeblich?"
+          ]
+        },
+        {
+          "title": "Schnittstellen zu regulatorischen Anforderungen",
+          "goal": "Ermitteln, wie Compliance und Policies (z. B. POL-SEC-001) im Datalake-Design umgesetzt werden",
+          "sample_questions": [
+            "Welche spezifischen regulatorischen Anforderungen beeinflussen die Datenpartitionierungsstrategie?",
+            "Wie wird 'Least Privilege & JIT Access' in der Datenpipeline durchgesetzt?",
+            "Welche Audit-Artefakte oder SLA-Dokumente werden für externe Prüfungen herangezogen?"
+          ]
+        },
+        {
+          "title": "Performanceoptimierung & Skalierungsrisiken",
+          "goal": "Tiefe Einblicke in Bottlenecks, Optimierungspläne und deren Auswirkungen auf andere Systeme",
+          "sample_questions": [
+            "Wo sehen Sie aktuell die größten Performance-Bottlenecks im Helios Datalake?",
+            "Wie beeinflussen geplante Optimierungen andere Systeme, z. B. Quasar Billing oder Mercury Messaging?",
+            "Welche Lessons Learned aus RB-ING-042 haben die letzten Deployments geprägt?"
+          ]
+        },
+        {
+          "title": "Langfristige Vision & Trade-offs",
+          "goal": "Abschließende Diskussion zu strategischen Entscheidungen, Risiken und nachhaltiger Velocity",
+          "sample_questions": [
+            "Welche Architekturentscheidungen haben Sie bewusst zugunsten langfristiger Wartbarkeit getroffen, auch wenn kurzfristig Performance verloren ging?",
+            "Wie balancieren Sie das Risiko zwischen schnellen Releases und der Einhaltung von SLA-HEL-01?",
+            "Können Sie ein Beispiel geben, wo eine Policy oder ein SLA Sie zu einem signifikanten Trade-off gezwungen hat?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27621,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

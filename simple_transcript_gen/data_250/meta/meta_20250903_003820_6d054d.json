@@ -1,0 +1,154 @@
+{
+  "id": "20250903_003820_6d054d",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 215,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Role Clarity",
+          "goal": "Establish the interviewee’s understanding of Atlas Mobile’s pilot phase goals and their specific UX responsibilities.",
+          "sample_questions": [
+            "Can you walk me through your role in the Atlas Mobile project and how it ties into the pilot phase objectives?",
+            "What are the primary UX deliverables you are accountable for in this phase?",
+            "How do you measure success for your UX work in the context of our mission and values?"
+          ]
+        },
+        {
+          "title": "UX Research & Accessibility Approach",
+          "goal": "Explore the research methods, accessibility standards, and design system integration applied in the project.",
+          "sample_questions": [
+            "What user research methods have you employed to validate our cross-platform approach?",
+            "How have you ensured compliance with accessibility requirements during the pilot?",
+            "Can you describe how the DS-ATLAS v2 Tokenized Components have influenced your design decisions?"
+          ]
+        },
+        {
+          "title": "Feature Flags & Offline Sync Design",
+          "goal": "Understand the UX considerations for implementing feature flags and offline sync capabilities.",
+          "sample_questions": [
+            "How do you prioritize which features to expose via flags during the pilot?",
+            "What UX challenges have you encountered with offline sync, and how have you addressed them?",
+            "Have you coordinated with SRE or Platform teams to align UX with technical constraints for offline mode?"
+          ]
+        },
+        {
+          "title": "Cross-team Collaboration & Evidence-based Decisions",
+          "goal": "Assess collaboration with other departments and the use of runbooks, RFCs, and SLAs in UX decision-making.",
+          "sample_questions": [
+            "Can you give an example of a decision where input from the Mobile and Security departments was critical?",
+            "How do you incorporate artifacts like runbooks or RFCs into your UX planning?",
+            "Have you used any SLA requirements to influence design trade-offs?"
+          ]
+        },
+        {
+          "title": "Risk Management & Iteration Planning",
+          "goal": "Discuss how risks are identified, documented, and mitigated in the UX domain, especially given pilot constraints.",
+          "sample_questions": [
+            "What are the top UX-related risks you foresee as we transition from pilot to build/scale?",
+            "How do you document and communicate these risks to stakeholders?",
+            "Can you share an example where you had to choose between two UX approaches due to a risk constraint, and what evidence supported your choice?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26183,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

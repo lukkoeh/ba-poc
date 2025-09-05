@@ -1,0 +1,154 @@
+{
+  "id": "20250902_131027_f08f1b",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 76,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Context & Current State",
+          "goal": "Establish the current operational baseline of Aegis IAM and surface any known security posture facts.",
+          "sample_questions": [
+            "Can you walk me through the current Aegis IAM architecture and its enforcement points?",
+            "What are the most recent audit findings from AUD-24-Q2 that impact our RBAC or JIT access?",
+            "How do you ensure our implementation aligns with POL-SEC-001 'Least Privilege & JIT Access'?"
+          ]
+        },
+        {
+          "title": "Threat Modeling & Vulnerability Management",
+          "goal": "Explore how threats are identified, modeled, and mitigated in the IAM system.",
+          "sample_questions": [
+            "Describe your process for threat modeling changes proposed in RFC-903.",
+            "How are vulnerabilities in IAM components tracked and prioritized?",
+            "What is your approach to limiting BLAST_RADIUS if a privileged token is compromised?"
+          ]
+        },
+        {
+          "title": "Cross-System Dependencies",
+          "goal": "Identify and assess security implications of Aegis IAM's integration with other projects.",
+          "sample_questions": [
+            "Which other Novereon projects consume Aegis IAM for auth and how do you handle their varying trust boundaries?",
+            "Can you give an example of an incident where IAM changes affected another system such as Orion Edge Gateway?",
+            "How do you validate that service-to-service mTLS policies from Poseidon Networking are enforced for IAM?"
+          ]
+        },
+        {
+          "title": "Incident Response & Evidence",
+          "goal": "Understand incident handling procedures and evidence-based decision making.",
+          "sample_questions": [
+            "Walk me through RB-IAM-075 and how it was applied in the last emergency access revocation.",
+            "What evidence do you collect during an IAM breach investigation to satisfy compliance audits?",
+            "How do you ensure incident learnings are integrated into runbooks and RFC updates?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Risk Decisions",
+          "goal": "Discuss recent or upcoming decisions involving security trade-offs, backed by evidence.",
+          "sample_questions": [
+            "Describe a case where you had to balance operational continuity with strict enforcement of least privilege.",
+            "What were the alternative designs considered for JIT access provisioning and why were they rejected?",
+            "How do you quantify and communicate residual risk to stakeholders?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27241,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

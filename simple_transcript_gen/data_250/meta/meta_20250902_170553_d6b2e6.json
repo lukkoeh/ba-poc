@@ -1,0 +1,163 @@
+{
+  "id": "20250902_170553_d6b2e6",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 138,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rolle",
+          "goal": "Verstehen, wie der Interviewee in das Phoenix Feature Store Projekt eingebunden ist und welche Verantwortlichkeiten er im Build-Phase-Kontext hat.",
+          "sample_questions": [
+            "Können Sie kurz umreißen, wie der Phoenix Feature Store in unsere Gesamtplattform integriert ist?",
+            "Welche Hauptaufgaben übernehmen Sie aktuell im Build-Prozess?",
+            "Wie arbeiten Sie mit den Data- und Platform-Teams zusammen?"
+          ]
+        },
+        {
+          "title": "Technische Architektur und Pipelines",
+          "goal": "Detaillierte Einblicke in die Architektur des Feature Stores, seine Online/Offline Serving-Mechanismen und die Drift-Monitoring-Strategien gewinnen.",
+          "sample_questions": [
+            "Wie ist der Datenfluss zwischen Online-Serving und Offline-Batch-Serving gestaltet?",
+            "Welche Technologien oder Frameworks nutzen Sie für das Drift Monitoring?",
+            "Wie stellen Sie sicher, dass Feature-Definitionen konsistent zwischen Training und Serving bleiben?"
+          ]
+        },
+        {
+          "title": "CI/CD für Modelle und Features",
+          "goal": "Verstehen, wie Feature- und Model-Deployments automatisiert und versioniert werden.",
+          "sample_questions": [
+            "Wie läuft bei Ihnen der CI/CD-Prozess für Feature-Definitionen ab?",
+            "Welche Tests und Validierungen sind vor einem Deployment obligatorisch?",
+            "Wie gehen Sie mit Rollbacks um, insbesondere in kritischen Echtzeit-Anwendungen?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Projekten",
+          "goal": "Aufzeigen von Abhängigkeiten und Schnittstellen zu anderen Projekten im Portfolio.",
+          "sample_questions": [
+            "Gibt es direkte Integrationen mit dem Helios Datalake oder Mercury Messaging?",
+            "Wie beeinflusst die mTLS-Policy aus Poseidon Networking Ihr Deployment?",
+            "Welche Lessons Learned aus Aegis IAM sind in Phoenix eingeflossen?"
+          ]
+        },
+        {
+          "title": "Monitoring, SLAs und Betrieb",
+          "goal": "Verstehen, wie im Betrieb SLOs/SLA-Parameter überwacht und eingehalten werden.",
+          "sample_questions": [
+            "Welche Metriken sind für Sie im Betrieb des Feature Stores kritisch?",
+            "Wie reagieren Sie auf Drift-Alerts, und wie ist der Runbook-Prozess gestaltet?",
+            "Welche SLAs gelten für Feature Serving, und wie messen Sie deren Einhaltung?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und Entscheidungen",
+          "goal": "Erfassen, welche technischen und organisatorischen Entscheidungen getroffen wurden, um Risiken zu minimieren.",
+          "sample_questions": [
+            "Welche größten Risiken sehen Sie aktuell in der Build-Phase?",
+            "Gab es Trade-offs zwischen Latenz und Konsistenz, und wie wurden diese adressiert?",
+            "Können Sie ein Beispiel nennen, wo ein Runbook oder eine RFC maßgeblich eine kritische Entscheidung beeinflusst hat?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29275,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

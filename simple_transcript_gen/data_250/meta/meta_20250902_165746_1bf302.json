@@ -1,0 +1,163 @@
+{
+  "id": "20250902_165746_1bf302",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 130,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction and Role Context",
+          "goal": "Establish rapport and understand the interviewee's background, responsibilities, and connection to Phoenix Feature Store.",
+          "sample_questions": [
+            "Can you tell me about your current role and how it connects to the Phoenix Feature Store project?",
+            "What are your primary responsibilities in the build phase of this project?",
+            "How do you typically interact with other teams like Data or SRE in your day-to-day work?"
+          ]
+        },
+        {
+          "title": "Current Workflows and Tooling",
+          "goal": "Explore the processes, CI/CD pipelines, and monitoring tools used for feature store development and deployment.",
+          "sample_questions": [
+            "Could you walk me through the model CI/CD pipeline you have in place for Phoenix?",
+            "What kind of drift monitoring strategies are you implementing?",
+            "How do you validate features before they go live in the online store?"
+          ]
+        },
+        {
+          "title": "Cross-Team Collaboration",
+          "goal": "Understand collaboration patterns, dependencies, and communication with other subsystems and teams.",
+          "sample_questions": [
+            "How do you coordinate with the Data team for feature ingestion from upstream sources?",
+            "Can you share an example where integration with an observability tool like Nimbus helped you catch an issue?",
+            "What are some challenges in aligning feature definitions across offline and online systems?"
+          ]
+        },
+        {
+          "title": "User Needs and UX Considerations",
+          "goal": "Identify how end-users (data scientists, analysts) interact with the feature store and their pain points.",
+          "sample_questions": [
+            "How do your end-users discover and understand available features?",
+            "Have you noticed any recurring UX issues in the feature retrieval process?",
+            "What feedback mechanisms are in place for users to request new features or report issues?"
+          ]
+        },
+        {
+          "title": "Risk Management and Tradeoffs",
+          "goal": "Discuss known risks, mitigation strategies, and tradeoffs made during the build phase.",
+          "sample_questions": [
+            "What are the main risks you foresee in operating Phoenix at scale?",
+            "Can you describe a tradeoff you had to make between performance and maintainability?",
+            "How do you ensure compliance with internal policies like POL-SEC-001 in the context of feature access?"
+          ]
+        },
+        {
+          "title": "Future Improvements",
+          "goal": "Explore potential enhancements, automation opportunities, and long-term vision for Phoenix Feature Store.",
+          "sample_questions": [
+            "If you had unlimited resources, what improvements would you prioritize for Phoenix?",
+            "Are there any upcoming RFCs or runbooks that will significantly change your workflows?",
+            "How do you envision the role of Phoenix evolving over the next year?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26140,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

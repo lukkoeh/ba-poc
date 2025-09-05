@@ -1,0 +1,154 @@
+{
+  "id": "20250903_002702_922a02",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 202,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rolle des UX-Teams",
+          "goal": "Verstehen, wie der UX Lead in Atlas Mobile eingebunden ist und welche Kernverantwortlichkeiten bestehen.",
+          "sample_questions": [
+            "Können Sie kurz umreißen, wie Ihr Team in die Pilotphase von Atlas Mobile integriert ist?",
+            "Welche UX-spezifischen Deliverables haben Sie für diesen Meilenstein definiert?",
+            "Wie stellen Sie sicher, dass UX-Anforderungen mit den SLA-Zielen des Projekts abgestimmt sind?"
+          ]
+        },
+        {
+          "title": "Designsystem & Feature Flags",
+          "goal": "Erfassen, wie das Designsystem DS-ATLAS v2 in Verbindung mit Feature Flags eingesetzt wird.",
+          "sample_questions": [
+            "Wie nutzen Sie Feature Flags, um UI-Änderungen schrittweise auszurollen?",
+            "Gibt es Prozesse, um die Konsistenz des Designsystems während experimenteller Releases zu sichern?",
+            "Wie wird das Zusammenspiel zwischen DS-ATLAS v2 und der Offline-Sync-Logik getestet?"
+          ]
+        },
+        {
+          "title": "Barrierefreiheit & Nutzerforschung",
+          "goal": "Tiefe Einblicke in Accessibility-Strategien und Research-Methoden gewinnen.",
+          "sample_questions": [
+            "Welche Accessibility-Standards setzen Sie aktuell um und wie messen Sie deren Einhaltung?",
+            "Wie binden Sie Nutzerforschungsergebnisse in schnelle Iterationen ein?",
+            "Gab es Konflikte zwischen Barrierefreiheit und Performance-Anforderungen?"
+          ]
+        },
+        {
+          "title": "Schnittstellen zu anderen Projekten",
+          "goal": "Verstehen, wie Atlas Mobile mit anderen Novereon-Systemen interagiert.",
+          "sample_questions": [
+            "Gibt es Abhängigkeiten zur Aegis IAM Lösung für Authentifizierung?",
+            "Wie fließen Observability-Daten aus Nimbus in Ihre UX-Entscheidungen ein?",
+            "Inwiefern beeinflussen FinOps-Vorgaben aus Vesta Ihre Designentscheidungen?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Lessons Learned",
+          "goal": "Späte Phase: Entscheidungen, Risiken und dokumentierte Erkenntnisse besprechen.",
+          "sample_questions": [
+            "Welche kritischen UX-Entscheidungen haben Sie in der Pilotphase getroffen und warum?",
+            "Gab es Situationen, in denen Sie bewusst gegen eine bestehende Runbook-Empfehlung entschieden haben?",
+            "Welche Risiken sehen Sie für den Rollout und wie dokumentieren Sie diese (z.B. in RFCs oder Tickets)?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29209,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

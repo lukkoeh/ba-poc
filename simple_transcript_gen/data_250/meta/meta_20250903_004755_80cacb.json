@@ -1,0 +1,168 @@
+{
+  "id": "20250903_004755_80cacb",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 225,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_ux",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Core Responsibilities",
+          "goal": "Understand the SRE's and UX Lead's roles in Nimbus Observability, including ownership boundaries and adherence to company values.",
+          "sample_questions": [
+            "Can you outline your specific responsibilities in the Nimbus Observability build phase?",
+            "How do you ensure alignment with the 'Safety First' and 'Evidence over Hype' values during implementation?",
+            "Which SLAs or SLOs are you directly accountable for?"
+          ]
+        },
+        {
+          "title": "Runbook-Driven Operations",
+          "goal": "Evaluate the maturity and completeness of operational runbooks and their integration into daily workflows.",
+          "sample_questions": [
+            "Walk me through RB-OBS-033 Alert Fatigue Tuning—how was it developed and how do you keep it current?",
+            "How do you validate runbook steps during incident simulations?",
+            "What’s your approach when a runbook conflicts with real-time incident data?"
+          ]
+        },
+        {
+          "title": "Cross-Subsystem Dependencies",
+          "goal": "Probe the understanding of how Nimbus Observability interacts with other projects and systems, especially during incidents.",
+          "sample_questions": [
+            "How does the OpenTelemetry pipeline integrate with the Helios Datalake ingestion process?",
+            "Can you give an example of a cross-project dependency that affected an incident response?",
+            "What unwritten coordination rules exist between SRE and UX when incident analytics impact UI dashboards?"
+          ]
+        },
+        {
+          "title": "Quality and Risk Management",
+          "goal": "Assess awareness of quality gates, risk tradeoffs, and evidence-based decision-making in observability tooling.",
+          "sample_questions": [
+            "What quality metrics do you monitor to ensure the observability platform meets SLA-HEL-01 or SLA-ORI-02 style targets?",
+            "Describe a decision where you had to balance alert coverage against noise.",
+            "How do you document and communicate known risks in the observability stack?"
+          ]
+        },
+        {
+          "title": "Incident Review and Continuous Improvement",
+          "goal": "Understand the feedback loops from incidents into design and operational practices.",
+          "sample_questions": [
+            "Can you walk me through a recent incident, the root cause, and how the runbooks were updated as a result?",
+            "How are UX considerations factored into post-incident reviews?",
+            "What’s the process for proposing an RFC to improve observability based on incident learnings?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26346,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "id": "20250902_164705_62e4cf",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 120,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_arch",
+      "role": "Cloud Architect",
+      "traits": [
+        "tradeoff",
+        "cost_perf",
+        "multi-region"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-TIT",
+      "name": "Titan DR",
+      "phase": "Drill",
+      "scope": "Disaster Recovery, multi-region failover"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_arch",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rollenverständnis",
+          "goal": "Ein grundlegendes Verständnis für Titan DR und die individuellen Verantwortlichkeiten der Befragten erhalten.",
+          "sample_questions": [
+            "Können Sie mir beschreiben, wie Titan DR aktuell in Ihrer Umgebung eingebettet ist?",
+            "Welche spezifischen Aufgaben übernehmen Sie im Rahmen der DR-Drills?",
+            "Wie interagieren SRE und Architekt im Notfall-Szenario?"
+          ]
+        },
+        {
+          "title": "Runbooks und Einsatzszenarien",
+          "goal": "Verstehen, wie dokumentierte Verfahren wie RB-DR-001 genutzt werden und wie diese in realen Ausfällen greifen.",
+          "sample_questions": [
+            "Wie oft greifen Sie auf das Runbook RB-DR-001 zurück?",
+            "Gab es Situationen, in denen das Runbook angepasst werden musste?",
+            "Welche typischen Stolpersteine treten bei der Umsetzung auf?"
+          ]
+        },
+        {
+          "title": "Multi-Region Architektur und Abhängigkeiten",
+          "goal": "Erforschen, wie die Multi-Region-Strategie mit anderen Plattformen und Projekten verzahnt ist.",
+          "sample_questions": [
+            "Welche anderen Systeme müssen beim Failover berücksichtigt werden?",
+            "Gab es schon Kettenreaktionen über mehrere Subsysteme hinweg?",
+            "Wie spielen RTO und RPO Ziele hier zusammen?"
+          ]
+        },
+        {
+          "title": "Erfahrungen aus GameDays und Tests",
+          "goal": "Erkenntnisse aus TEST-DR-2025-Q1 und ähnlichen Übungen erfassen.",
+          "sample_questions": [
+            "Was waren die wichtigsten Findings aus dem letzten GameDay?",
+            "Wie haben Sie die Lessons Learned umgesetzt?",
+            "Gab es Überraschungen in den Testresultaten?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Risiken und Optimierungen",
+          "goal": "Tiefe Einblicke in getroffene Architektur- und Betriebsentscheidungen erhalten und deren Risiken evaluieren.",
+          "sample_questions": [
+            "Welche Trade-offs mussten Sie bei der Multi-Region-Strategie eingehen?",
+            "Wie balancieren Sie Kosten und Performance im DR-Kontext?",
+            "Welche Risiken sehen Sie aktuell noch als nicht ausreichend mitigiert?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28156,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

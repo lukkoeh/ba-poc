@@ -1,0 +1,177 @@
+{
+  "id": "20250902_175601_5e4e1b",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 185,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_qa",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context and Role Definition",
+          "goal": "Establish the candidate's understanding of Hera QA Platform scope and their role in managing it.",
+          "sample_questions": [
+            "Can you walk me through the main objectives of the Hera QA Platform and how they align with Novereon’s mission?",
+            "What was your specific scope of responsibility in the Build phase for Hera?",
+            "How did you ensure alignment between QA and other departments during early planning?"
+          ]
+        },
+        {
+          "title": "Stakeholder Management and Communication",
+          "goal": "Evaluate ability to manage cross-functional stakeholders and ensure traceability of QA requirements.",
+          "sample_questions": [
+            "Describe the key stakeholders for Hera and your approach to managing their expectations.",
+            "How did you integrate feedback from the Architecture and SRE teams into the QA strategy?",
+            "What mechanisms did you use to communicate risk-based testing priorities to non-technical stakeholders?"
+          ]
+        },
+        {
+          "title": "Risk-Based Testing Strategy",
+          "goal": "Assess depth of knowledge in POL-QA-014 and linking QA strategy to project risk profile.",
+          "sample_questions": [
+            "How did you apply POL-QA-014 in the context of Hera’s flaky test analytics?",
+            "Can you give an example where you adjusted test coverage based on changing risk assessments?",
+            "What criteria did you use to prioritize high-risk features for early testing?"
+          ]
+        },
+        {
+          "title": "Integration with Other Projects",
+          "goal": "Understand ability to handle dependencies and integrations with other Novereon platforms.",
+          "sample_questions": [
+            "Were there dependencies on the Nimbus Observability or Helios Datalake projects? How did you manage them?",
+            "How did you ensure that test orchestration metrics were compatible with the SLO definitions from other teams?",
+            "Describe a situation where a change in another project’s RFC required adjustments to Hera’s QA plan."
+          ]
+        },
+        {
+          "title": "Decision Making and Tradeoffs",
+          "goal": "Probe for examples of tradeoff decisions and risk mitigation with evidence from project artifacts.",
+          "sample_questions": [
+            "Describe a tradeoff you made between test execution time and coverage. What evidence supported your choice?",
+            "How did you decide when to accept a flaky test versus when to fix it immediately?",
+            "Can you walk me through a runbook or RFC you referenced to support a QA-related decision?"
+          ]
+        },
+        {
+          "title": "Retrospective and Continuous Improvement",
+          "goal": "Identify ability to reflect on project outcomes and improve processes.",
+          "sample_questions": [
+            "Looking back, what would you change in Hera’s QA approach to improve efficiency?",
+            "How did you capture lessons learned and feed them back into QA runbooks or RFCs?",
+            "What metrics do you believe were most indicative of Hera’s QA success?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26863,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

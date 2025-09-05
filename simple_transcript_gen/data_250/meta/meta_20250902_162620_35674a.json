@@ -1,0 +1,154 @@
+{
+  "id": "20250902_162620_35674a",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 103,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Current IAM Security Posture",
+          "goal": "Understand the present state of the Aegis IAM system, including controls, monitoring, and adherence to company policies like POL-SEC-001.",
+          "sample_questions": [
+            "Can you describe the current RBAC model and how it aligns with POL-SEC-001?",
+            "What monitoring and alerting mechanisms are in place for unauthorized access attempts?",
+            "How often do you perform access reviews, and what triggers an out-of-cycle review?"
+          ]
+        },
+        {
+          "title": "Incident Handling and Runbook Efficacy",
+          "goal": "Assess how incidents are handled, with reference to RB-IAM-075, and determine if runbooks are effective and up to date.",
+          "sample_questions": [
+            "Walk me through the last time you used RB-IAM-075 for an emergency access revocation.",
+            "How do you ensure runbook steps are consistent with the latest RFC-903 Policy-as-Code conventions?",
+            "Have you encountered cases where the runbook was insufficient or outdated? How did you handle that?"
+          ]
+        },
+        {
+          "title": "Integration with Other Systems",
+          "goal": "Explore how Aegis IAM integrates with other Novereon projects, assessing security implications and dependencies.",
+          "sample_questions": [
+            "How does Aegis IAM integrate with Orion Edge Gateway for mTLS authentication?",
+            "What dependencies exist between IAM and the Nimbus Observability project for security event logging?",
+            "Have you identified any cross-project vulnerabilities or misconfigurations?"
+          ]
+        },
+        {
+          "title": "Policy Enforcement and Automation",
+          "goal": "Evaluate automation in policy enforcement, looking at least privilege, JIT access, and compliance evidence.",
+          "sample_questions": [
+            "How is JIT access provisioned and revoked automatically?",
+            "What automated checks are in place to ensure least privilege is maintained over time?",
+            "How do you collect and store compliance evidence for audits like AUD-24-Q2?"
+          ]
+        },
+        {
+          "title": "Risk Assessment and Future Improvements",
+          "goal": "Identify known risks, possible mitigations, and tradeoffs for future IAM enhancements.",
+          "sample_questions": [
+            "What’s the most significant current risk in Aegis IAM operations?",
+            "If you had to choose between reducing RTO or RPO for IAM, which would you prioritize and why?",
+            "What are your top priorities for improving security without impacting usability?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26369,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

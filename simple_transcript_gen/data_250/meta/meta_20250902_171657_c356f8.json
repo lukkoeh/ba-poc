@@ -1,0 +1,169 @@
+{
+  "id": "20250902_171657_c356f8",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 147,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_da",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rollenverständnis",
+          "goal": "Ein gemeinsames Verständnis über den Helios Datalake, seine Ziele und die Rollen der Beteiligten herstellen.",
+          "sample_questions": [
+            "Können Sie mir kurz beschreiben, wie der Helios Datalake aktuell in die Gesamtplattform eingebettet ist?",
+            "Welche Hauptaufgaben haben Sie als UX Lead in diesem Projekt übernommen?",
+            "Wie interagieren Sie mit den Data Engineers im Tagesgeschäft?"
+          ]
+        },
+        {
+          "title": "Nutzeranforderungen und Datenzugänglichkeit",
+          "goal": "Verstehen, wie Nutzeranforderungen erhoben werden und wie diese die Datenmodellierung und Interfaces beeinflussen.",
+          "sample_questions": [
+            "Wie erfassen Sie die Bedürfnisse der Endnutzer, die mit den Datalake-Interfaces arbeiten?",
+            "Gibt es spezifische Accessibility-Anforderungen, die den ELT-Prozess oder dbt-Modelle beeinflussen?",
+            "Welche Herausforderungen gibt es bei der Übersetzung von komplexen Datenstrukturen in verständliche UI-Elemente?"
+          ]
+        },
+        {
+          "title": "Technische Schnittstellen und UX-Implikationen",
+          "goal": "Die Auswirkungen technischer Entscheidungen (z. B. Partitionierungsstrategie, Failover) auf UX-Design und Nutzererlebnis ermitteln.",
+          "sample_questions": [
+            "Wie beeinflusst die in RFC-1287 dokumentierte Partitionierungsstrategie Ihre Designentscheidungen?",
+            "Können Sie Beispiele nennen, wo technische Limits aus Kafka-Ingestion Ihre UI-Konzeption verändert haben?",
+            "Wie gehen Sie mit Latenz oder Ausfällen um, um Nutzerfeedback klar und hilfreich zu gestalten?"
+          ]
+        },
+        {
+          "title": "Kollaboration und Prozessverbesserungen",
+          "goal": "Ermitteln, wie interdisziplinäre Zusammenarbeit funktioniert und wo Optimierungen möglich sind.",
+          "sample_questions": [
+            "Welche Tools und Meetings helfen am meisten, um UX und Data Engineering synchron zu halten?",
+            "Gab es Situationen, in denen Runbooks wie RB-ING-042 Ihre Arbeit direkt beeinflusst haben?",
+            "Wo sehen Sie Potenzial, um die Übergaben zwischen UX und Data Engineering zu verbessern?"
+          ]
+        },
+        {
+          "title": "Zukünftige Risiken und Entscheidungsfindung",
+          "goal": "Langfristige Risiken, Trade-offs und geplante Entscheidungen mit Blick auf UX und technische Machbarkeit beleuchten.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie für die Nutzererfahrung, wenn wir die SLA-HEL-01 Zielverfügbarkeit nicht erreichen?",
+            "Wie priorisieren Sie zwischen Feature Requests und technischen Schulden im Design?",
+            "Können Sie ein Beispiel nennen, wo Sie eine Designentscheidung aufgrund von Datenlatenz oder RPO/RTO-Anforderungen ändern mussten?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28651,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "id": "20250902_180012_7eca95",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 189,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Role Context",
+          "goal": "Establish interviewee's role in Vesta FinOps operations and relation to Novereon Systems' mission and values.",
+          "sample_questions": [
+            "Can you describe your day-to-day responsibilities within the Vesta FinOps project?",
+            "How does your FinOps work align with our values like 'Safety First' and 'Sustainable Velocity'?",
+            "What are your primary KPIs in the Operate phase of Vesta FinOps?"
+          ]
+        },
+        {
+          "title": "Current State of Cloud Cost Optimization",
+          "goal": "Understand the operational metrics, tooling, and processes in place for cost optimization.",
+          "sample_questions": [
+            "Which cost optimization levers have been most effective in the last quarter?",
+            "How do you track adherence to policy POL-FIN-007?",
+            "Can you walk me through the RB-FIN-007 Idle Resource Reaper runbook and its impact?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Identify how Vesta FinOps interacts with other projects and departments.",
+          "sample_questions": [
+            "How does Vesta FinOps integrate with Quasar Billing for anomaly detection?",
+            "Can you explain a scenario where cost data from Nimbus Observability informed a FinOps decision?",
+            "What is the workflow when a cost anomaly triggers a ticket in another project, such as BIL-9324?"
+          ]
+        },
+        {
+          "title": "Forecasting & Budgeting",
+          "goal": "Explore methods for cost forecasting, budgets, and quota management.",
+          "sample_questions": [
+            "What forecasting models are you currently using for multi-region deployments?",
+            "How do you apply the RFC-1502 Resource Quotas & Budgets in operational planning?",
+            "Can you give an example of adjusting budgets mid-cycle due to unexpected consumption?"
+          ]
+        },
+        {
+          "title": "Risk Management & Trade-offs",
+          "goal": "Discuss risk scenarios, trade-offs, and evidence-based decision-making.",
+          "sample_questions": [
+            "What risks do you see if we tighten quotas for Atlas Mobile in pilot phase?",
+            "How do you balance cost optimization against SLA commitments, e.g., SLA-ORI-02?",
+            "Can you provide an example where cost-saving measures conflicted with performance targets and how you resolved it?"
+          ]
+        },
+        {
+          "title": "Continuous Improvement & Closing",
+          "goal": "Identify opportunities for process improvements and conclude the interview.",
+          "sample_questions": [
+            "Which runbooks or RFCs would you prioritize for revision in the next quarter?",
+            "What metrics would you add to better capture FinOps impact?",
+            "Any final thoughts on scaling Vesta FinOps practices across more projects?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26393,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "id": "20250902_172218_b28c0a",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 154,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Intro & Context Setting",
+          "goal": "Establish the interviewee's background, role in Phoenix Feature Store, and key responsibilities.",
+          "sample_questions": [
+            "Can you walk me through your role as an MLOps Engineer on the Phoenix Feature Store project?",
+            "What were the main objectives of the feature store in its current build phase?",
+            "How does your work tie into the broader mission of Novereon Systems?"
+          ]
+        },
+        {
+          "title": "Architecture & Data Pipelines",
+          "goal": "Understand the technical architecture for online/offline serving and how drift monitoring is integrated.",
+          "sample_questions": [
+            "Could you describe the ingestion pipeline from raw data to features ready for serving?",
+            "How are you ensuring feature consistency between online and offline stores?",
+            "What mechanisms or tools are in place for drift detection and alerting?"
+          ]
+        },
+        {
+          "title": "Integration with Other Systems",
+          "goal": "Explore dependencies and integrations with other portfolio projects and cross-departmental systems.",
+          "sample_questions": [
+            "How does Phoenix Feature Store integrate with Helios Datalake or Mercury Messaging?",
+            "What are the key challenges in aligning with the Orion Edge Gateway for API serving?",
+            "Can you give an example of a cross-project dependency that influenced your design choices?"
+          ]
+        },
+        {
+          "title": "CI/CD for ML Models",
+          "goal": "Dive into the model lifecycle management, deployment strategies, and rollback procedures.",
+          "sample_questions": [
+            "What does your model CI/CD pipeline look like for Phoenix?",
+            "How do you handle schema evolution in features without breaking downstream models?",
+            "Could you walk me through a recent rollback scenario using RB-FS-034?"
+          ]
+        },
+        {
+          "title": "Monitoring, SLOs & Incident Response",
+          "goal": "Investigate operational metrics, SLO adherence, and incident management processes.",
+          "sample_questions": [
+            "What SLOs are defined for feature serving latency and availability?",
+            "How do you respond to drift alerts that breach thresholds?",
+            "Can you share an incident post-mortem where feature store performance impacted ML outcomes?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Future Plans",
+          "goal": "Understand decisions made under constraints, risks identified, and roadmap considerations.",
+          "sample_questions": [
+            "What trade-offs did you face when choosing between batch and streaming feature ingestion?",
+            "How do you mitigate risks related to data privacy and compliance in feature storage?",
+            "What are the next steps for Phoenix as it moves towards scale?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28192,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

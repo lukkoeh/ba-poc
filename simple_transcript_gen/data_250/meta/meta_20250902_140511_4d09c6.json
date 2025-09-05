@@ -1,0 +1,163 @@
+{
+  "id": "20250902_140511_4d09c6",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 88,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Context",
+          "goal": "Establish rapport and get high-level overview of the interviewee's role in Orion Edge Gateway project",
+          "sample_questions": [
+            "Can you briefly describe your role and responsibilities in the Orion Edge Gateway build phase?",
+            "What are the primary reliability objectives for the gateway service?",
+            "Which runbooks or SLAs are most relevant to your daily work on this project?"
+          ]
+        },
+        {
+          "title": "Incident Response & Runbook Usage",
+          "goal": "Understand how the interviewee applies runbooks like RB-GW-011 during incidents",
+          "sample_questions": [
+            "Walk me through a recent deployment incident and how you applied RB-GW-011.",
+            "How do you verify that rolling deployments meet SLA-ORI-02 latency requirements?",
+            "What heuristics do you use when runbook guidance is incomplete?"
+          ]
+        },
+        {
+          "title": "Cross-Subsystem Dependencies",
+          "goal": "Explore how Orion Edge Gateway interacts with IAM and Observability systems",
+          "sample_questions": [
+            "Can you explain a scenario where a gateway auth integration issue required coordination with Aegis IAM?",
+            "How do you leverage Nimbus Observability traces to debug p95 latency breaches?",
+            "Describe a time when a change in IAM policy-as-code impacted gateway rate limiting."
+          ]
+        },
+        {
+          "title": "Reliability Engineering Practices",
+          "goal": "Discuss preventive measures, SLO tracking, and failure budget management",
+          "sample_questions": [
+            "How do you monitor and adjust rate limiting to protect upstream services without violating SLAs?",
+            "What’s your process for calculating and consuming failure budgets for the gateway?",
+            "How do you balance deployment velocity with safety-first values?"
+          ]
+        },
+        {
+          "title": "Decision Making & Tradeoffs",
+          "goal": "Understand critical choices made under constraints and their long-term impact",
+          "sample_questions": [
+            "Describe a time you had to choose between a quick hotfix and a planned rollout—what evidence did you use?",
+            "How do you assess the blast radius of a gateway config change?",
+            "What risks do you see in the current blue/green deployment approach for Orion?"
+          ]
+        },
+        {
+          "title": "Closing & Reflection",
+          "goal": "Summarize key points, capture lessons learned, and identify improvement areas",
+          "sample_questions": [
+            "What would you change in the existing runbook RB-GW-011 based on recent incidents?",
+            "What’s your top recommendation for improving Orion Gateway reliability?",
+            "Any final thoughts on how cross-team collaboration has worked so far?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25821,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

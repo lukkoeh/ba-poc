@@ -1,0 +1,151 @@
+{
+  "id": "20250902_131504_0b327c",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 77,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_da"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_pm",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & Sicherheitskontext",
+          "goal": "Frühzeitig klären, wie der Helios Datalake derzeit aufgebaut ist, welche Sicherheitsanforderungen bestehen und wie sie in die Architektur eingebettet sind.",
+          "sample_questions": [
+            "Können Sie mir bitte einen Überblick über die aktuelle ELT-Pipeline geben und speziell, wo Sicherheitskontrollen eingebaut sind?",
+            "How do you ensure that dbt models adhere to least privilege principles?",
+            "Welche SLA- oder SLO-Verpflichtungen (z.B. SLA-HEL-01) beeinflussen Ihre Sicherheitsentscheidungen?"
+          ]
+        },
+        {
+          "title": "Integration & Abhängigkeiten",
+          "goal": "Verstehen, wie Helios mit anderen Plattformen und Projekten interagiert, um potenzielle Sicherheitslücken durch Schnittstellen zu identifizieren.",
+          "sample_questions": [
+            "Wie ist die Kafka-Ingestion mit den Observability Pipelines (z. B. Nimbus) verknüpft?",
+            "Are there any cross-project dependencies that could widen the BLAST_RADIUS in case of a breach?",
+            "Welche Runbooks (z. B. RB-ING-042) beinhalten Security-relevante Schritte, und wie werden diese im Incident-Fall getriggert?"
+          ]
+        },
+        {
+          "title": "Risikobewertung & Trade-offs",
+          "goal": "Am Ende konkrete Entscheidungen und Abwägungen zu dokumentieren, gestützt auf Beweise aus Artefakten, Policies und Erfahrungswerten.",
+          "sample_questions": [
+            "Welche sicherheitsrelevanten Risiken sehen Sie aktuell bei der Partitioning-Strategie (RFC-1287) und wie sind diese mitigiert?",
+            "Can you give me a concrete example where you had to choose between performance and data security?",
+            "Welche Lessons Learned aus vergangenen Incidents oder Tickets haben Ihre aktuellen Sicherheitsmaßnahmen geprägt?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27387,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

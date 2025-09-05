@@ -1,0 +1,163 @@
+{
+  "id": "20250902_155138_c02dcd",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 75,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_arch",
+      "role": "Cloud Architect",
+      "traits": [
+        "tradeoff",
+        "cost_perf",
+        "multi-region"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-TIT",
+      "name": "Titan DR",
+      "phase": "Drill",
+      "scope": "Disaster Recovery, multi-region failover"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_arch"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & Rolle des Interviewten",
+          "goal": "Kernfakten zum Titan DR Projekt und die spezifische Rolle des Cloud Architects erfassen.",
+          "sample_questions": [
+            "Können Sie bitte kurz die Ziele und den aktuellen Stand des Titan DR Projekts skizzieren?",
+            "Welche Verantwortung übernehmen Sie konkret als Cloud Architect in diesem Projekt?",
+            "Wie passt das Projekt in die Gesamtstrategie von Novereon Systems, insbesondere im Hinblick auf 'Safety First'?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & SLA-Anforderungen",
+          "goal": "Verständnis der Multi-Region-Architektur und deren Ausrichtung an SLA/SLO-Vorgaben.",
+          "sample_questions": [
+            "Wie ist die Architektur für Multi-Region-Failover im Titan DR Projekt gestaltet?",
+            "Welche SLAs oder SLOs sind für dieses Projekt definiert und wie stellen Sie deren Einhaltung sicher?",
+            "Wie berücksichtigen Sie RTO und RPO in Ihrem Design?"
+          ]
+        },
+        {
+          "title": "Subsystem-Integration & Abhängigkeiten",
+          "goal": "Zusammenhänge zwischen Titan DR und anderen Plattform- oder Observability-Projekten erfassen.",
+          "sample_questions": [
+            "Gibt es Integrationspunkte zwischen Titan DR und dem Nimbus Observability Projekt?",
+            "Wie nutzen Sie Runbooks wie RB-DR-001 in Verbindung mit Observability-Alarmen?",
+            "Welche Lessons Learned aus Projekten wie Helios Datalake oder Poseidon Networking fließen hier ein?"
+          ]
+        },
+        {
+          "title": "Kosten-Performance-Tradeoffs",
+          "goal": "Abwägungen zwischen Kosten, Performance und Resilienz im Multi-Region-Setup beleuchten.",
+          "sample_questions": [
+            "Wie balancieren Sie die Kosten für zusätzliche Regionen mit den Performancegewinnen?",
+            "Welche Maßnahmen haben Sie ergriffen, um den BLAST_RADIUS zu minimieren?",
+            "Gab es Überlegungen zu aktiver vs. passiver Standby-Strategie und wie wurden diese entschieden?"
+          ]
+        },
+        {
+          "title": "Risikomanagement & Evidenz",
+          "goal": "Entscheidungen anhand von Belegen (Tickets, Runbooks, Tests) nachvollziehen und Risiken identifizieren.",
+          "sample_questions": [
+            "Welche Risiken haben Sie im letzten GameDay (TEST-DR-2025-Q1) identifiziert?",
+            "Können Sie ein Beispiel nennen, wie ein Incident-Postmortem Ihre Architekturentscheidungen beeinflusst hat?",
+            "Wie dokumentieren Sie Tradeoffs und Lessons Learned für künftige Audits?"
+          ]
+        },
+        {
+          "title": "Abschluss & Ausblick",
+          "goal": "Zusammenfassung der Kernaussagen und Blick auf nächste Schritte im Projekt.",
+          "sample_questions": [
+            "Was sind die nächsten Prioritäten für Titan DR?",
+            "Welche Verbesserungen wollen Sie im nächsten Drill-Zyklus umsetzen?",
+            "Gibt es geplante RFCs zur Anpassung der Failover-Prozeduren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28470,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

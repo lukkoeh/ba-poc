@@ -1,0 +1,154 @@
+{
+  "id": "20250902_155820_9f962c",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 81,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung und Kontext",
+          "goal": "Verstehen, wie der Security Engineer den aktuellen Stand des Aegis IAM Projekts wahrnimmt und welche Kernaufgaben er hat.",
+          "sample_questions": [
+            "Können Sie kurz beschreiben, welche Hauptverantwortlichkeiten Sie im Aegis IAM Projekt übernehmen?",
+            "Wie würden Sie den aktuellen Betriebszustand des IAM-Systems einschätzen?",
+            "Welche der Unternehmenswerte von Novereon Systems beeinflussen Ihre tägliche Arbeit am stärksten?"
+          ]
+        },
+        {
+          "title": "Bedienbarkeit und Sicherheit",
+          "goal": "Erkunden, wie Sicherheitsprinzipien wie Least Privilege & JIT Access in der täglichen Nutzung umgesetzt werden und welche UX-Herausforderungen entstehen.",
+          "sample_questions": [
+            "Wie setzen Sie POL-SEC-001 in der Praxis um, ohne die Benutzerfreundlichkeit zu beeinträchtigen?",
+            "Gab es Situationen, in denen Sicherheitsmaßnahmen zu Friktionen oder Umwegen in den Workflows führten?",
+            "Welche Rolle spielen Runbooks wie RB-IAM-075 in Ihrem Incident Response Prozess?"
+          ]
+        },
+        {
+          "title": "Zusammenspiel mit anderen Systemen",
+          "goal": "Ermitteln, wie Aegis IAM mit anderen Projekten (z. B. Orion Edge Gateway oder Poseidon Networking) integriert ist und welche Sicherheitsaspekte dabei eine Rolle spielen.",
+          "sample_questions": [
+            "Wie ist Aegis IAM mit Orion Edge Gateway verbunden, insbesondere in Bezug auf Authentifizierung und Autorisierung?",
+            "Welche Abhängigkeiten bestehen zu Poseidon Networking hinsichtlich mTLS und Policy Enforcement?",
+            "Gab es jemals Sicherheitsvorfälle, die durch diese Integrationen beeinflusst wurden?"
+          ]
+        },
+        {
+          "title": "Risiken und Trade-offs",
+          "goal": "Diskutieren, wie Entscheidungen zu Sicherheit vs. Usability getroffen werden, unter Einbezug von Beweisen wie Audits oder RFCs.",
+          "sample_questions": [
+            "Können Sie ein Beispiel nennen, bei dem Sie zwischen strenger Zugriffskontrolle und reibungsloser UX abwägen mussten?",
+            "Wie fließen Ergebnisse wie aus AUD-24-Q2 in Ihre Entscheidungen ein?",
+            "Welche Risiken sehen Sie aktuell für das IAM-System und wie priorisieren Sie diese?"
+          ]
+        },
+        {
+          "title": "Zukunftsperspektiven",
+          "goal": "Verstehen, welche Verbesserungen oder Änderungen der Security Engineer für die Zukunft plant.",
+          "sample_questions": [
+            "Welche geplanten Änderungen in RFC-903 halten Sie für die kritischsten?",
+            "Gibt es Ideen, wie man JIT Access noch effizienter gestalten könnte?",
+            "Welche langfristigen Ziele haben Sie für die Sicherheit und Bedienbarkeit des IAM-Systems?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28619,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "id": "20250902_104528_e2853c",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 46,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_qa",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Role Clarity",
+          "goal": "Understand the interviewees’ involvement in Phoenix Feature Store and their perspectives on scope, deliverables, and alignment with Novereon values.",
+          "sample_questions": [
+            "Can you describe your primary responsibilities in the Phoenix Feature Store project?",
+            "How does the scope of this project align with the 'Safety First' and 'Sustainable Velocity' values?",
+            "Which other departments have you collaborated with during the build phase?"
+          ]
+        },
+        {
+          "title": "Technical Architecture & Data Flow",
+          "goal": "Explore the technical design of online/offline feature serving and how drift monitoring is integrated.",
+          "sample_questions": [
+            "Can you walk me through the architecture from data ingestion to feature serving?",
+            "How do you ensure consistency between online and offline stores?",
+            "What mechanisms are in place to detect and respond to feature drift?"
+          ]
+        },
+        {
+          "title": "Model CI/CD & Testing Strategy",
+          "goal": "Investigate model deployment pipelines, integration with QA processes, and risk-based testing approaches.",
+          "sample_questions": [
+            "How is model CI/CD implemented in the context of Phoenix Feature Store?",
+            "What role does the QA team play in validating feature pipelines?",
+            "Can you give examples of applying policy POL-QA-014 in this project?"
+          ]
+        },
+        {
+          "title": "Cross-System Dependencies",
+          "goal": "Identify dependencies on other Novereon projects and systems, and how they influence design and testing.",
+          "sample_questions": [
+            "Which upstream or downstream systems does Phoenix depend on?",
+            "How have you coordinated with the Nimbus Observability team for monitoring and alerting?",
+            "Have you integrated any runbooks from related projects, e.g., RB-FS-034 Hotfix Rollback Procedure?"
+          ]
+        },
+        {
+          "title": "Operational Readiness & SLAs",
+          "goal": "Assess preparations for operating the feature store at scale, including SLAs, runbooks, and incident response.",
+          "sample_questions": [
+            "What are the key SLAs defined for Phoenix and how are they measured?",
+            "How do you plan to handle rollback in case of data or model issues?",
+            "Can you discuss any drills or simulations performed to validate readiness?"
+          ]
+        },
+        {
+          "title": "Risk Management & Trade-offs",
+          "goal": "Understand major decisions, trade-offs, and risk mitigation strategies supported by evidence such as RFCs or tickets.",
+          "sample_questions": [
+            "What were the most significant trade-offs made in the design of Phoenix?",
+            "How did you balance feature freshness against system stability?",
+            "Can you reference any RFCs or tickets that influenced these decisions?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25910,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

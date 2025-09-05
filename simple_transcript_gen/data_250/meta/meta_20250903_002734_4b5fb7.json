@@ -1,0 +1,154 @@
+{
+  "id": "20250903_002734_4b5fb7",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 203,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Zielsetzung",
+          "goal": "Ein klares Verständnis der Projektziele, KPIs und des Status im Build-Phase-Kontext schaffen.",
+          "sample_questions": [
+            "Können Sie kurz den aktuellen Stand des Orion Edge Gateway beschreiben und welche Hauptziele wir in dieser Phase verfolgen?",
+            "Welche KPIs haben wir für die Build-Phase definiert und wie messen wir diese?",
+            "Wie fügt sich das Projekt in unsere Gesamtstrategie für Cloud-native Plattformen ein?"
+          ]
+        },
+        {
+          "title": "Technische Architektur und Abhängigkeiten",
+          "goal": "Architekturentscheidungen und deren Abhängigkeiten zu anderen Systemen verstehen.",
+          "sample_questions": [
+            "Wie ist die API-Gateway-Architektur im Detail aufgebaut, und welche Komponenten sind kritisch für die Rate-Limiting-Funktion?",
+            "Gibt es enge Kopplungen zu anderen Projekten wie Aegis IAM oder Poseidon Networking, die wir berücksichtigen müssen?",
+            "Welche Lessons Learned aus RFC-1287 oder RB-GW-011 haben wir bereits eingebracht?"
+          ]
+        },
+        {
+          "title": "Sicherheits- und Compliance-Anforderungen",
+          "goal": "Sicherheitsrichtlinien und Compliance-Aspekte im Projekt identifizieren.",
+          "sample_questions": [
+            "Wie stellen wir sicher, dass POL-SEC-001 Least Privilege & JIT Access im Gateway eingehalten wird?",
+            "Welche Authentifizierungsmechanismen sind implementiert und wie testen wir ihre Robustheit?",
+            "Haben wir spezifische SLAs wie SLA-ORI-02 bereits im Monitoring integriert?"
+          ]
+        },
+        {
+          "title": "Integration und Teststrategien",
+          "goal": "Testmethoden, Abnahmekriterien und Integration in CI/CD verstehen.",
+          "sample_questions": [
+            "Wie stellen wir sicher, dass das Gateway unter Last die p95 Latenzgrenze einhält?",
+            "Welche Rolle spielt die Hera QA Platform im Testprozess für Orion Edge Gateway?",
+            "Wie gehen wir mit Bugs wie in GW-4821 um, um Regressionen zu vermeiden?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und nächste Schritte",
+          "goal": "Wichtige Risiken, technische Trade-offs und geplante Maßnahmen für den nächsten Projektabschnitt erfassen.",
+          "sample_questions": [
+            "Welche Haupt-Trade-offs mussten wir bisher eingehen, z.B. bei der Wahl von Blue/Green vs. Canary Deployments?",
+            "Welche Risiken sehen Sie für die nächsten 3 Monate und wie mitigieren wir diese?",
+            "Gibt es offene RFCs oder Runbooks, die vor dem Go-Live zwingend abgeschlossen werden müssen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27631,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

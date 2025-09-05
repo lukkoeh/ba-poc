@@ -1,0 +1,154 @@
+{
+  "id": "20250902_132419_cf210b",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 79,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Context Setting",
+          "goal": "Establish baseline understanding of the Aegis IAM project's current operational state and the security engineer's involvement.",
+          "sample_questions": [
+            "Can you walk me through your primary responsibilities on Aegis IAM?",
+            "How does the project’s mission align with Novereon’s 'Least Privilege & JIT Access' policy?",
+            "What are the key security objectives tied to our current SLA or audit commitments?"
+          ]
+        },
+        {
+          "title": "Threat Modeling & Access Control",
+          "goal": "Explore how threat modeling is integrated into IAM operations and how RBAC/JIT principles are enforced.",
+          "sample_questions": [
+            "What threat models are most relevant to Aegis IAM in its current 'Operate' phase?",
+            "How do you validate that RBAC roles are not over-provisioned over time?",
+            "Could you describe a recent access revocation incident and how the RB-IAM-075 runbook guided the process?"
+          ]
+        },
+        {
+          "title": "Cross-System Dependencies",
+          "goal": "Understand dependencies between Aegis IAM and other Novereon projects and how they impact security posture.",
+          "sample_questions": [
+            "Which other systems rely on Aegis IAM for authentication or authorization flows?",
+            "Have you encountered any security implications when integrating with Orion Edge Gateway or Nimbus Observability?",
+            "How do you coordinate with Data and Platform teams when IAM changes affect their pipelines?"
+          ]
+        },
+        {
+          "title": "Incident Response & Evidence Gathering",
+          "goal": "Discuss incident handling, evidence collection, and audit readiness in the context of IAM.",
+          "sample_questions": [
+            "Can you describe the process for capturing forensic evidence during an IAM-related incident?",
+            "How does AUD-24-Q2 Access Review Summary feed into your incident prevention strategies?",
+            "What metrics or KPIs do you track to measure incident response effectiveness?"
+          ]
+        },
+        {
+          "title": "Tradeoffs, Risks & Future Improvements",
+          "goal": "Explore strategic decisions, trade-offs made, and future risk mitigation plans.",
+          "sample_questions": [
+            "Have there been cases where strict least privilege conflicted with operational agility? How did you resolve them?",
+            "What risks do you foresee if we scale Aegis IAM to support new partner integrations?",
+            "Can you outline a proposed improvement and the evidence (tickets, RFCs) that support it?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25956,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "id": "20250903_004704_958ced",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 224,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-TIT",
+      "name": "Titan DR",
+      "phase": "Drill",
+      "scope": "Disaster Recovery, multi-region failover"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Role Context",
+          "goal": "Establish the interviewee's role in Titan DR drills and clarify scope of responsibilities.",
+          "sample_questions": [
+            "Can you briefly describe your role as an SRE in the Titan DR project?",
+            "Which parts of the DR drill process are you directly responsible for?",
+            "How do you coordinate with other departments during a drill?"
+          ]
+        },
+        {
+          "title": "DR Runbook Familiarity",
+          "goal": "Assess depth of knowledge in RB-DR-001 Regional Failover Procedure and related artifacts.",
+          "sample_questions": [
+            "Walk me through the key steps of RB-DR-001.",
+            "How do you ensure compliance with RTO/RPO targets during a failover?",
+            "What preconditions must be verified before initiating a failover?"
+          ]
+        },
+        {
+          "title": "Incident Simulation & Coordination",
+          "goal": "Explore experience in simulated outages and cross-team dependencies.",
+          "sample_questions": [
+            "Describe a recent GameDay exercise and your role in it.",
+            "How do you communicate status updates to stakeholders during a drill?",
+            "What tools and dashboards do you rely on during failover?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Identify how Titan DR interacts with other systems like Helios Datalake or Orion Edge Gateway.",
+          "sample_questions": [
+            "What are the main upstream/downstream systems affected by Titan DR failover?",
+            "How do you coordinate with data and networking teams during a DR event?",
+            "Can you share an example where a dependency impacted DR outcomes?"
+          ]
+        },
+        {
+          "title": "Risk Management & Continuous Improvement",
+          "goal": "Understand approach to identifying risks, trade-offs, and improvement actions post-drill.",
+          "sample_questions": [
+            "What are the top three risks in the current DR strategy?",
+            "How do you document and track improvement actions from GameDay findings?",
+            "Describe a trade-off you had to make between failover speed and blast radius."
+          ]
+        },
+        {
+          "title": "Wrap-Up & Reflection",
+          "goal": "Summarize learnings, personal contributions, and next steps.",
+          "sample_questions": [
+            "What is your proudest achievement in the Titan DR project?",
+            "If you could change one thing about the current DR process, what would it be?",
+            "How do you prepare yourself and your team for the next drill?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26384,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

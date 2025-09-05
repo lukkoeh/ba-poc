@@ -1,0 +1,154 @@
+{
+  "id": "20250902_160714_89339b",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 89,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_arch",
+      "role": "Cloud Architect",
+      "traits": [
+        "tradeoff",
+        "cost_perf",
+        "multi-region"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-TIT",
+      "name": "Titan DR",
+      "phase": "Drill",
+      "scope": "Disaster Recovery, multi-region failover"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_arch"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rollenklärung",
+          "goal": "Verstehen, wie der Cloud Architect in Titan DR eingebunden ist und welche Verantwortlichkeiten er trägt.",
+          "sample_questions": [
+            "Können Sie kurz den aktuellen Stand des Titan DR Projekts beschreiben?",
+            "Welche spezifischen Rollen und Verantwortungen haben Sie in diesem Drill?",
+            "How does your role intersect with the SRE and Security teams in this context?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Multi-Region Design",
+          "goal": "Details zur DR-Architektur und den Multi-Region-Mechanismen erheben.",
+          "sample_questions": [
+            "Wie ist das Multi-Region Failover im Titan DR konzipiert?",
+            "Welche Recovery Time und Recovery Point Objectives sind definiert?",
+            "Can you walk me through how RB-DR-001 guides the failover execution?"
+          ]
+        },
+        {
+          "title": "Abhängigkeiten & Schnittstellen",
+          "goal": "Herausfinden, welche Systeme und Projekte mit Titan DR gekoppelt sind.",
+          "sample_questions": [
+            "Welche anderen Plattformen oder Projekte hängen direkt von Titan DR ab?",
+            "Wie stellen Sie sicher, dass die BLAST_RADIUS minimiert bleibt?",
+            "How do you coordinate with the Helios Datalake or Poseidon Networking teams during a drill?"
+          ]
+        },
+        {
+          "title": "Operational Runbooks & Lessons Learned",
+          "goal": "Verstehen, wie Runbooks angewendet werden und welche Verbesserungen aus Tests resultieren.",
+          "sample_questions": [
+            "Wie oft wird RB-DR-001 aktualisiert und auf welche Trigger hin?",
+            "Welche Findings aus TEST-DR-2025-Q1 wurden bereits umgesetzt?",
+            "Could you give an example of an unwritten rule the team follows during failover?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Entscheidungsfindung",
+          "goal": "Erkunden, wie technische Entscheidungen unter Kosten-, Performance- und Risikogesichtspunkten getroffen werden.",
+          "sample_questions": [
+            "Welche größten Trade-offs mussten Sie beim Design eingehen?",
+            "Wie balancieren Sie Kosten gegen Performance in einer DR-Architektur?",
+            "What risks remain even after implementing the current strategy, and how are they documented?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26045,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

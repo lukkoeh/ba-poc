@@ -1,0 +1,154 @@
+{
+  "id": "20250902_163948_3695ec",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 114,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_arch",
+      "role": "Cloud Architect",
+      "traits": [
+        "tradeoff",
+        "cost_perf",
+        "multi-region"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_arch"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Architektur-Übersicht",
+          "goal": "Ein umfassendes Bild der aktuellen Helios Datalake Architektur und deren Ziele erhalten.",
+          "sample_questions": [
+            "Können Sie den aktuellen Stand des Helios Datalake Projekts im Kontext der Scale-Phase beschreiben?",
+            "Wie sind die ELT-Pipelines zu Snowflake derzeit aufgebaut und welche Kernkomponenten sind involviert?",
+            "Welche SLOs und SLAs sind für den Datalake definiert und wie stellen Sie deren Einhaltung sicher?"
+          ]
+        },
+        {
+          "title": "Integration und Datenflüsse",
+          "goal": "Verstehen, wie Kafka-Ingestion, dbt-Modeling und Batch-Loads zusammenspielen.",
+          "sample_questions": [
+            "Wie greifen Kafka-Ingestion und Batch-Partitionierung ineinander?",
+            "Welche Rolle spielt RFC-1287 bei der Partitionierungsstrategie für Batch Loads?",
+            "Wie werden Änderungen an den dbt-Modellen in die Produktionsumgebung integriert und getestet?"
+          ]
+        },
+        {
+          "title": "Skalierung und Performance Optimierung",
+          "goal": "Strategien und Maßnahmen zur Performance-Steigerung und Kostenkontrolle identifizieren.",
+          "sample_questions": [
+            "Welche Maßnahmen haben Sie ergriffen, um die Performance bei wachsender Datenmenge zu sichern?",
+            "Wie gehen Sie mit Kostenoptimierung im Cloud-Kontext um, insbesondere in Bezug auf POL-FIN-007?",
+            "Gibt es spezifische Runbooks wie RB-ING-042, die Sie bei Failover-Szenarien nutzen?"
+          ]
+        },
+        {
+          "title": "Multi-Region und Ausfallsicherheit",
+          "goal": "Verstehen, wie die Architektur auf Multi-Region-Betrieb und Disaster Recovery vorbereitet ist.",
+          "sample_questions": [
+            "Welche Strategien setzen Sie ein, um den BLAST_RADIUS im Falle eines Ausfalls zu minimieren?",
+            "Wie ist das Zusammenspiel zwischen Helios Datalake und Titan DR Runbooks (RB-DR-001)?",
+            "Welche RTO/RPO-Ziele haben Sie definiert und wie werden diese praktisch getestet?"
+          ]
+        },
+        {
+          "title": "Trade-offs und Entscheidungsprozesse",
+          "goal": "Die Entscheidungsfindung bei Architektur-Trade-offs nachvollziehen.",
+          "sample_questions": [
+            "Welche wesentlichen Trade-offs mussten Sie zwischen Kosten, Performance und Resilienz treffen?",
+            "Können Sie ein Beispiel geben, wo Sie Evidenz aus Monitoring oder Tests als Entscheidungsgrundlage genutzt haben?",
+            "Wie dokumentieren und kommunizieren Sie diese Entscheidungen intern, z.B. via RFCs?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29272,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

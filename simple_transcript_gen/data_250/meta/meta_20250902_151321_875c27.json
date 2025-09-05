@@ -1,0 +1,159 @@
+{
+  "id": "20250902_151321_875c27",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 42,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_sre",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Qualitätsziele",
+          "goal": "Das grundlegende Verständnis für den aktuellen Stand des Orion Edge Gateway Projekts, seine Abhängigkeiten und die relevanten Qualitätsmetriken erfassen.",
+          "sample_questions": [
+            "Können Sie kurz den aktuellen Stand des Orion Edge Gateway beschreiben und wie dieser zum Gesamtportfolio passt?",
+            "Welche Qualitätsmetriken (z.B. SLA-ORI-02) sind für Sie als Product Owner prioritär?",
+            "Welche Abhängigkeiten zu anderen Projekten wie Aegis IAM oder Poseidon Networking bestehen aktuell?"
+          ]
+        },
+        {
+          "title": "Technische Implementierung und Teststrategie",
+          "goal": "Verstehen, wie technische Entscheidungen und Testansätze zur Erreichung der Qualitätsziele beitragen.",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass die Authentifizierungsintegration robust und sicher ist?",
+            "Welche Rolle spielt das Runbook RB-GW-011 bei Deployments und wie wird es in der Praxis genutzt?",
+            "Wie werden Last- und Latenztests in Bezug auf SLA-ORI-02 durchgeführt?"
+          ]
+        },
+        {
+          "title": "Incident Handling und Lessons Learned",
+          "goal": "Analysieren, wie das Team mit Vorfällen wie GW-4821 umgegangen ist und welche Verbesserungen daraus resultierten.",
+          "sample_questions": [
+            "Können Sie bitte den Ablauf der Fehleranalyse bei GW-4821 schildern?",
+            "Welche Änderungen an Prozessen oder Tools wurden nach diesem Incident eingeführt?",
+            "Wie wird sichergestellt, dass ähnliche Probleme zukünftig schneller erkannt werden?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und Zukunftsausrichtung",
+          "goal": "Bewerten, wie Risiken identifiziert, Trade-offs getroffen und zukünftige Herausforderungen adressiert werden.",
+          "sample_questions": [
+            "Welche wesentlichen Risiken sehen Sie aktuell für das Orion Edge Gateway in der Build-Phase?",
+            "Wie balancieren Sie Time-to-Market gegenüber der Einhaltung der Qualitätsrichtlinien wie POL-QA-014?",
+            "Welche Maßnahmen sind geplant, um den BLAST_RADIUS bei künftigen Änderungen zu minimieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28482,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

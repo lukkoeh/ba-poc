@@ -1,0 +1,163 @@
+{
+  "id": "20250902_131926_e27fc1",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 78,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Ziele",
+          "goal": "Das Gesamtbild des Helios Datalake-Projekts verstehen, inklusive Business-Treiber und aktueller Phase.",
+          "sample_questions": [
+            "Können Sie mir die Hauptziele des Helios Datalake in der aktuellen Scale-Phase erläutern?",
+            "Welche regulatorischen Anforderungen beeinflussen momentan Ihre Prioritäten?",
+            "Wie messen Sie den Erfolg des Projekts aus Produktperspektive?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Datenflüsse",
+          "goal": "Ein klares Bild von den wichtigsten Komponenten, Integrationspunkten und Abhängigkeiten gewinnen.",
+          "sample_questions": [
+            "Wie ist der ELT-Prozess in Ihrer Umgebung konkret umgesetzt?",
+            "Welche Rolle spielt Kafka in der Ingestion-Pipeline und wie wird das Failover gehandhabt?",
+            "Können Sie mir ein Beispiel geben, wie dbt-Modelle den Business-Mehrwert steigern?"
+          ]
+        },
+        {
+          "title": "SLOs, SLAs & Runbooks",
+          "goal": "Verstehen, welche Service Level Objectives und Agreements definiert sind und wie Runbooks im Betrieb eingesetzt werden.",
+          "sample_questions": [
+            "Welche KPIs überwachen Sie, um SLA-HEL-01 (99,9% Availability) einzuhalten?",
+            "Wie oft wird RB-ING-042 Ingestion Failover Runbook tatsächlich genutzt?",
+            "Gab es Situationen, in denen Sie das Runbook anpassen mussten?"
+          ]
+        },
+        {
+          "title": "Abhängigkeiten & Cross-Team-Koordination",
+          "goal": "Identifizieren, wie andere Plattform- oder Datenprojekte den Helios Datalake beeinflussen.",
+          "sample_questions": [
+            "Welche Schnittstellen gibt es zu Projekten wie Borealis ETL oder Nimbus Observability?",
+            "Wie stimmen Sie sich mit SRE oder Security ab, um BLAST_RADIUS zu minimieren?",
+            "Gibt es ein Beispiel, wo Änderungen in einem anderen Projekt Ihre Roadmap beeinflusst haben?"
+          ]
+        },
+        {
+          "title": "Tradeoffs & Risiken",
+          "goal": "Entscheidungen beleuchten, die zwischen Zeit, Qualität, Kosten und Sicherheit getroffen wurden.",
+          "sample_questions": [
+            "Gab es Entscheidungen, bei denen Sie bewusst den Scope reduziert haben, um ein SLA einzuhalten?",
+            "Wie gehen Sie mit der Balance zwischen regulatorischer Sicherheit und Feature-Delivery um?",
+            "Können Sie eine konkrete Risk-Mitigation-Maßnahme nennen, die Sie aufgrund eines AUD- oder RFC-Findings umgesetzt haben?"
+          ]
+        },
+        {
+          "title": "Zukunft & Skalierung",
+          "goal": "Planung für künftige Anforderungen, Wachstum und Technologie-Weiterentwicklung verstehen.",
+          "sample_questions": [
+            "Welche Kapazitätsgrenzen sehen Sie aktuell und wie adressieren Sie diese?",
+            "Gibt es Pläne, neue Datenquellen oder Analysetools anzubinden?",
+            "Wie stellen Sie sicher, dass das System auch in 2–3 Jahren noch den regulatorischen Standards entspricht?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29046,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "id": "20250902_102404_e8ae16",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 42,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_sre",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick und Rollenklärung",
+          "goal": "Verstehen, wie der Product Owner und der SRE ihre Rollen im Orion Edge Gateway Projekt definieren und koordinieren.",
+          "sample_questions": [
+            "Können Sie mir bitte den aktuellen Stand des Orion Edge Gateway Projekts schildern?",
+            "Wie sind Ihre jeweiligen Verantwortlichkeiten in diesem Build-Phase-Projekt verteilt?",
+            "Welche Hauptziele verfolgen Sie in den nächsten zwei Releases?"
+          ]
+        },
+        {
+          "title": "Qualitätsanforderungen und SLA-Umsetzung",
+          "goal": "Herausarbeiten, wie SLA-ORI-02 (p95 Latency < 120ms) in der Praxis gemessen und gesichert wird.",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass die Latenz-Ziele im Live-Betrieb eingehalten werden?",
+            "Welche Metriken und Dashboards nutzen Sie zur kontinuierlichen Überwachung?",
+            "Gab es bereits Abweichungen und wie wurden diese adressiert?"
+          ]
+        },
+        {
+          "title": "Runbooks und Incident Response",
+          "goal": "Verstehen, wie RB-GW-011 Rolling Deployments im Incident-Fall genutzt wird und welche Lessons Learned existieren.",
+          "sample_questions": [
+            "Können Sie den Ablauf eines Blue/Green Deployments bei einem kritischen Bug beschreiben?",
+            "Wie wird entschieden, wann ein Rollback initiiert wird?",
+            "Welche konkreten Erfahrungen haben Sie mit GW-4821 MTLS Handshake Bug gemacht?"
+          ]
+        },
+        {
+          "title": "Multi-Hop Abhängigkeiten",
+          "goal": "Analyse der Abhängigkeiten zu anderen Projekten wie Aegis IAM für Auth Integration und Nimbus Observability für Monitoring.",
+          "sample_questions": [
+            "Wie verzahnt sich Orion Edge Gateway mit Aegis IAM in Bezug auf Authentifizierung und RBAC?",
+            "Welche Observability-Mechanismen aus Nimbus nutzen Sie für das Gateway?",
+            "Gab es schon Probleme aufgrund von Schnittstellenänderungen in anderen Projekten?"
+          ]
+        },
+        {
+          "title": "Risikoanalyse und Tradeoffs",
+          "goal": "Diskussion von technischen und organisatorischen Risiken, inkl. Dokumentation in RFCs und Tickets.",
+          "sample_questions": [
+            "Welche Tradeoffs mussten Sie zwischen Latenzoptimierung und Sicherheit eingehen?",
+            "Wie dokumentieren Sie Risiken, die aus Abhängigkeiten entstehen?",
+            "Welche Maßnahmen planen Sie, um den BLAST_RADIUS bei Ausfällen zu minimieren?"
+          ]
+        },
+        {
+          "title": "Lessons Learned und Ausblick",
+          "goal": "Zusammenfassung der wichtigsten Erkenntnisse und Planung der nächsten Schritte.",
+          "sample_questions": [
+            "Was war aus Ihrer Sicht der größte Erfolg in dieser Build-Phase?",
+            "Welche Prozesse wollen Sie in der nächsten Projektphase ändern?",
+            "Wie wollen Sie die Zusammenarbeit zwischen PO, SRE und QA weiter verbessern?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27220,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

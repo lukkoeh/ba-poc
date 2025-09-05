@@ -1,0 +1,168 @@
+{
+  "id": "20250903_005018_db9767",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 228,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_pm",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & UX-Ziele",
+          "goal": "Verstehen, wie die UX-Strategie für Atlas Mobile im Pilotstadium definiert wurde und welche Qualitätsziele gesetzt sind.",
+          "sample_questions": [
+            "Können Sie bitte die Kernziele der UX-Strategie für Atlas Mobile im aktuellen Pilotstadium erläutern?",
+            "Wie stellen Sie sicher, dass Accessibility-Anforderungen gemäß interner Policies erfüllt werden?",
+            "Welche Metriken oder KPIs nutzen Sie, um UX-Qualität messbar zu machen?"
+          ]
+        },
+        {
+          "title": "Design-System & Feature Flags",
+          "goal": "Analysieren, wie das Design-System (DS-ATLAS v2 Tokenized Components) mit Feature-Flag-Strategien verzahnt ist.",
+          "sample_questions": [
+            "Wie integrieren Sie DS-ATLAS v2 Tokenized Components in den Entwicklungsprozess, um UI-Konsistenz zu sichern?",
+            "Welche Rolle spielen Feature Flags beim Testen neuer Design-Elemente?",
+            "Gab es Situationen, in denen ein Feature Flag die UX negativ beeinflusst hat?"
+          ]
+        },
+        {
+          "title": "Offline Sync & Fehlertoleranz",
+          "goal": "Bewerten, wie Offline-Synchronisation gestaltet wurde, um Nutzererfahrung bei Netzwerkausfällen zu optimieren.",
+          "sample_questions": [
+            "Welche UX-Patterns setzen Sie ein, um Nutzer während Offline-Phasen zu informieren?",
+            "Wie wird die RB-MOB-021 Crash Loop Mitigation in UX-Workflows berücksichtigt?",
+            "Gibt es dokumentierte SLAs oder SLOs für die Offline-Funktionalität?"
+          ]
+        },
+        {
+          "title": "Qualitätssicherung & Traceability",
+          "goal": "Untersuchen, wie UX-Anforderungen in die QA-Prozesse integriert und rückverfolgbar gemacht werden.",
+          "sample_questions": [
+            "Wie verknüpfen Sie UX-Anforderungen mit Testfällen gemäß POL-QA-014?",
+            "Welche Tools nutzen Sie, um UX-Bugs zu priorisieren?",
+            "Gab es Konflikte zwischen UX-Verbesserungen und Release-Deadlines?"
+          ]
+        },
+        {
+          "title": "Stakeholder-Management & Risikoabwägung",
+          "goal": "Verstehen, wie UX- und Produktentscheidungen mit Stakeholdern abgestimmt und Risiken bewertet werden.",
+          "sample_questions": [
+            "Wie kommunizieren Sie UX-Risiken an nicht-technische Stakeholder?",
+            "Gab es eine Situation, in der eine UX-Entscheidung bewusst gegen eine technische Empfehlung getroffen wurde?",
+            "Wie dokumentieren Sie diese Trade-offs, z.B. in RFCs oder Tickets?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28674,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

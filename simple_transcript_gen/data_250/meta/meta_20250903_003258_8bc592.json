@@ -1,0 +1,154 @@
+{
+  "id": "20250903_003258_8bc592",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 208,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projekt- und Rollenverständnis",
+          "goal": "Sicherstellen, dass der Interviewee den Kontext der Hera QA Platform und seine Rolle darin klar darstellt.",
+          "sample_questions": [
+            "Können Sie bitte kurz die Hauptziele der Hera QA Platform beschreiben?",
+            "Wie sieht Ihre Rolle als QA Lead in der Build-Phase konkret aus?",
+            "Welche besonderen Herausforderungen sehen Sie in der Testorchestrierung für dieses Projekt?"
+          ]
+        },
+        {
+          "title": "Risikobasierte Teststrategie",
+          "goal": "Vertiefung der angewandten Methoden gemäss POL-QA-014 und wie diese in Hera umgesetzt werden.",
+          "sample_questions": [
+            "Wie priorisieren Sie Testfälle basierend auf Risiko und Auswirkung?",
+            "Inwiefern berücksichtigen Sie Sicherheitsaspekte in Ihrer Teststrategie?",
+            "Wie stellen Sie sicher, dass Traceability von Anforderungen bis zu Testfällen gegeben ist?"
+          ]
+        },
+        {
+          "title": "Traceability und Sicherheitsanforderungen",
+          "goal": "Verknüpfung von QA-Artefakten mit Sicherheits-Policies und -Runbooks.",
+          "sample_questions": [
+            "Wie binden Sie Sicherheits-Runbooks wie RB-QA-051 in Ihre Testpläne ein?",
+            "Gibt es Abhängigkeiten zu anderen Projekten wie Aegis IAM oder Poseidon Networking?",
+            "Wie reagieren Sie, wenn sicherheitskritische Tests fehlschlagen?"
+          ]
+        },
+        {
+          "title": "Interdisziplinäre Schnittstellen",
+          "goal": "Erörtern, wie QA mit SRE, Security und Platform Teams zusammenarbeitet, um SLOs und SLAs einzuhalten.",
+          "sample_questions": [
+            "Welche SLOs sind für QA relevant und wie messen Sie diese?",
+            "Wie kommunizieren Sie mit dem Security-Team bei gefundenen Schwachstellen?",
+            "Gibt es Lessons Learned aus anderen Projekten, die Sie hier anwenden?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs und Risiken",
+          "goal": "Analyse von getroffenen Entscheidungen, deren Trade-offs und Risikobewertungen mit Belegen wie RFCs, Tickets.",
+          "sample_questions": [
+            "Gab es Situationen, in denen Sie bewusst weniger getestet haben, um eine Deadline zu halten? Wie haben Sie das Risiko begründet?",
+            "Können Sie ein Beispiel nennen, wo ein Trade-off zwischen Testtiefe und Time-to-Market nötig war?",
+            "Welche Belege (z. B. RFC-1770, Tickets) haben Sie genutzt, um diese Entscheidungen zu untermauern?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29076,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

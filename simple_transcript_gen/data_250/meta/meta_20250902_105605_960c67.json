@@ -1,0 +1,169 @@
+{
+  "id": "20250902_105605_960c67",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 48,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_da"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_ux",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projekt- und Rollenverständnis",
+          "goal": "Ein gemeinsames Bild vom aktuellen Stand des Helios Datalake Projekts und der individuellen Verantwortlichkeiten schaffen.",
+          "sample_questions": [
+            "Können Sie mir kurz umreißen, wie Ihre Rolle im Helios Datalake Projekt aussieht?",
+            "Welche Hauptziele verfolgen wir derzeit in der Scale-Phase?",
+            "Wie arbeiten Sie mit anderen Disziplinen wie UX oder SRE zusammen?"
+          ]
+        },
+        {
+          "title": "Daten-Pipeline und Modellierung",
+          "goal": "Verstehen, wie ELT, dbt-Modellierung und Kafka-Ingestion aktuell umgesetzt sind und welche Herausforderungen bestehen.",
+          "sample_questions": [
+            "Wie ist die aktuelle Architektur der ELT-Pipeline zu Snowflake aufgebaut?",
+            "Welche dbt-Modelle sind kritisch für unsere SLA-HEL-01?",
+            "Gab es in letzter Zeit Engpässe oder Bottlenecks bei der Kafka-Ingestion?"
+          ]
+        },
+        {
+          "title": "Nutzerperspektive und UX-Aspekte",
+          "goal": "Ermitteln, wie die Datenprodukte aus UX-Sicht wahrgenommen werden und welche Anforderungen daraus resultieren.",
+          "sample_questions": [
+            "Wie werden die Datalake-Dashboards aktuell von Endnutzern verwendet?",
+            "Gibt es Feedback zu Datenvisualisierungen oder -zugänglichkeit, das in die Pipeline-Entwicklung einfließt?",
+            "Wie werden Accessibility-Anforderungen in der Datenaufbereitung berücksichtigt?"
+          ]
+        },
+        {
+          "title": "Cross-Team Abhängigkeiten und Schnittstellen",
+          "goal": "Identifizieren, wie Änderungen in Helios andere Projekte oder Systeme beeinflussen.",
+          "sample_questions": [
+            "Welche Schnittstellen bestehen zu Projekten wie Borealis ETL oder Nimbus Observability?",
+            "Wie koordinieren Sie Schema-Änderungen mit Abnehmern in anderen Teams?",
+            "Gibt es gemeinsame Runbooks oder RFCs, die mehrere Projekte betreffen?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs und Risiken",
+          "goal": "Diskutieren, welche architektonischen und organisatorischen Entscheidungen getroffen wurden, welche Kompromisse eingegangen wurden und welche Risiken bestehen.",
+          "sample_questions": [
+            "Welche Designentscheidungen haben die Skalierbarkeit des Datalake am stärksten beeinflusst?",
+            "Gab es Situationen, in denen Sie zwischen Performance und Datenqualität abwägen mussten?",
+            "Wie wird das BLAST_RADIUS-Prinzip in Ihrer Arbeit konkret umgesetzt?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27853,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

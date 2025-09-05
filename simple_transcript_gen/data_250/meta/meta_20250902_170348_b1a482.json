@@ -1,0 +1,164 @@
+{
+  "id": "20250902_170348_b1a482",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 135,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_da"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Kontext",
+          "goal": "Sicherstellen, dass der Interviewee den Gesamtzusammenhang des Helios Datalake versteht und seine Rolle darin präzise darlegen kann.",
+          "sample_questions": [
+            "Können Sie bitte kurz Ihren Verantwortungsbereich im Helios Datalake Projekt beschreiben?",
+            "Welche Kernziele verfolgt das Projekt in der aktuellen Scale-Phase?",
+            "Wie messen Sie persönlich den Erfolg Ihrer Arbeit in diesem Kontext?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Datenflüsse",
+          "goal": "Verstehen, wie der Interviewee ELT-Pipelines, dbt-Modelle und Kafka-Ingestion integriert und optimiert.",
+          "sample_questions": [
+            "Beschreiben Sie den aktuellen ELT-Prozess von der Quelle bis Snowflake.",
+            "Wie setzen Sie dbt-Modelle ein, um Datenqualität und Lineage sicherzustellen?",
+            "Welche Herausforderungen gab es bei der Integration von Kafka-Ingestion ins bestehende System?"
+          ]
+        },
+        {
+          "title": "Qualitätssicherung & Runbooks",
+          "goal": "Bewerten, wie der Interviewee mit Runbooks wie RB-ING-042 arbeitet und SLA-HEL-01 einhält.",
+          "sample_questions": [
+            "Wie nutzen Sie RB-ING-042 Ingestion Failover Runbook im Incident-Fall?",
+            "Welche Metriken überwachen Sie, um die SLA-HEL-01 Vorgaben einzuhalten?",
+            "Wie gehen Sie mit Abweichungen von den SLOs um?"
+          ]
+        },
+        {
+          "title": "Multi-Hop Abhängigkeiten & Systemintegration",
+          "goal": "Aufdecken komplexer Abhängigkeiten zwischen Helios und anderen Projekten (z.B. Quasar Billing, Nimbus Observability) und wie diese koordiniert werden.",
+          "sample_questions": [
+            "Gibt es Abhängigkeiten zwischen Helios Datalake und Quasar Billing in Bezug auf Datenfeeds?",
+            "Wie stellen Sie sicher, dass Observability-Daten aus Nimbus korrekt in Helios integriert werden?",
+            "Gab es Fälle, in denen Änderungen in einem anderen System Ihre Pipelines beeinflusst haben?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Risiken & Trade-offs",
+          "goal": "Herausarbeiten, wie der Interviewee Entscheidungen unter Unsicherheit trifft, Risiken bewertet und dokumentiert.",
+          "sample_questions": [
+            "Beschreiben Sie eine Entscheidung, bei der Sie zwischen Performance und Datenkonsistenz abwägen mussten.",
+            "Welche Risiken sehen Sie aktuell für die Stabilität der ELT-Pipelines?",
+            "Wie dokumentieren Sie diese Risiken und Trade-offs für Audits?"
+          ]
+        },
+        {
+          "title": "Abschluss & Lessons Learned",
+          "goal": "Zusammenfassen, welche Verbesserungen möglich sind und wie der Interviewee seine Arbeit reflektiert.",
+          "sample_questions": [
+            "Was würden Sie im nächsten Quartal an Ihrem Ansatz ändern?",
+            "Welche Lessons Learned haben Sie aus den letzten Incidents gezogen?",
+            "Wie sichern Sie Wissenstransfer im Team?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28150,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

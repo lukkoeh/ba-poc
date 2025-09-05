@@ -1,0 +1,163 @@
+{
+  "id": "20250902_175413_d9be5b",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 183,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Role Clarity",
+          "goal": "Understand the interviewee's ownership within Orion Edge Gateway and their interaction with other teams",
+          "sample_questions": [
+            "Can you walk me through your responsibilities in Orion Edge Gateway?",
+            "How do you coordinate with Platform and Security teams during the build phase?",
+            "What are the key success metrics you track for this project?"
+          ]
+        },
+        {
+          "title": "Requirements & Stakeholder Management",
+          "goal": "Explore how requirements are gathered, prioritized, and validated with stakeholders",
+          "sample_questions": [
+            "What process do you follow to capture API gateway requirements from regulated industry clients?",
+            "How do you balance conflicting priorities between rate limiting and low latency requirements?",
+            "Can you provide an example of a requirement that evolved significantly from initial capture to implementation?"
+          ]
+        },
+        {
+          "title": "Technical Integration & Dependencies",
+          "goal": "Understand cross-project dependencies and integration points",
+          "sample_questions": [
+            "How does Orion Edge Gateway integrate with Aegis IAM for auth?",
+            "What are the dependencies on Poseidon Networking for mTLS setup?",
+            "How do you coordinate release schedules with dependent teams?"
+          ]
+        },
+        {
+          "title": "Risk Management & Compliance",
+          "goal": "Discuss how risks, especially in regulated environments, are identified and mitigated",
+          "sample_questions": [
+            "What compliance considerations are critical for Orion Edge Gateway?",
+            "Can you share how you handle incidents like the MTLS handshake bug (GW-4821)?",
+            "How do you ensure adherence to POL-SEC-001 during development?"
+          ]
+        },
+        {
+          "title": "Performance & SLA Management",
+          "goal": "Explore monitoring, performance tuning, and meeting SLA targets",
+          "sample_questions": [
+            "How do you ensure SLA-ORI-02 p95 latency < 120ms is met?",
+            "What is your approach to load testing before production release?",
+            "Can you describe a performance bottleneck and how it was resolved?"
+          ]
+        },
+        {
+          "title": "Tradeoffs & Decision Making",
+          "goal": "Understand how the interviewee makes tradeoffs under constraints",
+          "sample_questions": [
+            "Describe a major tradeoff you made between security and performance.",
+            "What factors influenced the decision to adopt Blue/Green deployments (RB-GW-011)?",
+            "How do you decide when to escalate an issue versus deferring it?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26826,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

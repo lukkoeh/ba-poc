@@ -1,0 +1,168 @@
+{
+  "id": "20250902_163513_587417",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 110,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_arch",
+      "role": "Cloud Architect",
+      "traits": [
+        "tradeoff",
+        "cost_perf",
+        "multi-region"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_arch"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & SLA Alignment",
+          "goal": "Verstehen, wie der Phoenix Feature Store in die Gesamtarchitektur passt und wie SLAs definiert und überwacht werden.",
+          "sample_questions": [
+            "Können Sie bitte den aktuellen Scope des Phoenix Feature Store in eigenen Worten beschreiben?",
+            "Wie stellen Sie sicher, dass SLA-ORI-02 ähnliche Latenz-Anforderungen auch hier erfüllt werden?",
+            "Welche Metriken sind für Sie entscheidend, um die Verfügbarkeit und Performance zu tracken?"
+          ]
+        },
+        {
+          "title": "Architekturentscheidungen & Multi-Region",
+          "goal": "Erkunden, welche Architekturentscheidungen getroffen wurden, um Multi-Region-Fähigkeiten und BLAST_RADIUS-Minimierung zu gewährleisten.",
+          "sample_questions": [
+            "Welche Trade-offs haben Sie bei der Wahl zwischen aktiver und passiver Replikation berücksichtigt?",
+            "Wie integrieren Sie RTO/RPO-Ziele in das Feature Store Design?",
+            "Can you explain how the feature store interacts with upstream systems like Helios Datalake under failover conditions?"
+          ]
+        },
+        {
+          "title": "MLOps Integration & Drift Monitoring",
+          "goal": "Verstehen, wie MLOps-Prozesse und CI/CD für Features implementiert sind und wie Drift erkannt und gemanagt wird.",
+          "sample_questions": [
+            "Welche Pipelines nutzen Sie für Feature-Ingestion und wie werden diese getestet?",
+            "How do you detect and respond to concept drift in near real-time?",
+            "Welche Runbooks existieren für Drift-Incidents, und wie sind diese mit RB-FS-034 verknüpft?"
+          ]
+        },
+        {
+          "title": "Kosten-Performance-Optimierung",
+          "goal": "Diskutieren, wie Kostenoptimierung und Performance-Bedarf balanciert werden, inkl. FinOps-Guidelines.",
+          "sample_questions": [
+            "Wie nutzen Sie Erkenntnisse aus Vesta FinOps oder Hyperion Cost Explorer für den Phoenix Feature Store?",
+            "Welche typischen Kostenfallen gibt es bei Online Feature Serving und wie vermeiden Sie diese?",
+            "Can you give an example of a quota or budget policy (POL-FIN-007) impacting your design?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Lessons Learned",
+          "goal": "Abschließende Reflexion über Risiken, getroffene Entscheidungen und deren Begründung mit Belegen.",
+          "sample_questions": [
+            "Was war die kritischste Architekturentscheidung bisher und welche Belege hatten Sie dafür?",
+            "Welche Risiken sind noch offen und wie mitigieren Sie diese?",
+            "Could you walk me through a ticket or RFC that best illustrates a major trade-off?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26840,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

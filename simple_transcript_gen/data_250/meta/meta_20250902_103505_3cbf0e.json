@@ -1,0 +1,154 @@
+{
+  "id": "20250902_103505_3cbf0e",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 44,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rolle",
+          "goal": "Verstehen der QA-Lead-Perspektive auf die Hera QA Platform und deren Einbettung in die Delivery-Organisation.",
+          "sample_questions": [
+            "Können Sie kurz Ihre Rolle im Hera QA Platform Projekt beschreiben?",
+            "Wie setzen Sie die Policy POL-QA-014 im aktuellen Build-Phase-Kontext um?",
+            "What are the main delivery constraints you are working under for Hera?"
+          ]
+        },
+        {
+          "title": "Teststrategie & Risikoansatz",
+          "goal": "Exploration der risk-based testing Strategie und deren Verbindung zu Artefakten wie RFC-1770.",
+          "sample_questions": [
+            "Wie priorisieren Sie Testfälle basierend auf Risiko und Traceability?",
+            "Can you walk me through how RFC-1770 influenced your test selection logic?",
+            "Wie stellen Sie sicher, dass kritische SLOs wie SLA-HEL-01 auch im QA-Kontext berücksichtigt werden?"
+          ]
+        },
+        {
+          "title": "Traceability & Tooling",
+          "goal": "Analyse der End-to-End Traceability zwischen Anforderungen, Tests und Defects.",
+          "sample_questions": [
+            "Welche Tools nutzen Sie zur Sicherstellung der Traceability?",
+            "How do you link defects back to original user stories or RFCs?",
+            "Gibt es interne Runbooks, die speziell für Traceability-Probleme entwickelt wurden?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Plattformen",
+          "goal": "Verstehen, wie Hera QA Platform mit Projekten wie Helios Datalake oder Nimbus Observability integriert wird.",
+          "sample_questions": [
+            "Wie beeinflusst die Observability Pipeline aus P-NIM Ihre Testmetriken?",
+            "Do you have cross-project dependencies that affect your QA cycles?",
+            "Welche Lessons Learned aus Helios Datalake wurden in Hera übernommen?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Risiken",
+          "goal": "Diskussion über konkrete Entscheidungen, Abwägungen und Risikomanagement mit Belegen aus Tickets, Runbooks oder SLAs.",
+          "sample_questions": [
+            "Gab es Situationen, in denen Sie Testabdeckung zugunsten von Time-to-Market reduziert haben?",
+            "Can you provide evidence, e.g., ticket IDs or runbook excerpts, that supported a major test strategy shift?",
+            "Wie gehen Sie mit Risiken um, die aus ungetesteten Integrationspfaden resultieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26178,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

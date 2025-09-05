@@ -1,0 +1,168 @@
+{
+  "id": "20250902_174242_1501e5",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 172,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_devops",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rollenklärung",
+          "goal": "Verstehen, welche Verantwortlichkeiten SRE und DevOps im Orion Edge Gateway Projekt haben und wie die Sicherheitsarchitektur eingebettet ist.",
+          "sample_questions": [
+            "Können Sie mir den aktuellen Stand des Orion Edge Gateway Projekts schildern?",
+            "Welche spezifischen Oncall- und Automationsaufgaben fallen in Ihren Bereich?",
+            "Wie greifen Ihre Rollen im Hinblick auf Auth-Integration ineinander?"
+          ]
+        },
+        {
+          "title": "Sicherheitsanforderungen und Policies",
+          "goal": "Herleiten, wie Policies wie POL-SEC-001 in Build-Phase umgesetzt werden und welche Sicherheitskontrollen für mTLS und Rate Limiting geplant sind.",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass Least Privilege im Gateway-Kontext umgesetzt wird?",
+            "Welche Lessons Learned aus GW-4821 haben Sie in die aktuellen Pipelines eingebaut?",
+            "Wie testen Sie AuthN/AuthZ-Mechanismen vor dem Go-Live?"
+          ]
+        },
+        {
+          "title": "Runbooks, SLAs und Incident Response",
+          "goal": "Verknüpfen, wie RB-GW-011 und SLA-ORI-02 in den täglichen Betrieb integriert werden und welche Metriken für p95 Latenz überwacht werden.",
+          "sample_questions": [
+            "Wie sieht der Ablauf eines Blue/Green Rollouts gemäß RB-GW-011 aus?",
+            "Welche KPIs nutzen Sie, um SLA-ORI-02 zu verifizieren?",
+            "Wie dokumentieren Sie Abweichungen und leiten daraus Verbesserungen ab?"
+          ]
+        },
+        {
+          "title": "Subsystem-Integration und Multi-Hop Abhängigkeiten",
+          "goal": "Aufzeigen der Abhängigkeiten zwischen Orion Edge Gateway und anderen Projekten wie Aegis IAM oder Poseidon Networking, insbesondere bei Authn/Authz und mTLS.",
+          "sample_questions": [
+            "Wie interagiert das Gateway mit Aegis IAM für JIT Access?",
+            "Welche Schnittstellen bestehen zu Poseidon Networking für mTLS?",
+            "Wie gehen Sie mit Änderungen in einer dieser Komponenten um?"
+          ]
+        },
+        {
+          "title": "Trade-offs, Risiken und finale Entscheidungen",
+          "goal": "Diskutieren der getroffenen Architekturentscheidungen, der Abwägung zwischen Sicherheit und Performance und der dokumentierten Risiken.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie bei aggressivem Rate Limiting im Hinblick auf legitime Lastspitzen?",
+            "Wie haben Sie die Balance zwischen p95 Latenz < 120ms und zusätzlichen mTLS Handshakes gefunden?",
+            "Können Sie ein Beispiel geben, wo Sie ein Sicherheitsfeature zugunsten der Verfügbarkeit angepasst haben?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28975,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

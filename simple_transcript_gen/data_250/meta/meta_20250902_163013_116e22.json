@@ -1,0 +1,154 @@
+{
+  "id": "20250902_163013_116e22",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 106,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Context & Role in Aegis IAM Operations",
+          "goal": "Establish the interviewee’s responsibilities, daily operational scope, and familiarity with Aegis IAM artifacts and policies.",
+          "sample_questions": [
+            "Can you walk me through your primary responsibilities in operating Aegis IAM?",
+            "Which runbooks or RFCs do you refer to most frequently, and why?",
+            "How do you ensure alignment with POL-SEC-001 in day-to-day activities?"
+          ]
+        },
+        {
+          "title": "Security Controls & Least Privilege Implementation",
+          "goal": "Assess how least privilege and JIT access are enforced, monitored, and audited in the IAM environment.",
+          "sample_questions": [
+            "Describe your process for granting and revoking JIT access under RB-IAM-075.",
+            "What monitoring or alerting mechanisms are in place for privilege escalations?",
+            "How do you validate that RBAC configurations remain compliant over time?"
+          ]
+        },
+        {
+          "title": "Incident Handling & Evidence Collection",
+          "goal": "Understand how the interviewee manages incidents, collects evidence, and maintains compliance during security events.",
+          "sample_questions": [
+            "Can you detail a recent incident where you had to execute RB-IAM-075, including evidence collection?",
+            "How do you ensure incident timelines and actions are properly documented for audits?",
+            "What challenges have you faced in correlating IAM logs with other subsystems?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies & Risk Management",
+          "goal": "Explore dependencies between Aegis IAM and other Novereon projects, and how those influence security posture.",
+          "sample_questions": [
+            "How does Aegis IAM integrate with Orion Edge Gateway’s auth mechanisms?",
+            "Have you encountered conflicting requirements between IAM and Poseidon Networking policies?",
+            "What is your approach to mitigating shared risks across dependent services?"
+          ]
+        },
+        {
+          "title": "Decision-Making & Tradeoffs in Security Controls",
+          "goal": "Evaluate the interviewee’s ability to make informed tradeoffs between security, usability, and operational efficiency.",
+          "sample_questions": [
+            "Describe a decision where you had to balance strict least privilege against user productivity.",
+            "What evidence did you gather to support that decision (e.g., AUD-24-Q2, SLA metrics)?",
+            "If you had to revise that decision today, what would you change and why?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26487,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

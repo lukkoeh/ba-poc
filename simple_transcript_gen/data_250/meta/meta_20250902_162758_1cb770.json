@@ -1,0 +1,154 @@
+{
+  "id": "20250902_162758_1cb770",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 104,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rolle",
+          "goal": "Verstehen, wie der SRE in Nimbus Observability eingebunden ist und welche Kernverantwortlichkeiten bestehen.",
+          "sample_questions": [
+            "Können Sie mir kurz den aktuellen Stand des Nimbus Observability Projekts skizzieren?",
+            "Which parts of the OpenTelemetry pipeline are you directly responsible for?",
+            "Wie ist Ihr Oncall-Rhythmus organisiert und wie greifen Sie auf Runbooks zu?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Pipelines",
+          "goal": "Tiefe Einblicke in Architekturentscheidungen, Telemetrieflüsse und Integrationspunkte gewinnen.",
+          "sample_questions": [
+            "Bitte erläutern Sie den Datenfluss vom Service bis zum Alerting-System.",
+            "How do SLO definitions in SLA-HEL-01 or SLA-ORI-02 influence your alert thresholds here?",
+            "Welche Abhängigkeiten zu anderen Projekten (z. B. Helios Datalake oder Poseidon Networking) bestehen?"
+          ]
+        },
+        {
+          "title": "Incident Response & Runbooks",
+          "goal": "Verstehen, wie Incident-Prozesse ablaufen, welche Runbooks (z. B. RB-OBS-033) genutzt werden und wie Lessons Learned dokumentiert werden.",
+          "sample_questions": [
+            "Können Sie ein Beispiel geben, wo RB-OBS-033 Alert Fatigue Tuning angewendet wurde?",
+            "What heuristics do you apply when the runbook doesn't cover a specific telemetry anomaly?",
+            "Wie erfolgt die Eskalation gemäß den internen SLAs?"
+          ]
+        },
+        {
+          "title": "Cross-System Integration & Multi-Hop Troubleshooting",
+          "goal": "Ermitteln, wie der SRE komplexe Probleme löst, die mehrere Systeme und Teams betreffen.",
+          "sample_questions": [
+            "Gab es schon Fälle, wo ein Observability-Problem durch eine IAM-Policy (P-AEG) verursacht wurde?",
+            "How do you correlate trace sampling strategies (RFC-1114) with cost guardrails from Vesta FinOps?",
+            "Welche Tools nutzen Sie, um solche multi-hop Fehlerpfade zu visualisieren?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Entscheidungsfindung",
+          "goal": "Aufzeigen, wie Entscheidungen unter Risiko getroffen werden, welche Evidenzen genutzt werden und wie Policies berücksichtigt werden.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie aktuell für die Erreichung unserer SLOs?",
+            "Can you describe a trade-off you made between observability granularity and ingestion cost?",
+            "Wie dokumentieren Sie solche Entscheidungen, z. B. in RFCs oder Tickets?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27977,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

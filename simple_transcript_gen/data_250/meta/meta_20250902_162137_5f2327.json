@@ -1,0 +1,177 @@
+{
+  "id": "20250902_162137_5f2327",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 99,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_po",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Rollenklärung",
+          "goal": "Klarstellen der Rollen im Projekt Phoenix Feature Store und Verständnis für den aktuellen Stand im Build-Phase schaffen.",
+          "sample_questions": [
+            "Können Sie bitte kurz Ihre Rolle im Phoenix Feature Store Projekt beschreiben?",
+            "Wie ist das Team strukturiert und welche Schnittstellen gibt es zu anderen Abteilungen?",
+            "Welche Hauptziele verfolgen Sie in der aktuellen Phase?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Feature Serving",
+          "goal": "Verständnis der Architektur für Online- und Offline-Feature-Serving sowie der Implementierungsdetails.",
+          "sample_questions": [
+            "Wie haben Sie das Online-Serving im Vergleich zum Offline-Serving technisch umgesetzt?",
+            "Welche Datenquellen werden angebunden und wie erfolgt die Synchronisation?",
+            "Gibt es spezielle Latenz- oder Durchsatzanforderungen, die in SLA-Form festgehalten sind?"
+          ]
+        },
+        {
+          "title": "Drift Monitoring & Model CI/CD",
+          "goal": "Erfassen, wie Drift-Monitoring integriert ist und wie Modelle kontinuierlich deployed werden.",
+          "sample_questions": [
+            "Wie erkennen Sie Daten- oder Konzeptdrift in der Plattform?",
+            "Welche Pipelines oder Tools nutzen Sie für das Model CI/CD?",
+            "Wie reagieren Sie auf festgestellten Drift, und wie schnell?"
+          ]
+        },
+        {
+          "title": "Schnittstellen zu anderen Projekten",
+          "goal": "Verstehen, wie Phoenix Feature Store mit anderen Systemen wie Helios Datalake oder Nimbus Observability interagiert.",
+          "sample_questions": [
+            "Welche Abhängigkeiten bestehen zu Helios Datalake?",
+            "Wie fließen Observability-Daten aus Nimbus in Ihre Drift-Analysen ein?",
+            "Gab es Herausforderungen bei der Integration dieser Systeme?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und Entscheidungen",
+          "goal": "Analyse von getroffenen Architektur- oder Produktentscheidungen, deren Risiken und Abwägungen.",
+          "sample_questions": [
+            "Welche wesentlichen Architekturentscheidungen wurden in den letzten 3 Monaten getroffen?",
+            "Gab es Trade-offs zwischen Performance und Kosteneffizienz?",
+            "Können Sie ein Beispiel nennen, wo ein Risiko bewusst eingegangen wurde und wie es abgesichert wurde?"
+          ]
+        },
+        {
+          "title": "Abschluss & Lessons Learned",
+          "goal": "Zusammenfassung der wichtigsten Punkte und Ableitung von Lessons Learned für zukünftige Phasen.",
+          "sample_questions": [
+            "Was würden Sie aus heutiger Sicht anders machen?",
+            "Welche Best Practices haben sich bewährt?",
+            "Wie fließen die Lessons Learned in andere Projekte ein?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28251,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

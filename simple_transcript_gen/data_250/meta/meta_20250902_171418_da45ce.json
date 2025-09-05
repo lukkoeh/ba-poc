@@ -1,0 +1,145 @@
+{
+  "id": "20250902_171418_da45ce",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 146,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick und Scope-Abgrenzung",
+          "goal": "Verstehen, wie der Senior Project Manager den aktuellen Scope und die Wachstumsphase des Helios Datalake interpretiert und steuert.",
+          "sample_questions": [
+            "Können Sie kurz den aktuellen Status des Helios Datalake beschreiben?",
+            "Wie definieren Sie die Scope-Grenzen in der Scale-Phase?",
+            "Welche Stakeholder sind derzeit am stärksten involviert?"
+          ]
+        },
+        {
+          "title": "Technische Abhängigkeiten und Integrationen",
+          "goal": "Ermitteln, welche technischen Schnittstellen und Abhängigkeiten kritisch sind und wie diese überwacht werden.",
+          "sample_questions": [
+            "Welche Systeme sind die wichtigsten Datenquellen für den Datalake?",
+            "Wie koordinieren Sie Änderungen in Kafka-Ingestion-Pipelines mit dbt-Modellen?",
+            "Gibt es Abhängigkeiten zu anderen Projekten im Portfolio, die besondere Aufmerksamkeit erfordern?"
+          ]
+        },
+        {
+          "title": "Governance, Policies und SLA-Management",
+          "goal": "Verstehen, wie Policies wie POL-SEC-001 oder SLA-HEL-01 in der Projektpraxis umgesetzt werden.",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass die SLA-HEL-01 (99,9% Availability) eingehalten wird?",
+            "Welche Runbooks oder RFCs sind für Ihr tägliches Management am relevantesten?",
+            "Wie fließen Sicherheitsrichtlinien in die Planung von Deployments ein?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und Lessons Learned",
+          "goal": "Identifizieren, welche Risiken der PM sieht, welche Trade-offs in der Vergangenheit getroffen wurden und welche Belege dafür existieren.",
+          "sample_questions": [
+            "Welche Risiken halten Sie derzeit für am kritischsten?",
+            "Gab es in der Vergangenheit Trade-offs zwischen Performance und Kosten? Können Sie Beispiele nennen?",
+            "Welche Lessons Learned aus früheren Incidents sind dokumentiert?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25924,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "id": "20250902_181024_624450",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 199,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Rollenklärung",
+          "goal": "Verstehen der Rolle des FinOps Analysten im Kontext von Vesta FinOps und Abgleich mit Sicherheitsarchitektur-Anforderungen",
+          "sample_questions": [
+            "Können Sie bitte kurz Ihren Verantwortungsbereich im Vesta FinOps Projekt umreißen?",
+            "Wie arbeiten Sie mit dem Security-Team zusammen, insbesondere im Hinblick auf Cloud Guardrails?",
+            "Welche Kernziele verfolgen Sie aktuell in der Operate-Phase?"
+          ]
+        },
+        {
+          "title": "Budget- und Quotensteuerung",
+          "goal": "Analyse, wie Budgets (POL-FIN-007) technisch und prozessual umgesetzt werden und Abhängigkeiten zu Sicherheitsrichtlinien",
+          "sample_questions": [
+            "Wie setzen Sie Resource Quotas & Budgets (RFC-1502) praktisch um?",
+            "Welche Monitoring-Mechanismen nutzen Sie, um Budgetüberschreitungen zu verhindern?",
+            "Inwiefern beeinflussen Least Privilege (POL-SEC-001) und JIT Access Ihre FinOps-Prozesse?"
+          ]
+        },
+        {
+          "title": "Incident Handling & Runbooks",
+          "goal": "Verstehen der Reaktionsprozesse bei Kostenanomalien und deren Verzahnung mit Sicherheitsvorfällen",
+          "sample_questions": [
+            "Können Sie den Ablauf aus RB-FIN-007 Idle Resource Reaper erläutern?",
+            "Wie korrelieren Sie Kostenanomalien mit potenziellen Sicherheitsvorfällen?",
+            "Gibt es SLAs oder SLOs, die direkt an Kostenanomalie-Response-Zeiten gebunden sind?"
+          ]
+        },
+        {
+          "title": "Subsystem-Interaktionen",
+          "goal": "Herausarbeiten von Multi-Hop-Beziehungen zwischen FinOps, Observability (Nimbus) und IAM (Aegis)",
+          "sample_questions": [
+            "Wie fließen Observability-Daten aus Nimbus in Ihre Kostenprognosen ein?",
+            "Welche Rolle spielt Aegis IAM bei der Kostenkontrolle?",
+            "Gab es Fälle, bei denen IAM-Änderungen direkt Kostenanomalien ausgelöst haben?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Risikoabschätzung",
+          "goal": "Bewertung von Entscheidungen zwischen Kosteneffizienz, Sicherheit und Performance",
+          "sample_questions": [
+            "Welche Risiken sehen Sie bei aggressiver Ressourcenabschaltung im Hinblick auf Sicherheit und Verfügbarkeit?",
+            "Wie dokumentieren Sie diese Trade-offs (z. B. in RFCs oder Audits)?",
+            "Können Sie ein Beispiel nennen, wo Kosteneinsparungen bewusst zugunsten von Sicherheit zurückgestellt wurden?"
+          ]
+        },
+        {
+          "title": "Abschluss & Ausblick",
+          "goal": "Zusammenfassung, Lessons Learned und geplante Optimierungen",
+          "sample_questions": [
+            "Was sind Ihre Top-Prioritäten für das nächste Quartal im Vesta FinOps Projekt?",
+            "Planen Sie Änderungen an den aktuellen Guardrails?",
+            "Welche Unterstützung erwarten Sie vom Security-Architektur-Team?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "FinOps Analyst beschreibt früh, dass Vesta FinOps auf POL-FIN-007 basiert und eng mit Security Guardrails verzahnt ist"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "Verknüpfung von Nimbus Observability Alerts mit Aegis IAM Events zur Erkennung von kostenrelevanten Security Incidents"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "Diskussion einer Entscheidung, Idle Resource Reaper aggressiver zu konfigurieren, mit Abwägung der Risiken für kritische Workloads, gestützt auf Runbook RB-FIN-007 und Audit-Daten"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26837,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

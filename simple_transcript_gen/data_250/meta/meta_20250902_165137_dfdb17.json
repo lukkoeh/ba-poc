@@ -1,0 +1,154 @@
+{
+  "id": "20250902_165137_dfdb17",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 125,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rolle",
+          "goal": "Frühes Verständnis für den Kontext des Helios Datalake und die spezifische SRE-Verantwortung des Interviewees aufbauen.",
+          "sample_questions": [
+            "Können Sie mir kurz schildern, wie Ihr Oncall-Alltag im Helios Datalake Projekt aussieht?",
+            "Welche Runbooks nutzen Sie am häufigsten bei Helios, und warum?",
+            "How do you balance proactive reliability work with incoming incident load?"
+          ]
+        },
+        {
+          "title": "Ingestion Pipeline & Failover",
+          "goal": "Technische Details zu Ingestion, Failover und Abhängigkeiten zwischen Kafka, Snowflake und dbt verstehen.",
+          "sample_questions": [
+            "Welche Schritte sind im RB-ING-042 Ingestion Failover Runbook dokumentiert, und wie strikt halten Sie sich daran?",
+            "Can you describe a real incident where Kafka ingestion stalled and how you traced the root cause?",
+            "Wie wirken sich Partitionierungsstrategien (RFC-1287) auf Ihre RTO/RPO-Ziele aus?"
+          ]
+        },
+        {
+          "title": "SLO/SLA Management",
+          "goal": "Erfahren, wie SLAs und SLOs im Betrieb überwacht und eingehalten werden.",
+          "sample_questions": [
+            "Wie überwachen Sie die SLA-HEL-01 Vorgabe von 99.9% Availability im Tagesgeschäft?",
+            "Which observability signals are your primary early-warning indicators?",
+            "Gibt es interne Heuristiken, um zwischen 'false positives' und echten SLA-Risiken zu unterscheiden?"
+          ]
+        },
+        {
+          "title": "Subsystem-Interaktionen",
+          "goal": "Zusammenhänge zwischen Helios Datalake und anderen Plattformkomponenten aufdecken.",
+          "sample_questions": [
+            "Wie interagiert Helios mit Nimbus Observability, um Ingestion-Fehler zu erkennen?",
+            "Have there been cascading failures involving Quasar Billing or Borealis ETL that impacted Helios?",
+            "Welche impliziten Absprachen gibt es zwischen SRE und Data Engineering bei Schema-Änderungen?"
+          ]
+        },
+        {
+          "title": "Incident Response & Continuous Improvement",
+          "goal": "Verstehen, wie Lessons Learned aus Incidents in Policies, Runbooks und RFCs einfließen.",
+          "sample_questions": [
+            "Wie dokumentieren Sie Postmortems, und wie fließen diese in Runbook-Updates ein?",
+            "What’s an example of a policy change triggered by a Helios incident?",
+            "Welche Risiken sehen Sie aktuell, und wie priorisieren Sie deren Behandlung?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27456,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

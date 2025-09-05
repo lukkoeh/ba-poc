@@ -1,0 +1,154 @@
+{
+  "id": "20250902_163254_643f3d",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 109,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-POS",
+      "name": "Poseidon Networking",
+      "phase": "Operate",
+      "scope": "Zero-trust networking, mTLS, service mesh policy"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Current State of Poseidon Networking",
+          "goal": "Establish the interviewee's understanding of the current zero-trust and mTLS setup in production",
+          "sample_questions": [
+            "Walk me through the current mTLS policy enforcement in Poseidon Networking.",
+            "How do you validate compliance with POL-SEC-001 Least Privilege & JIT Access in the service mesh?",
+            "What are the key metrics you monitor to ensure SLA-ORI-02-like latency targets are met in Poseidon?"
+          ]
+        },
+        {
+          "title": "Incident Handling & Runbooks",
+          "goal": "Explore operational readiness and runbook-driven response",
+          "sample_questions": [
+            "Describe the last incident where RB-NET-029 Cert Rotation Checklist was used.",
+            "How do you coordinate with other teams during a certificate expiry-related outage?",
+            "What unwritten heuristics do you apply when deciding to trigger RB-DR-001 Regional Failover Procedure in a networking context?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Identify multi-hop dependencies between networking and other subsystems",
+          "sample_questions": [
+            "How does Poseidon's mTLS policy interact with Orion Edge Gateway's MTLS handshake logic (GW-4821)?",
+            "Can you detail a scenario where changes in Nimbus Observability's tracing impacted your incident triage in Poseidon?",
+            "How do you ensure Borealis ETL traffic maintains compliance through Poseidon's zero-trust policies?"
+          ]
+        },
+        {
+          "title": "Risk Assessment & Tradeoffs",
+          "goal": "Probe understanding of risks, tradeoffs, and decision-making with evidence",
+          "sample_questions": [
+            "What are the main risks of tightening mTLS policies further, and how do you weigh them against potential latency impacts?",
+            "Describe a time you had to choose between SLA breach and security posture degradation—what evidence did you use?",
+            "If an RFC like RFC-1618 mTLS Policy Matrix conflicts with a runbook in a live incident, how do you resolve that?"
+          ]
+        },
+        {
+          "title": "Future Improvements & Policy Alignment",
+          "goal": "Discuss forward-looking changes and alignment with company values",
+          "sample_questions": [
+            "What improvements would you propose to RB-NET-029 to better support sustainable velocity?",
+            "How could we better integrate policy-as-code (RFC-903) into Poseidon's configuration management?",
+            "Which upcoming networking trends do you consider hype versus evidence-based, given our mission?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27722,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

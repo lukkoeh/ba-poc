@@ -1,0 +1,163 @@
+{
+  "id": "20250902_154125_6abe63",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 66,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Kontext",
+          "goal": "Projektkontext klären, Rolle des Interviewees im Orion Edge Gateway Projekt verstehen",
+          "sample_questions": [
+            "Können Sie bitte Ihre aktuelle Rolle im Projekt Orion Edge Gateway beschreiben?",
+            "Wie fügt sich das Gateway in die Gesamtarchitektur der Novereon Plattform ein?",
+            "Welche Hauptziele verfolgen wir in der aktuellen Build-Phase?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Automatisierung",
+          "goal": "Verständnis der technischen Architektur, IaC-Ansätze und CI/CD-Pipelines ermitteln",
+          "sample_questions": [
+            "Welche IaC-Tools setzen Sie für die Provisionierung der Gateway-Infrastruktur ein?",
+            "Wie ist der aktuelle Stand der CI/CD-Pipelines für Deployments im Projekt?",
+            "Wie stellen Sie sicher, dass Deployments im Einklang mit RB-GW-011 (Rolling Deployments Blue/Green) erfolgen?"
+          ]
+        },
+        {
+          "title": "Integration & Sicherheit",
+          "goal": "Bewertung der Authentifizierungs- und Autorisierungsintegration sowie Sicherheitsmaßnahmen",
+          "sample_questions": [
+            "Wie haben Sie die mTLS-Handshake-Problematik aus Ticket GW-4821 adressiert?",
+            "Inwiefern berücksichtigen Sie POL-SEC-001 (Least Privilege & JIT Access) in der Gateway-Konfiguration?",
+            "Wie werden Rate Limiting und Auth-Integration getestet, um SLA-ORI-02 einzuhalten?"
+          ]
+        },
+        {
+          "title": "Monitoring & Observability",
+          "goal": "Verständnis für Überwachungsmechanismen und SLO-Tracking gewinnen",
+          "sample_questions": [
+            "Welche Metriken überwachen Sie aktiv, um die p95 Latenz unter 120ms zu halten?",
+            "Wie integrieren Sie Observability-Daten aus Nimbus Observability (P-NIM) ins Gateway-Monitoring?",
+            "Wie gehen Sie mit Alert Fatigue um und nutzen dabei Runbooks wie RB-OBS-033?"
+          ]
+        },
+        {
+          "title": "Zusammenarbeit & Prozesse",
+          "goal": "Evaluieren, wie der Interviewee mit anderen Teams und Prozessen interagiert",
+          "sample_questions": [
+            "Wie koordinieren Sie mit dem Security-Team beim Einspielen neuer Auth-Policies?",
+            "Welche Prozessschritte folgen Sie bei RFC-Einreichungen, z.B. für Änderungen an Auth-Integration?",
+            "Wie dokumentieren Sie Änderungen, um Traceability gemäß POL-QA-014 sicherzustellen?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Lessons Learned",
+          "goal": "Tiefe Einsicht in getroffene Entscheidungen, Risiken und deren Begründung",
+          "sample_questions": [
+            "Welche wichtigen Trade-offs haben Sie bei der Rate-Limiting-Implementierung getroffen?",
+            "Gab es Risiken, die Sie bewusst akzeptiert haben, um die Build-Phase zu beschleunigen?",
+            "Können Sie ein Beispiel nennen, wo ein Runbook oder Ticket als Beweismittel für eine Entscheidung diente?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27440,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

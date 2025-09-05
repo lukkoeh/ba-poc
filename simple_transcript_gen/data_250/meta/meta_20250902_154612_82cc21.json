@@ -1,0 +1,172 @@
+{
+  "id": "20250902_154612_82cc21",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 70,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Role Context",
+          "goal": "Establish interviewee's background, current responsibilities, and familiarity with observability tooling in regulated environments.",
+          "sample_questions": [
+            "Can you briefly describe your current role and main responsibilities at your last project?",
+            "What prior experience do you have with OpenTelemetry or similar instrumentation frameworks?",
+            "How do you adapt DevOps practices when working in regulated industries?"
+          ]
+        },
+        {
+          "title": "Project-Specific Technical Deep Dive",
+          "goal": "Explore candidate's approach to implementing observability pipelines and meeting defined SLOs for Nimbus Observability.",
+          "sample_questions": [
+            "How would you design the ingestion pipeline for metrics, logs, and traces in Nimbus Observability?",
+            "What strategies would you use to ensure SLO compliance, e.g., SLA-HEL-01 style guarantees?",
+            "Can you walk me through a runbook you might create for alert fatigue tuning, referencing RB-OBS-033?"
+          ]
+        },
+        {
+          "title": "Cross-Project Integration & Dependencies",
+          "goal": "Assess ability to identify and manage dependencies with other Novereon projects such as Helios Datalake or Poseidon Networking.",
+          "sample_questions": [
+            "How would the observability signals from Poseidon Networking's mTLS policies inform incident analytics in Nimbus?",
+            "Can you describe a data flow from Helios Datalake ingestion through to Nimbus Observability dashboards?",
+            "What challenges arise when integrating telemetry from multiple sources with different retention policies?"
+          ]
+        },
+        {
+          "title": "Automation & Infrastructure as Code",
+          "goal": "Evaluate automation mindset, IaC tooling, and deployment strategies for observability components.",
+          "sample_questions": [
+            "Which IaC tools would you choose for deploying OpenTelemetry collectors and why?",
+            "How would you automate the deployment of alerting rules and dashboards across environments?",
+            "Can you cite an example where automation reduced MTTR in a previous project?"
+          ]
+        },
+        {
+          "title": "Incident Response & Continuous Improvement",
+          "goal": "Understand runbook use, postmortem culture, and continuous optimization of observability systems.",
+          "sample_questions": [
+            "How would you handle a sudden spike in false-positive alerts in Nimbus?",
+            "What metrics would you track post-incident to ensure improvements are effective?",
+            "Have you worked with RFC processes like RFC-1114 to formalize changes in observability strategy?"
+          ]
+        },
+        {
+          "title": "Risk Assessment & Decision-Making",
+          "goal": "Probe candidate's ability to balance trade-offs, manage risks, and make evidence-based decisions.",
+          "sample_questions": [
+            "If you had to choose between higher sampling rates and cost constraints, how would you decide?",
+            "How do you assess the blast radius when changing telemetry configurations?",
+            "Describe a time when you made a risk-based decision regarding observability coverage."
+          ]
+        },
+        {
+          "title": "Wrap-Up & Cultural Fit",
+          "goal": "Gauge alignment with Novereon Systems GmbH's values and mission.",
+          "sample_questions": [
+            "How do you embody 'Safety First' in your day-to-day work?",
+            "What does 'Sustainable Velocity' mean to you in the context of DevOps and observability?",
+            "Why do you want to work on Nimbus Observability at Novereon?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27688,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

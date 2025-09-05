@@ -1,0 +1,154 @@
+{
+  "id": "20250902_152728_68774d",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 56,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und strategische Ziele",
+          "goal": "Frühes Verständnis für den Gesamtzusammenhang von Atlas Mobile und der Rolle im Portfolio gewinnen.",
+          "sample_questions": [
+            "Könnten Sie mir kurz schildern, wie Atlas Mobile in die Gesamtstrategie von Novereon Systems eingebettet ist?",
+            "Welche Hauptziele wollen Sie mit der Pilotphase erreichen?",
+            "Wie messen Sie aktuell den Erfolg dieser Phase?"
+          ]
+        },
+        {
+          "title": "User Experience Anforderungen",
+          "goal": "Explorieren, welche UX-Überlegungen im CTO-Level priorisiert werden und wie diese in technische Entscheidungen einfließen.",
+          "sample_questions": [
+            "Welche UX-Kriterien sind für Sie geschäftskritisch in der Atlas Mobile App?",
+            "Wie fließen Erkenntnisse aus Nutzerstudien in Ihre Roadmap ein?",
+            "Gibt es unbeabsichtigte Nutzungsmuster, die Sie überrascht haben?"
+          ]
+        },
+        {
+          "title": "Technische Architektur und Feature Flags",
+          "goal": "Verstehen, wie technische Architekturentscheidungen und Feature-Flag-Strategien UX beeinflussen.",
+          "sample_questions": [
+            "Wie setzen Sie Feature Flags ein, um Risiken in der Pilotphase zu steuern?",
+            "Können Sie ein Beispiel geben, wo ein Feature Flag direkt ein UX-Problem entschärft hat?",
+            "Welche Trade-offs sehen Sie bei der Integration von Offline Sync in Bezug auf Performance und Komplexität?"
+          ]
+        },
+        {
+          "title": "Interplay mit anderen Plattformen",
+          "goal": "Mehrstufige Verbindung zu anderen Projekten und deren Einfluss auf Atlas Mobile herausarbeiten.",
+          "sample_questions": [
+            "Wie interagiert Atlas Mobile mit Aegis IAM für Authentifizierung?",
+            "Gab es Herausforderungen bei der Integration mit Nimbus Observability für Mobile Metrics?",
+            "Welche Lessons Learned aus Helios Datalake fließen in die Mobile-Datenstrategie ein?"
+          ]
+        },
+        {
+          "title": "Risiken, Entscheidungen und Zukunftspläne",
+          "goal": "Tiefe Einblicke in Entscheidungsprozesse, Risikoabwägungen und langfristige Visionen gewinnen.",
+          "sample_questions": [
+            "Welche größten Risiken sehen Sie aktuell für den Rollout nach der Pilotphase?",
+            "Gab es Entscheidungen, die Sie unter Beachtung von Policies wie POL-SEC-001 revidieren mussten?",
+            "Wie planen Sie, die App auf Skalierung vorzubereiten, ohne die UX zu kompromittieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27797,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

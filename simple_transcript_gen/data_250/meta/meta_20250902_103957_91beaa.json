@@ -1,0 +1,154 @@
+{
+  "id": "20250902_103957_91beaa",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 45,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Sicherheitsanforderungen",
+          "goal": "Verstehen, wie der Phoenix Feature Store aktuell aufgebaut ist und welche Sicherheitsrichtlinien greifen.",
+          "sample_questions": [
+            "Können Sie bitte den aktuellen Architekturstand des Phoenix Feature Store beschreiben?",
+            "Wie haben Sie die Policy-as-Code Konventionen (RFC-903) im Kontext des Feature Store umgesetzt?",
+            "Welche Komponenten sind aus Ihrer Sicht sicherheitskritisch und warum?"
+          ]
+        },
+        {
+          "title": "Feature-Pipeline, Drift Monitoring und Compliance",
+          "goal": "Tiefe in die MLOps-spezifischen Prozesse, Drift Detection und deren Einbettung in Compliance-Standards.",
+          "sample_questions": [
+            "Wie wird Drift Monitoring technisch implementiert und wie reagieren Sie auf Alerts?",
+            "Welche Runbooks oder SLAs existieren für Feature Serving und wie stellen Sie deren Einhaltung sicher?",
+            "Wie verknüpfen Sie Audit-Logs aus dem Feature Store mit den IAM-Systemen für Zugriffskontrolle?"
+          ]
+        },
+        {
+          "title": "Sicherheitsbedrohungen und Incident Response",
+          "goal": "Analyse der Bedrohungsmodelle, Incident Response Pläne und Lessons Learned aus bisherigen Vorfällen.",
+          "sample_questions": [
+            "Gab es Sicherheitsvorfälle im Kontext des Feature Stores? Falls ja, wie wurde reagiert?",
+            "Welche Trade-offs haben Sie bei der Implementierung von mTLS im Feature Serving gemacht?",
+            "Wie testen Sie Ihre Disaster Recovery Prozeduren im Zusammenspiel mit anderen Plattformkomponenten?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Novereon-Projekten",
+          "goal": "Erkennen, wie der Phoenix Feature Store mit Projekten wie Helios Datalake oder Aegis IAM integriert ist.",
+          "sample_questions": [
+            "Wie synchronisieren Sie Features aus dem Helios Datalake in Echtzeit?",
+            "Welche Abhängigkeiten bestehen zwischen dem Feature Store und Aegis IAM in Bezug auf Just-In-Time Access?",
+            "Welche Risiken bestehen, wenn Drift Monitoring mit Daten aus mehreren Projekten kombiniert wird?"
+          ]
+        },
+        {
+          "title": "Zukunftsplanung und Risikomanagement",
+          "goal": "Abschätzen, wie zukünftige Anforderungen, Skalierung und regulatorische Änderungen adressiert werden.",
+          "sample_questions": [
+            "Welche geplanten Änderungen im Feature Store bergen aus Ihrer Sicht die größten Sicherheitsrisiken?",
+            "Wie würden Sie die BLAST_RADIUS im Falle eines Data Poisoning-Angriffs begrenzen?",
+            "Welche Maßnahmen planen Sie, um zukünftige Compliance-Anforderungen proaktiv zu erfüllen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28036,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

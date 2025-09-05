@@ -1,0 +1,154 @@
+{
+  "id": "20250903_003130_5b334a",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 207,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & UX Role",
+          "goal": "Understand the interviewee's role in Atlas Mobile and how UX integrates with cross-platform development in a pilot phase.",
+          "sample_questions": [
+            "Can you walk me through your primary responsibilities on Atlas Mobile during this pilot phase?",
+            "How does the UX team collaborate with engineering and product for feature flag rollouts?",
+            "What unique constraints have you encountered designing for offline sync?"
+          ]
+        },
+        {
+          "title": "Design System Integration",
+          "goal": "Explore how the DS-ATLAS v2 tokenized components are influencing design and development workflows.",
+          "sample_questions": [
+            "How have tokenized components changed your approach to maintaining consistency across platforms?",
+            "Can you share an example where the design system accelerated a complex feature delivery?",
+            "What accessibility considerations are baked into DS-ATLAS v2?"
+          ]
+        },
+        {
+          "title": "Accessibility & Inclusivity",
+          "goal": "Dive into accessibility strategies and how they are applied in mobile UX for regulated industries.",
+          "sample_questions": [
+            "What accessibility standards or guidelines are you following for Atlas Mobile?",
+            "How do you test offline sync scenarios with assistive technologies?",
+            "Have you identified any gaps in current accessibility tooling for mobile?"
+          ]
+        },
+        {
+          "title": "Cross-Functional Collaboration",
+          "goal": "Understand how UX coordinates with SRE, QA, and Security teams given the company’s values and policies.",
+          "sample_questions": [
+            "How do UX decisions feed into risk-based testing as per POL-QA-014?",
+            "Can you describe a time when UX changes impacted the ‘Safety First’ principle?",
+            "What’s the process for incorporating security feedback into UI flows?"
+          ]
+        },
+        {
+          "title": "Pilot Learnings & Scaling Strategy",
+          "goal": "Discuss lessons learned in the pilot phase and plans to scale Atlas Mobile to production.",
+          "sample_questions": [
+            "Which pilot findings have had the biggest impact on your scaling strategy?",
+            "How will you adapt the offline sync model for a larger user base?",
+            "What risks do you foresee in scaling, and how are you addressing them?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27360,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

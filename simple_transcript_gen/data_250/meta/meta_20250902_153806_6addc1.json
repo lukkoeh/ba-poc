@@ -1,0 +1,163 @@
+{
+  "id": "20250902_153806_6addc1",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 65,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & Kontext",
+          "goal": "Schnell den aktuellen Stand des Orion Edge Gateway Projekts erfassen und die Rolle des Interviewees darin verstehen.",
+          "sample_questions": [
+            "Können Sie mir kurz den aktuellen Build-Status des Orion Edge Gateway schildern?",
+            "Welche Kernaufgaben haben Sie im Rahmen der API Gateway Implementierung übernommen?",
+            "How does your work tie into the SLA-ORI-02 p95 Latency < 120ms target?"
+          ]
+        },
+        {
+          "title": "Technische Umsetzung & Automation",
+          "goal": "Verstehen, wie der Interviewee Infrastructure as Code, CI/CD und Automatisierung einsetzt, um Projektziele zu erreichen.",
+          "sample_questions": [
+            "Welche IaC-Tools setzen Sie für die Gateway-Infrastruktur ein und warum?",
+            "Can you walk me through your blue/green deployment process as per RB-GW-011?",
+            "Wie stellen Sie sicher, dass Änderungen im Auth-Integrationsteil nicht die Rate-Limits verletzen?"
+          ]
+        },
+        {
+          "title": "Schnittstellen & Abhängigkeiten",
+          "goal": "Ermitteln, wie der Interviewee mit anderen Projekten und Plattformkomponenten interagiert, inkl. Sicherheits- und Observability-Aspekten.",
+          "sample_questions": [
+            "Mit welchen anderen Projekten (z. B. Aegis IAM oder Nimbus Observability) gibt es kritische Abhängigkeiten?",
+            "How do you propagate mTLS handshake fixes from GW-4821 into production without breaching SLAs?",
+            "Wie stimmen Sie sich mit dem Security-Team ab, um POL-SEC-001 Least Privilege einzuhalten?"
+          ]
+        },
+        {
+          "title": "Incident Response & Runbooks",
+          "goal": "Erkennen, wie der Interviewee auf Incidents reagiert und Runbooks einsetzt bzw. verbessert.",
+          "sample_questions": [
+            "Beschreiben Sie einen Fall, in dem Sie RB-GW-011 unter Zeitdruck anwenden mussten.",
+            "What unwritten heuristics do you follow when the runbook doesn't cover a specific failure mode?",
+            "Welche Lessons Learned haben Sie aus dem letzten Major Incident gezogen?"
+          ]
+        },
+        {
+          "title": "Performance & Optimierung",
+          "goal": "Evaluieren, wie der Interviewee Performance-Metriken misst, optimiert und dokumentiert.",
+          "sample_questions": [
+            "Wie messen Sie die Einhaltung des p95 Latenz-SLOs in der Build-Phase?",
+            "Have you experimented with request sampling strategies similar to RFC-1114 from Nimbus Observability?",
+            "Welche Trade-offs mussten Sie zwischen Sicherheit und Latenz eingehen?"
+          ]
+        },
+        {
+          "title": "Risiken & Entscheidungen",
+          "goal": "Verstehen, wie der Interviewee Risiken bewertet, dokumentiert und Entscheidungen mit Evidenz untermauert.",
+          "sample_questions": [
+            "Welche größten Risiken sehen Sie für die Go-Live-Phase?",
+            "Can you reference any tickets or RFCs that influenced a major architectural change?",
+            "Wie dokumentieren Sie Entscheidungen, die von Standard-Policies abweichen, um Audit-Readiness zu gewährleisten?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27331,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

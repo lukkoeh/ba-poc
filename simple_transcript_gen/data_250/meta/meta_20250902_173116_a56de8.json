@@ -1,0 +1,154 @@
+{
+  "id": "20250902_173116_a56de8",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 162,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rolle",
+          "goal": "Verstehen, wie der Interviewee seine Rolle im Kontext von Vesta FinOps sieht und welche Kernaufgaben er übernimmt.",
+          "sample_questions": [
+            "Können Sie bitte Ihren aktuellen Verantwortungsbereich im Projekt Vesta FinOps beschreiben?",
+            "Welche Hauptziele verfolgt das Projekt in der Operate-Phase?",
+            "Wie passen Ihre täglichen Aufgaben zu den Unternehmenswerten wie 'Safety First' und 'Sustainable Velocity'?"
+          ]
+        },
+        {
+          "title": "Budgetsteuerung und Vorhersagen",
+          "goal": "Erfassen, wie Budgets, Kostenprognosen und Quoten im Cloud-Kontext gemanagt werden.",
+          "sample_questions": [
+            "Wie setzen Sie die Policy POL-FIN-007 in Ihrer Arbeit konkret um?",
+            "Welche Forecasting-Methoden nutzen Sie, um Abweichungen frühzeitig zu erkennen?",
+            "Wie gehen Sie vor, wenn sich ein Projekt wie Helios Datalake und Vesta FinOps gegenseitig in den Kosten beeinflussen?"
+          ]
+        },
+        {
+          "title": "Zusammenarbeit mit anderen Abteilungen",
+          "goal": "Ermitteln, wie der Interviewee mit anderen Teams wie SRE, Platform oder Security interagiert, um Kostenoptimierungen umzusetzen.",
+          "sample_questions": [
+            "Wie priorisieren Sie Maßnahmen, wenn Security-Anforderungen (z.B. aus POL-SEC-001) zu höheren Betriebskosten führen?",
+            "Können Sie ein Beispiel nennen, wo Sie mit dem SRE-Team eine Kostenreduktion bei gleichbleibender SLA-Qualität erreicht haben?",
+            "Wie binden Sie Daten aus Nimbus Observability in Ihre Analysen ein?"
+          ]
+        },
+        {
+          "title": "Multi-Projekt-Abhängigkeiten",
+          "goal": "Verstehen, wie komplexe Abhängigkeiten zwischen Projekten identifiziert und gemanagt werden.",
+          "sample_questions": [
+            "Gab es Fälle, in denen Ihre Arbeit in Vesta FinOps direkt durch Änderungen in Quasar Billing beeinflusst wurde?",
+            "Wie koordinieren Sie Quotenänderungen, wenn gleichzeitig mehrere Projekte in der Scale-Phase sind?",
+            "Wie stellen Sie sicher, dass die BLAST_RADIUS klein bleibt, wenn Budgetkürzungen nötig sind?"
+          ]
+        },
+        {
+          "title": "Entscheidungsfindung und Trade-offs",
+          "goal": "Analyse der Entscheidungsprozesse, Risiken und Dokumentation mit Evidenz.",
+          "sample_questions": [
+            "Können Sie ein Beispiel für eine Entscheidung nennen, bei der Sie zwischen kurzfristiger Kostenersparnis und langfristiger Stabilität abwägen mussten?",
+            "Wie nutzen Sie Artefakte wie RFC-1502 oder RB-FIN-007, um Entscheidungen zu untermauern?",
+            "Welche Risiken sehen Sie, wenn Idle Resource Reaper aggressiver konfiguriert wird?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29809,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

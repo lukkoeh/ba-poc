@@ -1,0 +1,154 @@
+{
+  "id": "20250902_173537_b6662f",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 166,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und UX-Rolle",
+          "goal": "Verstehen, wie die UX-Perspektive in der Pilotphase von Atlas Mobile integriert ist",
+          "sample_questions": [
+            "Können Sie mir kurz den aktuellen Stand von Atlas Mobile aus Ihrer Sicht schildern?",
+            "Welche Hauptverantwortlichkeiten haben Sie als UX Lead in dieser Pilotphase?",
+            "Wie arbeiten Sie mit den anderen Teams wie Mobile-Engineering oder QA zusammen?"
+          ]
+        },
+        {
+          "title": "Designsystem und Feature Flags",
+          "goal": "Erkunden, wie das Designsystem (z.B. DS-ATLAS v2) mit Feature Flags koordiniert wird",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass neue UI-Komponenten aus DS-ATLAS v2 konsistent ausgerollt werden?",
+            "Gibt es Prozesse oder Runbooks, die Sie bei der Aktivierung oder Deaktivierung bestimmter Features unterstützen?",
+            "Wie gehen Sie mit der Herausforderung um, dass Feature Flags unterschiedliche UI-Zustände erzeugen können?"
+          ]
+        },
+        {
+          "title": "Offline Sync und Accessibility",
+          "goal": "Tiefe Einblicke in UX-Entscheidungen zu Offline-Synchronisation und Barrierefreiheit gewinnen",
+          "sample_questions": [
+            "Welche UX-Prinzipien leiten Sie bei der Gestaltung von Offline-Erfahrungen?",
+            "Wie testen Sie Accessibility im Kontext von Offline-Funktionalität?",
+            "Gab es bisher Nutzerfeedback, das zu Änderungen im Offline-Design geführt hat?"
+          ]
+        },
+        {
+          "title": "Zusammenarbeit mit Data und Observability",
+          "goal": "Verstehen, wie UX-Daten mit Telemetrie- und Observability-Daten verbunden werden",
+          "sample_questions": [
+            "Arbeiten Sie mit dem Nimbus Observability Team zusammen, um UX-bezogene Metriken zu sammeln?",
+            "Wie nutzen Sie quantitative Daten, um qualitative UX-Forschung zu ergänzen?",
+            "Können Sie ein Beispiel nennen, wo Observability-Daten direkt zu einer UX-Änderung führten?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und nächste Schritte",
+          "goal": "Diskussion über identifizierte Risiken, getroffene Trade-offs und geplante Maßnahmen",
+          "sample_questions": [
+            "Welche Risiken sehen Sie aktuell für die UX-Qualität beim Übergang vom Pilot zur Scale-Phase?",
+            "Gab es Trade-offs zwischen Performance und Accessibility, die Sie dokumentiert haben?",
+            "Wie planen Sie, diese Trade-offs in künftigen Iterationen zu adressieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27249,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

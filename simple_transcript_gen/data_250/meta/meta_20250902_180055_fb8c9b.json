@@ -1,0 +1,154 @@
+{
+  "id": "20250902_180055_fb8c9b",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 190,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Ausgangslage",
+          "goal": "Das Verständnis des Interviewees für Scope, Phase und Kernziele des Orion Edge Gateway Projekts eruieren.",
+          "sample_questions": [
+            "Können Sie den aktuellen Stand des Orion Edge Gateway Projekts kurz zusammenfassen?",
+            "Wie ist der Scope im Vergleich zur ursprünglichen Planung angepasst worden?",
+            "Welche Abhängigkeiten zu anderen Projekten bestehen aktuell?"
+          ]
+        },
+        {
+          "title": "Stakeholder-Management und Governance",
+          "goal": "Ermitteln, wie der Interviewee die Erwartungen verschiedener Stakeholder steuert und Governance-Richtlinien umsetzt.",
+          "sample_questions": [
+            "Wie stellen Sie die Einhaltung der Policy POL-SEC-001 im Projekt sicher?",
+            "Welche Kommunikationswege nutzen Sie für kritische Änderungen am API-Gateway?",
+            "Wie gehen Sie mit widersprüchlichen Anforderungen zwischen Security und Performance um?"
+          ]
+        },
+        {
+          "title": "Technische Schnittstellen und Integrationen",
+          "goal": "Verständnis der Integrationspunkte und deren Einfluss auf Zeitplan und Risiken.",
+          "sample_questions": [
+            "Welche Schnittstellen zu Aegis IAM und Poseidon Networking sind für Authentifizierung und mTLS relevant?",
+            "Wie stellen Sie sicher, dass die SLOs aus SLA-ORI-02 eingehalten werden?",
+            "Gab es bereits Vorfälle, die den BLAST_RADIUS überschritten haben?"
+          ]
+        },
+        {
+          "title": "Risikomanagement und Qualitätssicherung",
+          "goal": "Erkunden, wie Risiken identifiziert, bewertet und mitigiert werden, inkl. QA-Strategien.",
+          "sample_questions": [
+            "Welche Lessons Learned aus GW-4821 haben Sie in den aktuellen Build-Prozess integriert?",
+            "Wie wird Risk-Based Testing (POL-QA-014) im Build-Phase-Kontext umgesetzt?",
+            "Welche Metriken nutzen Sie zur Erfolgskontrolle von Deployments gemäß RB-GW-011?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs und Ausblick",
+          "goal": "Abwägen von Architektur- und Prozessentscheidungen unter Berücksichtigung von Risiken, Budgets und SLAs.",
+          "sample_questions": [
+            "Welche Trade-offs mussten Sie zwischen Feature-Umfang und Einhaltung des SLA-ORI-02 machen?",
+            "Wie priorisieren Sie technische Schulden gegenüber neuen Features im Build-Phase-Kontext?",
+            "Welche Risiken sehen Sie für den Übergang in die Operate-Phase?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28145,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

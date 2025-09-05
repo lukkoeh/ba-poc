@@ -1,0 +1,154 @@
+{
+  "id": "20250902_170450_487149",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 137,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Ziele",
+          "goal": "Verständnis des aktuellen Stands, der Deliverables und der messbaren Ziele von Orion Edge Gateway",
+          "sample_questions": [
+            "Können Sie bitte den aktuellen Status des Orion Edge Gateway Projekts kurz skizzieren?",
+            "Welche Hauptziele sind für die Build-Phase definiert, und wie messen Sie den Fortschritt?",
+            "Wie wurde SLA-ORI-02 in die Projektplanung integriert?"
+          ]
+        },
+        {
+          "title": "Stakeholder Management & Kommunikation",
+          "goal": "Ermitteln, wie Stakeholder identifiziert, priorisiert und informiert werden",
+          "sample_questions": [
+            "Welche internen und externen Stakeholder sind für dieses Projekt kritisch?",
+            "Wie stellen Sie sicher, dass technische Änderungen aus RFCs allen relevanten Parteien kommuniziert werden?",
+            "Welche Kommunikationskanäle nutzen Sie für Eskalationen?"
+          ]
+        },
+        {
+          "title": "Risiken und Abhängigkeiten",
+          "goal": "Risikoanalyse, Abhängigkeiten zu anderen Projekten und deren Management",
+          "sample_questions": [
+            "Welche größten Risiken sehen Sie derzeit, und wie werden diese mitigiert?",
+            "Gibt es Abhängigkeiten zu Projekten wie Aegis IAM oder Poseidon Networking?",
+            "Wie adressieren Sie potenzielle Auswirkungen auf das BLAST_RADIUS?"
+          ]
+        },
+        {
+          "title": "Technische Prozesse & Artefakte",
+          "goal": "Einblick in die Nutzung von Runbooks, Tickets und RFCs zur Steuerung der Build-Phase",
+          "sample_questions": [
+            "Wie wird RB-GW-011 im Deployment-Prozess eingesetzt?",
+            "Können Sie Beispiele nennen, wie ein Ticket wie GW-4821 in den Entwicklungszyklus integriert wurde?",
+            "Wie stellen Sie Traceability zwischen Anforderungen, Tests und Deployments sicher?"
+          ]
+        },
+        {
+          "title": "Entscheidungen & Trade-offs",
+          "goal": "Verstehen, wie Entscheidungen unter Unsicherheit getroffen werden und welche Belege verwendet werden",
+          "sample_questions": [
+            "Welche Entscheidung in der letzten Iteration war besonders kritisch, und wie wurde sie abgesichert?",
+            "Gab es einen Trade-off zwischen Latenzanforderungen und Sicherheitsmaßnahmen?",
+            "Welche Belege (Runbooks, Tests, Audits) wurden zur Untermauerung genutzt?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26600,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

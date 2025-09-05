@@ -1,0 +1,154 @@
+{
+  "id": "20250902_164532_45d593",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 119,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Sicherheitsanforderungen",
+          "goal": "Frühes Verständnis des Projektumfangs, der Architektur und der sicherheitsrelevanten Ziele",
+          "sample_questions": [
+            "Können Sie mir den aktuellen Stand des Orion Edge Gateway Projekts kurz schildern?",
+            "Welche Security-Controls sind bereits im Design verankert?",
+            "Wie stellen Sie sicher, dass SLA-ORI-02 p95 Latency < 120ms eingehalten wird trotz zusätzlicher Authentifizierungsschichten?"
+          ]
+        },
+        {
+          "title": "Architektur- und Integrationspunkte",
+          "goal": "Tiefe Analyse der Schnittstellen zu anderen Systemen und potenzieller Sicherheitsrisiken",
+          "sample_questions": [
+            "Wie integriert sich das Gateway mit Aegis IAM, insbesondere im Hinblick auf mTLS und RBAC?",
+            "Welche Lessons Learned aus GW-4821 MTLS Handshake Bug Analysis fließen in die aktuelle Build-Phase ein?",
+            "Welche Abhängigkeiten bestehen zu Nimbus Observability für Security-Monitoring?"
+          ]
+        },
+        {
+          "title": "Risikomanagement & Compliance",
+          "goal": "Prüfen, wie Risiken identifiziert, bewertet und mitigiert werden, inkl. Policy-Bezug",
+          "sample_questions": [
+            "Wie setzen Sie POL-SEC-001 Least Privilege & JIT Access im API Gateway um?",
+            "Welche ungeschriebenen Regeln gibt es im Team zur Absicherung von Deployments (RB-GW-011)?",
+            "Wie dokumentieren Sie Sicherheitsentscheidungen, um bei Audits (AUD-24-Q2) bestehen zu können?"
+          ]
+        },
+        {
+          "title": "Betriebs- und Incident-Handling",
+          "goal": "Verstehen, wie der Betrieb abgesichert ist und wie auf Vorfälle reagiert wird",
+          "sample_questions": [
+            "Wie läuft ein Incident-Response-Prozess bei Auth-Fehlern ab?",
+            "Gibt es Runbooks, die simultan Security- und Performance-Incidents adressieren?",
+            "Wie wird der BLAST_RADIUS bei Gateway-Ausfällen begrenzt?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Entscheidungsfindung",
+          "goal": "Diskussion von kritischen Architekturentscheidungen, Performance vs. Security",
+          "sample_questions": [
+            "Welche konkreten Trade-offs mussten Sie zwischen Security-Härtung und Latenz eingehen?",
+            "Haben Sie Belege oder Metriken, die diese Entscheidungen gestützt haben?",
+            "Wie priorisieren Sie Änderungen, wenn neue Security-Risiken entdeckt werden?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27783,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

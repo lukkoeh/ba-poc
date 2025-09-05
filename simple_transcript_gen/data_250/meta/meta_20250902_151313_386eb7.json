@@ -1,0 +1,154 @@
+{
+  "id": "20250902_151313_386eb7",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 45,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Sicherheitsanforderungen",
+          "goal": "Verstehen, wie der Phoenix Feature Store aktuell aufgebaut ist und welche Sicherheitsrichtlinien (z.B. POL-SEC-001) relevant sind.",
+          "sample_questions": [
+            "Können Sie den aktuellen Stand des Phoenix Feature Store im Build-Phase-Kontext beschreiben?",
+            "Welche Sicherheitsrichtlinien von Novereon Systems wenden Sie hier konkret an?",
+            "Wie stellen Sie sicher, dass Least Privilege & JIT Access im Feature Serving umgesetzt werden?"
+          ]
+        },
+        {
+          "title": "Feature-Pipeline und Modellbereitstellung",
+          "goal": "Tiefe Einsicht in die MLOps-Pipeline, insbesondere wie Features generiert, versioniert und für Modelle bereitgestellt werden.",
+          "sample_questions": [
+            "Wie werden Features von der Datenerfassung bis zur Bereitstellung in der Online-Serving-Umgebung verarbeitet?",
+            "Welche Runbooks oder RFCs definieren den Prozess?",
+            "Wie gehen Sie bei der CI/CD von Modellen mit Abhängigkeiten zu Feature-Versionen um?"
+          ]
+        },
+        {
+          "title": "Drift Monitoring und Incident Response",
+          "goal": "Verstehen, wie Daten- und Konzeptdrift erkannt und adressiert werden, inkl. Incident-Management-Prozesse.",
+          "sample_questions": [
+            "Welche Metriken nutzen Sie, um Drift zu erkennen, und wie sind diese mit SLOs/SLA-HEL-01 verknüpft?",
+            "Gibt es ein Runbook für das Vorgehen bei erkannter Drift? Falls ja, welches?",
+            "Wie ist das Zusammenspiel mit Observability (z.B. Nimbus Observability) organisiert?"
+          ]
+        },
+        {
+          "title": "Cross-System Security und Compliance",
+          "goal": "Analysieren, wie der Feature Store mit anderen Systemen (z.B. Aegis IAM, Helios Datalake) integriert ist und welche Sicherheitsrisiken entstehen.",
+          "sample_questions": [
+            "Wie authentifizieren sich Dienste zwischen Phoenix Feature Store und Aegis IAM?",
+            "Gibt es Audit-Artefakte, die die Zugriffe dokumentieren?",
+            "Wie wird der BLAST_RADIUS bei Sicherheitsvorfällen begrenzt?"
+          ]
+        },
+        {
+          "title": "Trade-offs, Risiken und Optimierungen",
+          "goal": "Diskussion über getroffene Architekturentscheidungen, ihre Risiken und mögliche Verbesserungen.",
+          "sample_questions": [
+            "Welche Kompromisse mussten Sie zwischen Performance und Sicherheit eingehen?",
+            "Wie bewerten Sie die Risiken im Hinblick auf Compliance-Anforderungen?",
+            "Welche RFCs oder Tickets belegen diese Entscheidungen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28679,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

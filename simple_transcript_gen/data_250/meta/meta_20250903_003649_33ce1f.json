@@ -1,0 +1,172 @@
+{
+  "id": "20250903_003649_33ce1f",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 213,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Role Context",
+          "goal": "Establish the interviewee's background in MLOps and feature store work within Phoenix Feature Store project.",
+          "sample_questions": [
+            "Can you walk me through your role as an MLOps Engineer on the Phoenix Feature Store project?",
+            "What aspects of online/offline feature serving are you most involved with?",
+            "How does your work align with Novereon Systems GmbH's values like 'Safety First' and 'Evidence over Hype'?"
+          ]
+        },
+        {
+          "title": "Feature Serving Architecture",
+          "goal": "Explore the technical and architectural design of the feature store, including serving patterns and integration points.",
+          "sample_questions": [
+            "Could you describe the current architecture for online and offline feature serving?",
+            "What are the main data sources and how are they ingested into the feature store?",
+            "How do you ensure consistency between online and offline features, especially under high load?"
+          ]
+        },
+        {
+          "title": "Model CI/CD Integration",
+          "goal": "Understand how model training and deployment pipelines integrate with the feature store.",
+          "sample_questions": [
+            "How is the feature store integrated into your model CI/CD workflow?",
+            "Can you give an example of a recent model deployment and how the feature store played a role?",
+            "What runbooks or RFCs guide your CI/CD processes for models using Phoenix Feature Store?"
+          ]
+        },
+        {
+          "title": "Drift Monitoring & Detection",
+          "goal": "Discuss the methods and tools for detecting and mitigating feature or model drift.",
+          "sample_questions": [
+            "What mechanisms are in place to monitor for data or concept drift in Phoenix?",
+            "Can you walk me through a recent drift incident and how it was handled?",
+            "How do you balance sensitivity and false positives in drift detection?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Identify dependencies with other Novereon projects and their implications.",
+          "sample_questions": [
+            "How does Phoenix Feature Store interact with the Helios Datalake or Mercury Messaging projects?",
+            "What challenges arise from these integrations, and how do you address them?",
+            "Can you describe a scenario where a change in another system impacted Phoenix?"
+          ]
+        },
+        {
+          "title": "Risk Management & Trade-offs",
+          "goal": "Evaluate decisions, risks, and trade-offs made during the project with supporting evidence.",
+          "sample_questions": [
+            "What was a significant trade-off you had to make in the feature store design, and why?",
+            "How do you mitigate the risk of serving stale or incorrect features in production?",
+            "Could you reference any runbooks, tickets, or RFCs that influenced these decisions?"
+          ]
+        },
+        {
+          "title": "Future Improvements & Lessons Learned",
+          "goal": "Reflect on the project's progress and identify opportunities for improvement.",
+          "sample_questions": [
+            "What lessons have you learned from building Phoenix Feature Store so far?",
+            "What features or capabilities do you plan to add next?",
+            "How will these improvements address current limitations or risks?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26922,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

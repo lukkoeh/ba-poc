@@ -1,0 +1,177 @@
+{
+  "id": "20250902_170151_d5a3a1",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 134,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_sec",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & Rollenklärung",
+          "goal": "Frühes Verständnis der Projektziele, der individuellen Rollen und Verantwortlichkeiten herstellen",
+          "sample_questions": [
+            "Können Sie bitte kurz den aktuellen Stand der Hera QA Platform beschreiben?",
+            "Welche Rolle übernehmen Sie konkret im Build-Phase Kontext?",
+            "Wie stellen Sie sicher, dass Ihre Arbeit mit den Unternehmenswerten wie 'Safety First' und 'Evidence over Hype' übereinstimmt?"
+          ]
+        },
+        {
+          "title": "Teststrategie & Traceability",
+          "goal": "Verstehen, wie Risk-Based Testing und vollständige Traceability umgesetzt werden",
+          "sample_questions": [
+            "Wie wenden Sie POL-QA-014 in der täglichen Arbeit an?",
+            "Welche Metriken oder Artefakte nutzen Sie, um die Testabdeckung in Hera nachzuweisen?",
+            "Can you walk me through how you link test results back to specific RFCs or SLAs?"
+          ]
+        },
+        {
+          "title": "Sicherheitsaspekte im QA-Kontext",
+          "goal": "Erfassen, wie Security-Engineering und QA-Strategien ineinandergreifen",
+          "sample_questions": [
+            "Wie arbeiten QA und Security zusammen, um frühzeitig Schwachstellen zu erkennen?",
+            "Can you describe a recent example where threat modeling influenced your test plan?",
+            "Wie setzen Sie POL-SEC-001 im Testumfeld konkret um?"
+          ]
+        },
+        {
+          "title": "Subsystem-Integration & Multi-Hop Dependencies",
+          "goal": "Analyse der Abhängigkeiten zu anderen Projekten und Systemen",
+          "sample_questions": [
+            "Welche Abhängigkeiten bestehen zwischen Hera und Projekten wie Nimbus Observability oder Aegis IAM?",
+            "How do you ensure that test orchestration covers cross-system workflows?",
+            "Gibt es Runbooks oder RFCs, die mehrere Systeme gleichzeitig adressieren?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Risiken",
+          "goal": "Bewertung von getroffenen Entscheidungen, deren Risiken und dokumentierte Evidenz",
+          "sample_questions": [
+            "Welche kritischen Trade-offs mussten Sie bei der Teststrategie eingehen?",
+            "Can you refer to any specific tickets or runbooks that influenced a go/no-go decision?",
+            "Wie bewerten Sie das Restrisiko in Bezug auf SLAs wie SLA-HEL-01 oder SLA-ORI-02?"
+          ]
+        },
+        {
+          "title": "Abschluss & Ausblick",
+          "goal": "Zusammenfassung, Lessons Learned und nächste Schritte",
+          "sample_questions": [
+            "Was sind die größten Lessons Learned aus der bisherigen Build-Phase?",
+            "Welche Verbesserungen planen Sie für die nächste Projektphase?",
+            "Any anticipated risks for scaling the Hera QA Platform?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26377,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

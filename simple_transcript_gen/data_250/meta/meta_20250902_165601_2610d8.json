@@ -1,0 +1,154 @@
+{
+  "id": "20250902_165601_2610d8",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 128,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rolle",
+          "goal": "Ein gemeinsames Verständnis für die aktuelle Phase des Phoenix Feature Store Projekts sowie die Rolle des MLOps Engineers schaffen.",
+          "sample_questions": [
+            "Können Sie mir kurz den aktuellen Stand des Phoenix Feature Store beschreiben?",
+            "Welche Ihrer Aufgaben sind derzeit am kritischsten für den Projekterfolg?",
+            "Wie passen Ihre Aktivitäten zu den Werten 'Safety First' und 'Sustainable Velocity'?"
+          ]
+        },
+        {
+          "title": "Feature Store Architektur & Pipelines",
+          "goal": "Die technische Architektur und CI/CD-Prozesse für Features verstehen.",
+          "sample_questions": [
+            "Wie ist die Trennung zwischen Online- und Offline-Serving technisch umgesetzt?",
+            "Welche Deployment-Strategien nutzen Sie für Feature-Pipelines?",
+            "Can you walk me through how RB-FS-034 Hotfix Rollback Procedure integrates into your CI/CD?"
+          ]
+        },
+        {
+          "title": "Drift Monitoring & Alerting",
+          "goal": "Mechanismen zur Erkennung und Reaktion auf Feature-Drift erfassen.",
+          "sample_questions": [
+            "Welche Metriken werden für Drift Detection erhoben?",
+            "Wie werden SLOs für Drift-Reaktionszeiten definiert und gemessen?",
+            "What’s your approach to minimize alert fatigue while maintaining coverage?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Plattformkomponenten",
+          "goal": "Verstehen, wie der Feature Store mit Data Lake, Observability und IAM interagiert.",
+          "sample_questions": [
+            "Wie fließen Daten aus dem Helios Datalake in den Feature Store?",
+            "Gibt es Abhängigkeiten zu Nimbus Observability für das Drift-Monitoring?",
+            "How do IAM policies (POL-SEC-001) affect feature access control?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Risiken",
+          "goal": "Entscheidungen, Abwägungen und Risiken im Projekt diskutieren.",
+          "sample_questions": [
+            "Welche Kompromisse mussten Sie zwischen Latenz und Datenkonsistenz eingehen?",
+            "Gab es Situationen, in denen Sie bewusst gegen ein RFC verstoßen mussten?",
+            "What risks are you tracking for the next release, and what’s the mitigation plan?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27593,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

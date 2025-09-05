@@ -1,0 +1,154 @@
+{
+  "id": "20250902_165329_d73ff3",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 126,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Kontext",
+          "goal": "Das Gesamtbild der Hera QA Platform verstehen, inkl. strategischer Ziele und aktueller Phase.",
+          "sample_questions": [
+            "Können Sie mir kurz den Hauptzweck der Hera QA Platform aus Ihrer Sicht schildern?",
+            "Welche strategischen Ziele verfolgen Sie mit der aktuellen Build-Phase?",
+            "Wie fügt sich dieses Projekt in die Gesamtmission von Novereon Systems ein?"
+          ]
+        },
+        {
+          "title": "Nutzeranforderungen & UX-Prioritäten",
+          "goal": "Verstehen, welche Nutzergruppen im Fokus stehen und welche UX-Aspekte priorisiert werden.",
+          "sample_questions": [
+            "Welche primären Nutzerrollen adressiert die Plattform?",
+            "Gibt es spezifische UX-Herausforderungen, die Sie frühzeitig identifiziert haben?",
+            "Wie messen Sie aktuell den UX-Erfolg im QA-Kontext?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Integrationen",
+          "goal": "Einblick in die technische Architektur und Schnittstellen zu anderen Systemen erhalten.",
+          "sample_questions": [
+            "Welche Kernsysteme interagieren direkt mit Hera?",
+            "Wie wird die Orchestrierung der Tests technisch umgesetzt?",
+            "Gibt es Abhängigkeiten zu Projekten wie Nimbus Observability oder Helios Datalake?"
+          ]
+        },
+        {
+          "title": "Prozess & Policy Alignment",
+          "goal": "Klären, wie Unternehmensrichtlinien (z.B. POL-QA-014) in der Umsetzung berücksichtigt werden.",
+          "sample_questions": [
+            "Inwiefern beeinflusst die Policy POL-QA-014 Ihre Test-Strategie?",
+            "Wie stellen Sie Traceability zwischen Anforderungen und Tests sicher?",
+            "Welche internen Runbooks oder RFCs sind hier besonders relevant?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Zukunft",
+          "goal": "Diskussion über Risiken, getroffene Entscheidungen und zukünftige Roadmap.",
+          "sample_questions": [
+            "Gab es in letzter Zeit Entscheidungen mit signifikanten Trade-offs?",
+            "Wie gehen Sie mit dem Risiko von Flaky Tests in großem Maßstab um?",
+            "Welche Funktionen oder Integrationen stehen als Nächstes auf der Roadmap?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27322,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

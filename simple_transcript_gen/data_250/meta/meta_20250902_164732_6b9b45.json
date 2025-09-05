@@ -1,0 +1,163 @@
+{
+  "id": "20250902_164732_6b9b45",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 121,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-TIT",
+      "name": "Titan DR",
+      "phase": "Drill",
+      "scope": "Disaster Recovery, multi-region failover"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Context",
+          "goal": "Establish interviewee's familiarity with Titan DR project, role in recent drills, and alignment with company values.",
+          "sample_questions": [
+            "Can you briefly describe your role in the Titan DR drills?",
+            "How does the 'Safety First' value play into your decision-making during a failover?",
+            "Which runbooks or SLAs are most critical during a DR event?"
+          ]
+        },
+        {
+          "title": "Runbook Execution & Incident Response",
+          "goal": "Understand the interviewee's approach to executing RB-DR-001 and handling deviations under pressure.",
+          "sample_questions": [
+            "Walk me through how you executed RB-DR-001 during the last GameDay test.",
+            "What steps do you take when the reality deviates from the runbook?",
+            "How do you coordinate with other teams during a multi-region failover?"
+          ]
+        },
+        {
+          "title": "Cross-System Dependencies",
+          "goal": "Explore how the SRE identifies and manages dependencies between Titan DR and other systems like Aegis IAM or Nimbus Observability.",
+          "sample_questions": [
+            "How do you ensure IAM policies remain consistent during a failover?",
+            "What telemetry from Nimbus Observability is most useful in DR scenarios?",
+            "Can you describe a time when a dependency outside Titan DR impacted your RTO?"
+          ]
+        },
+        {
+          "title": "Testing & Continuous Improvement",
+          "goal": "Assess methods for validating DR readiness and integrating lessons from drills into processes.",
+          "sample_questions": [
+            "How do you use findings from TEST-DR-2025-Q1 to improve runbooks?",
+            "What metrics or SLOs do you track post-drill?",
+            "How do you balance drill frequency with operational workload?"
+          ]
+        },
+        {
+          "title": "Risk Assessment & Tradeoffs",
+          "goal": "Evaluate the interviewee's ability to weigh tradeoffs between recovery speed, data consistency, and system stability.",
+          "sample_questions": [
+            "In a real incident, how would you prioritize between RTO and RPO?",
+            "What are the risks of an overly aggressive failover?",
+            "Can you share an example where you had to choose a slower recovery to reduce blast radius?"
+          ]
+        },
+        {
+          "title": "Closing & Reflection",
+          "goal": "Summarize insights, confirm understanding of processes, and identify areas for further discussion.",
+          "sample_questions": [
+            "If you could change one thing in our DR process, what would it be?",
+            "How do you keep yourself and the team prepared for unexpected DR events?",
+            "Any final thoughts on aligning DR strategy with sustainable velocity?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26174,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

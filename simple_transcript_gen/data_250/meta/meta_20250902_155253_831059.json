@@ -1,0 +1,154 @@
+{
+  "id": "20250902_155253_831059",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 76,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Access Control Architecture",
+          "goal": "Assess the engineer's understanding of RBAC implementation, policy-as-code, and integration with enterprise SSO.",
+          "sample_questions": [
+            "Explain how the current RBAC model in Aegis IAM enforces POL-SEC-001.",
+            "How does RFC-903 influence your policy-as-code deployment?",
+            "Describe the process for onboarding a new application into the SSO ecosystem."
+          ]
+        },
+        {
+          "title": "Incident Response & Runbooks",
+          "goal": "Evaluate knowledge of emergency access revocation and evidence collection.",
+          "sample_questions": [
+            "Walk me through RB-IAM-075 and how it aligns with our SLA obligations.",
+            "What are the key indicators you monitor to trigger emergency revocation?",
+            "How do you ensure auditability during a high-pressure incident?"
+          ]
+        },
+        {
+          "title": "Cross-Project Security Dependencies",
+          "goal": "Explore how IAM security posture impacts or is impacted by other projects like Orion Edge Gateway or Poseidon Networking.",
+          "sample_questions": [
+            "Identify a scenario where a misconfiguration in Poseidon Networking could bypass IAM controls.",
+            "How would you coordinate with the Orion Edge Gateway team to enforce mTLS at both layers?",
+            "What blast radius considerations do you apply when IAM tokens are compromised?"
+          ]
+        },
+        {
+          "title": "Risk Assessment & Trade-offs",
+          "goal": "Understand the interviewee's approach to balancing security with usability and operational overhead.",
+          "sample_questions": [
+            "Describe a trade-off you made between strict least privilege and user productivity.",
+            "How do you justify exceptions to POL-SEC-001 during urgent production fixes?",
+            "Given conflicting SLAs between IAM and dependent services, how do you prioritize remediation?"
+          ]
+        },
+        {
+          "title": "Evidence & Continuous Improvement",
+          "goal": "Check for familiarity with audits, post-incident reviews, and integrating lessons learned into the IAM platform.",
+          "sample_questions": [
+            "How did AUD-24-Q2 findings influence your access review cadence?",
+            "What metrics or KPIs do you track post-incident to validate improvements?",
+            "Describe how you feed vulnerability management outcomes back into IAM hardening."
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26931,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

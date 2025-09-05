@@ -1,0 +1,154 @@
+{
+  "id": "20250902_163247_bc0cce",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 108,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung und Rollenverständnis",
+          "goal": "Verständnis der Rolle des FinOps Analysten im Kontext des Projekts Vesta FinOps und Abgleich mit Unternehmenswerten",
+          "sample_questions": [
+            "Können Sie beschreiben, wie Ihre Rolle als FinOps Analyst in der Operate-Phase von Vesta FinOps aussieht?",
+            "Welche der Unternehmenswerte von Novereon Systems beeinflussen Ihre tägliche Arbeit am stärksten?",
+            "Wie definieren Sie in Ihrem Kontext 'Cloud cost optimization'?"
+          ]
+        },
+        {
+          "title": "Prozesse und Werkzeuge",
+          "goal": "Tiefe Einblicke in die eingesetzten Tools, Runbooks und RFCs zur Kostenkontrolle gewinnen",
+          "sample_questions": [
+            "Welche Runbooks wie z.B. RB-FIN-007 nutzen Sie regelmäßig und wie sind diese in Ihre Arbeitsabläufe integriert?",
+            "Wie setzen Sie RFC-1502 Resource Quotas & Budgets praktisch um?",
+            "Welche Metriken oder KPIs ziehen Sie zur Bewertung des Erfolgs Ihrer Optimierungsmaßnahmen heran?"
+          ]
+        },
+        {
+          "title": "Zusammenarbeit mit anderen Teams",
+          "goal": "Verstehen, wie der FinOps Analyst mit Plattform-, SRE- und Data-Teams interagiert",
+          "sample_questions": [
+            "Wie koordinieren Sie sich mit dem SRE-Team, um Kostenoptimierungen ohne Beeinträchtigung von SLAs wie SLA-HEL-01 sicherzustellen?",
+            "Gab es Situationen, in denen Sie gemeinsam mit dem Data-Team Maßnahmen zur Kostenreduktion bei Datenpipelines entwickelt haben?",
+            "Wie gehen Sie mit Zielkonflikten zwischen Performance und Kosten um?"
+          ]
+        },
+        {
+          "title": "Herausforderungen und Lessons Learned",
+          "goal": "Konkrete Beispiele für Herausforderungen, deren Ursachen und Lösungen erarbeiten",
+          "sample_questions": [
+            "Können Sie einen Vorfall schildern, bei dem die Cloudkosten unerwartet stark angestiegen sind?",
+            "Welche Rolle spielten dabei Frühwarnsysteme oder Observability-Tools wie aus Nimbus Observability?",
+            "Was haben Sie aus diesem Vorfall für zukünftige Budgetplanungen gelernt?"
+          ]
+        },
+        {
+          "title": "Zukunftsperspektiven und Verbesserungen",
+          "goal": "Ideen für zukünftige Optimierungen, Automatisierungen und strategische Ausrichtungen sammeln",
+          "sample_questions": [
+            "Welche weiteren Guardrails würden Sie in Vesta FinOps implementieren, um Kostenexplosionen zu verhindern?",
+            "Wie könnte die Integration mit Projekten wie Hyperion Cost Explorer Ihre Arbeit verbessern?",
+            "Welche Risiken sehen Sie derzeit, die in den nächsten 12 Monaten adressiert werden sollten?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28887,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

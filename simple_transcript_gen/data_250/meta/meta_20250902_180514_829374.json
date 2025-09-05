@@ -1,0 +1,163 @@
+{
+  "id": "20250902_180514_829374",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 194,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Kontext",
+          "goal": "Verstehen, wie der Product Owner den aktuellen Status und die Vision von Atlas Mobile beschreibt",
+          "sample_questions": [
+            "Können Sie mir kurz den aktuellen Stand des Atlas Mobile Piloten schildern?",
+            "Was war der ursprüngliche Auslöser für dieses Projekt?",
+            "Wie passt Atlas Mobile in die Gesamtstrategie von Novereon Systems?"
+          ]
+        },
+        {
+          "title": "Nutzerbedürfnisse & Feedback",
+          "goal": "Ermitteln, wie Kundenfeedback erhoben und priorisiert wird",
+          "sample_questions": [
+            "Welche Hauptnutzergruppen haben Sie identifiziert?",
+            "Wie sammeln Sie aktuell Feedback aus der Pilotphase?",
+            "Können Sie ein Beispiel geben, wo Kundenfeedback direkte Priorisierungsänderungen bewirkt hat?"
+          ]
+        },
+        {
+          "title": "Technische Abhängigkeiten & Feature Flags",
+          "goal": "Verstehen, wie technische Entscheidungen und Feature Flags gesteuert werden",
+          "sample_questions": [
+            "Welche kritischen Abhängigkeiten bestehen zu anderen Plattform- oder Backend-Teams?",
+            "Wie nutzen Sie Feature Flags, um Risiken zu minimieren?",
+            "Gab es Situationen, in denen Feature Flags Probleme verursacht oder gelöst haben?"
+          ]
+        },
+        {
+          "title": "Offline Sync & Edge Cases",
+          "goal": "Erforschen, wie Offline-Funktionalität konzipiert und getestet wird",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass Offline-Synchronisation robust funktioniert?",
+            "Welche Edge Cases sind Ihnen bisher begegnet?",
+            "Wie arbeiten Sie mit QA zusammen, um diese Fälle zu prüfen?"
+          ]
+        },
+        {
+          "title": "Priorisierung & Trade-offs",
+          "goal": "Herausfinden, wie der PO zwischen widersprüchlichen Anforderungen balanciert",
+          "sample_questions": [
+            "Können Sie ein Beispiel nennen, bei dem Sie zwischen Time-to-Market und Funktionsumfang abwägen mussten?",
+            "Wie fließen regulatorische Anforderungen in Ihre Priorisierung ein?",
+            "Wie dokumentieren Sie getroffene Trade-off-Entscheidungen?"
+          ]
+        },
+        {
+          "title": "Risiken & Zukunftsblick",
+          "goal": "Erkennen, welche Risiken der PO sieht und welche nächsten Schritte geplant sind",
+          "sample_questions": [
+            "Welche Hauptrisiken sehen Sie aktuell für Atlas Mobile?",
+            "Wie adressieren Sie diese Risiken proaktiv?",
+            "Welche Meilensteine stehen als Nächstes an und woran messen Sie den Erfolg?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28413,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

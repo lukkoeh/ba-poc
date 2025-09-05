@@ -1,0 +1,168 @@
+{
+  "id": "20250903_004029_6abfc0",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 217,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_ux",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Sicherheitsarchitektur",
+          "goal": "Verstehen, wie die grundlegende Architektur des Orion Edge Gateway aufgebaut ist und welche Sicherheitsanforderungen bereits definiert wurden.",
+          "sample_questions": [
+            "Können Sie den aktuellen Stand der Architektur des Orion Edge Gateway beschreiben?",
+            "Welche Bedrohungsmodelle wurden bisher für das Gateway berücksichtigt?",
+            "Wie setzen Sie POL-SEC-001 (Least Privilege & JIT Access) im Kontext des Gateways um?"
+          ]
+        },
+        {
+          "title": "Runbook- und Oncall-Prozesse",
+          "goal": "Ermitteln, wie Betriebs- und Störungsprozesse dokumentiert und umgesetzt werden, insbesondere in Bezug auf sicherheitskritische Vorfälle.",
+          "sample_questions": [
+            "Wie oft mussten Sie das Runbook RB-GW-011 Rolling Deployments (Blue/Green) in den letzten drei Monaten anwenden?",
+            "Welche Lessons Learned haben Sie aus GW-4821 MTLS Handshake Bug Analysis gezogen?",
+            "Wie wird bei einem sicherheitskritischen Fehler zwischen SRE und Security-Team eskaliert?"
+          ]
+        },
+        {
+          "title": "Schnittstellen & Multi-Hop-Abhängigkeiten",
+          "goal": "Aufdecken, wie das Gateway mit anderen Systemen interagiert und welche sicherheitsrelevanten Abhängigkeiten bestehen.",
+          "sample_questions": [
+            "Welche Downstream-Systeme hängen von der Authentifizierung des Gateways ab?",
+            "Wie beeinflusst das Gateway die SLA-ORI-02 p95 Latency < 120ms in Verbindung mit Aegis IAM?",
+            "Können Sie ein Beispiel für eine Incident-Kette nennen, die mehrere Projekte involviert hat?"
+          ]
+        },
+        {
+          "title": "UX-Implikationen von Sicherheitsmaßnahmen",
+          "goal": "Verstehen, wie Sicherheitsmechanismen die User Experience beeinflussen und welche Kompromisse eingegangen wurden.",
+          "sample_questions": [
+            "Wie wirken sich mTLS- und Rate-Limiting-Maßnahmen auf die Nutzerinteraktion aus?",
+            "Gab es UX-Tests, die Sicherheitsfeatures validiert oder in Frage gestellt haben?",
+            "Wie gehen Sie mit Accessibility um, wenn zusätzliche Authentifizierungsstufen eingeführt werden?"
+          ]
+        },
+        {
+          "title": "Trade-offs, Risiken & Evidenz",
+          "goal": "Bewertung der getroffenen Architekturentscheidungen anhand von dokumentierten Risiken, RFCs und Tickets.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie bei der aktuellen Auth-Integration und wie sind diese dokumentiert?",
+            "Wie haben RFC-903 Policy-as-Code Conventions Ihre Arbeit am Gateway beeinflusst?",
+            "Welche Metriken oder Audit-Logs nutzen Sie, um die Wirksamkeit der Sicherheitsmaßnahmen zu belegen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28310,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "id": "20250902_165522_3f2ed6",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 127,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_arch",
+      "role": "Cloud Architect",
+      "traits": [
+        "tradeoff",
+        "cost_perf",
+        "multi-region"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-TIT",
+      "name": "Titan DR",
+      "phase": "Drill",
+      "scope": "Disaster Recovery, multi-region failover"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_arch"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context and Role",
+          "goal": "Understand the interviewee’s involvement in Titan DR, their responsibilities, and the project's alignment with company mission and values.",
+          "sample_questions": [
+            "Can you describe your role in the Titan DR project and how it fits into the overall disaster recovery strategy at Novereon Systems?",
+            "How does the Titan DR initiative align with our 'Safety First' and 'Sustainable Velocity' values?",
+            "What are the primary objectives of the current drill phase?"
+          ]
+        },
+        {
+          "title": "Technical Architecture Overview",
+          "goal": "Gather details on the multi-region architecture, failover mechanisms, and alignment with runbooks and SLAs.",
+          "sample_questions": [
+            "Could you walk me through the high-level architecture for Titan DR, especially the multi-region components?",
+            "How do you ensure compliance with SLA-HEL-01 or similar SLAs within the DR context?",
+            "Which runbooks, such as RB-DR-001, are most critical during a failover scenario?"
+          ]
+        },
+        {
+          "title": "Subsystem Interactions",
+          "goal": "Explore dependencies between Titan DR and other systems like Orion Edge Gateway or Nimbus Observability.",
+          "sample_questions": [
+            "What dependencies exist between Titan DR and the Orion Edge Gateway for traffic rerouting?",
+            "How does Nimbus Observability integrate into the DR drills for monitoring failover health?",
+            "Can you provide an example of a cross-project incident where DR, IAM, and Observability teams had to coordinate?"
+          ]
+        },
+        {
+          "title": "Tradeoffs and Design Decisions",
+          "goal": "Discuss key architectural tradeoffs, especially regarding cost vs. performance in multi-region setups.",
+          "sample_questions": [
+            "What were the main tradeoffs you considered when designing the DR replication strategy?",
+            "How did cloud cost constraints from POL-FIN-007 influence the choice of active-active vs. active-passive failover?",
+            "Can you share any RFCs that document these decisions?"
+          ]
+        },
+        {
+          "title": "Risk Management and Evidence",
+          "goal": "Identify known risks, mitigation strategies, and how evidence from drills informs ongoing improvements.",
+          "sample_questions": [
+            "Which risks are currently top of mind for Titan DR, and how are they tracked?",
+            "How do GameDay findings like TEST-DR-2025-Q1 influence runbook updates?",
+            "Could you provide a concrete example where evidence from a past drill led to a change in policy or architecture?"
+          ]
+        },
+        {
+          "title": "Future Roadmap",
+          "goal": "Understand planned enhancements and long-term vision for disaster recovery.",
+          "sample_questions": [
+            "What enhancements are planned for Titan DR in the next two quarters?",
+            "How might emerging technologies or patterns influence our DR strategy?",
+            "Are there plans to integrate DR capabilities deeper into other product lines?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26685,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

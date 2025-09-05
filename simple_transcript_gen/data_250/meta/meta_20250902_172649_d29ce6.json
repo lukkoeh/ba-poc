@@ -1,0 +1,163 @@
+{
+  "id": "20250902_172649_d29ce6",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 158,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Kontext",
+          "goal": "Projektkontext, Rolle des SRE im Build-Phase-Setup klären",
+          "sample_questions": [
+            "Können Sie bitte kurz den aktuellen Stand von Nimbus Observability beschreiben?",
+            "Welche konkreten Aufgaben haben Sie als SRE in dieser Build-Phase übernommen?",
+            "Wie stellen Sie sicher, dass die Projektziele mit den Unternehmenswerten wie 'Safety First' übereinstimmen?"
+          ]
+        },
+        {
+          "title": "Runbook-Implementierung & Incident Response",
+          "goal": "Verständnis der existierenden Runbooks (z.B. RB-OBS-033) und deren praktischer Anwendung gewinnen",
+          "sample_questions": [
+            "Wie wurde das Runbook RB-OBS-033 Alert Fatigue Tuning in der Praxis angewendet?",
+            "Gab es Abweichungen von der Dokumentation, und wenn ja, warum?",
+            "Wie messen Sie den Erfolg dieser Runbook-Anpassungen?"
+          ]
+        },
+        {
+          "title": "SLO-Definition und SLA-Kohärenz",
+          "goal": "Beziehung zwischen SLOs und SLAs für Observability-Services analysieren",
+          "sample_questions": [
+            "Welche SLOs haben Sie für das Nimbus Observability Projekt definiert?",
+            "Wie stellen Sie sicher, dass diese SLOs konsistent zu bestehenden SLAs wie SLA-HEL-01 sind?",
+            "Gab es Zielkonflikte zwischen verschiedenen Projekten oder Stakeholdern?"
+          ]
+        },
+        {
+          "title": "Cross-System Abhängigkeiten",
+          "goal": "Nicht-triviale Abhängigkeiten zu anderen Plattform-Komponenten identifizieren",
+          "sample_questions": [
+            "Welche Abhängigkeiten bestehen zwischen Nimbus Observability und Helios Datalake?",
+            "Wie wirken sich Änderungen in Orion Edge Gateway auf die Observability-Pipelines aus?",
+            "Können Sie ein Beispiel geben, wo ein Incident in einem anderen System Ihre Metriken beeinflusst hat?"
+          ]
+        },
+        {
+          "title": "Qualitätssicherung & Risikoanalyse",
+          "goal": "Proaktive Maßnahmen und Trade-offs in Bezug auf Qualität und Risiken verstehen",
+          "sample_questions": [
+            "Wie haben Sie bei der Implementierung der OpenTelemetry Pipelines Risiken priorisiert?",
+            "Gab es Situationen, in denen Sie bewusst ein Risiko eingegangen sind, um ein anderes zu minimieren?",
+            "Welche Lessons Learned aus Incident Analytics haben Sie in die Build-Phase zurückgespielt?"
+          ]
+        },
+        {
+          "title": "Abschluss & Ausblick",
+          "goal": "Zusammenfassung der Erkenntnisse und nächste Schritte im Projekt",
+          "sample_questions": [
+            "Welche nächsten Schritte sehen Sie für Nimbus Observability nach der Build-Phase?",
+            "Welche langfristigen Risiken sehen Sie und wie planen Sie, diese zu mitigieren?",
+            "Gibt es Empfehlungen für die QA-Abteilung, um die Observability-Qualität nachhaltig zu sichern?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28647,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "id": "20250902_170821_d56915",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 139,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Context",
+          "goal": "Establish the interviewee’s role in the Vesta FinOps project and align on objectives.",
+          "sample_questions": [
+            "Can you briefly describe your responsibilities in the Vesta FinOps project?",
+            "How does your work align with Novereon Systems' mission and values?",
+            "What are the main KPIs you monitor for cost optimization?"
+          ]
+        },
+        {
+          "title": "Current Processes & Tools",
+          "goal": "Understand the existing FinOps workflows, tools, and policy compliance requirements.",
+          "sample_questions": [
+            "Which runbooks or RFCs are most relevant to your daily work?",
+            "How do you ensure compliance with POL-FIN-007 on Cloud Cost Budgets & Quotas?",
+            "Can you walk me through a typical cost anomaly detection cycle?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Explore how Vesta FinOps integrates with other projects and departments.",
+          "sample_questions": [
+            "How does cost optimization data from Vesta feed into projects like Quasar Billing or Hyperion Cost Explorer?",
+            "Can you describe a scenario where FinOps insights influenced SRE or Platform team decisions?",
+            "What are the main challenges in aligning guardrails across multiple product phases?"
+          ]
+        },
+        {
+          "title": "Challenges & Risks",
+          "goal": "Identify pain points, risk factors, and mitigation strategies in FinOps operations.",
+          "sample_questions": [
+            "What are the top three risks you see in sustaining cloud cost optimization?",
+            "How do you handle trade-offs between savings and performance SLAs?",
+            "Can you share an example from a ticket or audit where a policy breach was detected and resolved?"
+          ]
+        },
+        {
+          "title": "Decision Making & Future Improvements",
+          "goal": "Discuss recent decisions, trade-offs, and planned improvements for FinOps processes.",
+          "sample_questions": [
+            "What recent decision had the biggest impact on cost savings?",
+            "How do you evaluate the ROI of a new guardrail or quota?",
+            "What improvements are you planning for the next quarter to enhance compliance and savings?"
+          ]
+        },
+        {
+          "title": "Wrap-Up",
+          "goal": "Summarize key takeaways and confirm next steps.",
+          "sample_questions": [
+            "What support do you need from project management to achieve your goals?",
+            "Are there any upcoming audits or RFCs that we should prepare for?",
+            "Is there anything we haven’t covered that you think is important?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26136,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "20250903_005220_a5081c",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 230,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick und Scope-Klarheit",
+          "goal": "Frühe Erfassung der Zielsetzung, Scope-Abgrenzung und der Kernfakten zum Helios Datalake",
+          "sample_questions": [
+            "Bitte skizzieren Sie die Hauptziele des Helios Datalake Projekts in der aktuellen Scale-Phase.",
+            "Wie stellen Sie sicher, dass der Scope nicht unkontrolliert wächst?",
+            "Inwiefern sind die SLA-HEL-01 Vorgaben bereits in den laufenden Betrieb integriert?"
+          ]
+        },
+        {
+          "title": "Qualitätssicherung und Traceability",
+          "goal": "Verstehen, wie QA-Policies (z. B. POL-QA-014) umgesetzt werden und wie Risiken identifiziert und dokumentiert werden",
+          "sample_questions": [
+            "Welche QA-Metriken nutzen Sie, um die Datenqualität im Datalake zu überwachen?",
+            "Wie stellen Sie die Rückverfolgbarkeit von Änderungen sicher, insbesondere bei dbt-Modellen?",
+            "Gibt es Runbooks wie RB-ING-042, die Sie im Incident-Fall priorisieren?"
+          ]
+        },
+        {
+          "title": "Schnittstellen und Abhängigkeiten",
+          "goal": "Aufdecken von komplexen Multi-Hop-Verbindungen zwischen Helios Datalake und anderen Systemen",
+          "sample_questions": [
+            "Welche kritischen Abhängigkeiten bestehen zwischen Helios und externen Kafka-Streams?",
+            "Wie beeinflusst die Partitionierungsstrategie aus RFC-1287 den Batch-Load-Prozess?",
+            "Welche SLOs aus anderen Projekten (z. B. Nimbus Observability) wirken hier indirekt?"
+          ]
+        },
+        {
+          "title": "Risikomanagement und Eskalationspfade",
+          "goal": "Analyse der Risikobewertung und der Eskalationsmechanismen im Projekt",
+          "sample_questions": [
+            "Wie gehen Sie mit Ausfällen um, die das BLAST_RADIUS vergrößern könnten?",
+            "Welche Lessons Learned aus früheren Incidents sind in neue Runbooks eingeflossen?",
+            "Wie handhaben Sie Konflikte zwischen Performance-Optimierung und regulatorischen Anforderungen?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs und Evidenz",
+          "goal": "Bewertung von getroffenen Entscheidungen unter Berücksichtigung von Risiken, Kosten und SLA-Verpflichtungen",
+          "sample_questions": [
+            "Können Sie ein Beispiel für einen bewussten Trade-off zwischen Latenz und Kosten im Helios Datalake nennen?",
+            "Welche Evidenz (Tickets, RFCs) haben diese Entscheidung gestützt?",
+            "Wie haben Sie den Stakeholdern diese Entscheidung vermittelt und abgesichert?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26936,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

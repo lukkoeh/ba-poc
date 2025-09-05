@@ -1,0 +1,164 @@
+{
+  "id": "20250902_114159_00247e",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 57,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_da"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rolle",
+          "goal": "Das Verständnis des Kandidaten für die Ziele und den Status des Helios Datalake Projekts erfassen, sowie seine spezifische Rolle darin.",
+          "sample_questions": [
+            "Können Sie mir bitte kurz Ihren aktuellen Verantwortungsbereich im Helios Datalake Projekt beschreiben?",
+            "Welche Hauptziele verfolgen wir aktuell in der Scale-Phase und wie tragen Sie dazu bei?",
+            "Wie passen Ihre Aufgaben zu den Unternehmenswerten wie 'Safety First' und 'Evidence over Hype'?"
+          ]
+        },
+        {
+          "title": "Technische Architektur und Pipelines",
+          "goal": "Die technische Tiefe des Kandidaten in Bezug auf ELT, dbt, Airflow und Kafka ermitteln.",
+          "sample_questions": [
+            "Welche dbt-Modelle haben Sie zuletzt optimiert und mit welchem Ziel?",
+            "Wie ist die Kafka-Ingestion im Helios Datalake strukturiert und welche Herausforderungen gab es dabei?",
+            "Können Sie ein Beispiel nennen, wie Sie Airflow DAGs für Batch-Loads gemäß RFC-1287 partitioniert haben?"
+          ]
+        },
+        {
+          "title": "Qualitätssicherung und SLAs",
+          "goal": "Verständnis für SLA-HEL-01, Monitoring und Risikomanagement evaluieren.",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass wir die 99,9% Verfügbarkeit laut SLA-HEL-01 einhalten?",
+            "Welche Metriken und Alarme nutzen Sie, um frühzeitig Störungen in der Ingestion zu erkennen?",
+            "Wie gehen Sie vor, wenn ein SLA-Verstoß droht?"
+          ]
+        },
+        {
+          "title": "Cross-Team Zusammenarbeit",
+          "goal": "Ermitteln, wie der Kandidat mit anderen Abteilungen wie SRE, Security und QA interagiert.",
+          "sample_questions": [
+            "Wie stimmen Sie sich mit dem SRE-Team bei Ingestion-Failovern ab (RB-ING-042)?",
+            "Welche Sicherheitsrichtlinien aus POL-SEC-001 sind für Ihre Arbeit besonders relevant?",
+            "Gab es schon einmal Zielkonflikte zwischen Data und QA und wie wurden diese gelöst?"
+          ]
+        },
+        {
+          "title": "Optimierung und Skalierung",
+          "goal": "Strategien zur Performance-Optimierung und Skalierbarkeit aufzeigen lassen.",
+          "sample_questions": [
+            "Welche Optimierungen haben Sie vorgenommen, um die Latenz bei Batch-Loads zu reduzieren?",
+            "Wie gehen Sie bei Schemaänderungen vor, um Ausfallzeiten zu vermeiden?",
+            "Können Sie ein Beispiel nennen, bei dem eine Optimierung unbeabsichtigte Nebeneffekte hatte?"
+          ]
+        },
+        {
+          "title": "Risikomanagement und Lessons Learned",
+          "goal": "Erkennen, wie der Kandidat Risiken identifiziert, bewertet und mitigiert.",
+          "sample_questions": [
+            "Beschreiben Sie eine Situation, in der ein Ingestion-Failover nicht wie geplant funktionierte.",
+            "Welche Maßnahmen haben Sie nach einem Incident implementiert, um Wiederholungen zu vermeiden?",
+            "Wie dokumentieren Sie solche Erkenntnisse in Runbooks oder RFCs?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28053,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

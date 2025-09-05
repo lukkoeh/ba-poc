@@ -1,0 +1,164 @@
+{
+  "id": "20250902_162809_04368a",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 105,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_da"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Rollenverständnis",
+          "goal": "Verstehen, wie der Data Engineer in das Helios Datalake Projekt eingebunden ist und welche Kernaufgaben er übernimmt.",
+          "sample_questions": [
+            "Können Sie mir kurz Ihren aktuellen Verantwortungsbereich im Helios Datalake Projekt skizzieren?",
+            "Wie sieht ein typischer Arbeitstag für Sie aus?",
+            "Welche Schnittstellen zu anderen Teams haben Sie am häufigsten?"
+          ]
+        },
+        {
+          "title": "Technischer Kontext & Toolchain",
+          "goal": "Tiefe Einblicke in die eingesetzten Technologien, Pipelines und Integrationen gewinnen.",
+          "sample_questions": [
+            "Welche Rolle spielt dbt in Ihrer ELT-Architektur?",
+            "Wie haben Sie Kafka-Ingestion in Ihre Snowflake-Pipeline integriert?",
+            "Gibt es besondere Herausforderungen im Airflow-Orchestrierungsbereich?"
+          ]
+        },
+        {
+          "title": "User Experience & Self-Service",
+          "goal": "Herausfinden, wie interne Nutzer (Analysten, Data Scientists) mit den bereitgestellten Daten interagieren.",
+          "sample_questions": [
+            "Wie einfach ist es für interne User, neue Datenquellen anzubinden?",
+            "Welche Feedbackschleifen gibt es zwischen Engineering und den Nutzern?",
+            "Haben Sie Beispiele für UX-Hürden in der Nutzung des Datalakes?"
+          ]
+        },
+        {
+          "title": "Qualität, Governance & Sicherheit",
+          "goal": "Verstehen, wie Datenqualität, Governance-Policies und Sicherheit umgesetzt werden.",
+          "sample_questions": [
+            "Welche Mechanismen nutzen Sie für Data Lineage und Traceability?",
+            "Wie setzen Sie 'Least Privilege & JIT Access' im Kontext des Datalakes um?",
+            "Gibt es Runbooks für Notfälle, z.B. RB-ING-042?"
+          ]
+        },
+        {
+          "title": "Skalierung & Performance",
+          "goal": "Erkennen, wie das System für wachsende Datenmengen und Nutzeranforderungen optimiert wird.",
+          "sample_questions": [
+            "Welche Strategien nutzen Sie zur Partitionierung (z.B. aus RFC-1287)?",
+            "Wie überwachen Sie die SLA-HEL-01 99.9% Verfügbarkeit?",
+            "Gab es Engpässe bei der Batch- oder Streaming-Ingestion?"
+          ]
+        },
+        {
+          "title": "Abschließende Reflexion & Zukunft",
+          "goal": "Erfassen, welche Entscheidungen, Risiken und Trade-offs für die Zukunft relevant sind.",
+          "sample_questions": [
+            "Welche technischen Schulden sehen Sie aktuell als kritisch?",
+            "Wie balancieren Sie Geschwindigkeit und Sicherheit bei neuen Features?",
+            "Welche Risiken sehen Sie bei der weiteren Skalierung des Helios Datalakes?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27745,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

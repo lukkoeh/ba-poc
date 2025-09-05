@@ -1,0 +1,163 @@
+{
+  "id": "20250902_152301_12335e",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 53,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Kontext",
+          "goal": "Verstehen, wie der SRE die Rolle im Nimbus Observability Projekt interpretiert und welche Kernaufgaben er wahrnimmt.",
+          "sample_questions": [
+            "Können Sie mir kurz beschreiben, wie Ihr typischer Tag im Nimbus-Team aussieht?",
+            "Welche Hauptziele verfolgen Sie aktuell in der Build-Phase des Projekts?",
+            "How do you see your SRE role influencing the UX of internal observability dashboards?"
+          ]
+        },
+        {
+          "title": "Tooling & Runbooks",
+          "goal": "Erfassen, wie bestehende Runbooks (z.B. RB-OBS-033) genutzt werden, um Vorfälle zu managen.",
+          "sample_questions": [
+            "Können Sie mir ein Beispiel geben, wie Sie RB-OBS-033 zuletzt angewendet haben?",
+            "What gaps do you notice between runbook instructions and real incident conditions?",
+            "Wie dokumentieren Sie Abweichungen oder improvisierte Lösungen?"
+          ]
+        },
+        {
+          "title": "Cross-System Interaktionen",
+          "goal": "Herausfinden, wie Nimbus Observability mit anderen Plattformen (z.B. Helios Datalake, Mercury Messaging) interagiert und welche SRE-Herausforderungen entstehen.",
+          "sample_questions": [
+            "Können Sie ein Szenario schildern, in dem ein Problem im Observability-System einen Downstream-Service beeinflusst hat?",
+            "How do you coordinate with data engineers when telemetry pipelines impact ELT jobs?",
+            "Gibt es spezielle Metriken oder Alerts, die Sie nur in Zusammenarbeit mit anderen Projektteams interpretieren können?"
+          ]
+        },
+        {
+          "title": "SLOs und Incident Analytics",
+          "goal": "Verstehen, wie SLOs definiert, überwacht und im Incident-Fall analysiert werden.",
+          "sample_questions": [
+            "Welche SLOs sind für Nimbus aktuell kritisch und wie messen Sie diese?",
+            "Can you walk me through a recent incident postmortem and how analytics influenced next steps?",
+            "Wie fließen Analyseergebnisse in zukünftige Runbook-Updates ein?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Risiken",
+          "goal": "Diskutieren, wie Entscheidungen getroffen werden, wenn es Zielkonflikte zwischen Zuverlässigkeit, Performance und UX gibt.",
+          "sample_questions": [
+            "Gab es Situationen, in denen Sie bewusst ein höheres Alert-Fatigue-Risiko in Kauf genommen haben? Warum?",
+            "What evidence (tickets, RFCs, metrics) do you rely on when arguing for a trade-off?",
+            "Wie bewerten Sie das Risiko, wenn Observability-Änderungen die BLAST_RADIUS erhöhen könnten?"
+          ]
+        },
+        {
+          "title": "Abschluss & Zukunft",
+          "goal": "Reflexion über die zukünftige Entwicklung der Observability-Landschaft und persönliche Prioritäten.",
+          "sample_questions": [
+            "Welche Verbesserungen würden Sie in den nächsten sechs Monaten umsetzen wollen?",
+            "How do you imagine the ideal incident analytics UX for SREs?",
+            "Gibt es Policies oder Konventionen, die Sie gerne anpassen würden, um Ihre Arbeit zu erleichtern?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27872,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

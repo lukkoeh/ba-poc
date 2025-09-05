@@ -1,0 +1,163 @@
+{
+  "id": "20250902_153218_91891b",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 59,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Ziele",
+          "goal": "Ein gemeinsames Verständnis der aktuellen Phase und Zielsetzungen des Helios Datalake schaffen.",
+          "sample_questions": [
+            "Können Sie mir den aktuellen Stand des Helios Datalake in der Scale-Phase beschreiben?",
+            "Welche Kernziele verfolgen Sie in diesem Quartal?",
+            "How do these goals align with Novereon’s mission and values?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Integrationen",
+          "goal": "Verstehen, wie ELT, dbt-Modellierung und Kafka-Ingestion zusammenspielen.",
+          "sample_questions": [
+            "Wie ist die aktuelle Datenfluss-Architektur aufgebaut?",
+            "Can you walk me through how dbt models interact with Kafka ingestion streams?",
+            "Welche Runbooks oder RFCs sind für kritische Pfade besonders relevant?"
+          ]
+        },
+        {
+          "title": "SLOs, SLAs & Betriebsaspekte",
+          "goal": "Herausfinden, wie Betriebsziele definiert und gemessen werden.",
+          "sample_questions": [
+            "Wie messen Sie aktuell die Einhaltung von SLA-HEL-01 (99,9% Availability)?",
+            "What’s your process for handling ingestion failover according to RB-ING-042?",
+            "Welche impliziten Regeln gibt es im Team, um Ausfallzeiten zu minimieren?"
+          ]
+        },
+        {
+          "title": "Abhängigkeiten & Multi-Hop-Verknüpfungen",
+          "goal": "Komplexe Zusammenhänge zwischen Helios und anderen Plattformen aufdecken.",
+          "sample_questions": [
+            "Welche Systeme hängen direkt von Helios ab?",
+            "How do upstream Kafka topics from Mercury Messaging influence your batch load partitioning strategy (RFC-1287)?",
+            "Gibt es bekannte Engpässe in der Integration mit Quasar Billing oder Nimbus Observability?"
+          ]
+        },
+        {
+          "title": "Priorisierung & Trade-offs",
+          "goal": "Erfahren, wie der PO Entscheidungen zwischen Features, Stabilität und Kosten trifft.",
+          "sample_questions": [
+            "Wie balancieren Sie neue Features gegen technische Schulden?",
+            "What trade-offs have you made regarding partitioning granularity vs. storage costs?",
+            "Gab es Situationen, in denen 'Safety First' mit 'Sustainable Velocity' kollidierte?"
+          ]
+        },
+        {
+          "title": "Risiken, Evidenz & Entscheidungen",
+          "goal": "Verstehen, wie Risiken identifiziert und Entscheidungen evidenzbasiert getroffen werden.",
+          "sample_questions": [
+            "Welche größten Risiken sehen Sie für die nächsten 6 Monate?",
+            "Can you share evidence from recent tickets or audits that influenced a major decision?",
+            "Wie dokumentieren Sie Entscheidungen, um spätere Audits zu bestehen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26603,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

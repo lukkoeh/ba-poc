@@ -1,0 +1,154 @@
+{
+  "id": "20250902_123513_ebf64b",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 68,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Context & Role in Aegis IAM",
+          "goal": "Verstehen, welche Sicherheitsverantwortlichkeiten der Engineer im Operate-Phase-Setup hat und wie diese mit den Unternehmenswerten übereinstimmen.",
+          "sample_questions": [
+            "Können Sie bitte in Ihren eigenen Worten beschreiben, welche Kernaufgaben Sie aktuell im Aegis IAM übernehmen?",
+            "How does your daily work reflect the 'Least Privilege & JIT Access' policy, specifically POL-SEC-001?",
+            "Welche KPIs oder SLOs sind für Sie im Tagesgeschäft am wichtigsten?"
+          ]
+        },
+        {
+          "title": "Incident Handling & Runbooks",
+          "goal": "Analyse der konkreten Vorgehensweise bei sicherheitsrelevanten Incidents und Abgleich mit existierenden Runbooks.",
+          "sample_questions": [
+            "Können Sie mir den Ablauf aus RB-IAM-075 schildern und erläutern, wo Sie in der Praxis Abweichungen sehen?",
+            "Describe a recent incident where you had to revoke access urgently — what was the trigger and how did you validate containment?",
+            "Welche ungeschriebenen Regeln gibt es im Team, um die BLAST_RADIUS bei IAM-Incidents zu minimieren?"
+          ]
+        },
+        {
+          "title": "Cross-Project Security Dependencies",
+          "goal": "Herausarbeiten von sicherheitsrelevanten Abhängigkeiten zwischen Aegis IAM und anderen Projekten im Portfolio.",
+          "sample_questions": [
+            "Gibt es Schnittstellen zu Orion Edge Gateway oder Poseidon Networking, die besondere Sicherheitsprüfungen erfordern?",
+            "How do you ensure that IAM changes do not break SLA-ORI-02 or RFC-1618 compliance?",
+            "Welche Lessons Learned aus AUD-24-Q2 haben Sie in anderen Projekten angewendet?"
+          ]
+        },
+        {
+          "title": "Risk Assessment & Trade-offs",
+          "goal": "Bewertung von Sicherheitsentscheidungen in Bezug auf Performance, Usability und Compliance.",
+          "sample_questions": [
+            "In welchen Szenarien würden Sie bewusst von der Standard-JIT-Access-Policy abweichen und warum?",
+            "How do you balance RBAC granularity with operational overhead, especially under SLA pressure?",
+            "Welche Risiken sehen Sie, wenn wir RFC-903 schneller umsetzen als geplant?"
+          ]
+        },
+        {
+          "title": "Continuous Improvement & Audits",
+          "goal": "Identifizieren von Verbesserungsmöglichkeiten und Audit-Readiness.",
+          "sample_questions": [
+            "Welche Metriken würden Sie einführen, um die Effizienz des Access Revocation Emergency Prozesses zu messen?",
+            "Can you describe a gap found during AUD-24-Q2 and how it was remediated?",
+            "Welche weiteren Runbooks oder RFCs wären aus Ihrer Sicht für Aegis IAM dringend erforderlich?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27570,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

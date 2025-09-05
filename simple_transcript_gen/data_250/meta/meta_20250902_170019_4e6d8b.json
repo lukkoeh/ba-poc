@@ -1,0 +1,154 @@
+{
+  "id": "20250902_170019_4e6d8b",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 132,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & SLA-Orientierung",
+          "goal": "Frühes Verständnis für Projektstatus, SLA-Verpflichtungen und Scope-Klarheit gewinnen",
+          "sample_questions": [
+            "Können Sie den aktuellen Status des Orion Edge Gateway im Kontext der Build-Phase beschreiben?",
+            "Welche SLA-Parameter sind für das Gateway laut SLA-ORI-02 besonders kritisch?",
+            "Wie stellen Sie sicher, dass der Scope nicht über die vereinbarten Grenzen hinauswächst?"
+          ]
+        },
+        {
+          "title": "Abhängigkeiten & Schnittstellen",
+          "goal": "Ermitteln, welche internen Systeme und externen Schnittstellen kritisch sind und wie diese koordiniert werden",
+          "sample_questions": [
+            "Welche anderen Novereon-Projekte oder Plattformkomponenten sind direkt mit dem Gateway verknüpft?",
+            "Gab es Herausforderungen bei der Integration mit dem Aegis IAM für Authentifizierung?",
+            "Wie gehen Sie mit Änderungen in abhängigen Services während der Build-Phase um?"
+          ]
+        },
+        {
+          "title": "Risiko- und Incident-Management",
+          "goal": "Verstehen, wie Risiken identifiziert, bewertet und mitigiert werden, inkl. Lessons Learned aus Tickets/Runbooks",
+          "sample_questions": [
+            "Welche wesentlichen Risiken sehen Sie für die p95 Latenz unter 120ms?",
+            "Können Sie ein Beispiel für einen Vorfall nennen, z. B. aus GW-4821, und wie das Runbook RB-GW-011 dabei half?",
+            "Wie dokumentieren Sie Risiken und deren Maßnahmen im Projektkontext?"
+          ]
+        },
+        {
+          "title": "Entscheidungen & Trade-offs",
+          "goal": "Diskutieren, wie technische und organisatorische Entscheidungen getroffen werden, welche Kompromisse nötig waren und welche Evidenzen genutzt wurden",
+          "sample_questions": [
+            "Gab es Entscheidungen zwischen unterschiedlichen Deployment-Strategien (Blue/Green vs. Canary)?",
+            "Welche Rolle spielten interne RFCs oder Policies wie POL-SEC-001 bei diesen Entscheidungen?",
+            "Wie haben Sie die Auswirkungen auf die BLAST_RADIUS bewertet?"
+          ]
+        },
+        {
+          "title": "Zukunft & Skalierung",
+          "goal": "Bewerten, wie das Projekt auf die Betriebsphase vorbereitet wird und welche Skalierungspläne existieren",
+          "sample_questions": [
+            "Welche Maßnahmen planen Sie, um den Gateway-Dienst nach Go-Live zu skalieren?",
+            "Wie wird die Observability (z. B. über Nimbus Observability) integriert, um SLA-Compliance sicherzustellen?",
+            "Gibt es Pläne für weitere Auth-Integrationen oder Rate-Limiting-Features?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27630,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

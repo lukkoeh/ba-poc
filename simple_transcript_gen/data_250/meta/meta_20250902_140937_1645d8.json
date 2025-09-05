@@ -1,0 +1,154 @@
+{
+  "id": "20250902_140937_1645d8",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 89,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_arch",
+      "role": "Cloud Architect",
+      "traits": [
+        "tradeoff",
+        "cost_perf",
+        "multi-region"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-TIT",
+      "name": "Titan DR",
+      "phase": "Drill",
+      "scope": "Disaster Recovery, multi-region failover"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_arch"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rollenklärung",
+          "goal": "Verstehen der aktuellen Titan DR Drill-Phase und der Rolle des Cloud Architects darin",
+          "sample_questions": [
+            "Können Sie kurz den aktuellen Stand des Titan DR Projekts beschreiben?",
+            "Welche spezifische Verantwortung tragen Sie als Cloud Architect hier?",
+            "Wie wird im Drill-Setting die Zusammenarbeit mit SRE und Security organisiert?"
+          ]
+        },
+        {
+          "title": "Architektur & Multi-Region Design",
+          "goal": "Details zum Multi-Region Failover-Design und verwendeten Patterns erheben",
+          "sample_questions": [
+            "Welche Architekturprinzipien leiten Ihre Multi-Region-Strategie?",
+            "How do you ensure minimal BLAST_RADIUS during failover events?",
+            "Welche Abhängigkeiten bestehen zu anderen Projekten wie Poseidon Networking oder Helios Datalake?"
+          ]
+        },
+        {
+          "title": "Runbooks, SLAs und Tests",
+          "goal": "Erfassen, wie Runbooks (RB-DR-001) und SLAs/RTO/RPO umgesetzt und getestet werden",
+          "sample_questions": [
+            "Können Sie den Ablauf im Runbook RB-DR-001 kurz skizzieren?",
+            "How do you validate that RTO and RPO targets are met during drills?",
+            "Wie binden Sie Lessons Learned aus TEST-DR-2025-Q1 in die Architektur ein?"
+          ]
+        },
+        {
+          "title": "Kosten-Performance-Abwägungen",
+          "goal": "Analyse der Trade-offs zwischen Kosten, Performance und Resilienz",
+          "sample_questions": [
+            "Welche Cost-Performance-Heuristiken nutzen Sie für Multi-Region Deployments?",
+            "How do you balance idle resource costs versus readiness for failover?",
+            "Wie wirken sich POL-FIN-007 Budgets & Quotas auf Ihre Architekturentscheidungen aus?"
+          ]
+        },
+        {
+          "title": "Risiken & Entscheidungsfindung",
+          "goal": "Bewertung von Risiken, Entscheidungswegen und dokumentierten Evidenzen",
+          "sample_questions": [
+            "Welche Haupt-Risiken sehen Sie für Titan DR im nächsten Quartal?",
+            "Can you cite specific RFCs or audit findings that influenced a key decision?",
+            "Wie dokumentieren Sie Abwägungen für zukünftige Audits?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28526,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

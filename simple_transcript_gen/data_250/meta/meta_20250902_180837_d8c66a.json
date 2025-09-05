@@ -1,0 +1,154 @@
+{
+  "id": "20250902_180837_d8c66a",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 197,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Vision & Strategic Fit",
+          "goal": "Understand how Atlas Mobile aligns with company mission and values, and the CTO's vision for it.",
+          "sample_questions": [
+            "How does Atlas Mobile fit into Novereon's broader cloud-native platform strategy?",
+            "What specific regulatory or safety-first considerations influenced the pilot phase design?",
+            "In what ways do you see Atlas Mobile supporting sustainable velocity?"
+          ]
+        },
+        {
+          "title": "User Experience Goals",
+          "goal": "Explore the intended UX outcomes, target personas, and how offline sync and feature flags support them.",
+          "sample_questions": [
+            "What core user problems is Atlas Mobile aiming to solve?",
+            "How did the team prioritize which features to include in the pilot?",
+            "Can you describe how offline sync was designed to handle intermittent connectivity?"
+          ]
+        },
+        {
+          "title": "Technical Architecture & Dependencies",
+          "goal": "Map the technical architecture, key dependencies, and integration points with other Novereon projects.",
+          "sample_questions": [
+            "Which backend services or APIs are most critical to Atlas Mobile's success?",
+            "How does feature flagging integrate with existing CI/CD and QA processes?",
+            "Were there any multi-project dependencies, for example with Poseidon Networking or Aegis IAM?"
+          ]
+        },
+        {
+          "title": "Risk Management & Evidence Gathering",
+          "goal": "Understand how risks are identified, mitigated, and validated with evidence.",
+          "sample_questions": [
+            "What are the top risks you identified for the pilot, and how are they tracked?",
+            "Can you share an example of a runbook or RFC that directly influenced a design decision?",
+            "How do you measure success or failure during the pilot phase?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Future Roadmap",
+          "goal": "Discuss trade-offs made during pilot and potential directions for scale.",
+          "sample_questions": [
+            "Were there any deliberate compromises in UX or performance to meet regulatory or security constraints?",
+            "How will learnings from the pilot feed into the scale phase?",
+            "What is your decision-making process for prioritizing roadmap items post-pilot?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25880,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

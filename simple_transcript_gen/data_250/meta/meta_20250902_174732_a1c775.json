@@ -1,0 +1,154 @@
+{
+  "id": "20250902_174732_a1c775",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 176,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick und strategische Ziele",
+          "goal": "Ein klares Bild der Projektziele, des Status und der strategischen Einbettung im Portfolio gewinnen.",
+          "sample_questions": [
+            "Können Sie den aktuellen Stand des Orion Edge Gateway in Bezug auf die Build-Phase beschreiben?",
+            "Welche geschäftlichen und technischen Ziele verfolgen wir mit diesem Gateway?",
+            "Wie fügt sich das Projekt in unsere Mission 'Cloud-native Data & Platform Engineering for regulated industries' ein?"
+          ]
+        },
+        {
+          "title": "Technische Architektur und Schnittstellen",
+          "goal": "Verstehen, wie die Systemkomponenten integriert sind und welche Abhängigkeiten bestehen.",
+          "sample_questions": [
+            "Welche Kernkomponenten umfasst die Architektur und wie interagieren diese?",
+            "Gibt es relevante Abhängigkeiten zu Projekten wie Aegis IAM oder Poseidon Networking?",
+            "Wie stellen wir sicher, dass die Auth-Integration den Policy-Vorgaben wie POL-SEC-001 entspricht?"
+          ]
+        },
+        {
+          "title": "SLA, SLO und Performance",
+          "goal": "Klarheit über Leistungskennzahlen, SLA-ORI-02 und Monitoring-Mechanismen schaffen.",
+          "sample_questions": [
+            "Wie messen wir aktuell die p95 Latenz und welche Tools werden verwendet?",
+            "Welche Maßnahmen sind geplant, um SLA-ORI-02 einzuhalten?",
+            "Wie reagieren wir, wenn die Latenzwerte drohen, das vereinbarte Limit zu überschreiten?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und Lessons Learned",
+          "goal": "Identifizieren von Risiken, bewussten Kompromissen und bisherigen Erkenntnissen aus Tickets und Runbooks.",
+          "sample_questions": [
+            "Welche kritischen Risiken sehen Sie aktuell in Bezug auf Auth-Integration oder Rate Limiting?",
+            "Gab es Situationen wie in GW-4821, die zu umfangreichen Architekturentscheidungen geführt haben?",
+            "Welche Lessons Learned aus RB-GW-011 beeinflussen die aktuelle Deployment-Strategie?"
+          ]
+        },
+        {
+          "title": "Nächste Schritte und Ressourcenplanung",
+          "goal": "Konkretisieren der nächsten Meilensteine, Ressourcenbedarfe und Abhängigkeiten.",
+          "sample_questions": [
+            "Welche Meilensteine stehen in den nächsten 90 Tagen an?",
+            "Welche Ressourcen- oder Skill-Gaps müssen wir kurzfristig schließen?",
+            "Wie priorisieren wir zwischen Feature-Entwicklung und Stabilitätsmaßnahmen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27625,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

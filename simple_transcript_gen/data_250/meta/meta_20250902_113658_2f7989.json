@@ -1,0 +1,154 @@
+{
+  "id": "20250902_113658_2f7989",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 56,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und strategische Ziele",
+          "goal": "Frühes Verständnis für den Gesamtzusammenhang von Atlas Mobile und der Rolle im Portfolio gewinnen.",
+          "sample_questions": [
+            "Könnten Sie mir kurz schildern, wie Atlas Mobile in die Gesamtstrategie von Novereon passt?",
+            "Welche Kernziele verfolgen Sie in dieser Pilotphase?",
+            "How do you balance innovation speed with the 'Safety First' company value in this project?"
+          ]
+        },
+        {
+          "title": "User Experience Herausforderungen",
+          "goal": "Tiefe Einblicke in UX-relevante Anforderungen und Constraints sammeln.",
+          "sample_questions": [
+            "Welche Nutzergruppen priorisieren Sie aktuell und warum?",
+            "How do you envision offline sync impacting adoption in regulated industries?",
+            "Gab es bereits Feedback aus internen Testgruppen zu den Feature Flags?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Subsysteme",
+          "goal": "Verständnis für die Architekturentscheidungen und deren UX-Auswirkungen entwickeln.",
+          "sample_questions": [
+            "Können Sie beschreiben, wie die Feature-Flag-Architektur mit der Offline-Sync-Lösung verzahnt ist?",
+            "How do you ensure minimal BLAST_RADIUS when deploying new mobile components?",
+            "Welche internen Runbooks oder RFCs waren für diese Architektur entscheidend?"
+          ]
+        },
+        {
+          "title": "Multi-Projekt Abhängigkeiten",
+          "goal": "Zusammenhänge zwischen Atlas Mobile und anderen Plattformkomponenten verstehen.",
+          "sample_questions": [
+            "Inwiefern gibt es technische Abhängigkeiten zu Aegis IAM oder Orion Edge Gateway?",
+            "Could you walk me through a case where a change in Nimbus Observability influenced mobile UX decisions?",
+            "Wie koordinieren Sie sich mit dem QA-Team, speziell in Bezug auf Hera QA Platform?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und Roadmap",
+          "goal": "Spätere Entscheidungs- und Risikoaspekte explorieren, inkl. Belege aus Artefakten.",
+          "sample_questions": [
+            "Welche größten Risiken sehen Sie aktuell für den Rollout?",
+            "How do you decide between delaying a feature for better UX vs. meeting the pilot deadline?",
+            "Könnten Sie ein Beispiel geben, wo ein Runbook wie RB-MOB-021 entscheidend für eine Trade-off-Entscheidung war?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26737,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

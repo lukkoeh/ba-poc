@@ -1,0 +1,154 @@
+{
+  "id": "20250902_154306_6efdb8",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 68,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Context & Role in Aegis IAM",
+          "goal": "Verstehen der Rolle des Security Engineers im Operate-Phase Kontext und wie er/sie die IAM-Policies umsetzt",
+          "sample_questions": [
+            "Können Sie mir bitte präzise beschreiben, welche Ihrer täglichen Aufgaben direkt auf POL-SEC-001 einzahlen?",
+            "How do you integrate threat modeling outcomes into the live IAM system without service disruption?",
+            "Welche Schnittstellen haben Sie zu den anderen Departments, insbesondere zur Platform und zur SRE?"
+          ]
+        },
+        {
+          "title": "Security Controls & Compliance",
+          "goal": "Evaluieren, wie technische Kontrollen und Audits (AUD-24-Q2) umgesetzt und überwacht werden",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass JIT Access Requests immer im Rahmen der definierten SLAs (z. B. SLA-HEL-01) abgewickelt werden?",
+            "Can you walk me through how RB-IAM-075 is triggered and what escalation paths exist?",
+            "Welche Metriken nutzen Sie, um Least Privilege kontinuierlich zu verifizieren?"
+          ]
+        },
+        {
+          "title": "Incident Response & Forensics",
+          "goal": "Verstehen, wie der Interviewee sicherheitsrelevante Vorfälle erkennt, analysiert und mitigiert",
+          "sample_questions": [
+            "Beschreiben Sie bitte einen konkreten Fall, in dem Sie einen Access Revocation Emergency nach RB-IAM-075 durchgeführt haben.",
+            "How do you correlate IAM logs with other subsystems like Nimbus Observability to detect anomalies?",
+            "Welche Lessons Learned haben Sie aus der letzten AUD-24-Q2 Access Review gezogen?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Analyse von Abhängigkeiten zwischen Aegis IAM und Projekten wie Orion Edge Gateway oder Poseidon Networking",
+          "sample_questions": [
+            "Wie harmonisieren Sie mTLS Policies aus RFC-1618 mit den Auth-Mechanismen im Aegis IAM?",
+            "Can you map a change in Orion Edge Gateway auth to required IAM policy updates?",
+            "Welche Risiken entstehen durch asynchrone Policy-Deployments über Projekte hinweg?"
+          ]
+        },
+        {
+          "title": "Risk Assessment & Trade-offs",
+          "goal": "Tiefe Analyse von Entscheidungen, Abwägungen und deren dokumentierter Evidenz",
+          "sample_questions": [
+            "Beschreiben Sie eine Entscheidung, bei der Sie Sicherheit gegen Usability abwägen mussten, und wie Sie diese dokumentiert haben.",
+            "What evidence (tickets, RFCs) supported your final choice in that trade-off?",
+            "Welche Risiken sehen Sie aktuell im Betrieb des Aegis IAM und welche Gegenmaßnahmen sind geplant?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28079,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

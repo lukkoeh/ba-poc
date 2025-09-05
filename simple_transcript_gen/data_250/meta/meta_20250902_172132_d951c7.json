@@ -1,0 +1,168 @@
+{
+  "id": "20250902_172132_d951c7",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 152,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_pm",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & UX-Rolle",
+          "goal": "Einführung in Atlas Mobile, Rollenklärung des UX Leads und PM, erste SLA-relevante Punkte.",
+          "sample_questions": [
+            "Können Sie kurz den aktuellen Stand von Atlas Mobile im Pilot beschreiben?",
+            "Wie ist Ihre Rolle als UX Lead in Bezug auf die SLA-Parameter definiert?",
+            "Welche early user feedback loops haben Sie bereits implementiert?"
+          ]
+        },
+        {
+          "title": "Feature Flags & Offline Sync",
+          "goal": "Tiefe in technische und UX-Anforderungen für Feature Flags und Offline-Funktionalität, inkl. Abhängigkeiten zu anderen Systemen.",
+          "sample_questions": [
+            "Wie beeinflussen Feature Flags Ihre Designentscheidungen und Teststrategien?",
+            "Welche Herausforderungen sehen Sie beim Offline-Sync für Accessibility?",
+            "Gibt es Abhängigkeiten zu Nimbus Observability oder Aegis IAM, die UX-seitig relevant sind?"
+          ]
+        },
+        {
+          "title": "Systemintegration & Multi-Hop Abhängigkeiten",
+          "goal": "Verbindungen zwischen UX, Backend, Observability und Auth-Systemen herausarbeiten.",
+          "sample_questions": [
+            "Wie wirkt sich die Latenz von Orion Edge Gateway auf Ihre UX-Designs aus?",
+            "Welche Metriken aus Nimbus Observability sind für Ihre Usability-Tests entscheidend?",
+            "Gibt es ein Runbook oder RFC, das Sie bei der Integration besonders berücksichtigt haben?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Entscheidungsfindung",
+          "goal": "Späte Phase: Diskussion von Risiken, getroffenen Entscheidungen, Trade-offs zwischen UX, Sicherheit, Performance.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie bei der Skalierung nach dem Pilot?",
+            "Wie haben Sie zwischen Performance und Accessibility abgewogen?",
+            "Können Sie ein Beispiel nennen, wo ein Runbook wie RB-MOB-021 direkt Ihre Entscheidungsfindung beeinflusst hat?"
+          ]
+        },
+        {
+          "title": "Abschluss & Lessons Learned",
+          "goal": "Letzte Einschätzungen, Lessons Learned, potenzielle Verbesserungen.",
+          "sample_questions": [
+            "Welche Lessons Learned würden Sie für zukünftige mobile Pilotprojekte mitnehmen?",
+            "Wie können wir SLA-Compliance und UX-Qualität besser verzahnen?",
+            "Gibt es offene Punkte, die vor dem Scale-Phase-Übergang adressiert werden müssen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26607,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

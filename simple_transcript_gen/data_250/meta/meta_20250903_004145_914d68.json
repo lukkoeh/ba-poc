@@ -1,0 +1,168 @@
+{
+  "id": "20250903_004145_914d68",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 218,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_qa",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick und Sicherheitsrelevanz",
+          "goal": "Den allgemeinen Projektstatus und die sicherheitsrelevanten Anforderungen verstehen",
+          "sample_questions": [
+            "Können Sie mir den aktuellen Stand der Hera QA Platform im Build-Phase-Status schildern?",
+            "Welche sicherheitsrelevanten Anforderungen aus den Unternehmensrichtlinien sind bereits berücksichtigt?",
+            "Wie stellen Sie sicher, dass Testdaten keine sensiblen Informationen enthalten?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Plattformen",
+          "goal": "Verstehen, wie Hera QA Platform mit anderen Projekten wie Helios Datalake oder Aegis IAM interagiert",
+          "sample_questions": [
+            "Welche Schnittstellen bestehen aktuell zwischen Hera QA Platform und Helios Datalake?",
+            "Wie wird die Authentifizierung über Aegis IAM in den Testabläufen gehandhabt?",
+            "Gibt es Abhängigkeiten, die das Risiko von Sicherheitslücken erhöhen könnten?"
+          ]
+        },
+        {
+          "title": "Risikobewertung und Teststrategie",
+          "goal": "Bewertung der Risikoanalyse und der geplanten Teststrategie, insbesondere im Hinblick auf POL-QA-014",
+          "sample_questions": [
+            "Welche Risikokategorien haben Sie für die Testplanung definiert?",
+            "Wie setzen Sie Risk-Based Testing um, um kritische Pfade frühzeitig zu validieren?",
+            "Wie wird die Traceability zwischen Anforderungen, Testfällen und Defekten sichergestellt?"
+          ]
+        },
+        {
+          "title": "Nachweisdokumentation und Compliance",
+          "goal": "Prüfen, wie Compliance-Anforderungen erfüllt und dokumentiert werden",
+          "sample_questions": [
+            "Wie dokumentieren Sie die Einhaltung der SLA- und SLO-Vorgaben?",
+            "Welche Audit-Artefakte werden für spätere Überprüfungen vorbereitet?",
+            "Wie gehen Sie mit Abweichungen von den definierten Qualitätszielen um?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Kompromisse und Lessons Learned",
+          "goal": "Verstehen der getroffenen Entscheidungen, Trade-offs und Risiken mit Belegen",
+          "sample_questions": [
+            "Welche kritischen Architekturentscheidungen mussten Sie in dieser Build-Phase treffen?",
+            "Gab es Trade-offs zwischen Testabdeckung und Time-to-Market, und wie wurden diese begründet?",
+            "Können Sie konkrete Tickets oder Runbooks nennen, die diese Entscheidungen dokumentieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28507,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

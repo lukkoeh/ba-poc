@@ -1,0 +1,168 @@
+{
+  "id": "20250902_172201_3d50b8",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 153,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_ux",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick und Zieldefinition",
+          "goal": "Ein klares Bild vom aktuellen Stand und den Hauptzielen des Orion Edge Gateway Projekts erhalten.",
+          "sample_questions": [
+            "Können Sie den aktuellen Status des Orion Edge Gateway zusammenfassen?",
+            "Welche Hauptziele verfolgen wir in der Build-Phase und wie messen wir den Fortschritt?",
+            "Wie stellen Sie sicher, dass die SLA-ORI-02 p95 Latenz < 120ms eingehalten wird?"
+          ]
+        },
+        {
+          "title": "Schnittstellen und Abhängigkeiten",
+          "goal": "Verstehen, wie das Gateway mit anderen Novereon-Systemen und externen Diensten interagiert.",
+          "sample_questions": [
+            "Welche kritischen Abhängigkeiten bestehen zu Projekten wie Aegis IAM oder Poseidon Networking?",
+            "Gab es in der Vergangenheit Integrationsprobleme, z. B. im MTLS-Handshake (GW-4821)?",
+            "Wie koordinieren Sie API-Änderungen mit anderen Teams, um BLAST_RADIUS zu minimieren?"
+          ]
+        },
+        {
+          "title": "Qualitätssicherung und Betriebsvorbereitung",
+          "goal": "Ermitteln, wie Qualität und Betriebssicherheit von Anfang an berücksichtigt werden.",
+          "sample_questions": [
+            "Welche Runbooks (z. B. RB-GW-011) sind schon vorbereitet und wie werden sie getestet?",
+            "Wie integrieren Sie Risk-Based Testing nach POL-QA-014 in den Build-Prozess?",
+            "Welche Monitoring- und Observability-Maßnahmen aus Nimbus Observability sind geplant?"
+          ]
+        },
+        {
+          "title": "Benutzererfahrung und Designaspekte",
+          "goal": "UX-Anforderungen und Barrierefreiheit im Gateway-Kontext verstehen.",
+          "sample_questions": [
+            "Welche UX-Prinzipien leiten das API-Design für Entwickler?",
+            "Wie stellen Sie sicher, dass Auth- und Rate-Limit-Feedback für Nutzer verständlich ist?",
+            "Gibt es Konsistenzprüfungen mit dem Design System aus Atlas Mobile?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und Entscheidungsfindung",
+          "goal": "Tiefe Einblicke in priorisierte Entscheidungen und deren Begründung gewinnen.",
+          "sample_questions": [
+            "Welche kritischen Entscheidungen mussten jüngst getroffen werden, z. B. zur Auth-Integration?",
+            "Wie wägen Sie Time-to-Market gegen technische Schulden ab?",
+            "Welche Belege (RFCs, Tickets, AUDs) stützen diese Entscheidungen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28368,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

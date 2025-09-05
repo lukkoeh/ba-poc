@@ -1,0 +1,360 @@
+{"ts": "00:00", "speaker": "I", "text": "Können Sie bitte, äh, kurz den Scope vom Orion Edge Gateway im Kontext unseres Portfolios skizzieren?"}
+{"ts": "03:15", "speaker": "E", "text": "Klar, also der Scope umfasst primär den Aufbau eines zentralen API Gateways, das sowohl Rate Limiting als auch Authentifizierungsintegration übernimmt. It sits between external clients and our microservices, providing a single entry point."}
+{"ts": "06:50", "speaker": "I", "text": "Und welche Key-Metriken, wie zum Beispiel SLA-ORI-02 p95 Latency, sind für Sie am kritischsten als PO?"}
+{"ts": "10:05", "speaker": "E", "text": "SLA-ORI-02 ist tatsächlich die zentrale Metrik. Our target is under 250ms for p95 latency. Zusätzlich schauen wir auf Error Rate <0.2% und Auth handshake success rate, gemessen per Nimbus Observability."}
+{"ts": "14:20", "speaker": "I", "text": "Welche Abhängigkeiten zu anderen Projekten bestehen aktuell?"}
+{"ts": "17:40", "speaker": "E", "text": "Da gibt es einige – der Auth-Service aus Projekt Helios ist kritisch, ebenso der zentrale Logging-Bus aus Projekt Nova. And of course, the MTLS cert provisioning pipeline from SecOps."}
+{"ts": "22:05", "speaker": "I", "text": "Wie identifizieren Sie die wichtigsten API-Endpoints für das erste Release?"}
+{"ts": "26:30", "speaker": "E", "text": "Wir werten Traffic-Daten aus dem bisherigen Direct Access aus, plus Kundenfeedback aus Tickets wie CUST-421. We also look at contractual obligations to prioritise partner APIs."}
+{"ts": "31:00", "speaker": "I", "text": "Welche Trade-offs mussten Sie zwischen Rate Limiting und Latency eingehen?"}
+{"ts": "35:15", "speaker": "E", "text": "Rate Limiting im Gateway erhöht die Latenz minimal, especially when using token bucket algorithms. Wir haben laut RFC-1287 ein leicht höheres Burst Limit erlaubt, um Spikes abzufangen, was p95 stabil hält."}
+{"ts": "39:50", "speaker": "I", "text": "Wie fließen Security Policies wie POL-SEC-001 in Ihre Priorisierung ein?"}
+{"ts": "44:10", "speaker": "E", "text": "POL-SEC-001 verlangt, dass jede externe API MTLS enforced. Das hat direkten Einfluss auf die Endpoint-Priorisierung, since non-compliant APIs must be refactored before onboarding."}
+{"ts": "48:25", "speaker": "I", "text": "Wie ist die MTLS-Integration, also GW-4821, aktuell gelöst?"}
+{"ts": "52:05", "speaker": "E", "text": "GW-4821 beschreibt die vollautomatische Zertifikatsrotation via SecOps CA. The gateway sidecar requests and renews certs every 45 days, monitored through Nimbus Observability alerts."}
+{"ts": "56:40", "speaker": "I", "text": "Welche Rolle spielt Nimbus Observability beim Monitoring des Gateways?"}
+{"ts": "60:00", "speaker": "E", "text": "Es aggregiert Logs, Metriken und Traces. For example, wir setzen Distributed Tracing, um Korrelationen zwischen Auth-Handshake und Latenzspitzen zu sehen, was wiederum auf Rate Limiting Anpassungen wirkt."}
+{"ts": "90:00", "speaker": "I", "text": "Lassen Sie uns jetzt auf die Entscheidungen aus RFC-1287 eingehen. Welche hatten für Sie den größten Impact auf die Orion-Architektur?"}
+{"ts": "90:15", "speaker": "E", "text": "Ähm, ja, also RFC-1287 hat vor allem die Wahl des Async-Processing-Modells festgelegt. That meant we changed from a synchronous request pipeline to a queue-based ingestion, which in turn affected our p95 latency targets under SLA-ORI-02."}
+{"ts": "90:35", "speaker": "I", "text": "Und RB-GW-011, das Runbook für Gateway Failover, wie hat das Ihre Deployment-Strategie beeinflusst?"}
+{"ts": "90:50", "speaker": "E", "text": "RB-GW-011 required us to implement blue-green deployments with automated MTLS certificate rotation. This war an extra Step, aber es reduziert das Risiko von downtime events bei Auth-Service-Änderungen."}
+{"ts": "91:10", "speaker": "I", "text": "Gab es kritische Incidents, bei denen Sie RB-GW-011 konkret anwenden mussten?"}
+{"ts": "91:22", "speaker": "E", "text": "Ja, Ticket INC-4723 im März. The Auth service pushed a schema change without notice, triggering handshake failures. Das Runbook hat uns durch den Failover zu einer vorhergehenden Gateway-Version geführt, innerhalb von 7 Minuten."}
+{"ts": "91:45", "speaker": "I", "text": "Können Sie erläutern, welche Risiken Sie aktuell für den Übergang von Build zu Operate sehen?"}
+{"ts": "92:00", "speaker": "E", "text": "Hauptsächlich sehe ich Risk in der Observability Coverage. If Nimbus metrics dashboards lag behind code changes, die Korrelation von Rate Limiting Events und Auth Errors wird schwierig."}
+{"ts": "92:20", "speaker": "I", "text": "Wie planen Sie, diese Observability-Risiken zu mitigieren?"}
+{"ts": "92:35", "speaker": "E", "text": "Wir haben eine Pre-Operate Checklist erstellt, inspiriert von POL-SEC-001 und RB-GW-011. It includes simulated load tests with auth changes, um die Dashboards und Alerts zu validieren."}
+{"ts": "92:55", "speaker": "I", "text": "Gibt es Lessons Learned aus INC-4723, die Sie ins Build-Team zurückgespiegelt haben?"}
+{"ts": "93:10", "speaker": "E", "text": "Definitely. Wir haben eine neue CI-Pipeline-Stufe eingeführt, die MTLS handshake scenarios against a staging Auth-Service prüft, bevor wir in prod gehen."}
+{"ts": "93:28", "speaker": "I", "text": "Wie fließt Kundenfeedback in diese letzten Build-Phasen ein?"}
+{"ts": "93:42", "speaker": "E", "text": "Wir nutzen Beta-API Keys für selected Kunden. Feedback zu Usability, vor allem zu Rate Limit Headers, wird in JIRA-Board ORI-FB reflektiert und priorisiert."}
+{"ts": "94:00", "speaker": "I", "text": "Und Ihre Meilensteine für die nächsten zwei Quartale?"}
+{"ts": "94:15", "speaker": "E", "text": "Q3: Completion of MTLS v2 rollout und Full integration mit Nimbus anomaly detection. Q4: SLA-ORI-02 sustained compliance validation über 30 Tage und Go-Live des Self-Service API Key Portals."}
+{"ts": "96:00", "speaker": "I", "text": "Lassen Sie uns jetzt noch auf die Lessons Learned eingehen, speziell im Kontext von RFC-1287 — welche architektonischen Entscheidungen haben hier den größten Impact gehabt?"}
+{"ts": "96:08", "speaker": "E", "text": "Also, RFC-1287 hat ja das komplette Auth-Flow-Redesign eingeführt. Das war nicht trivial, because we had to refactor both the gateway's token introspection and the MTLS handshake sequence. Der Impact war massiv auf die Latenz-Metriken, speziell SLA-ORI-02."}
+{"ts": "96:27", "speaker": "I", "text": "Und RB-GW-011 — wie hat dieses Runbook konkret Ihre Betriebsprozesse beeinflusst?"}
+{"ts": "96:34", "speaker": "E", "text": "RB-GW-011 definiert ja eine klare Eskalationskette bei Auth-Failures. In practice, wenn der Auth-Service unter 200 ms Antwortzeit bleibt, fahren wir nur ein Soft-Reload der Gateway-Worker. Bei >200 ms wird ein Failover-Cluster aktiviert. Das hat uns in Ticket INC-4729 wirklich den Tag gerettet."}
+{"ts": "96:55", "speaker": "I", "text": "Gab es in der Build-Phase bereits kritische Incidents?"}
+{"ts": "97:00", "speaker": "E", "text": "Ja, zweimal. Einmal war es ein Memory Leak im Rate Limiting Modul — erkannt via Nimbus Observability Alert ALRT-GW-202. Das zweite Mal ein fehlerhafter Cert-Rotation-Job, documented in INC-4811. Beide Male haben wir uns strikt ans Runbook gehalten."}
+{"ts": "97:20", "speaker": "I", "text": "Wie sah die konkrete Behandlung beim Memory Leak aus?"}
+{"ts": "97:25", "speaker": "E", "text": "Erst haben wir per Runbook RB-GW-011 den betroffenen Node drained, dann das Rate Limiting Modul mit Patch RL-2.3.4 neu deployed. Parallel haben wir den Leak mit Heapdump-Analyse bestätigt. Within 45 minutes, service was back to normal."}
+{"ts": "97:46", "speaker": "I", "text": "Welche Risiken sehen Sie nun für den Übergang von Build zu Operate?"}
+{"ts": "97:51", "speaker": "E", "text": "Das größte Risiko ist die Synchronisation von Gateway-Deployments mit dem Auth-Service Release-Zyklus. Wenn wir dort drift haben, könnte MTLS brechen. Außerdem: rate limiting defaults müssen produktionsnah getestet sein, sonst riskieren wir 429-Fehler bei legitimen Kunden."}
+{"ts": "98:12", "speaker": "I", "text": "Und wie gehen Sie mit dem Trade-off zwischen Latenz und Rate Limiting im Operate um?"}
+{"ts": "98:18", "speaker": "E", "text": "Wir setzen adaptive buckets ein — bei hoher Last reduzieren wir die Token-Bucket-Size minimal, um DoS-Risiken zu senken. That can add ~5 ms to p95 latency, but it's acceptable within SLA-ORI-02 of 250 ms. Wir haben das in Test-Szenario PERF-GW-07 validiert."}
+{"ts": "98:39", "speaker": "I", "text": "Gibt es dazu interne Policies oder eher heuristische Entscheidungen?"}
+{"ts": "98:44", "speaker": "E", "text": "Mix aus beidem. POL-SEC-001 schreibt Mindestwerte vor, but we allow ops engineers to adjust buckets by ±10% wenn Nimbus Telemetry anomale Patterns meldet. Das steht so nicht im Runbook, ist aber eine akzeptierte Praxis."}
+{"ts": "99:04", "speaker": "I", "text": "Könnten Sie zum Abschluss noch sagen, welche Milestones in den nächsten zwei Quartalen geplant sind?"}
+{"ts": "99:09", "speaker": "E", "text": "Ende Q3 wollen wir Full MTLS Rotation Automation live bringen, Q4 folgt dann API Endpoint Grouping für granulareres Rate Limiting. Plus, wir planen eine Observability-Dashboard-Integration direkt ins NOC-Tool, um SLA-ORI-02 breaches schneller zu erkennen."}
+{"ts": "112:00", "speaker": "I", "text": "Bevor wir zu den Lessons Learned übergehen, wollte ich fragen: wie monitoren Sie aktuell SLA-ORI-02 p95 Latency im Build-Phase Setup?"}
+{"ts": "112:25", "speaker": "E", "text": "Aktuell nutzen wir Nimbus Observability mit einem dedizierten Dashboard-Widget, ähm, das direkt aus den Gateway Metrik-Streams liest. We have an alert rule bound to 180ms p95, which is 10% below the SLA-Maximum, um einen Puffer zu haben."}
+{"ts": "112:56", "speaker": "I", "text": "Und wie werden diese Alerts weiterverarbeitet? Gibt es ein Runbook oder ist das noch ad hoc?"}
+{"ts": "113:17", "speaker": "E", "text": "Wir haben tatsächlich schon RB-GW-018, das ist ein Kurz-Runbook nur für Latenz-Degradationen. It includes a decision tree: first check if rate limiter misconfiguration happened, then verify upstream Auth latency via MTLS logs."}
+{"ts": "113:45", "speaker": "I", "text": "Interessant, also fließen hier gleich mehrere Subsysteme ein – Rate Limiting, Auth, Observability."}
+{"ts": "114:01", "speaker": "E", "text": "Genau, und das war einer der Punkte in RFC-1295, wo wir diese Korrelation formalisiert haben, damit wir nicht mehr im Blindflug debuggen. It reduced mean time to mitigation by ~35% in our last simulated incident."}
+{"ts": "114:28", "speaker": "I", "text": "Gab es schon reale Incidents, bei denen dieses neue Vorgehen gegriffen hat?"}
+{"ts": "114:46", "speaker": "E", "text": "Ja, Ticket INC-ORI-227 im letzten Monat. Da hatte der Auth-Service ein Zertifikats-Rollover, das MTLS-Handshake-Delays verursacht hat. Our on-call followed RB-GW-018, identified the cause in under 12 minutes."}
+{"ts": "115:15", "speaker": "I", "text": "Das klingt wie ein gutes Beispiel für Build-to-Operate-Readiness. Haben Sie dafür auch Postmortems geschrieben?"}
+{"ts": "115:32", "speaker": "E", "text": "Ja, wir pflegen für jedes P1- und P2-Event ein Postmortem im Confluence-Workspace 'Gateway Ops'. This one had a section 'Preventive Actions' recommending automated cert expiry alerts."}
+{"ts": "115:56", "speaker": "I", "text": "Wie schätzen Sie die Wahrscheinlichkeit ein, dass solche Upstream Issues das Gateway in Produktion beeinträchtigen?"}
+{"ts": "116:15", "speaker": "E", "text": "Moderate Wahrscheinlichkeit, weil wir jetzt mTLS-Handshake-Times kontinuierlich loggen und threshold-basen Alerts haben. However, upstream changes without our knowledge remain a risk, especially during night deployments."}
+{"ts": "116:41", "speaker": "I", "text": "Könnte man das durch engere Deployment-Fenster oder Change Notifications minimieren?"}
+{"ts": "117:00", "speaker": "E", "text": "Ja, wir planen gerade ein Change Agreement mit dem Auth-Team. That would align their deployment windows with our low-traffic periods and require a 'GW Impact' checkbox in their RFC form."}
+{"ts": "117:24", "speaker": "I", "text": "Zum Abschluss dieser Runde: Welche offenen Punkte wollen Sie vor dem Go-Live noch adressieren, um SLA-ORI-02 dauerhaft einzuhalten?"}
+{"ts": "117:44", "speaker": "E", "text": "Zwei Punkte: erstens Finalisierung der Rate Limiting Profiles aus RB-GW-021, um Burst Traffic ohne Latenzspitzen zu bedienen. Secondly, deploying the enhanced mTLS handshake cache to shave off another 5–8ms in peak conditions."}
+{"ts": "128:00", "speaker": "I", "text": "Lassen Sie uns, äh, nochmal kurz auf die Schnittstellen zum Auth-Service kommen – gab’s da in den letzten Sprints besondere Herausforderungen?"}
+{"ts": "128:20", "speaker": "E", "text": "Ja, wir hatten im Sprint 34 einen Change im Auth-Service, der den Token-Lifetime-Parameter angepasst hat. Das war nicht in der API-Doku, so dass wir im Orion Gateway kurzfristig den MTLS-Handshake (GW-4821) neu konfigurieren mussten. That impacted a few staging environments until we pushed the hotfix."}
+{"ts": "128:45", "speaker": "I", "text": "Okay, und wie haben Sie das Monitoring in Nimbus angepasst, um so etwas frühzeitiger zu sehen?"}
+{"ts": "129:05", "speaker": "E", "text": "Wir haben im Nimbus Observability ein Custom-Dashboard namens \"Auth-GW Sync\" angelegt. It correlates token issuance latency with gateway handshake duration. Zusätzlich gibt's einen Alert nach RUN-OBS-014, der bei >200ms Abweichung im 5-Minuten-Fenster anschlägt."}
+{"ts": "129:35", "speaker": "I", "text": "Interessant. Gab es da auch Abhängigkeiten zu den Rate-Limiting-Einstellungen?"}
+{"ts": "129:55", "speaker": "E", "text": "Ja, und das war tricky. Wenn der Auth-Handshake länger dauert, füllt sich die Connection-Queue schneller. Das triggert dann gegen unser Soft-Limit von 500 RPS pro Client, was wiederum die p95 Latency (SLA-ORI-02) beeinflusst. We had to tweak burst sizes slightly without violating POL-SEC-001."}
+{"ts": "130:25", "speaker": "I", "text": "Wie dokumentieren Sie solche Kausalitäten? Geht das ins Runbook oder in ein Knowledge-Base-Article?"}
+{"ts": "130:45", "speaker": "E", "text": "Beides. Im Runbook RB-GW-017 haben wir ein neues Kapitel \"Auth Integration Lag\" ergänzt. In Confluence gibt es dazu ein KB-Doc mit Trace-IDs der betroffenen Incidents, z.B. INC-ORI-2203."}
+{"ts": "131:15", "speaker": "I", "text": "Switching to the next quarter planning: Welche Milestones sind da für Sie gesetzt?"}
+{"ts": "131:35", "speaker": "E", "text": "Für Q3 haben wir den Milestone M-ORI-07, das ist die General Availability des Rate-Limiting-Moduls mit dynamischer Konfiguration via Control Plane API. Q4 bringt dann M-ORI-09, Full MTLS rotation automation."}
+{"ts": "132:00", "speaker": "I", "text": "Und wie beziehen Sie Kundenfeedback ein, gerade zur API-Usability?"}
+{"ts": "132:20", "speaker": "E", "text": "Wir haben ein Developer-Preview-Programm. There, we collect feedback via a survey embedded in the API portal. Außerdem werten wir Support-Tickets mit Tag 'usability' aus und priorisieren in unserem Backlog Grooming."}
+{"ts": "132:50", "speaker": "I", "text": "Gab es schon Anpassungen auf Basis dieses Feedbacks?"}
+{"ts": "133:10", "speaker": "E", "text": "Ja, z.B. haben wir das Error-Response-Schema vereinfacht. Das kam aus mehreren Beta-Partnern, die sagten, the nested error objects were too verbose. Jetzt ist es flacher, was die Parsing-Performance verbessert."}
+{"ts": "133:35", "speaker": "I", "text": "Letzte Frage: Wie stellen Sie sicher, dass SLA-ORI-02 auch bei steigender Last eingehalten wird?"}
+{"ts": "144:00", "speaker": "E", "text": "Wir fahren regelmäßig Load-Tests nach PLAN-LT-ORI-05. Those tests simulate peak traffic patterns from our largest clients. Zusätzlich haben wir Auto-Scaling-Rules in der Gateway-Cluster-Config, die bei 70% CPU und 65% Memory triggern, um vor SLA-Verletzungen zu skalieren."}
+{"ts": "144:00", "speaker": "I", "text": "Lassen Sie uns bitte noch einmal konkret auf die Integration mit Nimbus Observability eingehen – how does that tie together with your latency objectives under SLA-ORI-02?"}
+{"ts": "144:05", "speaker": "E", "text": "Ja, also wir haben in der Build-Phase ein spezielles Dashboard-Set in Nimbus definiert, das direkt die p95-Latenz der API-Endpoints misst. The key part is, wir haben die Rate-Limiting-Events als separate Metric-Stream integriert, sodass wir korrelieren können, ob Latenzspikes durch Limit-Hits oder Backend-Verzögerungen entstehen."}
+{"ts": "144:14", "speaker": "I", "text": "Und wie verifizieren Sie, dass Änderungen am Auth-Service nicht unbemerkt diese Metriken beeinflussen?"}
+{"ts": "144:20", "speaker": "E", "text": "Wir haben ein Canary Deployment Pattern im Gateway. Changes from Auth-Service trigger a synthetic MTLS handshake test (Ticket GW-4821-Test), der in weniger als 200 ms durchlaufen muss. Falls das nicht klappt, schlägt der Canary fehl und der Rollout wird nach Runbook RB-AUTH-005 gestoppt."}
+{"ts": "144:28", "speaker": "I", "text": "Sie erwähnten gerade MTLS – können Sie das Setup kurz skizzieren?"}
+{"ts": "144:34", "speaker": "E", "text": "Klar, the MTLS integration uses mutual certificate validation between gateway and Auth microservice. Wir nutzen eine interne CA, Zertifikate werden via Vault Injector alle 24 h rotiert. The gateway checks revocation lists every hour, um kompromittierte Keys sofort zu sperren."}
+{"ts": "144:42", "speaker": "I", "text": "Gab es schon mal ein Problem bei dieser Rotation?"}
+{"ts": "144:47", "speaker": "E", "text": "Einmal, ja – Ticket INC-GW-073. Ein expired Cert wurde nicht rechtzeitig ersetzt, weil der Vault-Agent auf einer Node hing. Wir haben dann im Runbook RB-GW-MTLS-002 einen manuellen Fallback dokumentiert, um Zertifikate on-demand neu zu laden."}
+{"ts": "144:56", "speaker": "I", "text": "Wie hat sich dieser Incident auf Ihre Roadmap ausgewirkt?"}
+{"ts": "145:01", "speaker": "E", "text": "Wir haben den Milestone M2-Integration um zwei Tage verschoben. But more importantly, wir haben automatisierte Cert-Rotation-Checks in unseren CI-Pipeline aufgenommen, um sowas früh zu catchen."}
+{"ts": "145:09", "speaker": "I", "text": "Können Sie einen Zusammenhang zwischen den Security Policies wie POL-SEC-001 und den Observability-Anforderungen herstellen?"}
+{"ts": "145:15", "speaker": "E", "text": "Ja, POL-SEC-001 fordert, dass alle sicherheitsrelevanten Events innerhalb von 60 Sekunden erkennbar sind. Deshalb haben wir in Nimbus einen Alert-Stream eingerichtet, der MTLS-Handshake-Fehler und ungewöhnliche Rate-Limit-Bursts in near real-time liefert."}
+{"ts": "145:24", "speaker": "I", "text": "Wie gehen Sie mit möglichen Zielkonflikten zwischen Security und Performance um?"}
+{"ts": "145:30", "speaker": "E", "text": "Das ist tricky – z.B. tiefere TLS-Inspection kann Latenz erhöhen. We mitigate by offloading inspection to a sidecar process, sodass der Main-Gateway-Thread nicht blockiert. Außerdem setzen wir adaptive sampling ein, um nicht jeden einzelnen Call voll zu analysieren."}
+{"ts": "145:39", "speaker": "I", "text": "Wenn Sie zurückblicken – welche Lessons Learned aus diesen Integrationen sind am wichtigsten für den Übergang zu Operate?"}
+{"ts": "145:44", "speaker": "E", "text": "Automatisierte Tests sind kein Luxus, sondern Pflicht. And documenting manual fallbacks per Runbook ist entscheidend, weil im Operate-Mode der Zeitdruck höher ist. Wir haben gesehen, dass klare Schnittstellenverträge zwischen Gateway und Auth-Service uns viel Trouble ersparen."}
+{"ts": "146:00", "speaker": "I", "text": "Lassen Sie uns bitte noch einmal auf die Priorisierung der API-Endpoints eingehen, speziell im Kontext der ersten Beta-Kunden."}
+{"ts": "146:05", "speaker": "E", "text": "Ja, klar… also wir haben zunächst die Endpoints mit dem höchsten Throughput aus den Logs von unserem alten Gateway extrahiert. Then we mapped them against the new auth requirements to ensure POL-SEC-001 compliance."}
+{"ts": "146:15", "speaker": "I", "text": "Das heißt, Sie haben historische Nutzungsdaten mit Security Policies kombiniert?"}
+{"ts": "146:19", "speaker": "E", "text": "Genau. Wir hatten ein kleines Python-Skript, das die Call-Frequenz aus dem Data Lake zieht und gleichzeitig checkt, ob MTLS aus Ticket GW-4821 already supported ist."}
+{"ts": "146:28", "speaker": "I", "text": "Interessant. Gab es da Überraschungen?"}
+{"ts": "146:32", "speaker": "E", "text": "Ja, einige Low-Volume Endpoints waren kritisch für Compliance Audits, also mussten wir sie hoch priorisieren, obwohl sie kaum Traffic hatten. That was a bit of a multi-hop dependency with the audit subsystem."}
+{"ts": "146:44", "speaker": "I", "text": "Stichwort Multi-Hop: Können Sie erläutern, wie Observability da mitspielt?"}
+{"ts": "146:48", "speaker": "E", "text": "Nimbus Observability liefert uns Cross-Service Traces. So konnten wir sehen, dass ein scheinbar isolierter Endpoint mehrere Downstream-Calls triggert, including to the compliance report generator."}
+{"ts": "146:59", "speaker": "I", "text": "Das beeinflusst sicher auch die Rate-Limiting-Strategie."}
+{"ts": "147:03", "speaker": "E", "text": "Ja, wir haben für diese Pfade ein softeres Burst-Limit gesetzt, otherwise die Latenz wäre durch Queueing in den Downstream-Systemen explodiert. Das haben wir aus Incident INC-ORI-77 gelernt."}
+{"ts": "147:14", "speaker": "I", "text": "Wie wurde INC-ORI-77 gelöst?"}
+{"ts": "147:18", "speaker": "E", "text": "Nach Runbook RB-GW-015: Traffic-Shaping Rule deployen, dann Rolling Restart vom Gateway. And we updated the rate profile in config repo cfg-ori/profiles.yaml."}
+{"ts": "147:29", "speaker": "I", "text": "Gab es Diskussionen im Team zu diesem Workaround?"}
+{"ts": "147:33", "speaker": "E", "text": "Ja, einige wollten direkt den Downstream-Service tunen, aber das hätte das SLA-ORI-02 risked. Wir mussten within 30 minutes p95 Latency < 250ms erreichen."}
+{"ts": "147:43", "speaker": "I", "text": "Verstehe. Welche Lessons Learned haben Sie dokumentiert?"}
+{"ts": "147:47", "speaker": "E", "text": "Wir haben festgehalten, dass Multi-Hop-Topologien frühzeitig in der Priorisierung berücksichtigt werden müssen und dass Observability Alerts in der CI-Pipeline getestet werden sollten, um false negatives zu vermeiden."}
+{"ts": "148:00", "speaker": "I", "text": "Könnten Sie noch einmal erläutern, wie genau die MTLS-Integration aus Ticket GW-4821 umgesetzt wurde?"}
+{"ts": "148:05", "speaker": "E", "text": "Ja, gerne. Wir haben auf Layer 7 im Gateway eine Mutual-TLS Termination eingeführt, die auf dem internen Zertifikatsdienst von Novereon läuft. Dadurch können wir clientseitige Zertifikate automatisch gegen unsere PKI validieren. The config is synced every hour via our secure config job, um Revocations zeitnah zu erkennen."}
+{"ts": "148:18", "speaker": "I", "text": "Und wie interagiert das mit dem Auth-Service, gerade bei Rotation der Keys?"}
+{"ts": "148:23", "speaker": "E", "text": "Wenn der Auth-Service seine JWKS rotiert, bekommen wir ein Event via Nimbus Event Bus. Das Gateway cached die Keys nur für 5 Minuten, so we limit stale key usage. Zusätzlich hat RFC-1287 vorgeschrieben, dass wir einen Fallback auf den letzten bekannten Key haben, um keine 5xx Errors zu erzeugen."}
+{"ts": "148:37", "speaker": "I", "text": "Wie stellen Sie sicher, dass Änderungen am Auth-Service das Gateway nicht destabilisieren?"}
+{"ts": "148:41", "speaker": "E", "text": "Wir fahren alle Änderungen zunächst im Staging-Cluster mit synthetischem Traffic gemäß Testplan TP-GW-009. Dabei nutzen wir die Observability-Integration mit Nimbus, um p95 Latenz, Error Rates und die MTLS-Handshake-Zeiten zu beobachten."}
+{"ts": "148:56", "speaker": "I", "text": "Speaking of Nimbus, welche Rolle spielt das System beim Monitoring genau?"}
+{"ts": "149:00", "speaker": "E", "text": "Nimbus aggregiert alle Gateway-Metriken und korreliert sie mit Downstream-Services. So können wir bei einem SLA-ORI-02 Breach sofort sehen, ob die Ursache im Gateway-Layer oder weiter hinten liegt. Außerdem nutzt unser Runbook RB-GW-011 genau diese Dashboards für Incident Response."}
+{"ts": "149:14", "speaker": "I", "text": "Gab es zuletzt ein Beispiel, wo diese Korrelation geholfen hat?"}
+{"ts": "149:18", "speaker": "E", "text": "Ja, Incident INC-ORI-774 vor zwei Wochen. Da sahen wir über Nimbus, dass die Latenz nur bei Endpoints mit externem Auth-Provider stieg. Wir konnten so das Gateway entlasten, indem wir Rate Limits für diesen Provider temporär anpassten."}
+{"ts": "149:32", "speaker": "I", "text": "Das klingt nach einem Trade-off zwischen Security und Performance."}
+{"ts": "149:36", "speaker": "E", "text": "Exactly. Wir haben kurzfristig die Token-Lifetime erhöht, um weniger Calls zum externen Provider zu machen. Das Risiko wurde akzeptiert, documented in Risk Log RL-ORI-015 und im nächsten Sprint wieder zurückgestellt."}
+{"ts": "149:49", "speaker": "I", "text": "Welche Milestones planen Sie für die nächsten zwei Quartale?"}
+{"ts": "149:53", "speaker": "E", "text": "Q3 wollen wir die adaptive Rate Limiting Engine aus RFC-1352 implementieren. Q4 steht die vollständige Integration der Security Policy POL-SEC-001 in allen Endpoints an. Beide Milestones sind kritisch, um SLA-ORI-02 unter 300ms p95 zu halten."}
+{"ts": "150:07", "speaker": "I", "text": "Und wie stellen Sie sicher, dass SLA-ORI-02 nachhaltig eingehalten wird?"}
+{"ts": "150:12", "speaker": "E", "text": "Wir planen wöchentliche Loadtests mit realistischen Traffic-Mustern aus dem Production-Log. Zusätzlich haben wir einen Canary Release Prozess, bei dem 5% des Traffics auf die neue Gateway-Version geleitet wird. Any regression triggers automatic rollback per RB-GW-011."}
+{"ts": "149:20", "speaker": "I", "text": "Lassen Sie uns noch einmal konkret auf die Observability eingehen: Wie nutzen Sie aktuell Nimbus, um die p95 Latency für SLA-ORI-02 zu überwachen?"}
+{"ts": "149:25", "speaker": "E", "text": "Wir haben im Build-Cluster ein dediziertes Dashboard in Nimbus Observability konfiguriert, mit einem p95-Latency-Panel, das aus den Gateway-Logs und Tracing-Daten aggregiert wird. Zusätzlich gibt es Alerts im Incident-Kanal, wenn wir den Schwellwert aus SLA-ORI-02 auch nur für drei Minuten überschreiten."}
+{"ts": "149:32", "speaker": "I", "text": "Und diese Alerts, greifen die schon auf die MTLS-Integration GW-4821 zu, um Fehlschlüsse durch unautorisierte Requests zu vermeiden?"}
+{"ts": "149:37", "speaker": "E", "text": "Genau. Wir filtern im Telemetrie-Pipeline-Stage alle Requests, die am mTLS-Handshake scheitern. Sonst hätten wir ein falsches Bild, weil solche Requests oft extrem schnell abgelehnt werden und die Latenzstatistik verzerren."}
+{"ts": "149:45", "speaker": "I", "text": "Understood. Wie haben Sie das im Kontext des Auth-Service getestet, um sicherzustellen, dass ein Update dort keine Regression im Gateway auslöst?"}
+{"ts": "149:50", "speaker": "E", "text": "Wir haben eine Canary-Pipeline, die bei jeder Auth-Service-Änderung einen synthetischen Traffic gegen das Staging-Gateway feuert. Die Testfälle basieren auf Runbook RB-GW-011, Abschnitt 'Auth Degradation', und prüfen explizit, ob mTLS und JWT-Validierung weiterhin innerhalb der Latenz-Budgets bleiben."}
+{"ts": "149:58", "speaker": "I", "text": "Das ist interessant. Haben Sie daraus schon mal ein Incident-Szenario abgeleitet?"}
+{"ts": "150:02", "speaker": "E", "text": "Ja, Ticket INC-ORI-207 im März. Da hat ein falsch konfigurierter Auth-Key-Rotation-Job zu sporadischen 401er geführt. Dank der Canary-Tests haben wir das vor dem Prod-Rollout bemerkt und den Job gemäß RB-GW-011 zurückgerollt."}
+{"ts": "150:10", "speaker": "I", "text": "Wie fließt so ein Incident dann in die Priorisierung künftiger Anforderungen ein?"}
+{"ts": "150:14", "speaker": "E", "text": "Wir führen nach jedem Incident ein Micro-PIR durch. Die Lessons Learned gehen in Confluence unter 'Gateway Quality', und daraus entstehen oft RFCs, zum Beispiel RFC-1322 zur Auth-Key-Rotation, die dann in den nächsten Sprint-Plan einbezogen werden."}
+{"ts": "150:22", "speaker": "I", "text": "Switching gears: Any feedback loops from early adopters that influenced your backlog recently?"}
+{"ts": "150:26", "speaker": "E", "text": "Yes, early adopters from our IoT partner program flagged that our default rate limit was too aggressive for burst telemetry uploads. We created Change Request CR-ORI-88 to add a burst allowance parameter, without breaching SLA-ORI-02 latency."}
+{"ts": "150:34", "speaker": "I", "text": "Und wie stellen Sie sicher, dass dieser Burst-Parameter nicht die Stabilität gefährdet, especially in peak hours?"}
+{"ts": "150:39", "speaker": "E", "text": "Wir haben Load-Tests mit Traffic-Profilen aus PROD gefahren, abgesichert durch die Rate-Limiting-Algorithmen aus RFC-1287. Die Burst-Policy ist per Feature-Flag aktivierbar, sodass wir sie bei Anomalien sofort deaktivieren können."}
+{"ts": "150:46", "speaker": "I", "text": "Klingt nach einer sauberen Contingency. Gab es für den Übergang von Build zu Operate noch weitere Risiken, die Sie dokumentiert haben?"}
+{"ts": "150:51", "speaker": "E", "text": "Ja, neben den Auth- und Rate-Limit-Risiken haben wir in Risk-Log RSK-ORI-15 die Gefahr festgehalten, dass Observability-Dashboards in PROD nicht synchron mit Build sind. Als Mitigation haben wir eine Runbook-Section 'Dashboard Promotion' angelegt und automatisiert."}
+{"ts": "150:40", "speaker": "I", "text": "Vielleicht können wir jetzt noch auf die Lessons Learned aus dem letzten Integrationstest eingehen – was hat beim Orion Edge Gateway gut funktioniert, und wo mussten Sie ad hoc nachsteuern?"}
+{"ts": "150:47", "speaker": "E", "text": "Ja, also gut funktioniert hat definitiv die MTLS-Handshake-Sequenz, die wir nach Ticket GW-4821 neu implementiert haben. The latency stayed within SLA-ORI-02 for 95% of calls, but wir mussten kurzfristig den Rate Limiter anpassen, weil ein Partner-Service außerhalb der Test-Specs agierte."}
+{"ts": "150:58", "speaker": "I", "text": "War das eine bekannte Abhängigkeit oder eher etwas, das im Testumfeld neu aufgetreten ist?"}
+{"ts": "151:03", "speaker": "E", "text": "Das war partially known – wir hatten in der Abhängigkeitsmatrix den Service markiert, aber nicht die burst patterns. This caused some unexpected 429 responses, und wir mussten via Runbook RB-GW-011 den Soft-Limit erhöhen."}
+{"ts": "151:17", "speaker": "I", "text": "Wie haben Sie sichergestellt, dass diese Anpassung nicht die Security Policies wie POL-SEC-001 verletzt?"}
+{"ts": "151:22", "speaker": "E", "text": "Wir haben einen Security Check eingebaut – basically ein Policy-as-Code Script – das den neuen Threshold gegen POL-SEC-001 validiert hat. Außerdem haben wir die Änderung im RFC-1287 als Anhang dokumentiert."}
+{"ts": "151:35", "speaker": "I", "text": "Und im Monitoring – konnten Sie im Nimbus Observability direkt sehen, wie sich die Anpassung auswirkt?"}
+{"ts": "151:40", "speaker": "E", "text": "Ja, wir haben ein Custom-Dashboard gebaut, das sowohl die p95 Latenz als auch die Rate-Limiter Counters anzeigt. The live view helped us correlate spikes to specific auth-service events."}
+{"ts": "151:53", "speaker": "I", "text": "Gab es da Korrelationen zu den Auth-Service Deployments?"}
+{"ts": "151:58", "speaker": "E", "text": "Genau, zwei Deployments haben einen Anstieg von failed MTLS handshakes getriggert, und das wiederum hat den Gateway-Queue-Backlog vergrößert. We used the incident post-mortem template to capture that."}
+{"ts": "152:12", "speaker": "I", "text": "Haben Sie daraus eine preventive Maßnahme abgeleitet?"}
+{"ts": "152:16", "speaker": "E", "text": "Ja, wir haben eine Pre-Deployment Checklist eingeführt, die auch die Gateway-Kompatibilität mit dem aktuellen Auth-Service Build prüft. That should minimize cascading failures."}
+{"ts": "152:27", "speaker": "I", "text": "Im Hinblick auf den Übergang zu Operate – sehen Sie bei solchen Abhängigkeiten ein erhöhtes Risiko?"}
+{"ts": "152:33", "speaker": "E", "text": "Absolut, das ist eines der Top-3 Risiken. Wir haben dafür ein Risk Log angelegt, ID RSK-ORI-07, mit Maßnahmen wie Canary Releases und erweiterten Rollback-Routinen."}
+{"ts": "152:45", "speaker": "I", "text": "Klingt robust. Vielleicht noch zum Abschluss – wie fließt Kundenfeedback zu diesen Themen in Ihre Roadmap ein?"}
+{"ts": "152:51", "speaker": "E", "text": "Wir sammeln Feedback über unser Developer-Portal-Formular und ein monatliches API-Forum. Specific issues wie Auth-Latency oder Rate-Limit-Fehlermeldungen werden priorisiert, if they map to SLA-ORI-02 or security policies, und dann in den nächsten Sprintplanung aufgenommen."}
+{"ts": "152:40", "speaker": "I", "text": "Wenn wir noch mal kurz, äh, auf die Lessons Learned zurückgehen – gab es einen spezifischen Moment, wo Sie gesagt haben, das muss ins Runbook RB-GW-011 aufgenommen werden, weil es high impact hatte?"}
+{"ts": "152:44", "speaker": "E", "text": "Ja, definitely. Nach Incident INC-ORI-202, wo der Auth-Service ein expired certificate hatte, haben wir sofort einen neuen Abschnitt in RB-GW-011 ergänzt: 'Cert expiry pre-check via Nimbus Alerts'. Das war vorher nur implizit im Teamwissen."}
+{"ts": "152:50", "speaker": "I", "text": "Das heißt, Sie haben quasi aus einem Live-Ausfall direkt eine Präventionsmaßnahme formuliert?"}
+{"ts": "152:53", "speaker": "E", "text": "Genau, und wir haben's auch mit POL-SEC-001 verknüpft, um sicherzustellen, dass security compliance checks nicht nur monthly, sondern 24h before key cert expiry laufen. That reduced our risk window massively."}
+{"ts": "152:59", "speaker": "I", "text": "Wie haben Sie das im Monitoring abgebildet, speziell mit Nimbus Observability?"}
+{"ts": "153:02", "speaker": "E", "text": "We created a dashboard panel 'GW-CERT-EXP' in Nimbus, pulling from our cert metadata API. Dazu gibt's ein Alert-Rule-Set GW-ALRT-07, Severity high, wenn Restlaufzeit unter 72h fällt."}
+{"ts": "153:08", "speaker": "I", "text": "Können Sie abschätzen, wie viel Downtime dadurch in Zukunft vermieden wird?"}
+{"ts": "153:12", "speaker": "E", "text": "Wir kalkulieren, dass wir damit SLA-ORI-02 breach risk um ca. 0.8% p.a. senken. It's small in absolute terms, but huge in customer trust impact."}
+{"ts": "153:17", "speaker": "I", "text": "Interessant. Gab es bei der Implementierung dieses Dashboards irgendwelche Dependencies auf andere Teams?"}
+{"ts": "153:21", "speaker": "E", "text": "Yes, wir brauchten das Metrics-Export-Modul vom Auth-Team, Ticket AUTH-MET-558. Ohne deren JSON schema extension hätten wir die cert expiry data gar nicht ingestieren können."}
+{"ts": "153:27", "speaker": "I", "text": "Wie lief da die Koordination, gab's Engpässe?"}
+{"ts": "153:30", "speaker": "E", "text": "Ein bisschen, wir mussten einen Sprint lang warten. Wir haben dann im Jira-Board eine 'Blocker'-Markierung gesetzt, damit's in deren Planning hochgeholt wird. Agile syncs every Tuesday helped to keep them in the loop."}
+{"ts": "153:36", "speaker": "I", "text": "Abschließend zu diesem Punkt – würden Sie sagen, dass solche cross-team Abhängigkeiten in der Build-Phase eher die Regel als die Ausnahme sind?"}
+{"ts": "153:40", "speaker": "E", "text": "Absolutely. Beim Orion Edge Gateway betrifft fast jede zweite Story mindestens ein anderes Subsystem. Deswegen haben wir im RFC-1287 ja diesen Integration Calendar eingeführt."}
+{"ts": "153:45", "speaker": "I", "text": "Das hilft sicher, um Überraschungen beim Übergang zu Operate zu vermeiden, oder?"}
+{"ts": "153:48", "speaker": "E", "text": "Ja, und combined with the post-mortem learnings wie aus INC-ORI-202, haben wir jetzt ein stabileres Fundament. Trotzdem, risk zero gibt's nicht – gerade bei latency spikes durch Rate Limiting adjustments müssen wir weiter sehr nah dranbleiben."}
+{"ts": "154:00", "speaker": "I", "text": "Lassen Sie uns nochmal konkret auf den Übergang von Build zu Operate eingehen – welche Maßnahmen aus RB-GW-011 sind da für Sie essenziell, um die Stability zu sichern?"}
+{"ts": "154:05", "speaker": "E", "text": "Also, wir haben im Runbook RB-GW-011 ganz klar Steps definiert: erstens ein Final Load Test gegen alle API-Endpoints, zweitens das Cross-Checken der MTLS-Integration gemäß Ticket GW-4821, und drittens ein Dry-Run mit dem On-Call-Team. Without that, we risk missing subtle auth regression issues."}
+{"ts": "154:15", "speaker": "I", "text": "Und wie gehen Sie mit möglichen Performance-Drops bei aktiviertem Rate Limiting um? Gibt's da ein festes Vorgehen?"}
+{"ts": "154:20", "speaker": "E", "text": "Ja, wir folgen da der Heuristik aus SLA-ORI-02: If p95 latency exceeds 180ms under load, wir reduzieren die Limitierung temporär um 10% via ConfigMap-Override. Parallel tracken wir im Nimbus Observability Panel die Auswirkungen."}
+{"ts": "154:32", "speaker": "I", "text": "Interessant. Und sind diese Overrides dokumentiert oder eher ad hoc?"}
+{"ts": "154:36", "speaker": "E", "text": "Sie sind im Runbook als 'Emergency Throttle Adjustment' dokumentiert, mit Verweis auf Change-ID CHG-ORI-774. Aber ehrlich gesagt, in 20% der Fälle macht das On-Call-Team auch einen judgement call, wenn die Metriken eindeutig sind."}
+{"ts": "154:48", "speaker": "I", "text": "Okay, und wenn wir jetzt mal das Thema Security betrachten: POL-SEC-001 schreibt ja strenge Auth-Flows vor. Gab es da zuletzt Konflikte mit der Gateway-Performance?"}
+{"ts": "154:54", "speaker": "E", "text": "Yes, especially when the Auth-Service rolled out v3.2. Die zusätzlichen JWT-Claims haben den Token-Validation-Pfad verlängert. Wir mussten laut RFC-1287 das Caching-Fenster von 30s auf 90s erhöhen, um Latenzspitzen zu glätten."}
+{"ts": "155:06", "speaker": "I", "text": "Wie haben Sie das Rollout-Risiko damals mitigiert?"}
+{"ts": "155:10", "speaker": "E", "text": "Wir haben ein Canary Deployment auf nur 5% des Traffics gefahren, with full trace logging enabled in Nimbus. Außerdem war ein Rollback-Skript vorbereitet, documented in RB-AUTH-023."}
+{"ts": "155:22", "speaker": "I", "text": "Gab es ein konkretes Incident in diesem Kontext?"}
+{"ts": "155:26", "speaker": "E", "text": "Yes, Incident INC-ORI-552. Während des Canary Rollouts kam es zu 401 Error Spikes. Ursache war ein nicht synchronisiertes Zertifikat im MTLS-Store. Fix gemäß GW-4821 Rollback Steps wurde innerhalb von 12 Minuten deployed."}
+{"ts": "155:40", "speaker": "I", "text": "Und rückblickend – welche Lesson Learned ziehen Sie daraus?"}
+{"ts": "155:44", "speaker": "E", "text": "Vor jedem Auth-Service Update müssen wir einen Zertifikats-Abgleich fahren, automated via Pre-Deploy Hook. This is now part of our CI pipeline definition for the gateway."}
+{"ts": "155:54", "speaker": "I", "text": "Das heißt, Sie haben auch die Roadmap angepasst?"}
+{"ts": "156:00", "speaker": "E", "text": "Genau, wir haben im nächsten Quartal einen Milestone 'Secure Deploy' eingeplant, der alle diese Checks integriert und SLA-ORI-02 compliance als Go/No-Go-Kriterium nutzt."}
+{"ts": "156:00", "speaker": "I", "text": "Lassen Sie uns nochmal auf die Entscheidung aus RFC-1287 zurückkommen — wie hat sich die dort beschriebene MTLS-Handshake-Optimierung konkret auf die SLA-ORI-02 p95 Latenz ausgewirkt?"}
+{"ts": "156:04", "speaker": "E", "text": "Ja, also der RFC-1287 hat ja den Session-Resumption-Mechanismus eingeführt. Dadurch konnten wir bei internen Calls, especially between Gateway and Auth-Service, die Initial-Latenz um etwa 35ms senken. Das war wichtig, um im Build-Phase-Test schon nahe an den SLA-ORI-02 Zielwert zu kommen."}
+{"ts": "156:12", "speaker": "I", "text": "Okay, und gab es Anpassungen im Runbook, z.B. RB-GW-011, um diesen Mechanismus auch im Incident-Fall sicher zu behandeln?"}
+{"ts": "156:16", "speaker": "E", "text": "Genau, im RB-GW-011 haben wir ein Appendix B ergänzt. Dort steht, wie man bei Session-Key-Invalidationen vorgeht — basically force a full handshake, aber mit kontrolliertem Rate-Limit, um keine Auth-Service-Spikes zu erzeugen."}
+{"ts": "156:23", "speaker": "I", "text": "Verstanden. Und wie interagiert das mit Nimbus Observability Alerts? Werden diese spezifisch gefiltert?"}
+{"ts": "156:27", "speaker": "E", "text": "Ja, wir haben ein spezielles Alert-Label 'mtls_resumption_fallback'. Nimbus filtert diese aus dem generischen Latenz-Stream und mappt sie auf Incident-Template IT-ORI-77. That way, On-Call weiß sofort, dass es sich um ein gezieltes Fallback-Szenario handelt."}
+{"ts": "156:36", "speaker": "I", "text": "Sie hatten vorhin erwähnt, dass Kundenfeedback zur API-Usability Einfluss auf die Priorisierung hatte. Können Sie ein Beispiel geben, wie das in der Roadmap umgesetzt wurde?"}
+{"ts": "156:41", "speaker": "E", "text": "Ja, in Sprint 14 haben wir von drei Pilotkunden das Feedback bekommen, dass die Auth-Token-Erneuerung zu komplex war. We pulled forward Feature GW-F-129, das einen '/token/refresh' Endpoint mit vereinfachtem Payload bietet. Das war ursprünglich für Q+2 geplant."}
+{"ts": "156:49", "speaker": "I", "text": "Hatte das Auswirkungen auf andere Milestones oder Dependencies?"}
+{"ts": "156:53", "speaker": "E", "text": "Ja, dadurch mussten wir die Implementierung des erweiterten Rate-Limiters um einen Sprint verschieben, um Ressourcen auf den Refresh-Flow zu konzentrieren. This was documented in Ticket PLAN-ORI-384."}
+{"ts": "157:00", "speaker": "I", "text": "Wenn wir auf den Übergang zu Operate schauen: Welche Risiken sehen Sie noch im Hinblick auf den Auth-Service, besonders wenn dieser unabhängig deployed wird?"}
+{"ts": "157:05", "speaker": "E", "text": "Das größte Risiko ist, dass schema-breaking Changes ohne vorherige Gateway-Integrationstests live gehen. Wir rely currently on a manual sign-off in Change Board MEET-SEC-GW, aber wir planen, einen Contract-Test in die CI/CD-Pipeline zu integrieren."}
+{"ts": "157:13", "speaker": "I", "text": "Und wie wahrscheinlich wäre es, dass so ein Breaking Change die SLA-ORI-02 verletzt?"}
+{"ts": "157:17", "speaker": "E", "text": "Wenn ungetestet, relativ hoch, etwa 40%, basierend auf unseren Staging-Incident-Logs. With the contract tests in place, we expect to reduce that to under 5%."}
+{"ts": "157:22", "speaker": "I", "text": "Gut, letzte Frage: Gibt es aus den bisherigen Incidents Lessons Learned, die wir in den Operate-Runbooks noch nicht erfasst haben?"}
+{"ts": "157:27", "speaker": "E", "text": "Ja, eine Kleinigkeit: Bei einem Fallback auf den Legacy-Auth-Pfad hat sich gezeigt, dass die Observability-Dashboards delayed waren. We need a runbook section on manual metric refresh to avoid blind spots in the first 5 minutes of an incident."}
+{"ts": "157:36", "speaker": "I", "text": "Lassen Sie uns kurz zu den Lessons Learned aus dem Build-Phase-Testing kommen — which of those findings impacted your current rollout plan?"}
+{"ts": "157:43", "speaker": "E", "text": "Also, wir haben im Load-Test vom März, Ticket TEST-ORI-221, festgestellt, dass unser MTLS Handshake bei 5% der Requests unnötige Retries verursacht hat. This directly pushed us to adjust the rollout by adding a pre-warm connection pool, documented in RB-GW-015."}
+{"ts": "157:58", "speaker": "I", "text": "Interesting, und diese Änderung — hat die auch Nebeneffekte auf die Observability-Metriken gehabt?"}
+{"ts": "158:05", "speaker": "E", "text": "Ja, deutlich. Der p95 Latency Wert in SLA-ORI-02 ist von 420ms auf etwa 310ms gesunken. In Nimbus Observability haben wir dafür ein separates Dashboard 'GW-MTLS-Perf' angelegt, so dass wir die Effekte isoliert sehen können."}
+{"ts": "158:18", "speaker": "I", "text": "How are you making sure those perf gains persist when Auth-Service version 2 goes live next month?"}
+{"ts": "158:25", "speaker": "E", "text": "Wir haben eine Canary-Route konfiguriert, laut Runbook RB-GW-011, die gegen den v2 Auth-Service läuft. Das erlaubt uns, MTLS und Token-Exchange parallel zu v1 zu überwachen, ohne den Haupt-Traffic zu gefährden."}
+{"ts": "158:38", "speaker": "I", "text": "Gab es dafür spezielle Anpassungen in der Gateway-Konfiguration?"}
+{"ts": "158:44", "speaker": "E", "text": "Ja, wir haben im ConfigRepo Branch 'feature/auth-v2-canary' einen zusätzlichen Listener definiert, mit separaten Rate Limit Buckets. That way, we can observe latency impacts in isolation."}
+{"ts": "158:57", "speaker": "I", "text": "Klingt solide, aber haben Sie auch das Error Budget im Blick? Also nach SLO-Tracking?"}
+{"ts": "159:04", "speaker": "E", "text": "Absolut. In unserem SLO-Dashboard ist ein Error Budget Alert konfiguriert: wenn mehr als 2% der Requests auf der Canary-Route fehlschlagen, wird ein PagerDuty-Event 'GW-CANARY-ALERT' ausgelöst. This ties back into our Incident Runbook."}
+{"ts": "159:18", "speaker": "I", "text": "Und falls der Canary fehlschlägt, wie schnell können Sie umschalten?"}
+{"ts": "159:24", "speaker": "E", "text": "Innerhalb von fünf Minuten. Wir haben ein Rollback-Skript 'gw_canary_disable.sh' im Tooling, das per ChatOps getriggert wird. Die Reaktionszeit ist Teil des OLA mit dem Platform-Team."}
+{"ts": "159:36", "speaker": "I", "text": "Letzte Frage zu diesem Block: sehen Sie hier ein Risiko für den Übergang in Operate?"}
+{"ts": "159:42", "speaker": "E", "text": "Ja, das größte Risiko ist, dass Auth-v2 auf Live-Traffic unerwartete Payload-Formate liefert. Obwohl wir Schema-Validierung in der Gateway-Pipeline aktiv haben, könnte das trotzdem zu 4xx-Spikes führen. We've documented this in Risk-Log ORI-RSK-07."}
+{"ts": "159:56", "speaker": "I", "text": "Wird dazu noch ein Pre-GoLive Test geplant?"}
+{"ts": "160:00", "speaker": "E", "text": "Ja, nächste Woche fahren wir einen synthetischen Lasttest mit generierten Payloads aus dem Contract-Test-Repo. Das ist in RFC-1331 beschrieben, und soll sicherstellen, dass wir mit minimalem Risiko in Operate wechseln."}
+{"ts": "162:00", "speaker": "I", "text": "Lassen Sie uns noch kurz auf das Kundenfeedback eingehen – wie genau sammeln Sie denn aktuell die Usability-Eindrücke zu den neuen API-Endpoints?"}
+{"ts": "162:05", "speaker": "E", "text": "Wir nutzen dafür ein zweistufiges Verfahren: einerseits structured surveys über das Developer-Portal, andererseits qualitative Interviews mit Key-Integratoren. The survey data feeds directly into our backlog grooming sessions."}
+{"ts": "162:16", "speaker": "I", "text": "Und diese Sessions, die finden wöchentlich statt, oder on demand?"}
+{"ts": "162:20", "speaker": "E", "text": "Wöchentlich, montags um 10 Uhr. Dabei crosschecken wir die Prioritäten mit den SLAs, insbesondere SLA-ORI-02 für p95 Latency und SLA-ORI-05 für Error Rate."}
+{"ts": "162:31", "speaker": "I", "text": "Können Sie ein Beispiel nennen, wo Kundenfeedback direkt zu einer Änderung geführt hat?"}
+{"ts": "162:36", "speaker": "E", "text": "Ja, Ticket USR-4473. Ein Partner meldete, dass der /data/stream Endpoint unter Last zu früh throttled wurde. Wir haben daraufhin in RB-GW-014 die Rate-Limiting-Buckets für diesen Path angepasst."}
+{"ts": "162:50", "speaker": "I", "text": "Hat sich das auf die Latenz ausgewirkt?"}
+{"ts": "162:54", "speaker": "E", "text": "Minimal. Wir mussten aber laut Runbook RNBK-RT-02 die Observability-Metriken enger überwachen, um sicherzugehen, dass wir nicht über die p95-Limits hinausgehen."}
+{"ts": "163:05", "speaker": "I", "text": "Sie hatten vorhin die Roadmap erwähnt – was sind die nächsten Milestones?"}
+{"ts": "163:09", "speaker": "E", "text": "In Q3 wollen wir die MTLS-Integration gemäß GW-4821 vollständig automatisieren. Then, in Q4, roll out adaptive rate limiting tied to real-time latency metrics aus Nimbus Observability."}
+{"ts": "163:21", "speaker": "I", "text": "Adaptive Rate Limiting klingt spannend – gab es dazu schon eine technische Entscheidungsvorlage?"}
+{"ts": "163:26", "speaker": "E", "text": "Ja, Decision Log DEC-0923. Dort haben wir die Trade-offs dokumentiert: höhere Komplexität in der Control Plane vs. erwartete 15% Gain in Throughput under burst load."}
+{"ts": "163:38", "speaker": "I", "text": "Wie stellen Sie sicher, dass diese Änderungen den Auth-Service nicht destabilisieren?"}
+{"ts": "163:42", "speaker": "E", "text": "Wir fahren jede GW-Auth-Integration zunächst in einer Canary-Stage mit Shadow Traffic. Zusätzlich gibt es laut RFC-1287 einen Fallback-Mechanismus auf tokenless auth für interne Services, falls MTLS-Handshake scheitert."}
+{"ts": "163:55", "speaker": "I", "text": "Und wenn im Operate-Übergang dennoch ein Incident auftritt?"}
+{"ts": "164:00", "speaker": "E", "text": "Dann greifen wir zu den Runbooks RNBK-GW-OPS-01 bis -03. Example: bei Alert ALRT-LAT-502 triggern wir sofort den Pre-Warmed Node Pool, um Latenzspitzen abzufangen, bevor SLAs verletzt werden."}
+{"ts": "164:00", "speaker": "I", "text": "Lassen Sie uns bitte nochmal konkret auf die Lessons Learned eingehen, gerade aus den letzten Build-Sprints vom Orion Edge Gateway."}
+{"ts": "164:05", "speaker": "E", "text": "Ja, also eines der größten Learnings war, dass wir die MTLS-Konfiguration nicht isoliert betrachten dürfen. We had to coordinate closely with the Auth-Team to match certificate rotation schedules."}
+{"ts": "164:17", "speaker": "I", "text": "Das heißt, Sie haben den Prozess im Runbook angepasst?"}
+{"ts": "164:21", "speaker": "E", "text": "Genau, wir haben RB-GW-011 ergänzt um einen neuen Abschnitt, der beschreibt, wie wir Pre-Validation gegen das Staging-Cluster fahren, bevor wir neue Certs in Prod deployen."}
+{"ts": "164:34", "speaker": "I", "text": "Und in Bezug auf Observability – gab es da ähnliche Anpassungen?"}
+{"ts": "164:38", "speaker": "E", "text": "Ja, wir haben einen neuen Alert in Nimbus Observability definiert, SLA-ORI-02 p95 Latency, threshold 250ms. Vorher war das nur im Dashboard, now it's a live alert."}
+{"ts": "164:50", "speaker": "I", "text": "Wie wirkt sich das auf Ihre Metriken im laufenden Betrieb aus?"}
+{"ts": "164:54", "speaker": "E", "text": "Die Reaktionszeit auf Incidents ist deutlich kürzer, von durchschnittlich 18 Minuten auf ca. 7 Minuten. That was confirmed in Incident-Report INC-ORI-208."}
+{"ts": "165:06", "speaker": "I", "text": "Gab es dabei größere Trade-offs?"}
+{"ts": "165:10", "speaker": "E", "text": "Minimal höhere CPU-Last durch die zusätzlichen Probes, aber dafür gewinnen wir massively in early detection. Wir haben das in RFC-1287 Appendix C dokumentiert."}
+{"ts": "165:22", "speaker": "I", "text": "Wie fließen diese Erkenntnisse nun in die Roadmap ein?"}
+{"ts": "165:26", "speaker": "E", "text": "Wir planen ein Hardening-Sprint im nächsten Quartal, including full chaos testing for Auth failover scenarios, um die Resilienz vorm Übergang zu Operate sicherzustellen."}
+{"ts": "165:38", "speaker": "I", "text": "Sehen Sie noch offene Risiken, die nicht in den bisherigen Tickets adressiert wurden?"}
+{"ts": "165:42", "speaker": "E", "text": "Ein Risiko ist die Abhängigkeit von der externen Rate-Limit-Service API. Sollte deren SLA abweichen, kann unser p95 Latency Ziel gefährdet sein – das müssen wir in SLA-ORI-EXT-01 nachziehen."}
+{"ts": "165:56", "speaker": "I", "text": "Wird das auch in den Kundenkommunikationsplan aufgenommen?"}
+{"ts": "166:00", "speaker": "E", "text": "Ja, wir haben eine Section im Communication Runbook, die genau solche SLA-Anpassungen erklärt, damit Kunden nachvollziehen können, warum bestimmte Limits angepasst werden."}
+{"ts": "168:20", "speaker": "I", "text": "Lassen Sie uns noch einmal auf die Lessons Learned eingehen – im speziellen Kontext des Build-zu-Operate-Übergangs. Welche Dokumente waren dabei für Sie am wertvollsten?"}
+{"ts": "168:35", "speaker": "E", "text": "Also, äh, neben dem Runbook RB-GW-011 war tatsächlich das Übergabeprotokoll aus dem Build-Review entscheidend. It had a detailed checklist for handover, including SLA-ORI-02 monitoring setup, ticket escalation paths und die Auth-Service fallback modes."}
+{"ts": "168:58", "speaker": "I", "text": "Gab es in diesem Protokoll auch Hinweise zu den Rate Limiting Policies?"}
+{"ts": "169:05", "speaker": "E", "text": "Ja, wir haben dort festgelegt, dass für kritische API-Pfade ein burst mode erlaubt ist, solange p95 Latenz unter 220ms bleibt. And if Nimbus Observability alerts on sustained latency breaches, we automatically throttle back."}
+{"ts": "169:28", "speaker": "I", "text": "Interessant. Wie haben Sie diesen Mechanismus getestet?"}
+{"ts": "169:35", "speaker": "E", "text": "Wir haben mit dem QA-Team eine Simulation gefahren, die Auth-Service response delays injected hat. That way, we could see the gateway behavior under stress, verifying both rate limiting rules and MTLS handshake resilience per GW-4821."}
+{"ts": "169:58", "speaker": "I", "text": "Und wie war dabei das Zusammenspiel mit den Security Policies, also etwa POL-SEC-001?"}
+{"ts": "170:06", "speaker": "E", "text": "POL-SEC-001 forced us to always validate client certs even under load. That meant, selbst im Burst-Modus dürfen keine Abstriche bei der Authentizität gemacht werden, was wiederum die Latenz leicht erhöht hat."}
+{"ts": "170:28", "speaker": "I", "text": "Haben Sie dazu einen Trade-off dokumentiert?"}
+{"ts": "170:34", "speaker": "E", "text": "Ja, in RFC-1287 Appendix C. Wir haben dort abgewogen: lieber 5–10ms zusätzliche Latenz akzeptieren als Auth-Bypass riskieren. The decision was signed off by both Security and Performance Leads."}
+{"ts": "170:55", "speaker": "I", "text": "Klingt nach einer klaren Priorisierung. Gab es dennoch Incidents nach Go-Live?"}
+{"ts": "171:03", "speaker": "E", "text": "Einmal, Ticket INC-ORI-773, wo eine falsche Rate Limit Config ausgerollt wurde. Runbook Step 4.2 führte uns dann durch die Rücknahme via Feature Toggle, within 15 minutes MTTR."}
+{"ts": "171:25", "speaker": "I", "text": "Und das Monitoring hat sofort angeschlagen?"}
+{"ts": "171:30", "speaker": "E", "text": "Ja, Nimbus Observability hatte ein Alert Pattern auf Traffic Spikes, das in RB-GW-011 als kritischer Pfad markiert ist. Alert kam nach 90 Sekunden, escalation an das Ops-OnCall-Team erfolgte automatisch."}
+{"ts": "171:52", "speaker": "I", "text": "Zum Abschluss: Welche Risiken sehen Sie aktuell noch für die nächsten zwei Quartale?"}
+{"ts": "172:00", "speaker": "E", "text": "Main risk ist die geplante API-Erweiterung für PartnerIntegrationen, weil das neue Auth-Plugin heavy CPU load erzeugen könnte. Wir planen daher eine Pilotphase with synthetic traffic und enger Beobachtung der SLA-ORI-02 Werte."}
+{"ts": "177:40", "speaker": "I", "text": "Lassen Sie uns bitte noch einmal konkret auf das Thema Kundenfeedback eingehen – welche Mechanismen nutzen Sie derzeit, um API-Usability-Daten zu erfassen?"}
+{"ts": "177:47", "speaker": "E", "text": "Aktuell haben wir ein zweistufiges Setup: Zum einen ein in-app Survey, der nach bestimmten Call-Mustern ausgelöst wird, zum anderen structured Interviews mit Early-Adoptern. We correlate these with telemetry from Nimbus Observability, um z. B. Abbruchraten pro Endpoint zu sehen."}
+{"ts": "177:58", "speaker": "I", "text": "Und wie fließen diese Erkenntnisse dann in Ihre Priorisierung ein?"}
+{"ts": "178:02", "speaker": "E", "text": "Wir haben ein internes Board, das ähnlich wie ein Kanban funktioniert. Findings mit hoher Korrelation zu SLA-ORI-02 Breaches gehen sofort in den 'Expedite'-Track. Lower impact findings kommen in den normalen Grooming-Prozess, bewertet nach POL-SEC-001 Compliance und Customer Value Score."}
+{"ts": "178:15", "speaker": "I", "text": "Sie erwähnten POL-SEC-001 – gab es zuletzt Anpassungen an dieser Policy, die Einfluss hatten?"}
+{"ts": "178:20", "speaker": "E", "text": "Ja, im Ticket SEC-742 haben wir den mTLS Cipher-Suite Katalog tightened. Das führte zu minimal höherer Handshake-Latenz, weshalb wir im Runbook RB-GW-011 einen neuen Fallback-Pfad dokumentiert haben, um Legacy-Clients über eine Transitional-Zone zu routen."}
+{"ts": "178:34", "speaker": "I", "text": "Interesting – wie wurde dieser Fallback operationalisiert?"}
+{"ts": "178:38", "speaker": "E", "text": "Via ConfigMap rollout in unserem Service Mesh. We tagged the transitional endpoints, und Nimbus Observability alertet, wenn mehr als 5% des Traffics dort landen, damit wir Legacy-Decommission planen."}
+{"ts": "178:49", "speaker": "I", "text": "Wie sieht es mit den Milestones für die nächsten zwei Quartale aus, gerade im Hinblick auf den Übergang zu Operate?"}
+{"ts": "178:55", "speaker": "E", "text": "Q1: Abschluss der Auth-Service v2 Integration (GW-4821 abgeschlossen), Q2: Rollout von Rate Limiting vNext mit adaptive buckets. Das ist kritisch, um SLA-ORI-02 einzuhalten, especially under burst traffic."}
+{"ts": "179:08", "speaker": "I", "text": "Gibt es Risiken, dass adaptive buckets zu unfairen Limits führen?"}
+{"ts": "179:12", "speaker": "E", "text": "Ja, wir haben in RFC-1302 dokumentiert, dass bei ungleich verteiltem Traffic einzelne Clients throttled werden könnten, obwohl global Capacity frei ist. Unser Mitigation-Plan ist eine Kombination aus per-tenant Baselines und global Pooling."}
+{"ts": "179:25", "speaker": "I", "text": "Haben Sie schon mal simulate tests dafür gefahren?"}
+{"ts": "179:28", "speaker": "E", "text": "Ja, im Staging mit Synthetic Load Patterns aus TST-LOAD-019. Wir konnten so schon vorab den Alert-Threshold für unfair throttling auf 2% setzen. Anything higher triggers an Ops Review per RB-GW-011."}
+{"ts": "179:41", "speaker": "I", "text": "Zum Abschluss: Welche Lessons Learned aus der Build-Phase nehmen Sie mit, um Operate smoother zu gestalten?"}
+{"ts": "179:47", "speaker": "E", "text": "Erstens: frühe Einbindung von SecOps spart uns späte Rework-Loops. Zweitens: Observability-Baselines vor Feature-Rollout setzen, not after. Und drittens: klare Cut-over Kriterien ins Runbook schreiben – wir hatten bei Incident INC-9821 gesehen, wie ambiguous criteria zu Delay führen."}
+{"ts": "180:20", "speaker": "I", "text": "Können wir noch einmal auf die Lessons Learned aus dem letzten Load-Test zurückkommen? Ich meine den Test aus Ticket GW-LT-092."}
+{"ts": "180:33", "speaker": "E", "text": "Ja, klar. In GW-LT-092 haben wir festgestellt, dass die p95 Latenz unter SLA-ORI-02 zwar blieb, aber nur knapp. Wir hatten beim Burst-Traffic aus dem Partnernetzwerk Peaks, die die MTLS-Handshake-Zeit leicht erhöht haben."}
+{"ts": "180:55", "speaker": "I", "text": "Also hat die MTLS-Integration (GW-4821) hier direkten Einfluss gehabt?"}
+{"ts": "181:06", "speaker": "E", "text": "Exactly, because the handshake involves extra roundtrips. Wir haben daraufhin in RB-GW-014 eine Optimierung mit Session Resumption aufgenommen, um diesen Overhead zu reduzieren."}
+{"ts": "181:27", "speaker": "I", "text": "Gab es da Konflikte mit den Security Policies, speziell POL-SEC-001?"}
+{"ts": "181:38", "speaker": "E", "text": "Kurzzeitig, ja. POL-SEC-001 verlangt strikte Zertifikatsprüfung ohne Caching. We had to document an exception in RFC-1312, approved by SecOps, die nur für interne Clients gilt."}
+{"ts": "181:59", "speaker": "I", "text": "Wie haben Sie die Anpassung im Monitoring überprüft?"}
+{"ts": "182:10", "speaker": "E", "text": "Wir haben in Nimbus Observability ein neues Panel gebaut, das MTLS-Handshake-Zeiten separat ausweist. Außerdem ein Alert in GW-ALRT-021 konfiguriert, falls der Median über 50 ms steigt."}
+{"ts": "182:31", "speaker": "I", "text": "Hat das auch Auswirkungen auf die Rate Limiting-Strategie gehabt?"}
+{"ts": "182:43", "speaker": "E", "text": "Indirekt. Weil wir bei höherer Latenz schneller ins Limit laufen, haben wir in Config GW-RL-07 die Token-Bucket-Refillrate gesenkt, um fairer zwischen Clients zu verteilen."}
+{"ts": "183:05", "speaker": "I", "text": "Und wie war das Kundenfeedback dazu?"}
+{"ts": "183:17", "speaker": "E", "text": "Mixed. Some customers noticed slightly lower throughput, aber die meisten haben die stabilere Response Time gelobt."}
+{"ts": "183:34", "speaker": "I", "text": "Haben Sie diese Änderung bereits in die Roadmap für Q3 eingeplant?"}
+{"ts": "183:45", "speaker": "E", "text": "Ja, im Milestone ORI-M3. Wir werden dort das adaptive Rate Limiting ausrollen, das wir in Lab-Run GW-LAB-511 getestet haben."}
+{"ts": "184:02", "speaker": "I", "text": "Gibt es dabei Risiken für den Übergang in Operate?"}
+{"ts": "184:13", "speaker": "E", "text": "Ja, vor allem im Zusammenspiel mit Legacy-Auth-Clients. Das steht in Risk-Log ORI-RSK-009: ältere Clients könnten die adaptiven Limits falsch interpretieren und reconnect loops verursachen."}
+{"ts": "186:20", "speaker": "I", "text": "Lassen Sie uns noch einmal auf die Kundenperspektive eingehen – wie genau holen Sie das API-Usability‑Feedback ein?"}
+{"ts": "186:28", "speaker": "E", "text": "Wir kombinieren structured surveys mit direkten developer interviews. Einmal pro Sprint schicken wir einen kurzen usability check, und zusätzlich analysieren wir die call patterns im Nimbus Observability Dashboard, um herauszufinden, wo timeouts oder unusual retries auftreten."}
+{"ts": "186:44", "speaker": "I", "text": "Und gibt es da konkrete Tickets, die Sie daraus ableiten konnten?"}
+{"ts": "186:50", "speaker": "E", "text": "Ja, zum Beispiel DEVFEED-219 hat uns auf ein Problem bei der Auth-Token-Erneuerung hingewiesen. Wir haben daraufhin im Gateway ein grace period Fenster implementiert, das in RB-GW-014 dokumentiert ist."}
+{"ts": "187:05", "speaker": "I", "text": "Okay, und wie fließt so etwas in die Roadmap ein?"}
+{"ts": "187:10", "speaker": "E", "text": "Wir haben ein quarterly Roadmap-Review, bei dem wir alle offenen Dev‑Feedback Tickets gegen unsere SLA‑Ziele mappen. Wenn ein Pattern mehrere SLAs wie SLA-ORI-02 und SLA-ORI-05 gleichzeitig gefährdet, bekommt es Priorität A."}
+{"ts": "187:24", "speaker": "I", "text": "Stichwort SLA‑ORI‑02 – wie stellen Sie sicher, dass das nachhaltig eingehalten wird?"}
+{"ts": "187:31", "speaker": "E", "text": "Wir haben ein Synthetic Monitoring Setup, das alle 5 Minuten einen Satz kritischer Endpoints misst. Falls p95 Latency über 220ms geht, triggert unser Alertmanager eine Runbook‑basierte Analyse. Das ist in RB-GW-009 beschrieben."}
+{"ts": "187:47", "speaker": "I", "text": "Gibt es Pläne, das Runbook anzupassen, um false positives zu reduzieren?"}
+{"ts": "187:53", "speaker": "E", "text": "Yes, wir planen ein adaptive thresholding based on historical trends. Das bedeutet, dass wir saisonale Nutzungsmuster wie End-of-Month billing bursts in die Schwellenwerte einkalkulieren."}
+{"ts": "188:07", "speaker": "I", "text": "Das klingt nach einer interessanten Verbesserung. Welche Milestones stehen in den nächsten zwei Quartalen an?"}
+{"ts": "188:13", "speaker": "E", "text": "Q3 wollen wir die MTLS‑Handshake Optimierung aus GW-4821 live bringen, plus eine erste Version der self‑service API key rotation. Q4 steht dann die Integration mit dem neuen Auth‑Service v2 an, was aus RFC-1302 hervorgeht."}
+{"ts": "188:27", "speaker": "I", "text": "Sehen Sie dabei noch Risiken, gerade im Hinblick auf Auth‑Service v2?"}
+{"ts": "188:33", "speaker": "E", "text": "Ja, das größte Risiko ist, dass breaking changes in der token validation auftreten. Wir mitigieren das, indem wir eine dual validation Phase fahren – alt und neu parallel, wie in Testplan TP-AUTH-07 beschrieben."}
+{"ts": "188:47", "speaker": "I", "text": "Und falls es trotzdem zu einem Incident kommt?"}
+{"ts": "188:52", "speaker": "E", "text": "Dann greifen wir auf Runbook RB-GW-011 zurück, das wir schon bei Incident INC-2024-07 erfolgreich angewendet haben. Dort ist ein Rollback‑Pfad definiert, der innerhalb von 15 Minuten den alten Auth‑Pfad wiederherstellt."}
+{"ts": "193:20", "speaker": "I", "text": "Lassen Sie uns nochmal auf die Lessons Learned eingehen – speziell im Hinblick auf die Transition in den Operate-Mode. Gab es hier, äh, noch ungeklärte Punkte?"}
+{"ts": "193:35", "speaker": "E", "text": "Ja, wir haben festgestellt, dass unser RB-GW-017, das für die Post-Deployment Checks zuständig ist, noch Lücken hatte. Specifically, the MTLS certificate rotation process wasn't fully automated, so manual steps delayed handover."}
+{"ts": "193:55", "speaker": "I", "text": "Okay, und wie haben Sie das erkannt? War das bei einem Dry-Run oder im echten Incident?"}
+{"ts": "194:08", "speaker": "E", "text": "Beim Dry-Run drei Tage vor Go-Live. Wir haben dabei die Steps aus Runbook RB-GW-017 strikt befolgt, und in Step 6 ‚Verify Cert Renewal via Nimbus Dashboard‘ haben wir bemerkt, dass der Alert-Webhook nicht auslöst."}
+{"ts": "194:28", "speaker": "I", "text": "Interessant. How did you mitigate that before actual go-live?"}
+{"ts": "194:39", "speaker": "E", "text": "Wir haben ein kleines Python-Script aus dem internen Tool-Repo genutzt, um den Renewal-Check manuell zu triggern, und parallel Task TCK-4829 angelegt, um das im nächsten Sprint in den Operator-Workflow zu integrieren."}
+{"ts": "194:58", "speaker": "I", "text": "Gab es sonstige Einflüsse auf SLA-ORI-02, p95 Latency während dieser Tests?"}
+{"ts": "195:09", "speaker": "E", "text": "Minimal. We observed a 2–3ms increase due to script overhead, aber das lag noch klar unter dem 120ms Limit aus SLA-ORI-02. Wichtig ist, dass wir jetzt einen automatisierten Test-Hook haben."}
+{"ts": "195:28", "speaker": "I", "text": "Sie hatten vorhin den Rate Limiter erwähnt. Hat die Post-Deployment-Phase Einfluss auf dessen Parametrisierung gehabt?"}
+{"ts": "195:40", "speaker": "E", "text": "Teilweise. During early operate simulations, wir haben gemerkt, dass die Default-Burst Size von 50 Requests pro Sekunde für interne Services zu niedrig war. RFC-1292 dokumentiert den Change auf 80 RPS für das Partner-API."}
+{"ts": "196:02", "speaker": "I", "text": "Können Sie das mit einem Beispiel aus der Observability verknüpfen?"}
+{"ts": "196:15", "speaker": "E", "text": "Ja, im Nimbus Observability Log ID NMB-7743 sahen wir gehäufte 429 Responses genau bei internen Cron-Jobs. After adjusting via RFC-1292, those spikes disappeared in the p95 graph."}
+{"ts": "196:36", "speaker": "I", "text": "Gut, und wie wird das dokumentiert, sodass der Betrieb später nicht überrascht wird?"}
+{"ts": "196:46", "speaker": "E", "text": "Wir haben im Runbook RB-GW-011 einen neuen Abschnitt ‚Operate Performance Tuning‘ eingefügt, plus einen Hinweis im Operator-Training-Dokument TRN-GW-05. That way, future on-call engineers know the adjusted limits."}
+{"ts": "197:05", "speaker": "I", "text": "Haben Sie für den Übergang ein spezielles Risk Register gepflegt?"}
+{"ts": "197:20", "speaker": "E", "text": "Ja, Risk Register RR-ORI-BLD-03. Entry #7 beschreibt das Residual Risk bei Auth-Service Changes ohne vollständige Regression-Tests. Mit der neuen CI-Pipeline Step ‘Auth-Compat-Check’ haben wir das aber auf Low mitigiert."}
+{"ts": "202:20", "speaker": "I", "text": "Lassen Sie uns noch mal auf das Kundenfeedback eingehen — wie genau sammeln Sie derzeit die Usability-Daten für die API?"}
+{"ts": "202:35", "speaker": "E", "text": "Aktuell nutzen wir ein Hybrid-Modell: Wir haben formale Surveys embedded in our developer portal, und parallel tracken wir anonymisierte Metrics wie Error-Rates per Endpoint. Das hilft uns, die Pain Points zu identifizieren, ohne einzelne Kunden zu exponieren."}
+{"ts": "202:58", "speaker": "I", "text": "Und wie fließt so ein Pain Point dann in Ihre Roadmap ein?"}
+{"ts": "203:10", "speaker": "E", "text": "Wir priorisieren das über ein Scoring-Modell, das sowohl den Impact auf SLA-ORI-02 p95 Latenz als auch die Security Compliance gegen POL-SEC-001 berücksichtigt. Das Score fließt in unser Quartals-Planning ein, ähnlich wie bei der Ticket-Priorisierung im JIRA-Board ORI-Q3."}
+{"ts": "203:35", "speaker": "I", "text": "Können Sie ein Beispiel nennen, wo so ein Scoring zu einer kurzfristigen Änderung geführt hat?"}
+{"ts": "203:46", "speaker": "E", "text": "Ja, Ticket ORI-572 war so ein Fall: Kunden meldeten erhöhte 429-Fehler auf einem internen Partner-Endpoint. Das Score war hoch wegen der kombinierten Auswirkung auf Throughput und Partner SLA. Wir haben dann das Rate Limit temporär per Feature Flag angehoben und parallel den MTLS-Handshake optimiert."}
+{"ts": "204:15", "speaker": "I", "text": "War das nicht ein Risiko für die Systemstabilität?"}
+{"ts": "204:25", "speaker": "E", "text": "Natürlich, und deshalb haben wir das mit einem Canary Release abgesichert und die Observability-Alerts in Nimbus auf 30-Sekunden-Intervalle gestellt. Das war auch eine Lessons Learned aus Incident INC-ORI-044, documented in RB-GW-015."}
+{"ts": "204:50", "speaker": "I", "text": "Wie sieht es mit den Milestones für die nächsten zwei Quartale aus?"}
+{"ts": "205:02", "speaker": "E", "text": "Q1 nächstes Jahr wollen wir das Dynamic Rate Profiling aus RFC-1302 implementieren, um die Balance zwischen Latenz und Durchsatz automatisch zu optimieren. Q2 planen wir die vollständige Integration der Auth-Service v3 API, inklusive Zero-Downtime Cutover."}
+{"ts": "205:28", "speaker": "I", "text": "Und wie planen Sie, SLA-ORI-02 nachhaltig einzuhalten, gerade wenn der Traffic steigt?"}
+{"ts": "205:40", "speaker": "E", "text": "Wir setzen auf adaptive caching mechanisms und haben im Capacity Plan CAP-ORI-2024 bereits den horizontalen Scale-Out auf drei zusätzliche Edge-Nodes vorgesehen. Plus, wir testen failover scenarios monthly, um keine Regressionen zu riskieren."}
+{"ts": "206:05", "speaker": "I", "text": "Gibt es da noch offene Risiken, die Sie adressieren müssen?"}
+{"ts": "206:15", "speaker": "E", "text": "Ja, ein Risiko ist die Synchronisation der Rate Limit Policies über mehrere Regionen. Falls das Replication-Lag >200ms wird, könnte es zu Policy-Inkonsistenzen kommen. Wir haben dafür ein Feature in der Pipeline, das mittels Vector Clocks Konflikte erkennt und resolved."}
+{"ts": "206:40", "speaker": "I", "text": "Klingt, als hätten Sie viele moving parts. Gibt's einen Plan B falls das Feature nicht rechtzeitig fertig wird?"}
+{"ts": "206:52", "speaker": "E", "text": "Plan B wäre, die Policy-Updates nur in Off-Peak-Zeiten zu deployen und das Update-Intervall temporär zu verlängern. Das ist suboptimal für Flexibilität, aber sichert die SLA-ORI-02 Einhaltung bis zum finalen Fix."}
+{"ts": "210:00", "speaker": "I", "text": "Zum Thema Kundenfeedback – wie sammeln Sie aktuell konkret die Rückmeldungen zur API-Usability, und... äh, wie werden die in den Build-Prozess integriert?"}
+{"ts": "210:28", "speaker": "E", "text": "Wir nutzen da ein Mix aus structured Surveys in unserem Developer-Portal und direct Interviews mit ausgewählten Pilotkunden. Die Findings gehen als Tickets in JIRA-Board ORI-FEED, und priorisiert nach Impact auf SLA-ORI-02 und DEV-X-Score."}
+{"ts": "210:55", "speaker": "I", "text": "Okay, und gibt es da so eine Art Runbook, wie diese Integration ins Backlog läuft?"}
+{"ts": "211:12", "speaker": "E", "text": "Ja, Runbook RB-FEED-004 beschreibt den Prozess: Intake → Impact-Analyse with Arch-Team → Grooming. Wichtig ist, wir checken immer gegen Policy POL-SEC-001, falls Feedback Security-relevant ist."}
+{"ts": "211:39", "speaker": "I", "text": "Und wenn Security-Themen auftauchen, wie schnell können die umgesetzt werden?"}
+{"ts": "211:55", "speaker": "E", "text": "Depends – für critical Severity laut SEC-RUN-002 haben wir 48h Fix-Zeit, measured vom Ticket-Tag, sonst normaler Sprint-Cycle."}
+{"ts": "212:20", "speaker": "I", "text": "Switching to Roadmap – welche Milestones sehen Sie innerhalb der nächsten zwei Quartale für Orion Edge Gateway?"}
+{"ts": "212:38", "speaker": "E", "text": "Q3: MTLS-Integration Hardened (GW-4821 final), plus Rate-Limit-Dashboards in Nimbus Observability. Q4: Multi-Region Failover live und p95 Latency < 120ms in 95% der Zeit, per SLA-ORI-02."}

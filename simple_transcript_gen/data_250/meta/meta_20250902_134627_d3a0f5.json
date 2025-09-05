@@ -1,0 +1,154 @@
+{
+  "id": "20250902_134627_d3a0f5",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 84,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung und Projektkontext",
+          "goal": "Kernfakten zu Projektphase, Scope und Rolle des DevOps Engineers erfassen",
+          "sample_questions": [
+            "Können Sie bitte kurz Ihre Rolle im Orion Edge Gateway Projekt umreißen?",
+            "Welche Hauptziele verfolgt das Projekt derzeit in der Build-Phase?",
+            "Wie ordnet sich das Gateway in die Gesamtarchitektur von Novereon Systems ein?"
+          ]
+        },
+        {
+          "title": "Technische Umsetzung und Automatisierung",
+          "goal": "Detaillierte Einblicke in IaC, CI/CD-Pipelines und Automatisierungsstrategien gewinnen",
+          "sample_questions": [
+            "Welche Infrastructure-as-Code Tools setzen Sie für das Gateway ein?",
+            "Wie stellen Sie sicher, dass Blue/Green Deployments gemäß Runbook RB-GW-011 ablaufen?",
+            "Welche Metriken nutzen Sie, um die SLA-ORI-02 p95 Latency unter 120ms zu halten?"
+          ]
+        },
+        {
+          "title": "Qualitätssicherung und Traceability",
+          "goal": "Nachvollziehen, wie Qualität und Risiko im Build-Prozess gesteuert werden",
+          "sample_questions": [
+            "Wie wird POL-QA-014 im Kontext des Gateways angewendet?",
+            "Welche Teststufen haben Sie automatisiert und wie werden sie getriggert?",
+            "Wie dokumentieren Sie Abweichungen und Lessons Learned aus Tickets wie GW-4821?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Systemen",
+          "goal": "Verstehen, wie das Gateway mit IAM, Observability und Downstream-APIs interagiert",
+          "sample_questions": [
+            "Wie ist die Authentifizierung mit Aegis IAM technisch integriert?",
+            "Welche Observability-Mechanismen aus Nimbus Observability werden genutzt?",
+            "Wie gehen Sie mit Backpressure oder Rate-Limit-Überschreitungen um?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs und Risiken",
+          "goal": "Analyse wichtiger Architekturentscheidungen und deren Begründungen",
+          "sample_questions": [
+            "Warum wurde Blue/Green gegenüber Canary bevorzugt?",
+            "Welche Risiken sehen Sie aktuell in Bezug auf Latenz und Verfügbarkeit?",
+            "Welche Maßnahmen würden Sie bei einem MTLS-Handshake-Bug wie GW-4821 sofort ergreifen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29679,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

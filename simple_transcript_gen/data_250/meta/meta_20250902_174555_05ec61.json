@@ -1,0 +1,177 @@
+{
+  "id": "20250902_174555_05ec61",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 175,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_qa",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einleitung & Rollenklärung",
+          "goal": "Verstehen, welche Zuständigkeiten der SRE und QA Lead im Helios Datalake Projekt haben",
+          "sample_questions": [
+            "Können Sie kurz Ihre Rolle im Helios Datalake Projekt umreißen?",
+            "Wie sind die Oncall- und QA-Verantwortlichkeiten zwischen Ihnen beiden verteilt?",
+            "Welche SLA- oder SLO-Vorgaben sind für Sie besonders relevant?"
+          ]
+        },
+        {
+          "title": "Incident Response & Runbooks",
+          "goal": "Einblick in die Nutzung und Wirksamkeit von RB-ING-042 Ingestion Failover Runbook",
+          "sample_questions": [
+            "Wie oft mussten Sie das RB-ING-042 anwenden?",
+            "Gab es Abweichungen vom Runbook in der Praxis?",
+            "Welche Metriken nutzen Sie, um zu prüfen, ob das Failover erfolgreich war?"
+          ]
+        },
+        {
+          "title": "Teststrategie & Traceability",
+          "goal": "Verstehen, wie Risk-Based Testing (POL-QA-014) im Projekt umgesetzt wird",
+          "sample_questions": [
+            "Wie priorisieren Sie Tests für kritische Ingestion-Pfade?",
+            "Wie stellen Sie Traceability zwischen Defects und Testfällen sicher?",
+            "Gab es Situationen, in denen Sie Tests bewusst verschoben haben?"
+          ]
+        },
+        {
+          "title": "Cross-System Abhängigkeiten",
+          "goal": "Aufzeigen, wie Helios mit anderen Plattformen wie Mercury Messaging oder Nimbus Observability interagiert",
+          "sample_questions": [
+            "Welche Abhängigkeiten bestehen zwischen Helios und Mercury Messaging?",
+            "Wie haben Sie Observability (P-NIM) integriert, um Ingestion-Latenzen zu überwachen?",
+            "Gab es jemals ein Problem, das nur durch Korrelation mehrerer Subsysteme gelöst werden konnte?"
+          ]
+        },
+        {
+          "title": "Optimierungen & Lessons Learned",
+          "goal": "Verbesserungspotentiale und Risiken identifizieren",
+          "sample_questions": [
+            "Welche Maßnahmen haben Sie ergriffen, um den BLAST_RADIUS von Ausfällen zu minimieren?",
+            "Gab es Entscheidungen, bei denen Sie bewusst Performance gegen Stabilität abgewogen haben?",
+            "Welche Risiken sehen Sie für die nächsten 6 Monate im Betrieb des Datalakes?"
+          ]
+        },
+        {
+          "title": "Abschluss & Ausblick",
+          "goal": "Zusammenfassung und zukünftige Prioritäten klären",
+          "sample_questions": [
+            "Welche nächsten Schritte planen Sie im Hinblick auf SLA-HEL-01?",
+            "Gibt es geplante RFCs zur Verbesserung der Partitionierungsstrategie?",
+            "Wie wollen Sie die Zusammenarbeit zwischen SRE und QA weiterentwickeln?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28305,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

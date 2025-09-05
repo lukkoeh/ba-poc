@@ -1,0 +1,163 @@
+{
+  "id": "20250902_175955_9b2f30",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 188,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Projektkontext",
+          "goal": "Den Interviewten dazu bringen, früh den eigenen Verantwortungsbereich und die Kernziele des Nimbus Observability Projekts zu benennen.",
+          "sample_questions": [
+            "Können Sie bitte kurz Ihren Verantwortungsbereich im Nimbus Observability Projekt skizzieren?",
+            "Wie fügt sich dieses Projekt in die Gesamtstrategie von Novereon Systems GmbH ein?",
+            "Welche Hauptziele verfolgen Sie in der aktuellen Build-Phase?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Runbooks",
+          "goal": "Verständnis der Observability-Architektur, eingesetzter Tools und relevanter Runbooks gewinnen.",
+          "sample_questions": [
+            "Welche Komponenten umfasst die OpenTelemetry Pipeline konkret?",
+            "Wie setzen Sie Runbook RB-OBS-033 ein, um Alert Fatigue zu minimieren?",
+            "Gibt es Abhängigkeiten zu anderen Plattform- oder Datenprojekten?"
+          ]
+        },
+        {
+          "title": "SLOs, SLAs und Qualitätsmetriken",
+          "goal": "Ermitteln, wie SLOs definiert, überwacht und an SLAs gekoppelt werden.",
+          "sample_questions": [
+            "Wie definieren Sie SLOs für das Nimbus Observability System?",
+            "Welche Metriken sind entscheidend, um SLA-Verletzungen frühzeitig zu erkennen?",
+            "Wie dokumentieren Sie Abweichungen und Lessons Learned?"
+          ]
+        },
+        {
+          "title": "Incident Response & Multi-Hop Abhängigkeiten",
+          "goal": "Herausarbeiten komplexer Abhängigkeiten zwischen Observability, Upstream- und Downstream-Systemen.",
+          "sample_questions": [
+            "Können Sie ein Beispiel geben, wo eine Störung in einem Upstream-System über mehrere Hops zu fehlerhaften Alerts geführt hat?",
+            "Wie koordinieren Sie sich im Incident-Fall mit anderen Teams, z.B. SRE oder Security?",
+            "Welche Tools unterstützen Sie bei der Ursachenanalyse über mehrere Subsysteme hinweg?"
+          ]
+        },
+        {
+          "title": "Tradeoffs, Risiken & Entscheidungen",
+          "goal": "Diskussion über getroffene Architekturentscheidungen, deren Risiken und dokumentierte Evidenz.",
+          "sample_questions": [
+            "Welche Entscheidungen mussten Sie treffen, um zwischen Sampling-Strategie (RFC-1114) und Datenvollständigkeit zu balancieren?",
+            "Welche Risiken sehen Sie bei der aktuellen Architektur und wie mitigieren Sie diese?",
+            "Können Sie ein Ticket oder Audit-Log nennen, das eine kritische Entscheidung dokumentiert?"
+          ]
+        },
+        {
+          "title": "Abschluss & Ausblick",
+          "goal": "Zusammenfassung der wichtigsten Punkte und Ausblick auf nächste Schritte.",
+          "sample_questions": [
+            "Was sind die nächsten Meilensteine für Nimbus Observability?",
+            "Welche Verbesserungen planen Sie für die Alerting-Mechanismen?",
+            "Gibt es Lessons Learned, die Sie teamübergreifend teilen möchten?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27382,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

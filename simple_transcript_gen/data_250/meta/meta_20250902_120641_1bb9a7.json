@@ -1,0 +1,154 @@
+{
+  "id": "20250902_120641_1bb9a7",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 62,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Ziele",
+          "goal": "Verstehen, wie der Senior Project Manager die Pilotphase von Atlas Mobile definiert, welche Erfolgskriterien und UX-relevanten KPIs er im Blick hat.",
+          "sample_questions": [
+            "Können Sie mir den aktuellen Stand von Atlas Mobile in der Pilotphase beschreiben?",
+            "Welche spezifischen Ziele haben Sie für diese Phase gesetzt?",
+            "How do you connect these goals to measurable UX outcomes?"
+          ]
+        },
+        {
+          "title": "Stakeholder-Management & Kommunikation",
+          "goal": "Ermitteln, wie der PM mit internen und externen Stakeholdern kommuniziert und wie UX-Anforderungen priorisiert werden.",
+          "sample_questions": [
+            "Wie binden Sie die UX- und Mobile-Teams in Ihre wöchentlichen Status-Updates ein?",
+            "Can you share an example of a conflict between feature scope and UX quality, and how you resolved it?",
+            "Welche Kanäle nutzen Sie für schnelles Feedback zu Prototypen?"
+          ]
+        },
+        {
+          "title": "Feature Flags & Experimentation",
+          "goal": "Verstehen, wie Feature Flags genutzt werden, um Risiko zu minimieren und verschiedene UX-Varianten zu testen.",
+          "sample_questions": [
+            "Wie entscheiden Sie, welche Features hinter einem Feature Flag ausgerollt werden?",
+            "Could you walk me through a recent A/B test setup in Atlas Mobile?",
+            "Welche Metriken sind für Sie ausschlaggebend, um ein Feature für alle Nutzer freizugeben?"
+          ]
+        },
+        {
+          "title": "Offline Sync & Edge Cases",
+          "goal": "Tiefe Einblicke in die Herausforderungen beim Offline-Sync und deren Auswirkungen auf die Nutzererfahrung gewinnen.",
+          "sample_questions": [
+            "Welche typischen Probleme treten beim Offline-Sync auf?",
+            "How do you balance sync reliability with performance for users on slow networks?",
+            "Gibt es Runbooks oder SOPs, die Ihr Team bei Sync-Fehlern nutzt?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Lessons Learned",
+          "goal": "Risiken und getroffene Entscheidungen dokumentieren, um UX-Optimierungen in der nächsten Phase zu planen.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie derzeit für das UX-Design von Atlas Mobile?",
+            "Can you give an example where you had to trade off UX polish for delivery speed?",
+            "Welche Lessons Learned aus der Pilotphase möchten Sie ins Scaling übertragen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26975,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

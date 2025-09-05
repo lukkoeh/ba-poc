@@ -1,0 +1,163 @@
+{
+  "id": "20250902_160027_600d5a",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 82,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Role & Current Context",
+          "goal": "Establish understanding of the Security Engineer's role in the Aegis IAM operational phase and current priorities.",
+          "sample_questions": [
+            "Can you walk me through your day-to-day responsibilities in maintaining Aegis IAM?",
+            "Which operational metrics or signals are you most focused on at the moment?",
+            "How do you coordinate with other departments like Platform or SRE in ongoing IAM operations?"
+          ]
+        },
+        {
+          "title": "IAM Architecture & Policy Enforcement",
+          "goal": "Explore the technical underpinnings of IAM, and how policies like POL-SEC-001 are enforced.",
+          "sample_questions": [
+            "Could you explain the architecture layers of Aegis IAM and their respective security controls?",
+            "How does the 'Least Privilege & JIT Access' policy translate into implementation details?",
+            "What kind of monitoring or audits are in place to ensure compliance with access policies?"
+          ]
+        },
+        {
+          "title": "Incident Response & Runbooks",
+          "goal": "Understand procedures for critical incidents, referencing runbooks and past experiences.",
+          "sample_questions": [
+            "What scenarios trigger the use of RB-IAM-075 Access Revocation Emergency runbook?",
+            "Can you recall a recent incident and how the runbook guided your response?",
+            "How do you validate that an emergency revocation did not impact legitimate operations?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Identify interdependencies between Aegis IAM and other projects in the portfolio.",
+          "sample_questions": [
+            "Which other systems consume Aegis IAM services most heavily?",
+            "How do changes in Orion Edge Gateway or Poseidon Networking affect IAM configurations?",
+            "Have you encountered dependency risks during coordinated deployments?"
+          ]
+        },
+        {
+          "title": "Risk Assessment & Threat Modeling",
+          "goal": "Discuss the threat modeling process and how it's applied in the operational lifecycle.",
+          "sample_questions": [
+            "What is your process for updating threat models as new features are deployed?",
+            "How do you prioritize vulnerabilities in a regulated environment?",
+            "Can you give an example of a mitigated risk that emerged from cross-system analysis?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Future Plans",
+          "goal": "Explore decisions, trade-offs, and potential improvements in IAM operations.",
+          "sample_questions": [
+            "What are the main trade-offs between strict access control and user productivity?",
+            "How do you balance security requirements with sustainable velocity, as per company values?",
+            "Looking ahead, where do you see the biggest opportunities for enhancing IAM security posture?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26356,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

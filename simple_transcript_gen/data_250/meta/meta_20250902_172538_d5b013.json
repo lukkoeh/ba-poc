@@ -1,0 +1,172 @@
+{
+  "id": "20250902_172538_d5b013",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 156,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Projektkontext",
+          "goal": "Verständnis für den aktuellen Stand des Phoenix Feature Store und die Rolle des MLOps Engineers schaffen",
+          "sample_questions": [
+            "Können Sie bitte kurz den aktuellen Status des Phoenix Feature Store im Build-Phase-Kontext schildern?",
+            "Welche Kernfunktionen sind bereits implementiert und welche stehen noch aus?",
+            "Wie ist Ihre Rolle im Projektteam definiert?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Pipelines",
+          "goal": "Architekturentscheidungen, Datenflüsse und Integrationen zu anderen Systemen verstehen",
+          "sample_questions": [
+            "Wie sieht die Architektur für Online- und Offline-Feature Serving aus?",
+            "Welche Schnittstellen bestehen zum Helios Datalake oder Mercury Messaging?",
+            "Wie wird die Drift-Überwachung technisch umgesetzt?"
+          ]
+        },
+        {
+          "title": "SLA/SLO-Management & Monitoring",
+          "goal": "Sicherstellen, dass Service Level Objectives und Agreements eingehalten werden können",
+          "sample_questions": [
+            "Welche SLOs haben Sie für Latenz und Verfügbarkeit definiert?",
+            "Wie erfolgt das Monitoring und Alerting, und welche Runbooks sind relevant?",
+            "Gab es bereits Vorfälle, bei denen ein SLO verletzt wurde?"
+          ]
+        },
+        {
+          "title": "CI/CD für Features & Modelle",
+          "goal": "Verstehen, wie der Deployment-Prozess für Features und Modelle gestaltet ist",
+          "sample_questions": [
+            "Nutzen Sie ein einheitliches CI/CD-Framework für Features und Modelle?",
+            "Wie gehen Sie mit Hotfixes im Feature Store um?",
+            "Welche Tests sind in der Pipeline integriert?"
+          ]
+        },
+        {
+          "title": "Integration mit Compliance & Sicherheit",
+          "goal": "Prüfen, wie Sicherheits- und Compliance-Richtlinien eingehalten werden",
+          "sample_questions": [
+            "Wie setzen Sie die Policy 'Least Privilege & JIT Access' im Kontext des Feature Store um?",
+            "Gibt es Audit-Trails für Feature-Zugriffe?",
+            "Wie werden sensible Daten im Feature Store maskiert oder anonymisiert?"
+          ]
+        },
+        {
+          "title": "Multi-Hop Abhängigkeiten & Betriebsrisiken",
+          "goal": "Zusammenhänge zwischen Phoenix Feature Store und anderen Plattformkomponenten analysieren",
+          "sample_questions": [
+            "Welche kritischen Abhängigkeiten bestehen zu Upstream- und Downstream-Systemen?",
+            "Wie beeinflussen Änderungen im Helios Datalake oder im Orion Edge Gateway den Feature Store?",
+            "Welche Maßnahmen gibt es zur Begrenzung des BLAST_RADIUS?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Zukunftsentscheidungen",
+          "goal": "Bewertung von Architektur- und Technologieentscheidungen hinsichtlich Risiken und Chancen",
+          "sample_questions": [
+            "Welche Trade-offs haben Sie bei der Wahl der Speichertechnologie gemacht?",
+            "Wie gehen Sie mit der Balance zwischen Drift-Erkennung und False Positives um?",
+            "Welche Risiken sehen Sie für den Go-Live und wie werden diese mitigiert?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27497,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

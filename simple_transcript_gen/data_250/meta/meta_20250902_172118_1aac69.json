@@ -1,0 +1,172 @@
+{
+  "id": "20250902_172118_1aac69",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 151,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Role Clarification",
+          "goal": "Establish the interviewee’s involvement in Phoenix Feature Store and clarify responsibilities in feature engineering, CI/CD for ML models, and drift detection.",
+          "sample_questions": [
+            "Can you outline your primary responsibilities within the Phoenix Feature Store project?",
+            "How does your MLOps role intersect with the Build phase deliverables?",
+            "What are the key success criteria you track for both online and offline feature stores?"
+          ]
+        },
+        {
+          "title": "Feature Store Architecture & Data Flow",
+          "goal": "Understand the technical design, including ingestion pipelines, storage layers, serving APIs, and how they align with Novereon’s policies and values.",
+          "sample_questions": [
+            "Walk me through the end-to-end data flow from raw source to model-serving in Phoenix.",
+            "How do you ensure compliance with POL-SEC-001 Least Privilege & JIT Access in your pipeline design?",
+            "What controls are in place to maintain data freshness and minimize feature staleness?"
+          ]
+        },
+        {
+          "title": "Model CI/CD & Deployment Safety",
+          "goal": "Explore the approach to continuous integration and deployment for ML models, including rollback strategies and adherence to SLAs.",
+          "sample_questions": [
+            "How do you integrate model CI/CD into the Phoenix Feature Store workflows?",
+            "Can you describe the RB-FS-034 Hotfix Rollback Procedure and when you last applied it?",
+            "What SLA or SLO targets influence your deployment cadence?"
+          ]
+        },
+        {
+          "title": "Drift Monitoring & Incident Response",
+          "goal": "Examine drift detection mechanisms, alerting thresholds, and incident handling procedures.",
+          "sample_questions": [
+            "What types of drift do you monitor, and how are they detected in production?",
+            "How do you tune alerting to avoid fatigue while still catching critical drift?",
+            "Describe a recent drift incident and how you resolved it."
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies & Integration",
+          "goal": "Connect Phoenix to other systems like Helios Datalake or Nimbus Observability, identifying multi-hop dependencies.",
+          "sample_questions": [
+            "How does Phoenix consume data from Helios Datalake and ensure schema consistency?",
+            "What role does Nimbus Observability play in your feature store’s monitoring stack?",
+            "Can you give an example of a change upstream that required adjustments in Phoenix?"
+          ]
+        },
+        {
+          "title": "Quality Assurance & Risk Management",
+          "goal": "Assess the QA practices applied to Phoenix, including risk-based testing and mitigation strategies.",
+          "sample_questions": [
+            "Which elements of POL-QA-014 Risk-Based Testing are most relevant to Phoenix?",
+            "How do you test for backward compatibility in feature schemas?",
+            "What are the top three risks you see for Phoenix and how are they mitigated?"
+          ]
+        },
+        {
+          "title": "Decision-Making & Trade-offs",
+          "goal": "Discuss key architectural or operational trade-offs made, supported by evidence from RFCs, runbooks, or tickets.",
+          "sample_questions": [
+            "What trade-offs did you face between real-time feature freshness and cost optimization?",
+            "How did RFC-1419 Time-Travel Features influence your storage design?",
+            "Can you provide evidence from project artifacts that justified a major decision?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27647,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "id": "20250902_145922_283f20",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 43,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Context Setting",
+          "goal": "Establish the interviewee's understanding of the Orion Edge Gateway project and their role in it.",
+          "sample_questions": [
+            "Can you briefly describe your involvement in the Orion Edge Gateway build phase?",
+            "What are the core components and integrations you’ve been focusing on?",
+            "Which runbooks or SLAs are most relevant to your daily work here?"
+          ]
+        },
+        {
+          "title": "Architecture & Infrastructure as Code",
+          "goal": "Explore the interviewee’s approach to designing and automating the gateway infrastructure.",
+          "sample_questions": [
+            "How have you applied Infrastructure as Code principles to the API gateway deployment?",
+            "Can you walk me through the RB-GW-011 Rolling Deployments runbook and how you’ve automated parts of it?",
+            "What’s your strategy for managing configuration drift across environments?"
+          ]
+        },
+        {
+          "title": "Integration with Authentication and Security Policies",
+          "goal": "Understand how authentication mechanisms and corporate policies are implemented within the gateway.",
+          "sample_questions": [
+            "How did you integrate mTLS in compliance with POL-SEC-001?",
+            "What challenges did you face in resolving ticket GW-4821 MTLS Handshake Bug Analysis?",
+            "How do you ensure rate limiting and auth policies don’t conflict with SLA-ORI-02?"
+          ]
+        },
+        {
+          "title": "Monitoring, Observability & Incident Response",
+          "goal": "Assess the candidate’s approach to observability and handling incidents.",
+          "sample_questions": [
+            "What metrics and traces do you collect to ensure we meet p95 latency targets?",
+            "How do you coordinate with the Nimbus Observability team for alert tuning?",
+            "Could you describe a recent incident and the steps taken as per the runbook?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies and Multi-Hop Problem Solving",
+          "goal": "Evaluate the interviewee’s ability to reason across subsystems and resolve complex dependencies.",
+          "sample_questions": [
+            "How does Orion Edge Gateway interact with Aegis IAM for JIT access?",
+            "Can you give an example where a change in IAM policies impacted gateway auth flows?",
+            "How do you test these cross-component integrations in CI/CD?"
+          ]
+        },
+        {
+          "title": "Risk Assessment, Trade-offs & Future Planning",
+          "goal": "Explore the decision-making process for balancing performance, security, and maintainability.",
+          "sample_questions": [
+            "What trade-offs did you consider between blue/green and canary deployments for Orion?",
+            "How do you evaluate the blast radius when deploying a new rate limiting policy?",
+            "Based on current evidence, what risks should we prioritize in the next quarter?"
+          ]
+        },
+        {
+          "title": "Wrap-up & Reflection",
+          "goal": "Summarize key learnings and clarify any remaining questions.",
+          "sample_questions": [
+            "What’s one improvement you’d like to see in our deployment process?",
+            "How can the PMO better support DevOps in the next project phase?",
+            "Any final thoughts on the Orion Edge Gateway build experience?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26009,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

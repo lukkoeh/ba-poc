@@ -1,0 +1,154 @@
+{
+  "id": "20250902_145914_126487",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 44,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & SLA-Anforderungen",
+          "goal": "Das gemeinsame Verständnis der Hera QA Platform und relevanter SLAs herstellen.",
+          "sample_questions": [
+            "Können Sie bitte kurz den aktuellen Stand der Hera QA Platform beschreiben?",
+            "Welche SLA- oder SLO-Vorgaben sind für diese Plattform verbindlich?",
+            "Wie beeinflussen diese Vorgaben Ihre Teststrategie?"
+          ]
+        },
+        {
+          "title": "Teststrategie & Risk-Based Testing",
+          "goal": "Ermitteln, wie die Teststrategie mit POL-QA-014 konform ist und wie Risiken priorisiert werden.",
+          "sample_questions": [
+            "Wie setzen Sie Risk-Based Testing konkret um, z. B. in Verbindung mit RFC-1770?",
+            "Welche Metriken nutzen Sie, um Risiko und Testtiefe zu korrelieren?",
+            "Wie dokumentieren Sie Traceability von Anforderungen zu Testfällen?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Projekten",
+          "goal": "Verstehen, wie die QA Platform mit anderen Systemen und Projekten interagiert und welche Abhängigkeiten bestehen.",
+          "sample_questions": [
+            "Gibt es Integrationspunkte zur Nimbus Observability oder Helios Datalake?",
+            "Wie stellen Sie sicher, dass Testdaten konsistent über Subsysteme hinweg sind?",
+            "Welche Herausforderungen traten bei Schnittstellen-Tests auf?"
+          ]
+        },
+        {
+          "title": "Incident Handling & Runbooks",
+          "goal": "Evaluieren, wie Test-Incidents gemanagt werden und wie Runbooks wie RB-QA-051 genutzt werden.",
+          "sample_questions": [
+            "Welche Schritte folgen Sie bei einem Release Candidate Gate-Fail?",
+            "Wie werden Lessons Learned aus Incidents in die Teststrategie eingearbeitet?",
+            "Können Sie ein Beispiel geben, wo RB-QA-051 entscheidend war?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Risiken",
+          "goal": "Analysieren, wie Entscheidungen unter Unsicherheit getroffen werden und welche Risiken akzeptiert oder mitigiert wurden.",
+          "sample_questions": [
+            "Gab es Situationen, in denen Sie bewusst Testabdeckung reduziert haben? Warum?",
+            "Wie balancieren Sie Geschwindigkeit vs. Testtiefe bei knappen Deadlines?",
+            "Welche Risiken sehen Sie aktuell für die SLA-Einhaltung und wie adressieren Sie diese?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26975,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

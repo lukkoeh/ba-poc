@@ -1,0 +1,154 @@
+{
+  "id": "20250902_153643_007734",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 62,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Ziele",
+          "goal": "Frühes Verständnis für Scope, Stakeholder und UX-relevante Zielsetzungen schaffen",
+          "sample_questions": [
+            "Können Sie mir den aktuellen Stand von Atlas Mobile beschreiben und welche Hauptziele wir im Pilot anstreben?",
+            "Wie haben Sie den Scope im Hinblick auf Offline Sync und Feature Flags definiert?",
+            "Welche Stakeholder sind am stärksten in die UX-Entscheidungen eingebunden?"
+          ]
+        },
+        {
+          "title": "User Journeys & Technische Constraints",
+          "goal": "Verstehen, wie technische Entscheidungen die Nutzererfahrung beeinflussen",
+          "sample_questions": [
+            "Welche typischen User Journeys haben Sie im Pilot priorisiert?",
+            "Inwiefern beeinflussen die Cross-Platform Constraints (z.B. native vs. hybrid) die UX-Designentscheidungen?",
+            "Can you describe any technical debt that might impact the onboarding flow?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Systemen",
+          "goal": "Zusammenhänge zwischen Atlas Mobile und anderen Projekten identifizieren",
+          "sample_questions": [
+            "Gibt es direkte Integrationspunkte mit Aegis IAM oder Nimbus Observability?",
+            "How does the feature flag system interact with backend APIs from Janus API Composition?",
+            "Welche Abhängigkeiten erfordern besondere Koordination beim Release?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Entscheidungen",
+          "goal": "Explorieren, welche Entscheidungen getroffen wurden, welche Risiken bestehen und wie diese dokumentiert/evidenzbasiert sind",
+          "sample_questions": [
+            "Welche größeren Trade-offs mussten Sie in Bezug auf Performance vs. Offlinefähigkeit eingehen?",
+            "Can you share any runbooks or RFC references that informed these decisions?",
+            "Wie gehen Sie mit Risiken um, die aus der Pilotphase in den Scale-Phase übergehen könnten?"
+          ]
+        },
+        {
+          "title": "Zukunft & Skalierungspläne",
+          "goal": "Verstehen, wie das Projekt in die nächste Phase überführt wird und welche UX-Aspekte priorisiert werden",
+          "sample_questions": [
+            "Welche UX-Optimierungen stehen für die nächsten 6 Monate auf der Roadmap?",
+            "How will you measure success for Atlas Mobile beyond the pilot?",
+            "Welche Lessons Learned aus der Pilotphase fließen in die Skalierung ein?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25982,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

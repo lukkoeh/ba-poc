@@ -1,0 +1,154 @@
+{
+  "id": "20250902_153700_775a9b",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 63,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rollenverständnis",
+          "goal": "Das Verständnis des Kandidaten für den aktuellen Projektstatus, SLA-Anforderungen und seine Rolle im Betrieb von Aegis IAM ermitteln.",
+          "sample_questions": [
+            "Können Sie kurz den aktuellen Betriebszustand von Aegis IAM aus Ihrer Sicht schildern?",
+            "Wie stellen Sie sicher, dass die SLA-ORI-02 bzw. SLA-ähnlichen Vorgaben für IAM eingehalten werden?",
+            "Welche Ihrer täglichen Aufgaben hängen direkt mit den Policies wie POL-SEC-001 zusammen?"
+          ]
+        },
+        {
+          "title": "Bedrohungsmodellierung und Sicherheitsarchitektur",
+          "goal": "Tiefe Einblicke in die Anwendung von Threat Modeling und Least Privilege im Kontext von Enterprise SSO und RBAC gewinnen.",
+          "sample_questions": [
+            "Wie gehen Sie bei der Bedrohungsmodellierung für neue SSO-Integrationen vor?",
+            "Welche Risiken sehen Sie bei Just-in-Time Access und wie mitigieren Sie diese?",
+            "Wie setzen Sie Policy-as-Code (siehe RFC-903) praktisch um?"
+          ]
+        },
+        {
+          "title": "Incident Response und Runbooks",
+          "goal": "Verstehen, wie der Kandidat mit Incidents umgeht, insbesondere im Bezug auf Runbooks wie RB-IAM-075.",
+          "sample_questions": [
+            "Beschreiben Sie einen Vorfall, bei dem Sie RB-IAM-075 angewendet haben.",
+            "Wie priorisieren Sie Maßnahmen bei einem kritischen Access Revocation Incident?",
+            "Welche Metriken oder SLOs überwachen Sie, um potenzielle Zugriffsprobleme frühzeitig zu erkennen?"
+          ]
+        },
+        {
+          "title": "Multi-System Integration und Auswirkungen",
+          "goal": "Bewerten, wie der Kandidat Abhängigkeiten und Kaskadeneffekte zwischen IAM und anderen Plattformkomponenten erkennt und managt.",
+          "sample_questions": [
+            "Wie beeinflusst eine IAM-Policy-Änderung die Orion Edge Gateway Authentifizierung?",
+            "Können Sie ein Beispiel geben, wo eine IAM-Anpassung Auswirkungen auf Helios Datalake hatte?",
+            "Wie koordinieren Sie Änderungen mit dem SRE- oder Plattform-Team, um den BLAST_RADIUS zu minimieren?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs und Risiken",
+          "goal": "Herausfinden, wie der Kandidat sicherheitsrelevante Entscheidungen unter SLA-Druck trifft und dokumentiert.",
+          "sample_questions": [
+            "Beschreiben Sie eine Entscheidung, bei der Sie Sicherheit gegen Benutzerfreundlichkeit abwägen mussten.",
+            "Wie dokumentieren Sie Abweichungen von POL-SEC-001 und welche Evidenz führen Sie an?",
+            "Welche Lessons Learned aus AUD-24-Q2 haben Ihre Arbeit nachhaltig beeinflusst?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29354,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

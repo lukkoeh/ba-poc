@@ -1,0 +1,154 @@
+{
+  "id": "20250902_153219_ada335",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 60,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rolle",
+          "goal": "Verstehen, wie der Interviewee in das Orion Edge Gateway Projekt eingebunden ist und welche Verantwortlichkeiten er trägt.",
+          "sample_questions": [
+            "Können Sie kurz Ihren Verantwortungsbereich im Orion Edge Gateway Projekt umreißen?",
+            "Welche Automatisierungs- und IaC-Tools setzen Sie aktuell für das Gateway ein?",
+            "Inwiefern berücksichtigen Sie die Sicherheitsvorgaben der Novereon Systems GmbH in Ihrer täglichen Arbeit?"
+          ]
+        },
+        {
+          "title": "Sicherheitsarchitektur und Compliance",
+          "goal": "Prüfen, wie Sicherheitsprinzipien wie Least Privilege und mTLS umgesetzt werden und welche Lücken existieren könnten.",
+          "sample_questions": [
+            "Wie setzen Sie POL-SEC-001 'Least Privilege & JIT Access' im Deploy-Prozess um?",
+            "Können Sie den Ablauf aus RB-GW-011 'Rolling Deployments (Blue/Green)' im Hinblick auf Auth-Integration beschreiben?",
+            "Welche Risiken sehen Sie bei der Implementierung der SLA-ORI-02 p95 Latenz < 120ms in Verbindung mit mTLS?"
+          ]
+        },
+        {
+          "title": "Integration und Abhängigkeiten",
+          "goal": "Multi-Hop-Verknüpfungen zwischen Gateway, IAM und Observability identifizieren und bewerten.",
+          "sample_questions": [
+            "Wie interagiert das Orion Edge Gateway mit Aegis IAM bei der Authentifizierung?",
+            "Gab es Abhängigkeiten zu Nimbus Observability, z.B. bei der Latenzüberwachung?",
+            "Welche Lessons Learned aus GW-4821 MTLS Handshake Bug Analysis haben Sie in die Pipeline übernommen?"
+          ]
+        },
+        {
+          "title": "Automatisierung und Pipeline-Sicherheit",
+          "goal": "Verstehen, wie CI/CD-Pipelines abgesichert und automatisiert sind, inkl. Secret Management.",
+          "sample_questions": [
+            "Wie sind Secrets für das Gateway in der Pipeline gesichert?",
+            "Welche IaC-Validierungen laufen vor einem Rollout?",
+            "Wie gehen Sie mit Fehlerszenarien um, die in RB-GW-011 beschrieben sind?"
+          ]
+        },
+        {
+          "title": "Risikobewertung und Trade-offs",
+          "goal": "Entscheidungen und Abwägungen bei Performance vs. Sicherheit nachvollziehen.",
+          "sample_questions": [
+            "Gab es Situationen, in denen Sie Performance-Optimierungen zugunsten von Sicherheit zurückgestellt haben?",
+            "Wie dokumentieren Sie diese Entscheidungen (z.B. RFCs, Tickets)?",
+            "Welche Maßnahmen würden Sie priorisieren, um den Blast Radius bei Gateway-Ausfällen zu minimieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28650,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

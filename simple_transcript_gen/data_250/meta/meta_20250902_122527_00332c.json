@@ -1,0 +1,163 @@
+{
+  "id": "20250902_122527_00332c",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 66,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rolle",
+          "goal": "Das Verständnis des Kandidaten für den aktuellen Stand des Orion Edge Gateway Projekts und seine eigene Rolle darin erfassen.",
+          "sample_questions": [
+            "Können Sie kurz beschreiben, wie Sie in das Orion Edge Gateway Projekt eingebunden sind?",
+            "Welche Hauptaufgaben übernehmen Sie aktuell im Build-Phase-Kontext?",
+            "Wie ordnen Sie Ihre Arbeit in Bezug auf die Projektziele und die SLA-ORI-02 ein?"
+          ]
+        },
+        {
+          "title": "Technische Architektur und Pipelines",
+          "goal": "Ermitteln, wie tief der Kandidat in Architekturentscheidungen und CI/CD-Pipelines involviert ist.",
+          "sample_questions": [
+            "Welche IaC-Tools setzen Sie beim Orion Edge Gateway ein und warum?",
+            "Wie haben Sie die Pipeline für Blue/Green Deployments (RB-GW-011) implementiert?",
+            "Wie wird das Rate Limiting in der API Gateway Architektur technisch realisiert?"
+          ]
+        },
+        {
+          "title": "Integration und Sicherheit",
+          "goal": "Verstehen, wie Authentifizierung, mTLS und Least Privilege umgesetzt werden.",
+          "sample_questions": [
+            "Wie haben Sie die Authentifizierungsintegration im Gateway konzipiert?",
+            "Können Sie den Debug-Prozess für den MTLS Handshake Bug (GW-4821) erläutern?",
+            "Wie setzen Sie POL-SEC-001 im Gateway-Kontext um?"
+          ]
+        },
+        {
+          "title": "Monitoring und SLOs",
+          "goal": "Aufzeigen, wie der Kandidat Servicequalität überwacht und optimiert.",
+          "sample_questions": [
+            "Welche Metriken nutzen Sie, um das p95 Latenz-Ziel (< 120ms) zu überwachen?",
+            "Wie binden Sie Observability-Tools aus anderen Projekten wie Nimbus ein?",
+            "Wie gehen Sie mit Alert Fatigue um?"
+          ]
+        },
+        {
+          "title": "Cross-Projekt Abhängigkeiten",
+          "goal": "Erfassen, wie der Kandidat Abhängigkeiten zu anderen Systemen managt.",
+          "sample_questions": [
+            "Welche Schnittstellen bestehen zwischen Orion Edge Gateway und Aegis IAM?",
+            "Wie beeinflussen Änderungen im IAM die Gateway-Deployments?",
+            "Gab es Lessons Learned aus Helios Datalake oder Poseidon Networking, die Sie hier anwenden?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und Lessons Learned",
+          "goal": "Identifizieren, wie der Kandidat Risiken bewertet und Entscheidungen dokumentiert.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie aktuell in der Build-Phase?",
+            "Wie dokumentieren Sie Trade-offs, z.B. in RFCs?",
+            "Gab es Entscheidungen, die Sie rückblickend anders treffen würden?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28726,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

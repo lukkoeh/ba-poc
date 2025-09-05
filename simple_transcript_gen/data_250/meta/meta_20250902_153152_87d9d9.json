@@ -1,0 +1,177 @@
+{
+  "id": "20250902_153152_87d9d9",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 58,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_arch",
+      "role": "Cloud Architect",
+      "traits": [
+        "tradeoff",
+        "cost_perf",
+        "multi-region"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-TIT",
+      "name": "Titan DR",
+      "phase": "Drill",
+      "scope": "Disaster Recovery, multi-region failover"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_arch",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Context Setting",
+          "goal": "Understand participants' roles, responsibilities, and familiarity with Titan DR objectives",
+          "sample_questions": [
+            "Could you briefly describe your role in the Titan DR drills?",
+            "What does a typical day look like for you when preparing for a DR GameDay?",
+            "How do you interact with the rest of the team during a multi-region failover simulation?"
+          ]
+        },
+        {
+          "title": "Exploring Current DR Processes",
+          "goal": "Gather detailed insights into existing runbooks, tools, and coordination mechanisms",
+          "sample_questions": [
+            "Walk me through RB-DR-001 Regional Failover Procedure—how is it triggered and executed?",
+            "What monitoring or observability signals do you rely on to decide a failover?",
+            "How do you ensure alignment with RTO and RPO targets during drills?"
+          ]
+        },
+        {
+          "title": "Cross-System Dependencies",
+          "goal": "Identify multi-hop dependencies between Titan DR and other systems like Aegis IAM or Nimbus Observability",
+          "sample_questions": [
+            "Can you describe a situation where identity management or observability impacted a failover?",
+            "How do you coordinate with the Security or Data teams when a DR drill intersects their services?",
+            "What challenges arise from these interdependencies, and how do you mitigate them?"
+          ]
+        },
+        {
+          "title": "User Experience During Drills",
+          "goal": "Explore how internal users (engineers, oncall staff) experience the DR process",
+          "sample_questions": [
+            "From a user perspective, what are the most stressful moments during a failover?",
+            "How intuitive are the runbooks for someone new to the oncall rotation?",
+            "Are there points in the process where you think the UX could be improved?"
+          ]
+        },
+        {
+          "title": "Decision Making & Trade-offs",
+          "goal": "Understand how trade-offs between cost, performance, and resilience are evaluated",
+          "sample_questions": [
+            "How do you decide between a partial failover versus a full regional cutover?",
+            "What cost-related considerations influence your DR architecture decisions?",
+            "Can you give an example of a risk you accepted during a drill, and why?"
+          ]
+        },
+        {
+          "title": "Reflection & Future Improvements",
+          "goal": "Gather perspectives on lessons learned and planned enhancements",
+          "sample_questions": [
+            "What was the most valuable insight from TEST-DR-2025-Q1 GameDay Findings?",
+            "If you could change one thing in the current DR setup, what would it be?",
+            "How do you see the Titan DR project evolving over the next year?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27113,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

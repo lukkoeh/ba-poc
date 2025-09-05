@@ -1,0 +1,177 @@
+{
+  "id": "20250903_003329_2a90d7",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 209,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_qa",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context and Goals",
+          "goal": "Understand the Hera QA Platform's objectives, constraints, and how UX and QA interplay in its build phase.",
+          "sample_questions": [
+            "Can you walk me through the core goals of the Hera QA Platform and how they were defined?",
+            "What constraints from regulated industries influenced the initial design?",
+            "How did UX and QA collaborate in the early requirement gathering?"
+          ]
+        },
+        {
+          "title": "Design System and Accessibility Integration",
+          "goal": "Explore how accessibility and design system principles are integrated into the QA platform's interface.",
+          "sample_questions": [
+            "How is the Hera QA Platform leveraging existing design system components?",
+            "What specific accessibility standards are you targeting and why?",
+            "Can you share an example where QA feedback led to a design change for accessibility?"
+          ]
+        },
+        {
+          "title": "Risk-Based Testing and Traceability",
+          "goal": "Dive into QA strategies, especially risk-based testing and traceability per policy POL-QA-014.",
+          "sample_questions": [
+            "How do you prioritize tests based on risk in this project?",
+            "What mechanisms ensure traceability between requirements, tests, and defects?",
+            "How does the unified test orchestration support SLA tracking?"
+          ]
+        },
+        {
+          "title": "Cross-Functional Collaboration",
+          "goal": "Understand cross-functional workflows between UX, QA, and other departments like SRE or Platform.",
+          "sample_questions": [
+            "Can you describe a recent cross-functional workshop or sync that was critical for progress?",
+            "How do QA and UX jointly handle flaky test analytics impacting release readiness?",
+            "What role does evidence from runbooks or RFCs play in your design/testing decisions?"
+          ]
+        },
+        {
+          "title": "Decision-Making and Tradeoffs",
+          "goal": "Identify key decisions, tradeoffs, and risks faced during the build phase with supporting evidence.",
+          "sample_questions": [
+            "What was a major tradeoff you had to make between test coverage and delivery speed?",
+            "Can you recall a decision where user experience goals conflicted with QA constraints?",
+            "What documented evidence (tickets, runbooks, RFCs) supported that decision?"
+          ]
+        },
+        {
+          "title": "Future Outlook and Continuous Improvement",
+          "goal": "Discuss the long-term vision for the platform and continuous improvement loops.",
+          "sample_questions": [
+            "How do you envision the Hera QA Platform evolving over the next year?",
+            "What metrics will guide your continuous improvement efforts?",
+            "How will lessons learned in this build phase be codified for future projects?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26426,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

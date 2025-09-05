@@ -1,0 +1,163 @@
+{
+  "id": "20250902_171725_15a310",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 148,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Role Context & Project Overview",
+          "goal": "Understand the interviewee's responsibilities within Vesta FinOps and their alignment with company mission and SLAs.",
+          "sample_questions": [
+            "Can you walk me through your primary responsibilities on Vesta FinOps?",
+            "How does your work tie into the company's 'Cloud Cost Budgets & Quotas' policy (POL-FIN-007)?",
+            "Which SLAs or SLOs are most relevant to your role?"
+          ]
+        },
+        {
+          "title": "Operational Processes & Runbooks",
+          "goal": "Explore how the interviewee uses runbooks and RFCs to manage cost optimization and guardrails.",
+          "sample_questions": [
+            "Could you describe a recent situation where you applied RB-FIN-007 Idle Resource Reaper?",
+            "How do you integrate RFC-1502 Resource Quotas & Budgets into daily operations?",
+            "What unwritten rules or heuristics guide you when policies and runbooks are ambiguous?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Identify how Vesta FinOps interacts with other projects and subsystems to achieve cost efficiency.",
+          "sample_questions": [
+            "Which other projects in the portfolio have the biggest cost impact on Vesta FinOps?",
+            "How do you coordinate with the SRE or Platform teams on budget enforcement?",
+            "Can you give an example of a multi-hop dependency affecting a cost decision?"
+          ]
+        },
+        {
+          "title": "Forecasting & Budget Management",
+          "goal": "Assess techniques and tools used for forecasting and maintaining sustainable velocity within budget constraints.",
+          "sample_questions": [
+            "What forecasting models or tools do you rely on most?",
+            "How do you handle unexpected cost spikes without breaching SLAs?",
+            "Describe a time when you had to adjust forecasts due to scope changes in another project."
+          ]
+        },
+        {
+          "title": "Decision Making & Risk Management",
+          "goal": "Evaluate how the interviewee makes tradeoffs between cost, performance, and compliance, using evidence and policy.",
+          "sample_questions": [
+            "Describe a decision where you had to choose between higher performance and lower cost.",
+            "What evidence did you gather to justify your choice?",
+            "How do you assess the risk of breaching cost guardrails?"
+          ]
+        },
+        {
+          "title": "Continuous Improvement",
+          "goal": "Understand how the interviewee drives ongoing optimization and learning within FinOps practices.",
+          "sample_questions": [
+            "What metrics do you track to measure FinOps maturity?",
+            "How do you feed incident learnings back into forecasts and budgets?",
+            "Can you share a recent improvement initiative and its impact?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26611,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "20250902_175149_4fdd89",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 180,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Zielsetzung",
+          "goal": "Verstehen, wie der Helios Datalake im Unternehmenskontext positioniert ist, welche Kundenbedürfnisse er adressiert und welche KPIs relevant sind.",
+          "sample_questions": [
+            "Können Sie mir die Hauptziele des Helios Datalake aus Sicht des Product Owners beschreiben?",
+            "Welche spezifischen Kundenprobleme lösen wir mit der ELT-Architektur in Snowflake?",
+            "Wie messen Sie aktuell den Erfolg – gibt es definierte SLOs oder KPIs?"
+          ]
+        },
+        {
+          "title": "Technische Abhängigkeiten und Integrationen",
+          "goal": "Ermitteln, welche anderen Systeme, Datenquellen und Projekte mit Helios interagieren und wie diese Abhängigkeiten gesteuert werden.",
+          "sample_questions": [
+            "Welche Upstream- und Downstream-Systeme sind kritisch für den Betrieb?",
+            "Wie koordinieren Sie Änderungen mit anderen Projekten wie Borealis ETL oder Nimbus Observability?",
+            "Gibt es spezifische Runbooks oder RFCs, die besonders häufig referenziert werden?"
+          ]
+        },
+        {
+          "title": "Priorisierung und Backlog Management",
+          "goal": "Nachvollziehen, wie Features, technische Schulden und regulatorische Anforderungen priorisiert werden.",
+          "sample_questions": [
+            "Wie balancieren Sie Feature-Entwicklung mit der Behebung technischer Schulden?",
+            "Welche Rolle spielen regulatorische Anforderungen bei der Priorisierung?",
+            "Gibt es ein formales Verfahren zur Bewertung von Business Value vs. technischem Risiko?"
+          ]
+        },
+        {
+          "title": "Qualitätssicherung und Betrieb",
+          "goal": "Verstehen, wie Qualität, Stabilität und Einhaltung der SLA-HEL-01 (99.9% Availability) sichergestellt werden.",
+          "sample_questions": [
+            "Welche Monitoring- und Alerting-Mechanismen sind für Helios im Einsatz?",
+            "Wie gehen Sie mit Ingestion-Failures um – z.B. laut RB-ING-042?",
+            "Gab es in letzter Zeit Incidents, die zu einer Anpassung der Runbooks geführt haben?"
+          ]
+        },
+        {
+          "title": "Strategische Weiterentwicklung und Risiken",
+          "goal": "Ermitteln, welche langfristigen Entscheidungen anstehen, welche Risiken bestehen und wie diese mitigiert werden.",
+          "sample_questions": [
+            "Welche strategischen Erweiterungen des Datalakes stehen im nächsten Jahr an?",
+            "Wo sehen Sie die größten Risiken – technisch oder geschäftlich?",
+            "Wie dokumentieren Sie Entscheidungen – z.B. in RFCs – und binden Stakeholder ein?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28321,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

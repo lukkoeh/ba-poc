@@ -1,0 +1,163 @@
+{
+  "id": "20250902_102950_dc64b5",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 43,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Context Setting",
+          "goal": "Establish the candidate's understanding of the Nimbus Observability project's objectives, constraints, and alignment with company values.",
+          "sample_questions": [
+            "Can you summarize your understanding of the Nimbus Observability project's scope and its role in our platform ecosystem?",
+            "How do you see the 'Safety First' and 'Sustainable Velocity' values influencing observability pipeline design?",
+            "What are the key deliverables in the Build phase for a project of this nature?"
+          ]
+        },
+        {
+          "title": "Technical Implementation Details",
+          "goal": "Assess hands-on experience with OpenTelemetry pipelines, SLO definitions, and integration with incident analytics.",
+          "sample_questions": [
+            "Walk me through how you would set up an OpenTelemetry collector for multi-service ingestion.",
+            "How would you ensure SLOs are accurately measured and aligned with SLA-ORI-02 for downstream systems?",
+            "Describe a time you automated an observability deployment pipeline with IaC; what tools and patterns did you use?"
+          ]
+        },
+        {
+          "title": "Cross-System Dependencies",
+          "goal": "Evaluate ability to identify and manage dependencies with other portfolio projects and departments.",
+          "sample_questions": [
+            "How might the Nimbus Observability pipeline need to integrate with Mercury Messaging's exactly-once semantics?",
+            "If the Atlas Mobile app's feature flags cause variable traffic patterns, how would you adjust sampling strategies (see RFC-1114)?",
+            "Can you describe a scenario where observability data feeds into FinOps guardrails in Vesta?"
+          ]
+        },
+        {
+          "title": "Incident Response & Runbooks",
+          "goal": "Test knowledge of incident triage, alert fatigue management, and runbook utilization.",
+          "sample_questions": [
+            "How would you use RB-OBS-033 to tune alerts to reduce noise without missing critical incidents?",
+            "Give an example of a high-severity incident where observability data directly shortened MTTR.",
+            "What unwritten heuristics do you apply when deciding to escalate an anomaly?"
+          ]
+        },
+        {
+          "title": "Decision-Making, Risks & Tradeoffs",
+          "goal": "Understand approach to balancing performance, cost, and reliability in observability systems.",
+          "sample_questions": [
+            "If faced with a tradeoff between higher sampling rates and increased storage costs, how would you decide?",
+            "What risks do you foresee in deploying new trace sampling strategies across all services simultaneously?",
+            "Can you reference an RFC or SLA that would guide your decision in such a tradeoff?"
+          ]
+        },
+        {
+          "title": "Closing & Reflection",
+          "goal": "Gauge cultural fit, reflective learning, and alignment with project trajectory.",
+          "sample_questions": [
+            "Looking back, what would you improve in your last observability deployment?",
+            "How do you keep up with evolving best practices in cloud-native observability?",
+            "Any questions for us about the Nimbus Observability roadmap?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26848,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

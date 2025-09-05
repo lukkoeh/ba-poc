@@ -1,0 +1,163 @@
+{
+  "id": "20250902_164038_6c409f",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 115,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introductions & Role Context",
+          "goal": "Establish the SRE's responsibilities on Orion Edge Gateway and their security-relevant scope.",
+          "sample_questions": [
+            "Can you walk me through your day-to-day responsibilities on the Orion Edge Gateway?",
+            "How does your SRE role intersect with security requirements in this project?",
+            "What SLAs or SLOs are you directly accountable for?"
+          ]
+        },
+        {
+          "title": "Gateway Architecture & Security Posture",
+          "goal": "Understand the current architecture, security controls, and integration points for authentication and MTLS.",
+          "sample_questions": [
+            "Describe the Orion Edge Gateway's architecture from an SRE perspective.",
+            "How is MTLS implemented and monitored in production?",
+            "What runbooks exist for MTLS handshake failures?"
+          ]
+        },
+        {
+          "title": "Incident Handling & Runbook Use",
+          "goal": "Assess how incidents have been managed, referencing specific tickets and runbooks.",
+          "sample_questions": [
+            "Can you recall a recent incident and how RB-GW-011 factored into your resolution?",
+            "What was the root cause in GW-4821 and how did you mitigate it?",
+            "How do you ensure lessons learned are folded back into runbooks?"
+          ]
+        },
+        {
+          "title": "Multi-Subsystem Dependencies",
+          "goal": "Explore dependencies between Orion Edge Gateway and other systems like Aegis IAM or Poseidon Networking.",
+          "sample_questions": [
+            "How does Orion Edge Gateway depend on Aegis IAM for auth?",
+            "What coordination is required with Poseidon Networking for mTLS policy changes?",
+            "Have you experienced cascading failures due to upstream IAM issues?"
+          ]
+        },
+        {
+          "title": "Risk Assessment & Trade-offs",
+          "goal": "Evaluate how the SRE balances performance SLAs with security hardening.",
+          "sample_questions": [
+            "How do you balance SLA-ORI-02 latency targets with stricter mTLS cipher suites?",
+            "Have you ever had to choose between availability and strict policy enforcement?",
+            "What evidence or metrics guide those decisions?"
+          ]
+        },
+        {
+          "title": "Closing & Future Improvements",
+          "goal": "Wrap up with forward-looking improvements and security posture evolution.",
+          "sample_questions": [
+            "What improvements are planned for Orion Edge Gateway's security posture?",
+            "How would you evolve RB-GW-011 to handle more complex failover scenarios?",
+            "What are your top risks for the next 12 months?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26147,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

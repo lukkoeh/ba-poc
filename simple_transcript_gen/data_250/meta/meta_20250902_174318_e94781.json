@@ -1,0 +1,154 @@
+{
+  "id": "20250902_174318_e94781",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 173,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "IAM Architecture & Policy Alignment",
+          "goal": "Assess the candidate's understanding of Aegis IAM architecture and how it aligns with company security policies such as POL-SEC-001.",
+          "sample_questions": [
+            "Walk me through the high-level architecture of Aegis IAM and its integration points.",
+            "How does the system enforce Least Privilege & JIT Access in practice?",
+            "Which components are most critical for maintaining compliance with POL-SEC-001?"
+          ]
+        },
+        {
+          "title": "Threat Modeling & Risk Assessment",
+          "goal": "Evaluate ability to identify, model, and prioritize threats in IAM context.",
+          "sample_questions": [
+            "Describe your threat modeling process for an SSO + RBAC system.",
+            "What are the top three threat vectors for Aegis IAM given its current phase?",
+            "How would you detect and mitigate privilege escalation attempts?"
+          ]
+        },
+        {
+          "title": "Incident Response & Runbook Familiarity",
+          "goal": "Gauge familiarity with operational artifacts like RB-IAM-075 and ability to act under pressure.",
+          "sample_questions": [
+            "Have you used RB-IAM-075 Access Revocation Emergency in a live incident?",
+            "What are the key steps from RB-IAM-075 and why are they ordered that way?",
+            "How would you adapt the runbook if the incident involved cross-region replication issues?"
+          ]
+        },
+        {
+          "title": "Cross-Project Security Dependencies",
+          "goal": "Test ability to reason about IAM dependencies on and from other Novereon projects.",
+          "sample_questions": [
+            "How does Aegis IAM interact with Poseidon Networking’s mTLS policies?",
+            "What authentication flows are shared between Aegis IAM and Orion Edge Gateway?",
+            "If Nimbus Observability detects suspicious login patterns, how should Aegis IAM respond?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Risk-Based Decisions",
+          "goal": "Understand how candidate makes security trade-offs under constraints.",
+          "sample_questions": [
+            "Describe a situation where you had to choose between strict access control and service availability.",
+            "What factors would influence relaxing an SLA to mitigate a security risk?",
+            "How do you balance audit completeness (AUD-24-Q2) with operational overhead?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26368,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

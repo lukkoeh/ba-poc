@@ -1,0 +1,177 @@
+{
+  "id": "20250903_005125_54f735",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 229,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_sec",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Objectives",
+          "goal": "Understand the high-level goals, constraints, and success criteria for Orion Edge Gateway from both PM and Security perspectives.",
+          "sample_questions": [
+            "Can you walk me through the main objectives for Orion Edge Gateway and how they align with Novereon's mission?",
+            "What are the key constraints—technical, regulatory, or organizational—that shape this project?",
+            "How do you define success for the Build phase in this context?"
+          ]
+        },
+        {
+          "title": "User Journeys & Edge Cases",
+          "goal": "Explore typical and atypical user interaction patterns with the API gateway, including rate limiting and authentication flows.",
+          "sample_questions": [
+            "What are the primary user journeys that the gateway needs to support?",
+            "Can you tell me about any rare but critical edge cases you anticipate?",
+            "How do rate limits and authentication mechanisms interplay in these scenarios?"
+          ]
+        },
+        {
+          "title": "Security & Compliance Integration",
+          "goal": "Investigate how security requirements, especially mTLS and auth integration, are being incorporated into the design and build processes.",
+          "sample_questions": [
+            "What threat models are you applying to the API gateway's design?",
+            "How do you ensure compliance with POL-SEC-001 Least Privilege & JIT Access?",
+            "Can you walk me through the resolution steps for ticket GW-4821 and their impact on design?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Identify dependencies between Orion Edge Gateway and other projects like Aegis IAM or Nimbus Observability.",
+          "sample_questions": [
+            "Which other projects or systems does Orion Edge Gateway depend on for authentication and logging?",
+            "How do these dependencies affect your delivery timelines and risk profile?",
+            "Can you share an example of a cross-project issue and how it was resolved?"
+          ]
+        },
+        {
+          "title": "Risk Management & Trade-offs",
+          "goal": "Discuss major trade-offs made during the Build phase, including performance vs. security, and their implications.",
+          "sample_questions": [
+            "Were there any situations where you had to choose between performance targets and security controls?",
+            "What evidence or metrics did you use to make these decisions?",
+            "How are these trade-offs documented and communicated to stakeholders?"
+          ]
+        },
+        {
+          "title": "Future Outlook & Continuous Improvement",
+          "goal": "Gather insights on planned improvements, monitoring, and feedback loops post-Build phase.",
+          "sample_questions": [
+            "What are the next steps after the Build phase completes?",
+            "How will you monitor p95 latency against SLA-ORI-02 in production?",
+            "What feedback mechanisms are in place to iterate on the gateway's UX and security?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26331,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

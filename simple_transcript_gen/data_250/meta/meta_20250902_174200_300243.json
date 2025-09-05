@@ -1,0 +1,163 @@
+{
+  "id": "20250902_174200_300243",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 171,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Role Context & Daily Workflows",
+          "goal": "Understand the interviewee’s day-to-day responsibilities in relation to the Phoenix Feature Store and how they interact with other teams.",
+          "sample_questions": [
+            "Can you walk me through a typical day working on Phoenix Feature Store?",
+            "Which other departments do you collaborate with most frequently, and how?",
+            "How does your MLOps work connect to the UX or data consumption side?"
+          ]
+        },
+        {
+          "title": "Feature Store Architecture & User Flows",
+          "goal": "Explore how the architecture supports both online and offline serving and the implications for end-user experience.",
+          "sample_questions": [
+            "Can you describe the main components of the Phoenix Feature Store architecture?",
+            "How do you manage consistency between online and offline feature data?",
+            "What are the key pain points for data scientists or analysts using the store?"
+          ]
+        },
+        {
+          "title": "Model CI/CD & Deployment Experience",
+          "goal": "Investigate the tooling and processes for deploying models that consume features from the store.",
+          "sample_questions": [
+            "What does the CI/CD pipeline look like for models depending on Phoenix?",
+            "How do you validate feature availability and correctness before deployment?",
+            "Can you share an example of a deployment that went particularly well or poorly?"
+          ]
+        },
+        {
+          "title": "Drift Monitoring & Incident Response",
+          "goal": "Understand how drift is detected, reported, and mitigated in the Phoenix Feature Store context.",
+          "sample_questions": [
+            "What types of drift do you monitor for and how are alerts configured?",
+            "How do you prioritize and respond to drift-related incidents?",
+            "Can you recall a recent drift incident and the steps taken to resolve it?"
+          ]
+        },
+        {
+          "title": "Integration with Other Systems",
+          "goal": "Uncover dependencies and integration patterns between Phoenix and other portfolio projects or external systems.",
+          "sample_questions": [
+            "Does Phoenix integrate with the Helios Datalake or Mercury Messaging, and if so, how?",
+            "What challenges have you faced in cross-project data consistency or latency?",
+            "Are there shared runbooks or RFCs that guide these integrations?"
+          ]
+        },
+        {
+          "title": "Future Improvements & Risks",
+          "goal": "Discuss planned enhancements, potential risks, and trade-offs in design or process.",
+          "sample_questions": [
+            "What upcoming changes are planned for Phoenix to improve user experience?",
+            "Are there any technical debts or architectural risks you’re concerned about?",
+            "How do you balance rapid iteration with stability and compliance?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27057,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

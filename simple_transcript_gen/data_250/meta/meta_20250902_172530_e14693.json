@@ -1,0 +1,154 @@
+{
+  "id": "20250902_172530_e14693",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 155,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und QA-Rolle",
+          "goal": "Früh verstehen, welche Rolle QA im Hera QA Platform Projekt spielt und wie die Person den Kontext sieht.",
+          "sample_questions": [
+            "Können Sie mir kurz beschreiben, wie Sie in das Hera QA Platform Projekt eingebunden sind?",
+            "What were the main QA challenges when you joined this project?",
+            "Wie beeinflusst der aktuelle Build-Phase-Status Ihre Teststrategie?"
+          ]
+        },
+        {
+          "title": "Risk-Based Testing und Traceability",
+          "goal": "Tiefe Einblicke in die Umsetzung von POL-QA-014 im Projekt und deren Auswirkungen auf UX-relevante Aspekte gewinnen.",
+          "sample_questions": [
+            "Wie operationalisieren Sie risk-based testing hier konkret?",
+            "Can you give me an example where traceability uncovered a UX-impacting defect?",
+            "Welche Tools oder Artefakte nutzen Sie für die Nachvollziehbarkeit der Testabdeckung?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Plattformen",
+          "goal": "Verstehen, wie QA mit Subsystemen wie Helios Datalake oder Nimbus Observability zusammenarbeitet.",
+          "sample_questions": [
+            "Gibt es Schnittstellen zu anderen Projekten, die besondere QA-Herausforderungen darstellen?",
+            "How do you align test orchestration with observability signals from Nimbus?",
+            "Welche Lessons Learned gab es bei der Integration mit Helios Datalake?"
+          ]
+        },
+        {
+          "title": "Flaky Tests und Analytics",
+          "goal": "Einblicke in die Analyse und Reduktion von flaky Tests und deren Einfluss auf Release-Entscheidungen.",
+          "sample_questions": [
+            "Wie identifizieren und klassifizieren Sie flaky tests?",
+            "Can you describe a situation where analytics changed your release go/no-go decision?",
+            "Welche KPIs nutzen Sie, um Verbesserungen zu messen?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Risiken und Trade-offs",
+          "goal": "Am Ende konkrete Entscheidungen und deren Begründung aus QA-Perspektive festhalten.",
+          "sample_questions": [
+            "Gab es kürzlich eine Entscheidung, bei der Sie bewusst ein Risiko in Kauf genommen haben? Warum?",
+            "How do you balance speed and thoroughness in the current build phase?",
+            "Welche Evidenz (z.B. Tickets, Runbooks) stützt diese Entscheidungen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26454,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

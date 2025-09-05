@@ -1,0 +1,163 @@
+{
+  "id": "20250902_133750_345416",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 82,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Context & Role in Aegis IAM",
+          "goal": "Understand interviewee's responsibilities, current operational posture, and security priorities in IAM context",
+          "sample_questions": [
+            "Can you walk me through your day-to-day responsibilities in the Aegis IAM project?",
+            "How do you ensure compliance with POL-SEC-001 in ongoing operations?",
+            "What are the most common security incidents you encounter in IAM?"
+          ]
+        },
+        {
+          "title": "Threat Modeling & Access Controls",
+          "goal": "Explore how threats are identified, modeled, and mitigated, and how least privilege is enforced",
+          "sample_questions": [
+            "What is your process for threat modeling new IAM features before deployment?",
+            "How do you balance usability and strict RBAC enforcement?",
+            "Can you give an example where JIT access prevented a potential breach?"
+          ]
+        },
+        {
+          "title": "Cross-system Dependencies",
+          "goal": "Investigate dependencies between IAM and other Novereon systems, especially during incidents",
+          "sample_questions": [
+            "How does Aegis IAM integrate with Orion Edge Gateway for authentication flows?",
+            "What happens to dependent systems like Helios Datalake if IAM is degraded?",
+            "Can you describe a past incident where IAM and Nimbus Observability had to coordinate?"
+          ]
+        },
+        {
+          "title": "Runbooks & Incident Response",
+          "goal": "Understand the operational guidance and runbook usage in security incident handling",
+          "sample_questions": [
+            "How often do you refer to RB-IAM-075 Access Revocation Emergency?",
+            "Can you walk me through a step you’ve modified in that runbook and why?",
+            "What’s the escalation path if revocation fails?"
+          ]
+        },
+        {
+          "title": "Metrics, SLAs, and Continuous Improvement",
+          "goal": "Examine how performance, SLAs, and post-incident reviews drive security improvements",
+          "sample_questions": [
+            "Which SLA or SLO metrics are most relevant for IAM security posture?",
+            "How do you feed incident learnings into RFC-903 Policy-as-Code conventions?",
+            "Have you ever had to propose SLA changes due to evolving threat landscapes?"
+          ]
+        },
+        {
+          "title": "Tradeoffs & Future Risks",
+          "goal": "Discuss anticipated challenges, tradeoffs in design, and risk mitigation strategies",
+          "sample_questions": [
+            "What tradeoffs have you made between speed of access provisioning and security rigor?",
+            "How do you foresee evolving compliance requirements affecting IAM architecture?",
+            "What’s the highest-impact risk you think we’re underestimating right now?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25691,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

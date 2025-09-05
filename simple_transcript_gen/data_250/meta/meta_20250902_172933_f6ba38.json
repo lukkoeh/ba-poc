@@ -1,0 +1,163 @@
+{
+  "id": "20250902_172933_f6ba38",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 159,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Overview and Scope Alignment",
+          "goal": "Confirm understanding of Orion Edge Gateway scope, objectives, and current build phase priorities.",
+          "sample_questions": [
+            "Can you walk me through the current scope of the Orion Edge Gateway and any changes since the initial charter?",
+            "What are the primary deliverables for this build phase, and how do they map to the SLA-ORI-02?",
+            "How have you ensured scope control given the evolving auth integration requirements?"
+          ]
+        },
+        {
+          "title": "SLA and SLO Management",
+          "goal": "Assess how SLA-ORI-02 p95 latency targets are being planned for and measured.",
+          "sample_questions": [
+            "What mechanisms are in place to monitor p95 latency in near real-time during the build phase?",
+            "How are you coordinating with the SRE team to ensure readiness for these SLAs?",
+            "Have you identified any risk areas that could jeopardize meeting the latency objectives?"
+          ]
+        },
+        {
+          "title": "Integration with Security and IAM",
+          "goal": "Understand dependencies on Aegis IAM and Poseidon Networking for authentication and mTLS.",
+          "sample_questions": [
+            "Can you describe the integration points between Orion Edge Gateway and Aegis IAM for SSO and RBAC?",
+            "How are mTLS handshake issues (e.g., GW-4821) being tracked and mitigated?",
+            "What is the fallback plan if Poseidon Networking changes its mTLS policy matrix mid-build?"
+          ]
+        },
+        {
+          "title": "Risk Management and Contingency Planning",
+          "goal": "Explore the interviewee's approach to identifying, documenting, and mitigating risks.",
+          "sample_questions": [
+            "What are your top three risks for this project and how are they documented?",
+            "Do you have any runbooks or RFCs that directly address these risks?",
+            "How do you balance risk aversion with delivery velocity in this build phase?"
+          ]
+        },
+        {
+          "title": "Stakeholder Communication and Alignment",
+          "goal": "Evaluate how stakeholder expectations are managed and communicated.",
+          "sample_questions": [
+            "How frequently are you updating stakeholders on SLA performance and integration status?",
+            "What tools or dashboards are you using to maintain transparency?",
+            "How do you handle conflicting priorities between Platform, Security, and Architecture teams?"
+          ]
+        },
+        {
+          "title": "Post-Build Readiness",
+          "goal": "Assess preparations for the transition from build to operate phase.",
+          "sample_questions": [
+            "What criteria will you use to declare readiness for production rollout?",
+            "Are there any gaps in runbook coverage, such as RB-GW-011, that could delay go-live?",
+            "How will you validate that all auth integration points meet compliance and security requirements?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26100,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

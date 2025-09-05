@@ -1,0 +1,168 @@
+{
+  "id": "20250902_164450_513105",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 118,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_cto",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & UX Role",
+          "goal": "Establish the UX lead’s responsibilities and constraints within the Atlas Mobile pilot, including interactions with other departments and policy adherence.",
+          "sample_questions": [
+            "Can you walk me through your primary responsibilities on Atlas Mobile during the pilot phase?",
+            "How do you ensure UX decisions align with Novereon’s values like 'Safety First' and 'Sustainable Velocity'?",
+            "What interdependencies exist between your UX team and the Mobile or Platform departments?"
+          ]
+        },
+        {
+          "title": "Design System & Accessibility",
+          "goal": "Explore how the design system (DS-ATLAS v2) supports accessibility and consistent user experience across platforms.",
+          "sample_questions": [
+            "How does DS-ATLAS v2 address cross-platform consistency for critical workflows?",
+            "What accessibility standards are you targeting, and how are they validated?",
+            "Have you encountered any conflicts between design system constraints and feature velocity?"
+          ]
+        },
+        {
+          "title": "Offline Sync & Feature Flags",
+          "goal": "Investigate technical and UX considerations for offline sync and feature flag integration, including failure modes and user feedback loops.",
+          "sample_questions": [
+            "How do offline sync mechanisms influence the UX for intermittent connectivity scenarios?",
+            "Can you describe a case where a feature flag rollout impacted user perception?",
+            "What’s your process for collaborating with SRE and QA teams when sync issues arise?"
+          ]
+        },
+        {
+          "title": "Cross-Department Collaboration & Risk Management",
+          "goal": "Understand how UX integrates with QA, Security, and SRE for risk-based testing and incident response in the pilot.",
+          "sample_questions": [
+            "How do you contribute to runbooks like RB-MOB-021 Crash Loop Mitigation from a UX perspective?",
+            "Have you been involved in applying policy POL-QA-014 Risk-Based Testing & Traceability to Atlas Mobile?",
+            "What’s the escalation path when a UX-related defect is found in production?"
+          ]
+        },
+        {
+          "title": "Strategic Decisions & Trade-offs",
+          "goal": "Discuss how the UX lead and CTO balance innovation with stability, referencing concrete artifacts and metrics.",
+          "sample_questions": [
+            "Can you share an example of a trade-off between rapid feature delivery and maintaining UX quality?",
+            "How do SLA commitments, if any, shape UX design priorities?",
+            "What evidence or metrics do you rely on when deciding to pivot a UX approach mid-pilot?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27207,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

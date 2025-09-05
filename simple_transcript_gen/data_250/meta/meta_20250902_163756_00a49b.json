@@ -1,0 +1,163 @@
+{
+  "id": "20250902_163756_00a49b",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 112,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Overview & Role Context",
+          "goal": "Establish understanding of Atlas Mobile's goals, pilot scope, and the UX Lead's responsibilities.",
+          "sample_questions": [
+            "Can you summarize the core objectives of the Atlas Mobile pilot from a UX perspective?",
+            "What are your primary responsibilities as the UX Lead on this project?",
+            "How does the pilot phase influence your design and research approach?"
+          ]
+        },
+        {
+          "title": "Design System & Accessibility",
+          "goal": "Explore the DS-ATLAS v2 tokenized components and accessibility considerations.",
+          "sample_questions": [
+            "How did the DS-ATLAS v2 tokenized components influence the cross-platform design?",
+            "What accessibility standards are you targeting and how are they validated?",
+            "Can you describe any challenges in aligning design tokens with offline sync features?"
+          ]
+        },
+        {
+          "title": "Feature Flags & Experimentation",
+          "goal": "Understand how UX is impacted by feature flag strategy and experimentation.",
+          "sample_questions": [
+            "How do you ensure consistent UX when features are toggled on/off via flags?",
+            "What collaboration exists between UX and engineering to manage user experience in A/B tests?",
+            "Have you encountered any conflicts between rapid experimentation and design consistency?"
+          ]
+        },
+        {
+          "title": "Cross-Department Collaboration",
+          "goal": "Identify how UX works with SRE, QA, and Platform teams to meet SLAs and policies.",
+          "sample_questions": [
+            "How do you integrate feedback from QA's risk-based testing into UX iterations?",
+            "Can you give an example where SRE input changed a design decision?",
+            "How do policies like POL-SEC-001 influence UX workflows?"
+          ]
+        },
+        {
+          "title": "Incident Response & UX",
+          "goal": "Link UX decisions to operational runbooks such as RB-MOB-021 Crash Loop Mitigation.",
+          "sample_questions": [
+            "How are UX considerations included in incident response for mobile crashes?",
+            "Have you had to adjust designs due to operational constraints from runbooks?",
+            "Can you walk through a case where a crash loop impacted user trust and how you responded?"
+          ]
+        },
+        {
+          "title": "Long-term Sustainability & Risks",
+          "goal": "Discuss tradeoffs, risks, and evidence-based decisions for scaling beyond pilot.",
+          "sample_questions": [
+            "What are the key UX risks if Atlas Mobile scales rapidly?",
+            "How do you balance speed of delivery with maintaining accessibility standards?",
+            "Can you share evidence or metrics that informed a major design tradeoff?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27159,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

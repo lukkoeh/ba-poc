@@ -1,0 +1,145 @@
+{
+  "id": "20250902_175643_929cad",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 186,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & UX-Rolle",
+          "goal": "Verstehen, wie die UX-Perspektive in der Pilotphase von Atlas Mobile eingebracht wurde",
+          "sample_questions": [
+            "Können Sie den aktuellen Stand der Atlas Mobile Pilotphase aus UX-Sicht beschreiben?",
+            "Wie haben Sie die Feature Flags genutzt, um unterschiedliche UX-Varianten zu testen?",
+            "Welche Accessibility-Anforderungen haben Sie in dieser Phase priorisiert?"
+          ]
+        },
+        {
+          "title": "Sicherheitsrelevante UX-Entscheidungen",
+          "goal": "Aufdecken, wie Designentscheidungen Sicherheits- und Compliance-Risiken beeinflussen",
+          "sample_questions": [
+            "Wie wurde die Authentifizierung in die UX integriert, ohne die Benutzerfreundlichkeit zu beeinträchtigen?",
+            "Gab es Konflikte zwischen 'Least Privilege' (POL-SEC-001) und intuitiver Bedienbarkeit?",
+            "Wie gehen Sie mit sensiblen Daten im Offline-Sync aus UX-Sicht um?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Systemen",
+          "goal": "Ergründen, wie Atlas Mobile UX mit anderen Projekten des Portfolios zusammenspielt",
+          "sample_questions": [
+            "Welche Abhängigkeiten bestehen zu Aegis IAM oder Orion Edge Gateway aus UX-Sicht?",
+            "Wie fließen Observability-Daten aus Nimbus in Ihre Designentscheidungen ein?",
+            "Gab es Anpassungen am Design System (DS-ATLAS v2), um mTLS- oder RBAC-Anforderungen zu erfüllen?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Lessons Learned",
+          "goal": "Identifizieren von getroffenen Entscheidungen, deren Begründung und den Umgang mit Risiken",
+          "sample_questions": [
+            "Welche UX-Entscheidung hat das größte Sicherheitsrisiko mit sich gebracht und wie wurde dies mitigiert?",
+            "Wie haben Sie abgewogen zwischen Time-to-Market und vollständiger Accessibility-Implementierung?",
+            "Welche Belege (Runbooks, Tickets, RFCs) können Ihre Entscheidungen stützen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28189,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

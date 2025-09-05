@@ -1,0 +1,163 @@
+{
+  "id": "20250902_112210_317a80",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 53,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Kontext",
+          "goal": "Verstehen, wie der SRE die Rolle im Nimbus Observability Projekt interpretiert und welche Kernaufgaben er wahrnimmt.",
+          "sample_questions": [
+            "Können Sie mir kurz beschreiben, wie Ihr typischer Tag im Nimbus-Team aussieht?",
+            "Welche Hauptziele verfolgen Sie aktuell in der Build-Phase des Projekts?",
+            "How do you see your SRE role influencing the UX of internal observability tools?"
+          ]
+        },
+        {
+          "title": "Tooling & Runbooks",
+          "goal": "Erfassen, wie bestehende Runbooks (z.B. RB-OBS-033) genutzt werden, um Vorfälle zu managen.",
+          "sample_questions": [
+            "Können Sie mir ein Beispiel geben, wie Sie RB-OBS-033 zuletzt angewendet haben?",
+            "What gaps do you notice between runbook instructions and actual incident conditions?",
+            "Wie dokumentieren Sie Abweichungen oder Lessons Learned aus einem Incident?"
+          ]
+        },
+        {
+          "title": "SLOs, SLAs & Incident Analytics",
+          "goal": "Verstehen, wie Service Level Objectives und SLAs in Entscheidungen einfließen.",
+          "sample_questions": [
+            "Wie arbeiten Sie mit SLOs im Kontext von OpenTelemetry-Daten?",
+            "Can you walk me through how you correlate incident analytics with SLA breach risks?",
+            "Welche internen Policies oder RFCs beeinflussen Ihre Entscheidungen hier?"
+          ]
+        },
+        {
+          "title": "Subsystem-Interaktionen",
+          "goal": "Aufzeigen, wie Observability-Daten mit anderen Projekten (z.B. Helios Datalake, Orion Edge Gateway) verknüpft werden.",
+          "sample_questions": [
+            "Wie fließen Metriken aus Orion Edge Gateway in Ihre Observability-Pipelines ein?",
+            "Do you also integrate Helios Datalake data for historical trend analysis?",
+            "Welche Herausforderungen entstehen, wenn mehrere Subsysteme gleichzeitig auffällig werden?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Risiken",
+          "goal": "Diskutieren, wie Entscheidungen unter Unsicherheit getroffen werden und welche Risiken akzeptiert werden.",
+          "sample_questions": [
+            "Welche Kompromisse mussten Sie zwischen Sampling-Strategien (RFC-1114) und Datenvollständigkeit eingehen?",
+            "How do you justify risk acceptance when tuning down alert sensitivity?",
+            "Wie dokumentieren Sie diese Entscheidungen, z.B. in Tickets oder Audit-Logs?"
+          ]
+        },
+        {
+          "title": "Abschluss & Empfehlungen",
+          "goal": "Zusammenfassung der wichtigsten Erkenntnisse und mögliche Verbesserungen für die UX.",
+          "sample_questions": [
+            "Was würden Sie sich an der UX der Observability-Tools am meisten verbessert wünschen?",
+            "If you could add one feature tomorrow, what would it be and why?",
+            "Gibt es Learnings aus anderen Projekten, die Sie hier umsetzen würden?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26294,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "20250902_130155_5567b2",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 74,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und QA-Rolle",
+          "goal": "Verstehen, wie der QA Lead in der Build-Phase der Hera QA Platform eingebunden ist und welche Kernverantwortlichkeiten bestehen.",
+          "sample_questions": [
+            "Können Sie mir kurz schildern, wie Ihr Tag-zu-Tag im Hera QA Platform Projekt aussieht?",
+            "Welche QA-Ziele wurden für die Build-Phase definiert?",
+            "How do you interact with other departments like Platform or Data during this phase?"
+          ]
+        },
+        {
+          "title": "Risk-Based Testing & Traceability",
+          "goal": "Erfassen, wie POL-QA-014 praktisch umgesetzt wird und welche Tools/Methoden verwendet werden.",
+          "sample_questions": [
+            "Wie priorisieren Sie Testfälle basierend auf Risiko?",
+            "Could you walk me through your traceability matrix for a recent release?",
+            "Wie stellen Sie sicher, dass Änderungen aus RFC-1770 korrekt abgebildet werden?"
+          ]
+        },
+        {
+          "title": "Interaktion mit Test Orchestration & Analytics",
+          "goal": "Verstehen, wie das Team mit flaky tests umgeht und welche Strategien zur Orchestrierung genutzt werden.",
+          "sample_questions": [
+            "Welche Signale nutzen Sie, um flaky tests zu identifizieren?",
+            "How do you feed analytics insights back into the test plan?",
+            "Gibt es im Runbook RB-QA-051 Schritte, die Sie regelmäßig anpassen?"
+          ]
+        },
+        {
+          "title": "Zusammenarbeit mit UX & Feedback Loops",
+          "goal": "Explorieren, wie QA und UX zusammenarbeiten, um Usability-Aspekte in Tests einzubinden.",
+          "sample_questions": [
+            "Wie fließen UX-Research-Ergebnisse in Ihre Teststrategie ein?",
+            "Can you give an example where a UX finding changed your QA priorities?",
+            "Welche ungeschriebenen Regeln gibt es für die Zusammenarbeit mit dem UX-Team?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs und Risiken",
+          "goal": "Tiefe Einsicht in Entscheidungen, getroffene Kompromisse und bekannte Risiken mit Belegen aus Artefakten.",
+          "sample_questions": [
+            "Gab es Situationen, in denen Sie bewusst Testabdeckung reduziert haben, um eine Deadline zu halten?",
+            "How did you balance SLA requirements with the need for rapid iteration?",
+            "Können Sie ein Beispiel für ein Risiko nennen, das Sie dokumentiert, aber bewusst akzeptiert haben?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27058,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

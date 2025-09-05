@@ -1,0 +1,154 @@
+{
+  "id": "20250902_135127_530848",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 85,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Context & Role in Vesta FinOps",
+          "goal": "Understand interviewee’s responsibilities, how they interact with Vesta FinOps scope, and the operational environment.",
+          "sample_questions": [
+            "Can you walk me through your day-to-day responsibilities within the Vesta FinOps project?",
+            "How does your work tie into the company’s mission of cloud-native data & platform engineering for regulated industries?",
+            "Which policies or guardrails do you interact with most frequently, and how do they shape your workflows?"
+          ]
+        },
+        {
+          "title": "Current Cloud Cost Optimization Processes",
+          "goal": "Explore the existing mechanisms, tools, and metrics used in cost optimization, and how they align with company values.",
+          "sample_questions": [
+            "What are the primary KPIs or SLOs you track for cloud cost efficiency?",
+            "Could you describe the flow from anomaly detection to budget adjustments?",
+            "How do runbooks like RB-FIN-007 Idle Resource Reaper fit into your operational playbook?"
+          ]
+        },
+        {
+          "title": "Cross-Project FinOps Impacts",
+          "goal": "Identify how FinOps decisions affect other projects in the portfolio, especially those in Build or Scale phases.",
+          "sample_questions": [
+            "Can you give an example of a cost optimization decision in Vesta FinOps that impacted a Build-phase project like Nimbus Observability?",
+            "How do you coordinate with SRE or Platform teams when implementing new quotas from RFC-1502?",
+            "What’s the process for resolving conflicts between cost guardrails and performance SLAs?"
+          ]
+        },
+        {
+          "title": "Evidence-Driven Decision Making",
+          "goal": "Understand how the interviewee uses data, runbooks, and RFCs to support or challenge decisions.",
+          "sample_questions": [
+            "Can you describe a recent case where you used evidence from an audit or SLA to justify a cost-related change?",
+            "How do you balance historical spend data with forecast models when making decisions?",
+            "What unwritten heuristics do you rely on when deciding whether to enforce a budget cap?"
+          ]
+        },
+        {
+          "title": "Trade-offs, Risks, and Future Planning",
+          "goal": "Discuss trade-offs between cost savings, performance, and compliance; explore risk management and forward-looking strategies.",
+          "sample_questions": [
+            "What’s the most challenging trade-off you’ve faced between cost optimization and SLA commitments?",
+            "How do you quantify and communicate the blast radius of a cost-saving measure?",
+            "What future capabilities would you like to see in Vesta FinOps to better manage these trade-offs?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26929,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "20250902_115133_b50c23",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 59,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Ziele",
+          "goal": "Ein gemeinsames Verständnis der aktuellen Skalierungsphase und der Business-Ziele herstellen.",
+          "sample_questions": [
+            "Können Sie mir den aktuellen Stand des Helios Datalake in eigenen Worten zusammenfassen?",
+            "Welche KPIs sind für Sie als Product Owner in dieser Phase am wichtigsten?",
+            "How do you align the technical roadmap with regulatory constraints?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Datenflüsse",
+          "goal": "Verständnis für die Architektur, ELT-Pipelines und Abhängigkeiten zu anderen Plattformen entwickeln.",
+          "sample_questions": [
+            "Wie ist die ELT-Pipeline von Kafka bis Snowflake momentan aufgebaut?",
+            "Welche Rolle spielt das dbt-Modelling in Ihrer Release-Planung?",
+            "Can you explain how ingestion failover (RB-ING-042) interacts with partitioning strategies (RFC-1287)?"
+          ]
+        },
+        {
+          "title": "Stakeholder & Governance",
+          "goal": "Rollen, Verantwortlichkeiten und Entscheidungsprozesse verstehen.",
+          "sample_questions": [
+            "Welche internen Stakeholder sind am stärksten involviert?",
+            "Wie setzen Sie die Policy POL-SEC-001 in der täglichen Arbeit um?",
+            "How do you handle conflicting priorities between Platform and Data departments?"
+          ]
+        },
+        {
+          "title": "SLOs, SLAs & Incident Response",
+          "goal": "Serviceziele, Supportprozesse und Lessons Learned aus Incidents erkunden.",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass SLA-HEL-01 (99,9% Availability) eingehalten wird?",
+            "Welche Runbooks kommen bei Ingestion-Problemen zum Einsatz?",
+            "Can you walk me through a recent incident and the trade-offs made during mitigation?"
+          ]
+        },
+        {
+          "title": "Zukunftsplanung & Risiken",
+          "goal": "Langfristige Strategie, Risiken und mögliche Trade-offs identifizieren.",
+          "sample_questions": [
+            "Welche Erweiterungen sind für die nächsten zwei Quartale geplant?",
+            "Wie bewerten Sie mögliche Risiken im Zusammenhang mit wachsenden Datenvolumina?",
+            "What is your approach to balancing sustainable velocity with safety-first values?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26936,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

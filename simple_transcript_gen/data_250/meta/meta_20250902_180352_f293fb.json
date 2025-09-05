@@ -1,0 +1,168 @@
+{
+  "id": "20250902_180352_f293fb",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 192,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_sre",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projekt- und Rollenverständnis",
+          "goal": "Klären, wie die Kandidaten ihre Rollen im Kontext des Orion Edge Gateway Projekts sehen und welche Verantwortung sie für Sicherheit und Betrieb übernehmen.",
+          "sample_questions": [
+            "Können Sie bitte kurz umreißen, welche Hauptaufgaben Sie im Orion Edge Gateway Projekt haben?",
+            "Wie ist die Zusammenarbeit zwischen DevOps und SRE bei Ihnen konkret organisiert?",
+            "Welche sicherheitsrelevanten Anforderungen sind Ihnen zu Beginn des Projekts kommuniziert worden?"
+          ]
+        },
+        {
+          "title": "Architektur und Sicherheitsintegration",
+          "goal": "Verstehen, wie Sicherheitsanforderungen in die API Gateway Architektur integriert werden, inkl. Authentifizierung, Autorisierung und mTLS.",
+          "sample_questions": [
+            "Wie haben Sie die mTLS-Handshake-Implementierung geplant, um Risiken wie in Ticket GW-4821 zu vermeiden?",
+            "Welche Policy-as-Code Ansätze setzen Sie für Auth-Integration ein?",
+            "Wie stellen Sie sicher, dass Rate Limiting nicht versehentlich legitimen Traffic blockiert?"
+          ]
+        },
+        {
+          "title": "Betrieb, Monitoring und Incident Response",
+          "goal": "Erfassen, wie der Betrieb abgesichert ist, welche Runbooks genutzt werden und wie SLAs überwacht werden.",
+          "sample_questions": [
+            "Welche Metriken nutzen Sie, um das SLA-ORI-02 p95 Latency < 120ms einzuhalten?",
+            "Können Sie mir den Ablauf aus RB-GW-011 für Blue/Green Deployments schildern?",
+            "Wie reagieren Sie, wenn ein Auth-Integration-Service plötzlich fehlschlägt?"
+          ]
+        },
+        {
+          "title": "Cross-Project Abhängigkeiten",
+          "goal": "Analysieren, welche Abhängigkeiten zu anderen Projekten bestehen und wie diese koordiniert werden.",
+          "sample_questions": [
+            "Gibt es Schnittstellen zur Aegis IAM Plattform und wie sichern Sie diese ab?",
+            "Wie koordinieren Sie sich mit Nimbus Observability, um API Gateway Logs und Traces zu korrelieren?",
+            "Welche Lessons Learned aus Helios Datalake oder Poseidon Networking konnten Sie übertragen?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und Lessons Learned",
+          "goal": "Diskutieren, welche Entscheidungen sicherheits- oder performancekritisch waren, welche Kompromisse eingegangen wurden und welche Risiken bestehen.",
+          "sample_questions": [
+            "Gab es einen Moment, in dem Sie zwischen Sicherheit und Performance abwägen mussten? Wie haben Sie entschieden?",
+            "Welche Risiken sehen Sie aktuell noch im mTLS-Setup?",
+            "Wie dokumentieren Sie diese Entscheidungen, z.B. in RFCs oder Runbooks?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28954,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

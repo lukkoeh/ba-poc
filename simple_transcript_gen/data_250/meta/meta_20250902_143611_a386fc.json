@@ -1,0 +1,163 @@
+{
+  "id": "20250902_143611_a386fc",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 95,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Projektkontext",
+          "goal": "Ein grundlegendes Verständnis des Hera QA Platform Projekts und der Rolle des QA Leads herstellen.",
+          "sample_questions": [
+            "Können Sie mir kurz erzählen, wie Sie in das Hera QA Platform Projekt involviert wurden?",
+            "Welche Kernziele verfolgen Sie aktuell in der Build-Phase?",
+            "How does your QA leadership role intersect with the unified test orchestration scope?"
+          ]
+        },
+        {
+          "title": "Risk-Based Testing & Traceability",
+          "goal": "Vertiefung der QA-Strategien, speziell in Bezug auf Policy POL-QA-014 und die Umsetzung im Projekt.",
+          "sample_questions": [
+            "Wie setzen Sie risk-based testing in der täglichen Arbeit um?",
+            "Can you walk me through a concrete traceability workflow from requirement to test evidence?",
+            "Welche Tools oder internen Runbooks wie RB-QA-051 nutzen Sie, um Release Candidate Gates zu steuern?"
+          ]
+        },
+        {
+          "title": "User Experience & QA Schnittstellen",
+          "goal": "Verstehen, wie QA-Methoden die UX beeinflussen und welche Feedbackschleifen existieren.",
+          "sample_questions": [
+            "Wie fließen UX-Research-Ergebnisse in Ihre Testplanung ein?",
+            "Can you give an example where flaky test analytics led to a UX change?",
+            "Gibt es ungeschriebene Regeln, wie QA und UX-Teams bei Novereon zusammenarbeiten?"
+          ]
+        },
+        {
+          "title": "Multi-Projekt Abhängigkeiten",
+          "goal": "Aufdecken von Verknüpfungen zwischen Hera QA Platform und anderen Projekten im Portfolio.",
+          "sample_questions": [
+            "Gibt es Abhängigkeiten zu Projekten wie Helios Datalake oder Nimbus Observability?",
+            "How do cross-project SLOs affect your release criteria?",
+            "Welche Herausforderungen entstehen bei der Orchestrierung von Tests über mehrere Plattformen hinweg?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Risiken",
+          "goal": "Analyse von getroffenen Entscheidungen, deren Begründung und möglichen Risiken.",
+          "sample_questions": [
+            "Erzählen Sie von einer Entscheidung, bei der Sie zwischen Testabdeckung und Time-to-Market abwägen mussten.",
+            "What evidence (e.g. RFC-1770, OBS runbooks) did you use to justify that decision?",
+            "Wie gehen Sie mit dem Risiko um, dass zu strikte Release Gates Innovation verlangsamen?"
+          ]
+        },
+        {
+          "title": "Abschluss & Reflexion",
+          "goal": "Zusammenfassung der wichtigsten Erkenntnisse und Ausblick auf nächste Schritte.",
+          "sample_questions": [
+            "Wenn Sie einen Aspekt der aktuellen QA-Strategie ändern könnten, welcher wäre das?",
+            "What would an ideal collaboration between QA and UX look like for you?",
+            "Gibt es Lessons Learned, die Sie aus dieser Build-Phase in die nächste mitnehmen werden?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27731,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "id": "20250902_165041_09bc14",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 123,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_da",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rollenklärung",
+          "goal": "Verstehen der spezifischen Verantwortlichkeiten im Helios Datalake Projekt und Abgleich mit Unternehmenswerten.",
+          "sample_questions": [
+            "Können Sie mir bitte Ihren aktuellen Verantwortungsbereich im Helios Datalake Projekt schildern?",
+            "Wie setzen Sie den Wert 'Safety First' in Ihrer täglichen Arbeit um?",
+            "Welche Schnittstellen zu anderen Abteilungen haben Sie im Rahmen dieses Projekts?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Automatisierung",
+          "goal": "Einblick in die technische Landschaft, IaC-Umsetzung und Automatisierungsstrategien im Datalake-Kontext.",
+          "sample_questions": [
+            "Welche IaC-Tools setzen Sie aktuell für die Provisionierung der Snowflake- und Kafka-Ressourcen ein?",
+            "Wie haben Sie die Ingestion-Pipelines automatisiert und welche Runbooks wie RB-ING-042 kommen dabei zum Einsatz?",
+            "Welche Herausforderungen gab es bei der dbt-Modellierung in Bezug auf Lineage und Abhängigkeiten?"
+          ]
+        },
+        {
+          "title": "Datenflüsse & Qualitätssicherung",
+          "goal": "Verstehen der ELT-Flüsse, dbt-Modelle, Airflow-Orchestrierung und QA-Strategien.",
+          "sample_questions": [
+            "Wie stellen Sie die Datenqualität entlang der gesamten Pipeline sicher?",
+            "Welche Rolle spielt Airflow bei der Steuerung der Batch Loads, insbesondere im Kontext von RFC-1287?",
+            "Wie adressieren Sie Flaky Tests oder inkonsistente Daten im Scale-Betrieb?"
+          ]
+        },
+        {
+          "title": "Monitoring & Incident Response",
+          "goal": "Erfassen der Strategien für Observability, Alerting und Incident Management.",
+          "sample_questions": [
+            "Welche Metriken überwachen Sie, um das SLA-HEL-01 einzuhalten?",
+            "Wie gehen Sie mit Alert Fatigue um, insbesondere bei Kafka-Ingestion-Fehlern?",
+            "Können Sie einen konkreten Incident schildern, bei dem RB-ING-042 angewendet wurde?"
+          ]
+        },
+        {
+          "title": "Schnittstellen & Abhängigkeiten",
+          "goal": "Analyse der Integration mit anderen Plattform- oder Data-Projekten und deren Einfluss auf den Betrieb.",
+          "sample_questions": [
+            "Wie interagiert Helios Datalake mit Quasar Billing oder Nimbus Observability?",
+            "Gab es Abhängigkeiten zu Aegis IAM für den JIT-Zugriff auf Daten?",
+            "Welche Lessons Learned aus anderen Projekten haben Sie hier angewendet?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Zukunft",
+          "goal": "Diskussion über getroffene Architekturentscheidungen, Risiken und geplante Verbesserungen.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie aktuell bei der Skalierung der Ingestion?",
+            "Gab es Trade-offs zwischen Latenz und Datenkonsistenz, und wie wurden diese entschieden?",
+            "Welche nächsten Schritte planen Sie, um die BLAST_RADIUS im Fehlerfall zu minimieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29244,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

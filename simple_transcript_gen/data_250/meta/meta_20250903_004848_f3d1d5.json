@@ -1,0 +1,163 @@
+{
+  "id": "20250903_004848_f3d1d5",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 227,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projekt- und Rollenverständnis",
+          "goal": "Klären, wie der UX Lead in Atlas Mobile eingebunden ist und welche Kernaufgaben er übernimmt",
+          "sample_questions": [
+            "Können Sie kurz beschreiben, wie Ihre Rolle als UX Lead im Atlas Mobile Projekt aussieht?",
+            "Wie interagieren Sie mit den anderen Teams wie Platform oder QA im Pilot-Phase-Kontext?",
+            "Welche Hauptziele verfolgen Sie aktuell im Rahmen des Pilotbetriebs?"
+          ]
+        },
+        {
+          "title": "Benutzerforschung und Accessibility",
+          "goal": "Verstehen, wie Benutzerfeedback und Barrierefreiheit in den Designprozess integriert werden",
+          "sample_questions": [
+            "Welche Methoden setzen Sie zur Erhebung von Nutzerfeedback ein?",
+            "Wie stellen Sie sicher, dass Accessibility-Anforderungen durchgängig erfüllt werden?",
+            "Gab es konkrete Accessibility-Findings, die in der Pilotphase zu Änderungen geführt haben?"
+          ]
+        },
+        {
+          "title": "Design System und Feature Flags",
+          "goal": "Ermitteln, wie das Design System mit Feature Flags und der technischen Umsetzung verzahnt ist",
+          "sample_questions": [
+            "Wie binden Sie das DS-ATLAS v2 Tokenized Components Artefakt in die Entwicklung ein?",
+            "Welche Herausforderungen gab es bei der Kombination von Feature Flags mit UI-Komponenten?",
+            "Wie stellen Sie die Konsistenz der UI über verschiedene Plattformen hinweg sicher?"
+          ]
+        },
+        {
+          "title": "Schnittstellen zu QA und Incident Handling",
+          "goal": "Erörtern, wie UX und QA im Pilotbetrieb zusammenarbeiten und auf Incidents reagieren",
+          "sample_questions": [
+            "Wie arbeiten Sie mit QA beim Release Candidate Gate zusammen?",
+            "Gab es in letzter Zeit Crash Loops (RB-MOB-021) und wie war Ihre UX-Rolle bei der Behebung?",
+            "Wie fließen Erkenntnisse aus Incidents in zukünftige UX-Entscheidungen ein?"
+          ]
+        },
+        {
+          "title": "SLA- und SLO-Perspektive aus UX-Sicht",
+          "goal": "Erfassen, wie Service Levels in die UX-Strategie integriert werden",
+          "sample_questions": [
+            "Wie berücksichtigen Sie SLAs oder SLOs in Ihren UX-Entscheidungen?",
+            "Welche Metriken sind für Sie als UX Lead besonders relevant, um Servicequalität zu messen?",
+            "Wie priorisieren Sie UX-Verbesserungen unter SLA-Druck?"
+          ]
+        },
+        {
+          "title": "Zukunft und Skalierung",
+          "goal": "Diskutieren, welche UX-Herausforderungen bei der Skalierung nach der Pilotphase zu erwarten sind",
+          "sample_questions": [
+            "Welche Risiken sehen Sie bei der Skalierung der App in Bezug auf UX?",
+            "Wie planen Sie, das Design System für neue Feature-Sets anzupassen?",
+            "Gibt es Lessons Learned aus der Pilotphase, die Sie unbedingt beibehalten möchten?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28566,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

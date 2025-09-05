@@ -1,0 +1,163 @@
+{
+  "id": "20250902_120139_16f125",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 61,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Overview & Objectives",
+          "goal": "Elicit a clear understanding of the Orion Edge Gateway project objectives, scope boundaries, and alignment with company mission and values.",
+          "sample_questions": [
+            "Can you walk me through the primary objectives of the Orion Edge Gateway initiative?",
+            "How does the scope of the project align with Novereon Systems' mission of cloud-native data and platform engineering for regulated industries?",
+            "What are the key success criteria or KPIs you have established for this build phase?"
+          ]
+        },
+        {
+          "title": "Stakeholder Management & SLA Alignment",
+          "goal": "Understand how SLA-ORI-02 and other service expectations are communicated and agreed upon with stakeholders.",
+          "sample_questions": [
+            "How have you communicated the p95 latency < 120ms target to both technical and business stakeholders?",
+            "Could you describe any conflicts or tradeoffs that emerged between stakeholder expectations and SLA commitments?",
+            "What escalation paths exist if SLA thresholds are at risk during build or early operation?"
+          ]
+        },
+        {
+          "title": "Risk Identification & Mitigation",
+          "goal": "Explore the risk landscape, including technical, operational, and compliance risks, and how they are mitigated.",
+          "sample_questions": [
+            "What are the top three risks you’ve identified for the Orion Edge Gateway build phase?",
+            "How are these risks tracked and reported—do you use specific runbooks or ticketing conventions?",
+            "Can you provide an example of a risk that was mitigated through a change in scope or timeline?"
+          ]
+        },
+        {
+          "title": "Integration with Other Systems",
+          "goal": "Investigate how Orion Edge Gateway integrates with other portfolio projects, such as Aegis IAM or Nimbus Observability.",
+          "sample_questions": [
+            "Which upstream or downstream systems does Orion Edge Gateway directly interface with?",
+            "How have you coordinated with the Aegis IAM team for auth integration?",
+            "What monitoring or observability hooks are planned in collaboration with Nimbus Observability?"
+          ]
+        },
+        {
+          "title": "Operational Readiness & Handover",
+          "goal": "Assess preparations for transition from build to operate, including documentation, training, and incident response alignment.",
+          "sample_questions": [
+            "What is your plan for validating the RB-GW-011 rolling deployment runbook before go-live?",
+            "How will you ensure the operations team is trained and ready to handle incidents like GW-4821?",
+            "Are there any gaps in the current operational readiness checklist that you’re working to close?"
+          ]
+        },
+        {
+          "title": "Decision Log & Tradeoffs",
+          "goal": "Review major decisions taken during the build phase, the tradeoffs considered, and evidence used to support them.",
+          "sample_questions": [
+            "Can you share a recent decision where you had to balance latency targets against feature completeness?",
+            "What documentation or RFCs did you reference to make that decision?",
+            "How do you record and communicate these tradeoffs to ensure transparency?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25193,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

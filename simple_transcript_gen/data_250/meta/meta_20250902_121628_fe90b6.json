@@ -1,0 +1,154 @@
+{
+  "id": "20250902_121628_fe90b6",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 64,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Overview & Objectives",
+          "goal": "Understand the interviewee's view of Orion Edge Gateway's purpose, scope, and success metrics.",
+          "sample_questions": [
+            "Can you walk me through the main objectives of the Orion Edge Gateway project?",
+            "How do you define success for the build phase in relation to the SLA-ORI-02 p95 latency target?",
+            "What are the key customer problems this gateway is intended to solve?"
+          ]
+        },
+        {
+          "title": "SLA Alignment & Customer Impact",
+          "goal": "Explore how the project aligns with organizational SLAs and customer expectations.",
+          "sample_questions": [
+            "How are you ensuring compliance with SLA-ORI-02 during development?",
+            "What monitoring or alerting measures are in place to detect SLA breaches early?",
+            "How do you prioritize backlog items that directly affect latency and availability?"
+          ]
+        },
+        {
+          "title": "Integration & Dependencies",
+          "goal": "Identify integrations with other systems and how dependencies are managed.",
+          "sample_questions": [
+            "Which upstream and downstream services does Orion Edge Gateway depend on?",
+            "Can you describe any cross-project coordination, for example with Aegis IAM for auth integration?",
+            "Have you encountered any dependency-related blockers, and how were they resolved?"
+          ]
+        },
+        {
+          "title": "Operational Readiness & Risk Management",
+          "goal": "Evaluate readiness for deployment and risk mitigation strategies.",
+          "sample_questions": [
+            "What operational runbooks, such as RB-GW-011, are critical for this project?",
+            "How do you assess and mitigate risks like the MTLS handshake bug documented in GW-4821?",
+            "What is your approach to limiting BLAST_RADIUS during rollouts?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Decision-Making",
+          "goal": "Discuss key trade-offs made during the build phase and their rationale.",
+          "sample_questions": [
+            "Can you share a recent decision where you had to balance feature scope against performance targets?",
+            "How do you weigh customer feature requests against technical debt reduction?",
+            "What evidence or metrics do you use to back such decisions, and how do you communicate them to stakeholders?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26104,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

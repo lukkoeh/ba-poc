@@ -1,0 +1,154 @@
+{
+  "id": "20250903_004845_c943de",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 226,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick und strategische Ziele",
+          "goal": "Ein klares Bild vom aktuellen Stand des Orion Edge Gateway Projekts und dessen strategischer Bedeutung im Gesamtportfolio erhalten.",
+          "sample_questions": [
+            "Können Sie den aktuellen Status des Orion Edge Gateway kurz skizzieren?",
+            "Welche strategischen Ziele verfolgen wir mit diesem Gateway in den nächsten 12 Monaten?",
+            "Wie fügt sich das Projekt in die Gesamtarchitektur von Novereon Systems ein?"
+          ]
+        },
+        {
+          "title": "SLA- und SLO-Management",
+          "goal": "Verstehen, wie SLA-ORI-02 (p95 Latency < 120ms) operationalisiert und überwacht wird.",
+          "sample_questions": [
+            "Welche Maßnahmen sind implementiert, um die Latenz-Ziele konstant einzuhalten?",
+            "Wie gehen wir mit Incidents um, die das SLA verletzen könnten?",
+            "Gibt es Abhängigkeiten zu anderen Plattformkomponenten, die das SLA beeinflussen?"
+          ]
+        },
+        {
+          "title": "Technische Architektur und Abhängigkeiten",
+          "goal": "Tiefe Einsicht in die Architektur, vor allem Schnittstellen zu Auth-Systemen und Rate Limiting.",
+          "sample_questions": [
+            "Wie ist die mTLS-Integration im Gateway technisch umgesetzt?",
+            "Welche Lessons Learned gab es aus Ticket GW-4821?",
+            "Welche externen Systeme beeinflussen die Stabilität des Gateways?"
+          ]
+        },
+        {
+          "title": "Betriebsprozesse und Runbooks",
+          "goal": "Überprüfen, ob Runbooks wie RB-GW-011 aktuell und praxistauglich sind.",
+          "sample_questions": [
+            "Wie oft haben wir das Blue/Green Deployment Runbook tatsächlich genutzt?",
+            "Gab es Abweichungen zwischen Runbook und tatsächlicher Incident-Response?",
+            "Wie werden Runbooks versioniert und gepflegt?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und nächste Schritte",
+          "goal": "Identifizieren von Risiken, technischen Schulden und Entscheidungsbedarfen mit belastbaren Belegen.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie aktuell für die Inbetriebnahme?",
+            "Gab es bewusst eingegangene Trade-offs bei der Architektur?",
+            "Welche evidenzbasierten Entscheidungen stehen in den nächsten 3 Monaten an?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27367,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

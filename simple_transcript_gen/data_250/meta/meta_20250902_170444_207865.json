@@ -1,0 +1,154 @@
+{
+  "id": "20250902_170444_207865",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 136,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Context & Role Alignment",
+          "goal": "Understand the MLOps engineer's role within Phoenix Feature Store and how it interfaces with UX needs.",
+          "sample_questions": [
+            "Can you walk me through your day-to-day responsibilities on Phoenix Feature Store?",
+            "How does your work intersect with end-user or data scientist workflows?",
+            "What are the main success metrics you track for your role?"
+          ]
+        },
+        {
+          "title": "Feature Store Architecture & Operations",
+          "goal": "Explore the technical architecture, CI/CD processes for models, and drift monitoring setup.",
+          "sample_questions": [
+            "Could you describe the online/offline serving architecture and how you ensure consistency?",
+            "What are the key steps in your model CI/CD pipeline for Phoenix?",
+            "How are drift detection alerts currently surfaced and acted upon?"
+          ]
+        },
+        {
+          "title": "Cross-Team Collaboration",
+          "goal": "Identify how MLOps collaborates with UX, Data Science, and SRE teams to deliver features.",
+          "sample_questions": [
+            "When a new feature is requested by Data Science, how is it integrated into the store?",
+            "What channels do you use to coordinate with SRE for performance SLAs?",
+            "How do you communicate changes that might affect user-facing analytics tools?"
+          ]
+        },
+        {
+          "title": "Challenges & Pain Points",
+          "goal": "Uncover operational bottlenecks, usability issues, and gaps in tooling.",
+          "sample_questions": [
+            "What are the most common operational issues you face with Phoenix?",
+            "Are there any parts of the runbooks or RFCs that are unclear or outdated?",
+            "Can you share a recent incident where UX feedback led to a technical change?"
+          ]
+        },
+        {
+          "title": "Future Improvements & Tradeoffs",
+          "goal": "Discuss planned enhancements, tradeoffs under consideration, and associated risks.",
+          "sample_questions": [
+            "What improvements are you considering to reduce feature serving latency?",
+            "How do you balance rapid iteration with model governance requirements?",
+            "What risks do you foresee if drift monitoring thresholds are adjusted?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26998,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

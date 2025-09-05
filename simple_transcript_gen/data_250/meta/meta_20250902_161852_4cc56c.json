@@ -1,0 +1,155 @@
+{
+  "id": "20250902_161852_4cc56c",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 96,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_da"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Sicherheitsanforderungen",
+          "goal": "Frühes Verständnis für die Datenarchitektur und die relevanten Security-Policies gewinnen.",
+          "sample_questions": [
+            "Können Sie den aktuellen ELT-Flow im Helios Datalake beschreiben und wo sensible Datenpunkte liegen?",
+            "Wie setzen Sie POL-SEC-001 'Least Privilege & JIT Access' konkret in Ihren Airflow DAGs um?",
+            "Welche SLOs oder SLAs beeinflussen Ihre Sicherheitsentscheidungen?"
+          ]
+        },
+        {
+          "title": "Technische Tiefe: Datenflüsse & Lineage",
+          "goal": "Verstehen, wie Daten von Kafka bis Snowflake gelangen und welche Kontrollpunkte existieren.",
+          "sample_questions": [
+            "Wie wird im dbt-Modell die Datenherkunft (Lineage) nachverfolgt und auditiert?",
+            "Welche Runbooks, z. B. RB-ING-042, greifen im Fehlerfall und wie sind diese abgesichert?",
+            "Wie stellen Sie sicher, dass bei Partitionierung (RFC-1287) keine unautorisierten Zugriffe auf historische Daten erfolgen?"
+          ]
+        },
+        {
+          "title": "Sicherheitsrisiken & Compliance",
+          "goal": "Risiken identifizieren, die sich aus Architekturentscheidungen ergeben, und deren Mitigation.",
+          "sample_questions": [
+            "Welche Bedrohungsmodelle haben Sie für den Datalake definiert und wie testen Sie diese?",
+            "Wie gehen Sie mit Audit-Anforderungen für regulierte Industrien um, speziell bei Schema-Änderungen?",
+            "Gab es Fälle, in denen Performance-Optimierungen mit Sicherheitsanforderungen kollidierten?"
+          ]
+        },
+        {
+          "title": "Multi-Hop Abhängigkeiten & Cross-Projekt-Integration",
+          "goal": "Zusammenhänge zu anderen Novereon-Projekten und deren Sicherheitsimplikationen aufzeigen.",
+          "sample_questions": [
+            "Wie interagiert der Helios Datalake mit Quasar Billing oder Nimbus Observability?",
+            "Welche IAM-Policies aus Aegis IAM sind kritisch für Ihre Datenpipelines?",
+            "Wie wirken sich Observability-Änderungen (z. B. RFC-1114) auf Incident Response im Datalake aus?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Evidenz",
+          "goal": "Konkrete Entscheidungen mit Begründung und dokumentierter Evidenz nachvollziehen.",
+          "sample_questions": [
+            "Können Sie eine Entscheidung schildern, bei der Sie zwischen Durchsatz und Data Governance abwägen mussten?",
+            "Welche Belege (Tickets, RFCs, Runbooks) stützen diese Entscheidung?",
+            "Wie haben Sie das BLAST_RADIUS Prinzip angewendet, um Risiken zu minimieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28156,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

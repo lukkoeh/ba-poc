@@ -1,0 +1,154 @@
+{
+  "id": "20250902_155111_1bbe14",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 74,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und QA-Rolle",
+          "goal": "Ein gemeinsames Verständnis für das Hera QA Platform Projekt und die Rolle des QA Leads schaffen.",
+          "sample_questions": [
+            "Können Sie mir kurz schildern, wie Ihre Rolle im Hera QA Platform Projekt aussieht?",
+            "What are the main quality goals you’ve set for this build phase?",
+            "Wie beeinflusst die Projektphase 'Build' Ihre Teststrategie?"
+          ]
+        },
+        {
+          "title": "Risk-Based Testing & Traceability",
+          "goal": "Vertieftes Verständnis für die Anwendung der Policy POL-QA-014 im Projekt.",
+          "sample_questions": [
+            "Wie setzen Sie Risk-Based Testing konkret um, especially when dealing with flaky test analytics?",
+            "Gibt es bestimmte Metriken oder Artefakte, die Sie nutzen, um Traceability sicherzustellen?",
+            "Can you walk me through how a test case links back to an RFC or SLA in your workflow?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Plattformkomponenten",
+          "goal": "Herausfinden, wie QA mit anderen Projekten und Subsystemen verzahnt ist.",
+          "sample_questions": [
+            "Wie interagiert die QA Platform mit der Nimbus Observability Pipeline oder der Atlas Mobile App?",
+            "Do you have shared runbooks or cross-project QA gates?",
+            "Welche Herausforderungen gibt es bei der Synchronisation von Testdaten über mehrere Systeme hinweg?"
+          ]
+        },
+        {
+          "title": "User Experience und QA",
+          "goal": "Zusammenhänge zwischen UX-Anforderungen und QA-Prozessen erforschen.",
+          "sample_questions": [
+            "Wie fließen UX-Research-Ergebnisse in Ihre Testplanung ein?",
+            "In what ways do you adapt tests to validate both functional and experiential quality?",
+            "Gibt es Feedback-Loops zwischen UX-Team und QA, die besonders effektiv sind?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs und Risiken",
+          "goal": "Verstehen, wie QA-Entscheidungen unter Unsicherheit getroffen werden und welche Evidenzen genutzt werden.",
+          "sample_questions": [
+            "Können Sie ein Beispiel geben, wo Sie zwischen Testtiefe und Time-to-Release abwägen mussten?",
+            "How did you document and justify that decision—was there a runbook or ticket reference?",
+            "Welche Risiken haben Sie identifiziert, die nicht durch automatisierte Tests abgedeckt werden konnten?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26464,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

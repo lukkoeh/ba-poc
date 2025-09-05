@@ -1,0 +1,178 @@
+{
+  "id": "20250902_164248_92c53b",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 117,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_da",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Zieldefinition",
+          "goal": "Ein klares Bild vom aktuellen Stand des Helios Datalake Projekts gewinnen, inkl. Scope, Stakeholder und Deliverables.",
+          "sample_questions": [
+            "Wie würden Sie den aktuellen Fortschritt des Helios Datalake in der Scale-Phase beschreiben?",
+            "Welche primären Ziele sind im SLA-HEL-01 definiert und wie messen wir diese?",
+            "Welche Stakeholder sind am stärksten involviert und wie wird ihr Feedback integriert?"
+          ]
+        },
+        {
+          "title": "Technische Architektur und Datenflüsse",
+          "goal": "Die End-to-End ELT Pipeline verstehen, inklusive dbt-Modelling, Kafka-Ingestion und Snowflake-Zielmodell.",
+          "sample_questions": [
+            "Können Sie den aktuellen Ingestion-Flow von Kafka bis Snowflake Schritt für Schritt erläutern?",
+            "Wie wird das Partitioning aus RFC-1287 in den Batch Loads umgesetzt?",
+            "Welche Rolle spielt RB-ING-042 im Failover-Fall?"
+          ]
+        },
+        {
+          "title": "Betriebsprozesse und Runbooks",
+          "goal": "Operational Excellence und Incident Response Mechanismen im Helios Datalake evaluieren.",
+          "sample_questions": [
+            "Wie oft mussten wir RB-ING-042 in den letzten sechs Monaten aktivieren?",
+            "Welche Lessons Learned aus Incidents wurden in die Runbooks aufgenommen?",
+            "Wie wird der BLAST_RADIUS bei Ingestion-Fehlern begrenzt?"
+          ]
+        },
+        {
+          "title": "Multi-Projekt-Abhängigkeiten",
+          "goal": "Zusammenhänge mit anderen Novereon-Projekten aufdecken, die den Helios Datalake beeinflussen.",
+          "sample_questions": [
+            "Gibt es Abhängigkeiten zur Borealis ETL Replatforming-Initiative?",
+            "Wie beeinflusst das Nimbus Observability Projekt die SLO-Überwachung des Datalake?",
+            "Welche IAM-Policies aus Aegis IAM sind für den Zugriff auf Helios relevant?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und Entscheidungsfindung",
+          "goal": "Wichtige Entscheidungen und deren Begründung verstehen, inklusive Risiken und Alternativen.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie bei der aktuellen Partitionierungsstrategie?",
+            "Gab es Trade-offs zwischen Performance und Kosten, die dokumentiert sind?",
+            "Wie wird 'Evidence over Hype' bei Technologieentscheidungen angewendet?"
+          ]
+        },
+        {
+          "title": "Lessons Learned und Ausblick",
+          "goal": "Erkenntnisse aus bisherigen Phasen und nächste Schritte festhalten.",
+          "sample_questions": [
+            "Welche Änderungen planen Sie für die nächste Skalierungswelle?",
+            "Welche Metriken wollen Sie künftig stärker in den Fokus nehmen?",
+            "Wie fließen Lessons Learned aus Helios in andere Projekte ein?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27472,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

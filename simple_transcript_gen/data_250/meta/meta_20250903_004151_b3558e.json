@@ -1,0 +1,163 @@
+{
+  "id": "20250903_004151_b3558e",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 219,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & UX Vision",
+          "goal": "Understand the UX Lead's perspective on Atlas Mobile's pilot phase goals, constraints, and how the design system supports them.",
+          "sample_questions": [
+            "Can you describe the primary user personas identified for Atlas Mobile and how they influenced early design decisions?",
+            "How does the DS-ATLAS v2 Tokenized Components artifact align with our mission of sustainable velocity?",
+            "What constraints from the Pilot phase most impact your UX strategy?"
+          ]
+        },
+        {
+          "title": "Accessibility & Research Integration",
+          "goal": "Probe how accessibility standards and research insights are integrated into the cross-platform design, especially under regulatory constraints.",
+          "sample_questions": [
+            "What accessibility benchmarks are you targeting, and how do you measure compliance?",
+            "Can you give an example where user research directly altered a component specification?",
+            "How do you reconcile conflicting findings from mobile vs. desktop research when defining cross-platform patterns?"
+          ]
+        },
+        {
+          "title": "Offline Sync & Feature Flags Impact",
+          "goal": "Examine the UX implications of offline sync and feature flag toggles, including failure modes and user trust.",
+          "sample_questions": [
+            "How have you addressed potential confusion when features appear/disappear due to flag changes?",
+            "In offline mode, what UX patterns ensure data consistency and user awareness?",
+            "Can you walk me through a specific usability test scenario for offline conflict resolution?"
+          ]
+        },
+        {
+          "title": "Cross-Department Collaboration",
+          "goal": "Explore how UX decisions interact with Platform, SRE, and QA requirements, especially regarding RB-MOB-021 Crash Loop Mitigation.",
+          "sample_questions": [
+            "How did the Crash Loop Mitigation runbook inform your error state designs?",
+            "What trade-offs arose between SRE's stability requirements and UX responsiveness?",
+            "How do you ensure QA can trace UX-related defects back to design artifacts?"
+          ]
+        },
+        {
+          "title": "Evidence-Based Decision Making",
+          "goal": "Assess how the UX Lead applies 'Evidence over Hype' in prioritizing design changes for the pilot.",
+          "sample_questions": [
+            "Can you describe a time when qualitative research overrode a stakeholder's high-priority request?",
+            "How do you balance analytics data with anecdotal feedback?",
+            "What metrics are you tracking to decide whether a UX pattern graduates from pilot to scale?"
+          ]
+        },
+        {
+          "title": "Risk Assessment & Future Scaling",
+          "goal": "Understand potential risks in scaling Atlas Mobile UX and how they are mitigated.",
+          "sample_questions": [
+            "What are the most significant UX risks if we scale without further pilot iterations?",
+            "How do you plan to maintain design system integrity as more teams contribute?",
+            "What contingency plans exist if accessibility compliance slips during scale-up?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27179,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

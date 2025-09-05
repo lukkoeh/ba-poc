@@ -1,0 +1,163 @@
+{
+  "id": "20250902_170912_76c82e",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 141,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Kontext",
+          "goal": "Rahmenbedingungen, Projektphase und strategische Ziele des Atlas Mobile Piloten verstehen",
+          "sample_questions": [
+            "Können Sie mir kurz den aktuellen Stand des Atlas Mobile Projekts schildern?",
+            "Welche strategische Rolle spielt Atlas Mobile innerhalb des gesamten Portfolios?",
+            "Wie definieren Sie den Erfolg in dieser Pilotphase?"
+          ]
+        },
+        {
+          "title": "Nutzerzentrierte Zielsetzungen",
+          "goal": "Ermitteln, wie Nutzerfeedback und UX-Anforderungen in die technische Roadmap einfließen",
+          "sample_questions": [
+            "Wie fließen aktuelle Erkenntnisse aus Nutzerstudien in Ihre Release-Planung ein?",
+            "Gibt es konkrete UX-Metriken, die Sie als CTO im Blick behalten?",
+            "Wie balancieren Sie technische Machbarkeit und Nutzerbedürfnisse?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Feature Flags",
+          "goal": "Verstehen, wie Feature Flags und Offline Sync technisch und organisatorisch umgesetzt werden",
+          "sample_questions": [
+            "Welche technischen Entscheidungen haben Sie bei der Implementierung der Feature Flags getroffen?",
+            "Wie stellen Sie sicher, dass Offline Sync robust und sicher funktioniert?",
+            "Gibt es Abhängigkeiten zu anderen Plattform- oder Datenprojekten?"
+          ]
+        },
+        {
+          "title": "Integration mit bestehenden Systemen",
+          "goal": "Zusammenhänge zwischen Atlas Mobile und anderen Projekten im Portfolio aufdecken",
+          "sample_questions": [
+            "Inwiefern nutzt Atlas Mobile bestehende APIs oder Datenpipelines, z.B. aus Helios Datalake?",
+            "Welche Herausforderungen sehen Sie bei der Integration mit IAM oder Observability Systemen?",
+            "Wie wirkt sich die Integration auf Ihre Time-to-Market aus?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs und zukünftige Entscheidungen",
+          "goal": "Erfassen, welche Entscheidungen bevorstehen, welche Risiken bestehen und wie diese belegt werden",
+          "sample_questions": [
+            "Welche größten Risiken sehen Sie aktuell für Atlas Mobile?",
+            "Können Sie ein Beispiel für einen Trade-off nennen, den Sie mit Belegen aus Runbooks oder Tickets entschieden haben?",
+            "Wie planen Sie, evidenzbasiert über die Pilotphase hinaus zu skalieren?"
+          ]
+        },
+        {
+          "title": "Abschluss & Reflexion",
+          "goal": "Offene Punkte klären, nächste Schritte und offene Fragen für UX definieren",
+          "sample_questions": [
+            "Welche UX-Themen sollten wir aus Ihrer Sicht prioritär weiterverfolgen?",
+            "Gibt es Lessons Learned aus der Pilotphase, die Sie teilen möchten?",
+            "Wie können wir als UX-Team Sie in den kommenden Monaten am besten unterstützen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28245,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

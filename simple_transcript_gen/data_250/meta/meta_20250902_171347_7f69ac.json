@@ -1,0 +1,163 @@
+{
+  "id": "20250902_171347_7f69ac",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 145,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Role",
+          "goal": "Understand the interviewee's role in the Hera QA Platform project and initial objectives.",
+          "sample_questions": [
+            "Can you walk me through your primary responsibilities as QA Lead on the Hera QA Platform?",
+            "What were the initial quality goals set for the Build phase?",
+            "Which stakeholders are most critical to your QA processes in this project?"
+          ]
+        },
+        {
+          "title": "Risk-Based Testing Approach",
+          "goal": "Explore the methodologies and frameworks used, aligned with POL-QA-014.",
+          "sample_questions": [
+            "How did you apply the Risk-Based Testing & Traceability policy to Hera QA?",
+            "Can you give an example of a high-risk test scenario and how you prioritized it?",
+            "What metrics do you use to decide when to cut or expand test coverage?"
+          ]
+        },
+        {
+          "title": "Traceability & Compliance",
+          "goal": "Assess traceability mechanisms and compliance with SLA and audit requirements.",
+          "sample_questions": [
+            "How do you ensure every test case is traceable back to a requirement or SLA?",
+            "Have you integrated any automated traceability tools into the unified orchestration?",
+            "Describe a time when traceability uncovered a hidden defect or gap."
+          ]
+        },
+        {
+          "title": "Integration with Other Systems",
+          "goal": "Understand cross-system dependencies, such as with Helios Datalake or Orion Edge Gateway.",
+          "sample_questions": [
+            "How does Hera QA integrate with upstream data from Helios or APIs from Orion?",
+            "What challenges arise when testing across multiple projects' SLAs?",
+            "Can you share a case where a dependency's instability impacted your QA schedule?"
+          ]
+        },
+        {
+          "title": "Incident Handling & Continuous Improvement",
+          "goal": "Review incident response processes and how lessons are fed back into QA strategy.",
+          "sample_questions": [
+            "Walk me through your process when a critical defect is found late in the cycle.",
+            "How do runbooks like RB-QA-051 influence your release candidate gating?",
+            "What changes have you implemented after post-incident reviews?"
+          ]
+        },
+        {
+          "title": "Trade-offs, Decisions & Risks",
+          "goal": "Discuss key trade-offs and decisions made, supported by evidence such as RFCs or tickets.",
+          "sample_questions": [
+            "What was the most difficult trade-off you made between test depth and delivery timelines?",
+            "Can you cite specific RFCs or tickets that influenced your test strategy?",
+            "How do you balance reducing flaky tests with maintaining broad coverage?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26508,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

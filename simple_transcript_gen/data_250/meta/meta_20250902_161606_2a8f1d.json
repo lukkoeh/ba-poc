@@ -1,0 +1,154 @@
+{
+  "id": "20250902_161606_2a8f1d",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 95,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Projektkontext",
+          "goal": "Ein grundlegendes Verständnis für die Hera QA Platform und den aktuellen Projektstatus schaffen.",
+          "sample_questions": [
+            "Können Sie mir kurz den aktuellen Stand der Hera QA Platform beschreiben?",
+            "Welche Hauptziele verfolgt das Team in der Build-Phase?",
+            "How does the unified test orchestration fit into the broader platform strategy?"
+          ]
+        },
+        {
+          "title": "Teststrategie & Risk-Based Testing",
+          "goal": "Verstehen, wie Risk-Based Testing im Projekt angewendet wird und welche Traceability-Praktiken bestehen.",
+          "sample_questions": [
+            "Wie setzen Sie POL-QA-014 konkret in Ihrem Testansatz um?",
+            "Which criteria do you use to prioritize test cases under time constraints?",
+            "Wie stellen Sie die Nachvollziehbarkeit von Anforderungen bis zu Testfällen sicher?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Plattformen",
+          "goal": "Ermitteln, wie die QA-Plattform mit anderen Projekten wie Helios Datalake oder Nimbus Observability interagiert.",
+          "sample_questions": [
+            "Gibt es Schnittstellen zu Projekten wie P-HEL oder P-NIM, und wie beeinflussen diese die Testplanung?",
+            "How do you coordinate test data needs across subsystems?",
+            "Welche Herausforderungen gibt es bei der Synchronisation von Testumgebungen?"
+          ]
+        },
+        {
+          "title": "Nutzererfahrung der QA-Tools",
+          "goal": "Erfassen, wie benutzerfreundlich die QA-Orchestrierung für interne Nutzer ist.",
+          "sample_questions": [
+            "Wie intuitiv finden die Tester die Oberfläche der QA Platform?",
+            "Are there pain points in the workflow that slow down adoption?",
+            "Welche UX-Aspekte haben Sie zuletzt angepasst, um die Effizienz zu steigern?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Risiken",
+          "goal": "Tiefe Einblicke in getroffene Architektur- und Prozessentscheidungen gewinnen, inklusive Risiken und deren Begründung.",
+          "sample_questions": [
+            "Gab es Entscheidungen, bei denen Sie bewusst zwischen Testabdeckung und Time-to-Market abgewogen haben?",
+            "Can you share an example where evidence from flaky test analytics influenced a release go/no-go?",
+            "Wie dokumentieren Sie Risiken im QA-Kontext, z.B. in RFC-1770 oder RB-QA-051?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27060,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

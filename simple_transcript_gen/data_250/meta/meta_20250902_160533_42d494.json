@@ -1,0 +1,177 @@
+{
+  "id": "20250902_160533_42d494",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 87,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_sec",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rollenverständnis",
+          "goal": "Ein gemeinsames Verständnis für die Ziele und den aktuellen Status von Vesta FinOps schaffen, sowie die Rollen der Interviewten klären.",
+          "sample_questions": [
+            "Können Sie kurz den aktuellen Betriebszustand von Vesta FinOps beschreiben?",
+            "Wie sieht Ihre Rolle im täglichen Betrieb und in der Optimierung aus?",
+            "Wie interagieren Sie mit den anderen Teams, z. B. Security oder SRE?"
+          ]
+        },
+        {
+          "title": "Kostenoptimierungsstrategien",
+          "goal": "Verstehen, welche Methoden und Tools zur Kostenkontrolle und -prognose eingesetzt werden.",
+          "sample_questions": [
+            "Welche Werkzeuge nutzen Sie für Forecasting und Budget-Tracking?",
+            "Wie setzen Sie die Vorgaben aus POL-FIN-007 in der Praxis um?",
+            "Gibt es Runbooks oder RFCs, die Sie besonders häufig verwenden?"
+          ]
+        },
+        {
+          "title": "Sicherheits- und Compliance-Aspekte",
+          "goal": "Aufzeigen, wie Kostenoptimierungen mit Sicherheitsrichtlinien (z. B. POL-SEC-001) abgestimmt werden.",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass Kostensenkungsmaßnahmen keine Sicherheitslücken öffnen?",
+            "Welche Schnittstellen gibt es zwischen FinOps und Security bei der Ressourcenverwaltung?",
+            "Gab es in der Vergangenheit Konflikte zwischen Kosten- und Sicherheitszielen?"
+          ]
+        },
+        {
+          "title": "Interdisziplinäre Abhängigkeiten",
+          "goal": "Analyse der Wechselwirkungen zwischen FinOps, Security und anderen Plattformkomponenten.",
+          "sample_questions": [
+            "Wie beeinflussen Entscheidungen in Vesta FinOps Projekte wie Helios Datalake oder Nimbus Observability?",
+            "Können Sie ein Beispiel geben, wo eine Kostenoptimierung einen Security-Workflow verändert hat?",
+            "Wie werden Änderungen dokumentiert und kommuniziert?"
+          ]
+        },
+        {
+          "title": "Erfahrungen aus Vorfällen",
+          "goal": "Lernen aus konkreten Incidents oder Audit-Feststellungen, um zukünftige Risiken zu minimieren.",
+          "sample_questions": [
+            "Gab es in letzter Zeit ein Incident, das sowohl FinOps- als auch Security-Aspekte betraf?",
+            "Wie wurde im Runbook RB-FIN-007 auf diesen Fall reagiert?",
+            "Welche Lessons Learned wurden daraus abgeleitet?"
+          ]
+        },
+        {
+          "title": "Zukünftige Roadmap und Risiken",
+          "goal": "Diskussion über geplante Verbesserungen, potenzielle Risiken und Entscheidungsgrundlagen.",
+          "sample_questions": [
+            "Welche geplanten Änderungen könnten die Kostenstruktur signifikant beeinflussen?",
+            "Welche Risiken sehen Sie in der aktuellen Ressourcen-Quota-Strategie (RFC-1502)?",
+            "Wie balancieren Sie Geschwindigkeit der Umsetzung mit langfristiger Nachhaltigkeit?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27105,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "20250902_175827_1eee0f",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 187,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Context & Role in Aegis IAM",
+          "goal": "Establish the interviewee's direct responsibilities, familiarity with enterprise SSO, RBAC, and JIT access in the operational phase.",
+          "sample_questions": [
+            "Can you walk me through your day-to-day responsibilities in operating Aegis IAM?",
+            "How do you ensure compliance with POL-SEC-001 in your workflows?",
+            "What are the main operational challenges you've encountered since moving to the 'Operate' phase?"
+          ]
+        },
+        {
+          "title": "Threat Modeling & Vulnerability Management",
+          "goal": "Assess how the interviewee applies threat modeling to IAM, and manages vulnerabilities in an enterprise SSO environment.",
+          "sample_questions": [
+            "What is your process for identifying and prioritizing threats in Aegis IAM?",
+            "How do you integrate vulnerability scan results into your patch management?",
+            "Can you give an example where a threat model led you to change an IAM configuration?"
+          ]
+        },
+        {
+          "title": "Cross-Project Security Interactions",
+          "goal": "Explore multi-hop links between Aegis IAM and other projects like Orion Edge Gateway and Poseidon Networking.",
+          "sample_questions": [
+            "How does Aegis IAM integrate with Orion Edge Gateway's mTLS setup?",
+            "What security dependencies exist between IAM policies and Poseidon Networking's zero-trust model?",
+            "Have you ever had to coordinate a change across these systems to close a security gap?"
+          ]
+        },
+        {
+          "title": "Incident Response & Runbook Usage",
+          "goal": "Understand how the interviewee uses runbooks like RB-IAM-075 in real incidents, and how lessons are fed back into procedures.",
+          "sample_questions": [
+            "Describe a time you used RB-IAM-075 in an actual incident.",
+            "How do you document deviations from the runbook during a live event?",
+            "What metrics do you track post-incident to validate recovery effectiveness?"
+          ]
+        },
+        {
+          "title": "Risk Assessment & Decision-Making",
+          "goal": "Evaluate the interviewee's ability to make informed security tradeoffs and decisions under constraints, supported by evidence from audits and SLAs.",
+          "sample_questions": [
+            "How do you weigh the risk of delayed access revocation against operational continuity?",
+            "Can you walk me through a decision where you had to balance SLA-ORI-02 latency targets with stricter IAM enforcement?",
+            "Which findings from AUD-24-Q2 had the most impact on your operational priorities?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26411,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

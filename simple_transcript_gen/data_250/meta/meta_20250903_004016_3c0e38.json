@@ -1,0 +1,168 @@
+{
+  "id": "20250903_004016_3c0e38",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 216,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Rollenverständnis",
+          "goal": "Verstehen, wie UX und MLOps im Phoenix Feature Store zusammenarbeiten und welche Kernziele verfolgt werden.",
+          "sample_questions": [
+            "Können Sie kurz beschreiben, welche Rolle Sie im Phoenix Feature Store Projekt einnehmen?",
+            "Wie sind UX-Design-Entscheidungen bisher in die technische Architektur eingeflossen?",
+            "Welche Schnittstellen gibt es zwischen UX und MLOps im aktuellen Build-Phase-Setup?"
+          ]
+        },
+        {
+          "title": "User Journeys und Feature Serving",
+          "goal": "Herausarbeiten, wie Nutzerinteraktionen mit Feature Serving zusammenhängen und welche Anforderungen daraus folgen.",
+          "sample_questions": [
+            "Wie fließen User Journeys in die Definition von Online- und Offline-Features ein?",
+            "Welche speziellen Anforderungen an Accessibility oder Design-Systeme ergeben sich aus dem Feature Store?",
+            "Wie beeinflusst die Drift-Monitoring-Strategie die UX-Entscheidungen?"
+          ]
+        },
+        {
+          "title": "Multi-Hop: Drift Monitoring und Design-System",
+          "goal": "Verknüpfen von Monitoring-Daten mit Design-System-Optimierungen, um proaktive UX-Anpassungen zu ermöglichen.",
+          "sample_questions": [
+            "Wie werden Drift-Alarme aus RB-FS-034 oder RFC-1419 in UX-Änderungen übersetzt?",
+            "Gibt es einen Prozess, um MLOps-Metriken direkt in Design-Iterationen einzuspeisen?",
+            "Wie reagieren Sie auf Änderungen der Feature-Schemas im Live-Betrieb aus UX-Sicht?"
+          ]
+        },
+        {
+          "title": "Trade-offs und Risiken im Deployment",
+          "goal": "Diskussion von Entscheidungen, Risiken und Evidenz im Kontext von Feature Store Deployments.",
+          "sample_questions": [
+            "Welche Trade-offs mussten Sie zwischen schneller Feature-Bereitstellung und stabiler UX eingehen?",
+            "Können Sie ein Beispiel nennen, wo ein UX-Entscheid aufgrund von Drift-Daten revidiert wurde?",
+            "Wie dokumentieren Sie Risiken in Bezug auf UX und MLOps, z.B. in Tickets oder Runbooks?"
+          ]
+        },
+        {
+          "title": "Zukunftsperspektiven und Lessons Learned",
+          "goal": "Erfassen von Verbesserungspotenzialen und strategischen Ausrichtungen für UX und MLOps im Projekt.",
+          "sample_questions": [
+            "Welche Lessons Learned aus der Build-Phase möchten Sie in die nächste Phase mitnehmen?",
+            "Wo sehen Sie die größten Potenziale für Automatisierung zwischen UX und MLOps?",
+            "Wie könnte die Zusammenarbeit in künftigen Projekten optimiert werden?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27626,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

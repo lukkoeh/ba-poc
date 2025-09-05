@@ -1,0 +1,163 @@
+{
+  "id": "20250902_174828_23ec3d",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 178,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Context Setting",
+          "goal": "Establish the interviewee's understanding of the Hera QA Platform project, their role, and alignment with company policies and values.",
+          "sample_questions": [
+            "Can you briefly describe your role as QA Lead within the Hera QA Platform initiative?",
+            "How does the Hera QA Platform align with Novereon Systems' mission and values, especially 'Evidence over Hype'?",
+            "Which policies, such as POL-QA-014, are most relevant to your current work?"
+          ]
+        },
+        {
+          "title": "Test Strategy & Risk-Based Approach",
+          "goal": "Explore the interviewee's approach to designing and implementing a risk-based testing strategy for the Hera QA Platform.",
+          "sample_questions": [
+            "How have you applied POL-QA-014 Risk-Based Testing & Traceability in this project?",
+            "What factors do you consider when prioritizing test cases for unified orchestration?",
+            "Can you walk me through how you handle flaky test analytics to minimize false positives?"
+          ]
+        },
+        {
+          "title": "Traceability & Cross-System Dependencies",
+          "goal": "Understand how the QA strategy ensures traceability across multiple subsystems and integrates with other portfolio projects.",
+          "sample_questions": [
+            "How do you maintain traceability between requirements, tests, and defects in Hera?",
+            "Can you give an example where a change in another project, such as Helios Datalake or Orion Edge Gateway, impacted your QA scope?",
+            "What tools or runbooks, like RB-QA-051, support you in managing these dependencies?"
+          ]
+        },
+        {
+          "title": "Non-Trivial Multi-Hop Linkage",
+          "goal": "Dive into a scenario where multiple subsystems required coordinated QA efforts, ensuring risk-based priorities were maintained.",
+          "sample_questions": [
+            "Describe a situation where a flaky test in Hera revealed an upstream data integrity issue in Helios Datalake.",
+            "How did you coordinate with other teams to resolve this while keeping Hera's release on track?",
+            "What evidence or metrics did you rely on to justify deferring or blocking a release?"
+          ]
+        },
+        {
+          "title": "Decision-Making & Trade-offs",
+          "goal": "Assess the interviewee's ability to make informed trade-offs under constraints, using evidence from runbooks, SLAs, and tickets.",
+          "sample_questions": [
+            "Can you share a decision where you had to balance speed of delivery with test coverage?",
+            "What risks did you identify and how did you mitigate them?",
+            "How did you document and communicate this decision to stakeholders?"
+          ]
+        },
+        {
+          "title": "Closing & Reflection",
+          "goal": "Summarize key learnings, evaluate process effectiveness, and identify areas for improvement.",
+          "sample_questions": [
+            "Looking back, what would you change in your QA strategy for Hera?",
+            "How do you measure the success of risk-based testing in this context?",
+            "What advice would you give to a new QA Lead joining Novereon Systems?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25676,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

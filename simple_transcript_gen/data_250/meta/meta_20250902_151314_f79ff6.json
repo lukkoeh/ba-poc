@@ -1,0 +1,154 @@
+{
+  "id": "20250902_151314_f79ff6",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 43,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context and Role",
+          "goal": "Establish the interviewee's understanding of Nimbus Observability's objectives, their role in the build phase, and alignment with company values.",
+          "sample_questions": [
+            "Can you describe the primary goals of the Nimbus Observability project and how they align with our 'Safety First' and 'Evidence over Hype' values?",
+            "What is your role within the Build phase, and how does it integrate with other departments such as SRE or Security?",
+            "How do you ensure your automation work supports the defined SLOs and SLAs for this project?"
+          ]
+        },
+        {
+          "title": "Technical Implementation Details",
+          "goal": "Explore the interviewee's approach to implementing OpenTelemetry pipelines, managing SLOs, and integrating incident analytics.",
+          "sample_questions": [
+            "Walk me through the pipeline architecture you have deployed for telemetry data ingestion and processing.",
+            "How are you instrumenting services to meet the requirements in RFC-1114 Sampling Strategy for Traces?",
+            "What measures are you taking to prevent alert fatigue, and how does RB-OBS-033 guide your configuration?"
+          ]
+        },
+        {
+          "title": "Cross-Project and Multi-System Dependencies",
+          "goal": "Identify how the interviewee navigates dependencies with other projects like Helios Datalake or Mercury Messaging and ensures cohesive observability.",
+          "sample_questions": [
+            "How do you ensure trace IDs are propagated correctly across systems like Helios Datalake and Mercury Messaging?",
+            "Can you describe a scenario where a change in another project's telemetry schema affected Nimbus Observability's pipelines?",
+            "How do you coordinate with other teams to maintain consistent incident analytics across services?"
+          ]
+        },
+        {
+          "title": "Operational Readiness and Risk Management",
+          "goal": "Assess the interviewee's strategies for ensuring operational readiness, managing risks, and adhering to runbooks and policies.",
+          "sample_questions": [
+            "What steps do you take to validate that new telemetry components meet the defined SLAs before going live?",
+            "How do you handle incidents where the observability stack itself becomes degraded, and what runbooks do you follow?",
+            "Can you share an example of a trade-off you had to make between telemetry granularity and system performance?"
+          ]
+        },
+        {
+          "title": "Continuous Improvement and Sustainability",
+          "goal": "Understand how the interviewee plans for sustainable velocity, continuous improvement, and evolving observability needs.",
+          "sample_questions": [
+            "How do you incorporate feedback from incident post-mortems into the observability tooling?",
+            "What automation have you implemented to ensure ongoing compliance with POL-SEC-001 and other relevant policies?",
+            "How do you envision the observability stack evolving over the next year to support scale and new features?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27146,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

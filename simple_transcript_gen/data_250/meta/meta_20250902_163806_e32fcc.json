@@ -1,0 +1,154 @@
+{
+  "id": "20250902_163806_e32fcc",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 113,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & UX-Verantwortlichkeiten",
+          "goal": "Ein klares Bild der Rolle des UX Leads im Atlas Mobile Pilotprojekt gewinnen",
+          "sample_questions": [
+            "Können Sie kurz Ihren Verantwortungsbereich im Atlas Mobile Projekt beschreiben?",
+            "Wie haben Sie die UX-Ziele mit den Unternehmenswerten wie 'Safety First' und 'Sustainable Velocity' ausgerichtet?",
+            "Welche Schnittstellen zu anderen Abteilungen (z.B. SRE, Mobile, QA) sind für Ihre Arbeit besonders wichtig?"
+          ]
+        },
+        {
+          "title": "Design System & Accessibility",
+          "goal": "Verstehen, wie das DS-ATLAS v2 Tokenized Components Artefakt in der Praxis angewendet wird",
+          "sample_questions": [
+            "Wie haben Sie das Design System im Pilotphase-Kontext eingeführt und gepflegt?",
+            "Welche Accessibility-Standards haben Sie implementiert, und wie messen Sie deren Einhaltung?",
+            "Gab es Konflikte zwischen Feature Flags und Barrierefreiheit, und wie wurden diese gelöst?"
+          ]
+        },
+        {
+          "title": "Offline Sync & Feature Flags",
+          "goal": "Erfassen, welche UX-Herausforderungen durch Offline-Synchronisation und Feature Flagging entstehen",
+          "sample_questions": [
+            "Welche Usability-Probleme sind bei der Offline-Sync-Funktionalität aufgetreten?",
+            "Wie kommunizieren Sie den Status von Feature Flags an Endnutzer, ohne Verwirrung zu stiften?",
+            "Inwiefern mussten Sie UX-Tests anpassen, um unterschiedliche Feature-Flag-Kombinationen abzudecken?"
+          ]
+        },
+        {
+          "title": "Cross-Team Collaboration & Multi-Hop Dependencies",
+          "goal": "Aufdecken, wie UX-Entscheidungen mit Backend, API Composition (P-JAN) und Observability (P-NIM) verknüpft sind",
+          "sample_questions": [
+            "Gab es Abhängigkeiten zwischen Atlas Mobile UI und Janus API Composition, die besondere UX-Anpassungen erforderten?",
+            "Wie haben Observability-Daten aus Nimbus Observability Ihre Designentscheidungen beeinflusst?",
+            "Können Sie ein Beispiel geben, wo eine Designänderung eine Kaskade von Anpassungen in anderen Projekten ausgelöst hat?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Risiken",
+          "goal": "Verstehen, wie der UX Lead Entscheidungen unter Unsicherheit trifft und Risiken dokumentiert",
+          "sample_questions": [
+            "Welche dokumentierten Risiken (z.B. aus RB-MOB-021 Crash Loop Mitigation) haben Ihre UX-Strategie beeinflusst?",
+            "Gab es Situationen, in denen Sie zwischen Performance und Accessibility abwägen mussten?",
+            "Wie dokumentieren Sie UX-bezogene Risiken für die Audit-Trails und zukünftige Iterationen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27690,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

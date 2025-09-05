@@ -1,0 +1,154 @@
+{
+  "id": "20250902_171016_e5333f",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 142,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Context & Role Understanding",
+          "goal": "Understand the interviewee's role, daily responsibilities, and how they interact with Vesta FinOps tooling.",
+          "sample_questions": [
+            "Can you walk me through your typical day as a FinOps Analyst at Novereon Systems?",
+            "How does the Vesta FinOps platform fit into your workflow?",
+            "Which other teams or departments do you collaborate with most frequently?"
+          ]
+        },
+        {
+          "title": "Current Processes & Pain Points",
+          "goal": "Explore existing workflows for cost monitoring, anomaly detection, and budget enforcement; identify friction points.",
+          "sample_questions": [
+            "What is your process for spotting and investigating a cost anomaly?",
+            "Can you describe the last time you had to enforce a budget quota?",
+            "What parts of the current system slow you down or cause confusion?"
+          ]
+        },
+        {
+          "title": "Tooling & Data Integration",
+          "goal": "Dive deeper into how data from multiple projects (e.g., Quasar Billing, Nimbus Observability) is integrated into Vesta FinOps.",
+          "sample_questions": [
+            "Which upstream systems feed into your cost dashboards?",
+            "Have you encountered mismatches between billing data and observability metrics?",
+            "How do you validate the accuracy of cost allocation before reporting?"
+          ]
+        },
+        {
+          "title": "Decision-Making & Tradeoffs",
+          "goal": "Understand how the interviewee balances cost savings against performance and compliance requirements.",
+          "sample_questions": [
+            "Can you share an example where optimizing for cost conflicted with meeting an SLA?",
+            "How do you decide when to trigger the Idle Resource Reaper runbook?",
+            "Have you ever rejected a cost optimization because of a potential risk to availability?"
+          ]
+        },
+        {
+          "title": "Future Needs & UX Opportunities",
+          "goal": "Gather ideas for improving the platform's usability, reporting, and collaboration features.",
+          "sample_questions": [
+            "If you could change one thing about the Vesta FinOps UI tomorrow, what would it be?",
+            "Do you feel you have the right level of granularity in your cost reports?",
+            "What would help you communicate cost insights more effectively to non-technical stakeholders?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26478,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

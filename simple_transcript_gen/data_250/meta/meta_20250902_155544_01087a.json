@@ -1,0 +1,163 @@
+{
+  "id": "20250902_155544_01087a",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 78,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Ziele",
+          "goal": "Das Gesamtbild des Helios Datalake-Projekts verstehen, inklusive Business-Treiber und technische Kernanforderungen.",
+          "sample_questions": [
+            "Können Sie mir den aktuellen Stand des Helios Datalake kurz skizzieren?",
+            "Welche übergeordneten Ziele verfolgt das Projekt aus Ihrer Sicht?",
+            "Wie messen Sie den Erfolg in der aktuellen Scale-Phase?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Datenflüsse",
+          "goal": "Einblick in die Architektur, die Integrationspunkte und den Datenfluss vom Ingestion Layer bis zur Analyse gewinnen.",
+          "sample_questions": [
+            "Wie ist der ELT-Prozess technisch aufgebaut?",
+            "Welche Rolle spielt Kafka in der Gesamtarchitektur?",
+            "Wie setzen Sie das Partitionierungskonzept aus RFC-1287 konkret um?"
+          ]
+        },
+        {
+          "title": "Betrieb & SLA-Management",
+          "goal": "Verstehen, wie Betriebsstabilität und SLA-HEL-01 eingehalten werden, inklusive Monitoring und Incident Response.",
+          "sample_questions": [
+            "Welche Metriken überwachen Sie kontinuierlich zur SLA-Einhaltung?",
+            "Wie sieht der Ablauf laut RB-ING-042 im Failover-Fall aus?",
+            "Gab es in letzter Zeit Incidents, die zu einer SLA-Verletzung geführt haben?"
+          ]
+        },
+        {
+          "title": "Abhängigkeiten & Schnittstellen",
+          "goal": "Identifizieren von Querverbindungen zu anderen Projekten und Abhängigkeiten, die Risiken oder Chancen darstellen.",
+          "sample_questions": [
+            "Welche Schnittstellen bestehen zu Quasar Billing oder Nimbus Observability?",
+            "Wie koordinieren Sie Änderungen mit dem Aegis IAM-Projekt?",
+            "Gibt es Abhängigkeiten, die die Release-Frequenz limitieren?"
+          ]
+        },
+        {
+          "title": "Priorisierung & Trade-offs",
+          "goal": "Herausarbeiten, wie Entscheidungen zwischen Features, Stabilität und Kosten getroffen werden.",
+          "sample_questions": [
+            "Wie priorisieren Sie Feature Requests gegenüber Stabilitätsmaßnahmen?",
+            "Gab es Situationen, in denen Sie bewusst gegen eine technische Empfehlung entschieden haben?",
+            "Wie fließen Cloud-Kostenrestriktionen (POL-FIN-007) in Ihre Roadmap ein?"
+          ]
+        },
+        {
+          "title": "Risiken & Zukunftspläne",
+          "goal": "Verstehen, welche Risiken aktuell bestehen und wie die mittelfristige Roadmap aussieht.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie für die nächsten 6 Monate?",
+            "Wie planen Sie, den Datalake für neue regulatorische Anforderungen fit zu machen?",
+            "Welche Innovationen möchten Sie in der nächsten Phase testen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28921,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "id": "20250902_175534_33711a",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 184,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_ux",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & Sicherheitskontext",
+          "goal": "Verständnis der aktuellen Projektphase, Sicherheitsarchitektur und relevanter Policies gewinnen.",
+          "sample_questions": [
+            "Können Sie kurz den aktuellen Stand des Orion Edge Gateway Projekts skizzieren?",
+            "Welche Sicherheitsrichtlinien wie POL-SEC-001 sind derzeit implementiert?",
+            "Wie stellen Sie sicher, dass das SLA-ORI-02 p95 Latency < 120ms eingehalten wird?"
+          ]
+        },
+        {
+          "title": "Architektur- und Integrationsdetails",
+          "goal": "Tieferes Verständnis der API Gateway Architektur, Authentifizierungsintegration und deren Abhängigkeiten.",
+          "sample_questions": [
+            "Welche Authentifizierungsmechanismen sind im Gateway verankert und wie werden sie mit Aegis IAM integriert?",
+            "Wie gehen Sie mit Rate Limiting um, um sowohl Sicherheit als auch Nutzererlebnis zu gewährleisten?",
+            "Welche Lessons Learned aus GW-4821 MTLS Handshake Bug Analysis sind eingeflossen?"
+          ]
+        },
+        {
+          "title": "Sicherheits- und UX-Abwägungen",
+          "goal": "Spannungsfelder zwischen Sicherheit, Performance und Benutzerfreundlichkeit identifizieren.",
+          "sample_questions": [
+            "Wie balancieren Sie strikte mTLS-Policies mit der UX-Anforderung an schnelle API-Antwortzeiten?",
+            "Wie fließen Accessibility-Anforderungen in die Auth-Flow-Designs ein?",
+            "Welche Trade-offs wurden bei der Entscheidung für Blue/Green-Deployments (RB-GW-011) gemacht?"
+          ]
+        },
+        {
+          "title": "Risiko-, Compliance- und Incident-Handling",
+          "goal": "Risikoanalyse, Compliance-Maßnahmen und Incident-Response-Prozesse verstehen.",
+          "sample_questions": [
+            "Wie wird der BLAST_RADIUS bei einem Gateway-Ausfall begrenzt?",
+            "Welche Runbooks werden bei Authentifizierungsstörungen sofort aktiviert?",
+            "Wie wird die Einhaltung von Policies und Audits wie AUD-24-Q2 in diesem Kontext überprüft?"
+          ]
+        },
+        {
+          "title": "Zukunftsausrichtung & Nachhaltigkeit",
+          "goal": "Planung für Skalierung, zukünftige Sicherheitsanforderungen und nachhaltige Velocity.",
+          "sample_questions": [
+            "Wie planen Sie, die Gateway-Architektur für kommende regulatorische Anforderungen zu rüsten?",
+            "Welche Metriken nutzen Sie, um sowohl Sicherheit als auch Performance nachhaltig zu optimieren?",
+            "Wie wird die Zusammenarbeit zwischen Security, UX und Platform-Teams langfristig gestaltet?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28018,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "id": "20250902_171240_18129c",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 144,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & SLA-Kontext",
+          "goal": "Kernfakten zum Projektstatus, SLA-Anforderungen und strategische Ziele klären",
+          "sample_questions": [
+            "Können Sie kurz den aktuellen Stand des Orion Edge Gateway Projekts beschreiben?",
+            "Welche SLA-Parameter, insbesondere SLA-ORI-02, sind für Sie kritisch?",
+            "Wie priorisieren Sie zwischen Funktionalität und Einhaltung der Latenzvorgaben?"
+          ]
+        },
+        {
+          "title": "Architektur & Integrationspunkte",
+          "goal": "Technische Architektur, Abhängigkeiten und Integrationsrisiken verstehen",
+          "sample_questions": [
+            "Wie ist das Gateway mit bestehenden Auth-Systemen wie Aegis IAM integriert?",
+            "Welche Lessons Learned aus Helios Datalake oder Poseidon Networking sind eingeflossen?",
+            "Wie adressieren Sie BLAST_RADIUS in der Architektur?"
+          ]
+        },
+        {
+          "title": "Deployment & Betrieb",
+          "goal": "Deploy-Strategien, Runbooks und Betriebsprozesse evaluieren",
+          "sample_questions": [
+            "Können Sie den Ablauf aus RB-GW-011 Rolling Deployments erläutern?",
+            "Wie stellen Sie sicher, dass bei mTLS-Handshakes (GW-4821) keine Regressionen auftreten?",
+            "Welche Metriken überwachen Sie kontinuierlich, um SLA-ORI-02 einzuhalten?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Entscheidungen",
+          "goal": "Schlüsselentscheidungen, Trade-offs und Risikomanagement belegen",
+          "sample_questions": [
+            "Gab es Entscheidungen, bei denen Sie bewusst Performance gegen Sicherheit getauscht haben?",
+            "Welche Evidenz aus Tickets oder Tests nutzen Sie, um Risiken zu bewerten?",
+            "Wie planen Sie, im Falle von Latenzverletzungen innerhalb des BLAST_RADIUS zu reagieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28147,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

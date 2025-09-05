@@ -1,0 +1,163 @@
+{
+  "id": "20250902_124417_c7d611",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 70,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Role Context",
+          "goal": "Establish interviewee's background, current responsibilities, and familiarity with observability tooling and practices relevant to Nimbus Observability.",
+          "sample_questions": [
+            "Can you briefly walk me through your current role and how it connects to observability initiatives?",
+            "What experience do you have with OpenTelemetry in production environments?",
+            "How do you usually collaborate with SRE or QA teams when defining SLOs?"
+          ]
+        },
+        {
+          "title": "Technical Foundations",
+          "goal": "Assess depth of knowledge in instrumentation, pipelines, metrics/logs/traces correlation, and automation via IaC for observability stacks.",
+          "sample_questions": [
+            "Describe the pipeline you would design for ingesting and processing telemetry data at scale.",
+            "How would you ensure trace sampling strategies (e.g., RFC-1114) meet both performance and diagnostic needs?",
+            "What automation patterns have you used for deploying observability agents across multi-region clusters?"
+          ]
+        },
+        {
+          "title": "Incident Analytics & SLO Management",
+          "goal": "Understand ability to link telemetry data to incident analysis, SLO tracking, and continuous improvement processes.",
+          "sample_questions": [
+            "How would you approach alert fatigue tuning, possibly referencing RB-OBS-033?",
+            "Can you give an example of using incident analytics to adjust SLO thresholds?",
+            "What data points do you prioritize when conducting a post-incident review?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Evaluate awareness of dependencies between Nimbus Observability and other Novereon projects, especially in regulated environments.",
+          "sample_questions": [
+            "How might observability requirements differ for the Orion Edge Gateway vs. Helios Datalake?",
+            "What integration points exist between Nimbus Observability and the Aegis IAM project for secure telemetry?",
+            "How would you adapt pipeline configurations to meet the SLA-ORI-02 latency constraints?"
+          ]
+        },
+        {
+          "title": "Decision-Making & Risk Management",
+          "goal": "Probe decision-making under constraints, trade-off analysis, and ability to provide evidence-based recommendations.",
+          "sample_questions": [
+            "When balancing high-cardinality metrics with storage cost limits (POL-FIN-007), what trade-offs would you consider?",
+            "Describe a situation where you had to choose between increasing sampling rate and maintaining system performance.",
+            "If a critical alerting pipeline fails, how would you decide whether to trigger a failover per RB-OBS-033?"
+          ]
+        },
+        {
+          "title": "Closing & Reflection",
+          "goal": "Summarize key points, allow candidate to clarify or expand, and assess cultural fit with Novereon Systems’ values.",
+          "sample_questions": [
+            "What would be your first priority if you joined the Nimbus Observability team?",
+            "How do you align automation initiatives with 'Safety First' and 'Sustainable Velocity' values?",
+            "Any questions for us about the project or organizational processes?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27967,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

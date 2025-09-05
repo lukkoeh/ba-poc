@@ -1,0 +1,163 @@
+{
+  "id": "20250902_135603_1cf1ba",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 86,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & QA-Rolle",
+          "goal": "Verstehen, wie der QA Lead in der Build-Phase des Hera QA Platform Projekts eingebunden ist und welche Kernverantwortlichkeiten bestehen.",
+          "sample_questions": [
+            "Können Sie kurz schildern, wie Sie aktuell in das Hera QA Platform Projekt eingebunden sind?",
+            "Welche Hauptziele verfolgt das QA-Team in dieser Build-Phase?",
+            "Wie stellen Sie sicher, dass die Projektziele mit der Unternehmensmission 'Safety First' im Einklang stehen?"
+          ]
+        },
+        {
+          "title": "Teststrategie & Risk-Based Testing",
+          "goal": "Erfassen, wie Risk-Based Testing (POL-QA-014) konkret umgesetzt wird und wie Traceability gewährleistet ist.",
+          "sample_questions": [
+            "Wie priorisieren Sie Testfälle basierend auf Risikoanalysen?",
+            "Können Sie ein Beispiel geben, wie Sie Traceability von Anforderungen bis zu Testresultaten sicherstellen?",
+            "Welche Tools oder Artefakte aus dem Projekt nutzen Sie für diese Nachverfolgbarkeit?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Plattform-Komponenten",
+          "goal": "Verstehen, wie das QA-System mit anderen Projekten wie Nimbus Observability oder Orion Edge Gateway interagiert.",
+          "sample_questions": [
+            "Gibt es Abhängigkeiten zwischen Hera QA Platform und Nimbus Observability? Wie handhaben Sie diese?",
+            "Wie beeinflussen Änderungen im Orion Edge Gateway Ihre Teststrategie?",
+            "Können Sie eine Situation beschreiben, in der Sie mehrere Subsysteme koordinieren mussten, um ein QA-Problem zu lösen?"
+          ]
+        },
+        {
+          "title": "Umgang mit Flaky Tests",
+          "goal": "Vertiefen, wie Flaky Tests identifiziert, analysiert und reduziert werden.",
+          "sample_questions": [
+            "Wie definieren Sie in Ihrem Team 'flaky'?",
+            "Welche Metriken oder Heuristiken nutzen Sie, um Flaky Tests zu priorisieren?",
+            "Gab es einen Fall, bei dem ein Flaky Test einen Release-Stop ausgelöst hat? Wie sind Sie vorgegangen?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Risiken",
+          "goal": "Diskutieren, wie Entscheidungen im QA-Bereich getroffen werden, insbesondere unter Zeitdruck, und welche Risiken abgewogen werden.",
+          "sample_questions": [
+            "Wie entscheiden Sie, ob ein Release mit bekannten, aber als gering eingestuften Defects trotzdem live geht?",
+            "Können Sie ein Beispiel für einen Trade-off zwischen Testabdeckung und Time-to-Market geben?",
+            "Wie dokumentieren Sie solche Entscheidungen, z.B. in RFCs oder Runbooks?"
+          ]
+        },
+        {
+          "title": "Abschluss & Lessons Learned",
+          "goal": "Zusammenfassen der wichtigsten Punkte und Ableitung von Lessons Learned für zukünftige QA-Initiativen.",
+          "sample_questions": [
+            "Was waren die größten Herausforderungen in der bisherigen Build-Phase?",
+            "Welche Lessons Learned möchten Sie für zukünftige Projekte festhalten?",
+            "Gibt es Empfehlungen zur Verbesserung von Risk-Based Testing im Unternehmenskontext?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27961,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

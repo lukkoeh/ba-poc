@@ -1,0 +1,168 @@
+{
+  "id": "20250902_143159_21df63",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 94,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_pm",
+      "role": "Senior Project Manager",
+      "traits": [
+        "scope_control",
+        "risikoavers",
+        "stakeholder_mgmt"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_pm"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_sre",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Goals",
+          "goal": "Understand the overall objectives, constraints, and stakeholder landscape for Nimbus Observability.",
+          "sample_questions": [
+            "Can you walk me through the main goals for Nimbus Observability in the current build phase?",
+            "What regulatory or compliance constraints influence your observability design?",
+            "Who are your primary stakeholders and how do their priorities differ?"
+          ]
+        },
+        {
+          "title": "Current Architecture & Tooling",
+          "goal": "Explore the existing telemetry pipelines, integrations, and decision criteria for tooling.",
+          "sample_questions": [
+            "Which parts of the OpenTelemetry pipeline are already implemented and which are pending?",
+            "How are SLOs defined and where are they stored or tracked?",
+            "Can you describe any runbooks or RFCs that have shaped the current architecture?"
+          ]
+        },
+        {
+          "title": "Incident Response & Analytics",
+          "goal": "Investigate how incident analytics are performed, and how observability data supports oncall teams.",
+          "sample_questions": [
+            "How do you currently triage alerts to avoid fatigue?",
+            "What does RB-OBS-033 cover in practice during an incident?",
+            "Can you share a recent example where incident analytics led to a design change?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Identify links between Nimbus Observability and other Novereon projects or systems.",
+          "sample_questions": [
+            "How does Nimbus Observability integrate with Helios Datalake or Titan DR?",
+            "Are there shared SLO definitions or dashboards across projects?",
+            "What challenges have you faced in aligning telemetry formats across teams?"
+          ]
+        },
+        {
+          "title": "Risks, Trade-offs & Future Plans",
+          "goal": "Uncover decision rationales, risk assessments, and roadmap considerations.",
+          "sample_questions": [
+            "What trade-offs did you make between data granularity and storage cost?",
+            "Can you walk me through a decision where risk mitigation shaped the implementation?",
+            "Looking ahead, what are the biggest risks and opportunities you foresee for Nimbus Observability?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26685,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

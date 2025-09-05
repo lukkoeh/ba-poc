@@ -1,0 +1,145 @@
+{
+  "id": "20250902_151801_f0029f",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 47,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & Security-Scope",
+          "goal": "Frühes Verständnis der Produktvision, Sicherheitsanforderungen und kritischen Assets im Orion Edge Gateway schaffen",
+          "sample_questions": [
+            "Können Sie mir bitte in zwei Minuten den Kern des Orion Edge Gateway Projekts erklären und wie Security darin verankert ist?",
+            "Welche kritischen Datenflüsse laufen durch das Gateway, und welche Bedrohungen haben Sie priorisiert?",
+            "How do you align the build-phase roadmap with the security policies like POL-SEC-001?"
+          ]
+        },
+        {
+          "title": "Architektur & Integrationspunkte",
+          "goal": "Tiefe in die API Gateway Architektur, Auth-Flows und Interaktionen mit anderen Plattformkomponenten gewinnen",
+          "sample_questions": [
+            "Wie ist das Gateway mit Aegis IAM integriert, insbesondere für mTLS und RBAC?",
+            "Which upstream and downstream systems are most sensitive to latency or auth failures?",
+            "Haben Sie Abhängigkeiten zu Projekten wie Nimbus Observability oder Poseidon Networking identifiziert?"
+          ]
+        },
+        {
+          "title": "Bedrohungsmodell & Incident Response",
+          "goal": "Evaluieren, ob ein ausgereiftes Bedrohungsmodell existiert und wie Incident Response vorbereitet ist",
+          "sample_questions": [
+            "Welche Bedrohungsszenarien haben Sie im letzten Threat Modeling Workshop priorisiert?",
+            "Do you have runbooks like RB-GW-011 aligned with DR procedures from Titan DR?",
+            "Wie wird im Falle eines Auth-Bypass oder Rate-Limit-Ausfalls reagiert?"
+          ]
+        },
+        {
+          "title": "Trade-offs, Risiken & Compliance",
+          "goal": "Verstehen, wie Produktentscheidungen zwischen Performance, Sicherheit, und Kundenerwartungen balanciert werden",
+          "sample_questions": [
+            "Welche Performance-Ziele aus SLA-ORI-02 mussten gegen Security-Härtungen abgewogen werden?",
+            "How do you evidence compliance to audits if performance tuning changes security posture?",
+            "Gab es Fälle, in denen ein Feature-Launch verzögert wurde, um Sicherheitslücken zu schließen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26967,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

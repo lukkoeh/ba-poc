@@ -1,0 +1,163 @@
+{
+  "id": "20250902_172944_d06732",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 160,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & Rollenklärung",
+          "goal": "Verstehen der Rolle des QA Leads im Kontext der Hera QA Platform und ihrer Build-Phase.",
+          "sample_questions": [
+            "Können Sie bitte kurz Ihre Rolle im Hera QA Platform Projekt beschreiben?",
+            "Welche Hauptverantwortlichkeiten haben Sie aktuell in der Build-Phase?",
+            "Wie ist Ihr Team strukturiert und wie interagieren Sie mit anderen Abteilungen?"
+          ]
+        },
+        {
+          "title": "Teststrategie & Risikobasierter Ansatz",
+          "goal": "Erfassen, wie der QA Lead die Teststrategie gestaltet und das Policy POL-QA-014 umsetzt.",
+          "sample_questions": [
+            "Wie setzen Sie den risikobasierten Testansatz konkret um?",
+            "Können Sie ein Beispiel geben, wie Sie Testfälle nach Risiko priorisieren?",
+            "Wie stellen Sie Traceability zwischen Anforderungen, Tests und Defects sicher?"
+          ]
+        },
+        {
+          "title": "Tooling & Automatisierung",
+          "goal": "Ermitteln, welche Tools und Automatisierungen für Testorchestrierung und Analyse eingesetzt werden.",
+          "sample_questions": [
+            "Welche Testorchestrierungs-Tools nutzen Sie aktuell?",
+            "Wie integrieren Sie flaky test analytics in Ihren Workflow?",
+            "Gibt es einen Runbook- oder RFC-gestützten Prozess für Toolauswahl?"
+          ]
+        },
+        {
+          "title": "Cross-Team Abhängigkeiten",
+          "goal": "Verstehen, wie QA mit anderen Projekten/Subsystemen interagiert, z.B. mit Nimbus Observability oder Orion Edge Gateway.",
+          "sample_questions": [
+            "Gibt es Abhängigkeiten zu Observability-Daten aus Nimbus?",
+            "Wie werden API-Änderungen aus Orion Edge Gateway in die Teststrategie integriert?",
+            "Können Sie ein Szenario beschreiben, in dem mehrere Subsysteme gleichzeitig getestet werden mussten?"
+          ]
+        },
+        {
+          "title": "Qualitätsmetriken & SLAs",
+          "goal": "Feststellen, welche Qualitätsmetriken verfolgt werden und wie diese auf SLAs/SLOs abgebildet sind.",
+          "sample_questions": [
+            "Welche KPIs messen Sie zur Bewertung der Qualität?",
+            "Wie fließen SLA- oder SLO-Anforderungen in Ihre Testplanung ein?",
+            "Haben Sie Beispiele, wo Metriken direkt zu einer Anpassung der Teststrategie geführt haben?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Risiken",
+          "goal": "Ermitteln, wie der QA Lead kritische Entscheidungen trifft, Trade-offs bewertet und Risiken dokumentiert.",
+          "sample_questions": [
+            "Können Sie eine Entscheidung beschreiben, bei der Sie zwischen Testabdeckung und Liefergeschwindigkeit abwägen mussten?",
+            "Wie dokumentieren Sie Risiken und welche Evidenzen nutzen Sie (z.B. Tickets, Runbooks)?",
+            "Gab es Situationen, in denen Sie bewusst von einer Policy abgewichen sind? Warum?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27543,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

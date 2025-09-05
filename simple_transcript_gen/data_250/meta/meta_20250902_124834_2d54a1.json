@@ -1,0 +1,154 @@
+{
+  "id": "20250902_124834_2d54a1",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 71,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & QA-Rollenverständnis",
+          "goal": "Das grundlegende Verständnis des QA-Leads für die Hera QA Platform und seine Rolle im Build-Phase-Kontext erfassen.",
+          "sample_questions": [
+            "Können Sie mir kurz erläutern, wie Sie die Teststrategie für Hera bisher aufgesetzt haben?",
+            "Wie stellen Sie sicher, dass 'Risk-Based Testing & Traceability' (POL-QA-014) im Build-Prozess verankert ist?",
+            "Welche Schnittstellen haben Sie aktuell zu Security und SRE, und wie fließt das in Ihre Testplanung ein?"
+          ]
+        },
+        {
+          "title": "Testarchitektur & Sicherheitsaspekte",
+          "goal": "Überprüfen, wie Sicherheitsanforderungen in die Testarchitektur integriert werden und ob kritische Pfade ausreichend abgedeckt sind.",
+          "sample_questions": [
+            "Welche Security-Testfälle sind in Ihren Orchestrationspipelines Pflicht und wie werden diese getrackt?",
+            "Gibt es ein Mapping zwischen Sicherheits-Risiken und Testfällen? Können Sie ein Beispiel geben?",
+            "Wie gehen Sie mit flüchtigen Testumgebungen um, um Least Privilege (POL-SEC-001) einzuhalten?"
+          ]
+        },
+        {
+          "title": "Traceability & Multi-Hop Abhängigkeiten",
+          "goal": "Ermitteln, wie Testfälle über mehrere Subsysteme hinweg nachverfolgt werden, besonders bei komplexen Integrationen.",
+          "sample_questions": [
+            "Können Sie einen End-to-End-Flow beschreiben, der Hera QA Platform mit Orion Edge Gateway und Aegis IAM verbindet?",
+            "Wie dokumentieren Sie in diesem Flow die Testabdeckung und Sicherheitsrelevanz?",
+            "Welche Tools oder Runbooks (z. B. RB-QA-051) nutzen Sie für solche Cross-System Tests?"
+          ]
+        },
+        {
+          "title": "Fehleranalyse & Incident Response",
+          "goal": "Bewerten, wie QA auf sicherheitsrelevante Fehler reagiert und diese priorisiert.",
+          "sample_questions": [
+            "Wie schnell können Sie bei einem kritischen Testfehler reagieren, der potenziell ein Security-Leck bedeutet?",
+            "Welche Eskalationswege sind definiert, und wie ist das mit SLA- oder SLO-Vorgaben verzahnt?",
+            "Haben Sie ein Beispiel aus der Praxis, wo ein QA-Test einen größeren Security-Incident verhindert hat?"
+          ]
+        },
+        {
+          "title": "Trade-offs & Risikoabwägung",
+          "goal": "Verstehen, welche Entscheidungen unter Zeit- und Ressourcenknappheit getroffen werden und wie Risiken abgewogen werden.",
+          "sample_questions": [
+            "Wie entscheiden Sie, welche Tests bei Zeitdruck entfallen können, ohne kritische Lücken zu riskieren?",
+            "Haben Sie schon einmal bewusst ein Risiko in den Go-Live genommen? Mit welcher Begründung?",
+            "Wie dokumentieren Sie solche Entscheidungen für spätere Audits (z. B. AUD-24-Q2)?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28225,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

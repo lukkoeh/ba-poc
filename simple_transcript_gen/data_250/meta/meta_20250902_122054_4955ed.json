@@ -1,0 +1,154 @@
+{
+  "id": "20250902_122054_4955ed",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 65,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick & Kontext",
+          "goal": "Schnell den aktuellen Stand des Orion Edge Gateway Projekts erfassen und die Rolle des Interviewees darin verstehen.",
+          "sample_questions": [
+            "Können Sie bitte kurz den aktuellen Build-Stand des Orion Edge Gateway beschreiben?",
+            "Welche Kernkomponenten haben Sie persönlich automatisiert oder betreut?",
+            "How does your work tie into the SLA-ORI-02 p95 latency requirement?"
+          ]
+        },
+        {
+          "title": "Automation & IaC Practices",
+          "goal": "Tiefe Einblicke in Automatisierungsstrategien, IaC-Patterns und deren Anwendung im Gateway-Kontext gewinnen.",
+          "sample_questions": [
+            "Welche Terraform- oder Ansible-Module nutzen Sie für die Gateway-Deployments?",
+            "Can you walk me through your CI/CD pipeline structure for Blue/Green deployments?",
+            "Wie stellen Sie sicher, dass Änderungen an Auth-Integrationen reproduzierbar und auditierbar sind?"
+          ]
+        },
+        {
+          "title": "Schnittstellen zu anderen Systemen",
+          "goal": "Verstehen, wie das Gateway mit IAM, Observability und anderen Plattformkomponenten integriert ist.",
+          "sample_questions": [
+            "Wie interagiert das Orion Gateway mit dem Aegis IAM Just-in-Time Access Mechanismus?",
+            "Can you describe any dependencies on Nimbus Observability for latency monitoring?",
+            "Gab es Herausforderungen bei mTLS-Handshake-Implementierungen, z. B. wie im Ticket GW-4821?"
+          ]
+        },
+        {
+          "title": "Performance & Reliability",
+          "goal": "Bewerten, wie der Interviewee Performance-Optimierungen und Ausfallsicherheit implementiert.",
+          "sample_questions": [
+            "Wie messen Sie die Einhaltung des p95-Latenz-Ziels praktisch?",
+            "What strategies do you use to limit BLAST_RADIUS during gateway failures?",
+            "Welche Runbooks (z. B. RB-GW-011) haben Sie im Incident-Fall angewendet?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Lessons Learned",
+          "goal": "Tiefe Diskussion zu getroffenen Entscheidungen, Risiken und deren Dokumentation.",
+          "sample_questions": [
+            "Gab es Entscheidungen, bei denen Sie bewusst zwischen Time-to-Market und Stabilität abgewogen haben?",
+            "Can you share an example where a policy like POL-SEC-001 influenced your deployment design?",
+            "Welche langfristigen Risiken sehen Sie für das Gateway, basierend auf bisherigen Incidents?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26472,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

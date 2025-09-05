@@ -1,0 +1,159 @@
+{
+  "id": "20250902_154305_958507",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 69,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_po",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick und Qualitätsziele",
+          "goal": "Ein klares Verständnis der Projektziele, des aktuellen Status und der relevanten Qualitätsmetriken gewinnen.",
+          "sample_questions": [
+            "Können Sie bitte die wichtigsten Ziele des Helios Datalake in der Scale-Phase zusammenfassen?",
+            "Welche SLOs oder SLAs gelten aktuell für das System, und wie messen wir deren Einhaltung?",
+            "Wie stellen Sie sicher, dass die Qualitätsziele mit den Unternehmenswerten wie 'Safety First' übereinstimmen?"
+          ]
+        },
+        {
+          "title": "Architektur und Integrationspunkte",
+          "goal": "Verstehen, wie Helios Datalake mit anderen Plattform- und Datenservices interagiert und welche Risiken daraus entstehen.",
+          "sample_questions": [
+            "Welche kritischen Integrationspunkte bestehen zwischen Helios Datalake und Kafka-Ingestion-Pipelines?",
+            "Wie wirkt sich die Partitionierungsstrategie (RFC-1287) auf Batch-Loads und Downstream-Modelle aus?",
+            "Gibt es Abhängigkeiten zu anderen Projekten wie Borealis ETL oder Nimbus Observability, die unsere Stabilität beeinflussen?"
+          ]
+        },
+        {
+          "title": "Qualitätssicherung und Runbooks",
+          "goal": "Prüfen, wie Runbooks wie RB-ING-042 im Incident-Fall angewendet werden und ob sie ausreichend getestet sind.",
+          "sample_questions": [
+            "Wie oft wurde das Ingestion Failover Runbook realistisch geübt, und was waren die Lessons Learned?",
+            "Welche Metriken nutzen Sie, um Alert-Fatigue zu vermeiden und trotzdem schnell zu reagieren?",
+            "Wie dokumentieren Sie Abweichungen von POL-QA-014 in Release-Zyklen?"
+          ]
+        },
+        {
+          "title": "Langfristige Skalierungsstrategien",
+          "goal": "Ermitteln, wie Skalierungsentscheidungen getroffen werden und welche Trade-offs zwischen Kosten, Performance und Sicherheit bestehen.",
+          "sample_questions": [
+            "Welche Kriterien führen zu einer Anpassung der Datenpartitionierung oder dbt-Modelle?",
+            "Wie balancieren Sie Cloud-Kosten (POL-FIN-007) mit Performance-Zielen?",
+            "Welche Risiken sehen Sie bei weiteren Integrationen in regulierten Branchen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28599,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

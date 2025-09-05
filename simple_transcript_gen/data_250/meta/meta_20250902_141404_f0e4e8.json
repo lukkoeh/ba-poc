@@ -1,0 +1,168 @@
+{
+  "id": "20250902_141404_f0e4e8",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 90,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_arch",
+      "role": "Cloud Architect",
+      "traits": [
+        "tradeoff",
+        "cost_perf",
+        "multi-region"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_arch",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rollenverständnis",
+          "goal": "Frühes Verständnis der individuellen Verantwortlichkeiten im Projekt Vesta FinOps und wie diese mit den Unternehmenswerten verknüpft sind.",
+          "sample_questions": [
+            "Können Sie bitte die Kernziele des Vesta FinOps Projekts aus Ihrer Sicht skizzieren?",
+            "Wie sieht Ihre spezifische Rolle im Rahmen der Cloud Cost Optimization & Guardrails aus?",
+            "Inwiefern beeinflussen Firmenwerte wie 'Sustainable Velocity' Ihre täglichen Entscheidungen?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Kostensteuerung",
+          "goal": "Tiefe Einblicke in die eingesetzten Architekturmuster und wie diese Kosten, Performance und Sicherheit beeinflussen.",
+          "sample_questions": [
+            "Welche Architekturentscheidungen wurden getroffen, um Kosten zu optimieren, ohne SLAs zu verletzen?",
+            "Wie interagieren Ihre FinOps Guardrails mit anderen Systemen wie Nimbus Observability oder Quasar Billing?",
+            "Können Sie ein Beispiel geben, wo technische Constraints direkte Budgetanpassungen erforderten?"
+          ]
+        },
+        {
+          "title": "Metriken, Forecasting & Anomaliedetektion",
+          "goal": "Verstehen, wie Metriken definiert, überwacht und für Forecasting genutzt werden und wie Anomalien erkannt und adressiert werden.",
+          "sample_questions": [
+            "Welche KPIs sind für Sie im Tagesgeschäft am wichtigsten, um Kostentreiber zu identifizieren?",
+            "Wie setzen Sie die in RFC-1502 definierten Resource Quotas & Budgets praktisch um?",
+            "Gab es Situationen, in denen Anomaliedetektoren Fehlalarme generierten und wie wurde darauf reagiert?"
+          ]
+        },
+        {
+          "title": "Interdisziplinäre Zusammenarbeit",
+          "goal": "Ermitteln, wie FinOps Analysten und Cloud Architekten zusammenarbeiten, um komplexe Kosten-Performance-Tradeoffs zu lösen.",
+          "sample_questions": [
+            "Wie stimmen Sie sich mit Architekten ab, wenn es um Multi-Region-Deployments und deren Kosten geht?",
+            "Welche Kommunikationskanäle nutzen Sie für schnelle Eskalationen?",
+            "Gab es ein Beispiel, wo eine Architekturentscheidung Ihre Kostenprognosen signifikant verändert hat?"
+          ]
+        },
+        {
+          "title": "Risiken, Entscheidungen & Lessons Learned",
+          "goal": "Am Ende des Interviews fundierte Entscheidungen, Risiken und evidenzbasierte Learnings ableiten.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie aktuell für die Kostenoptimierung und wie mitigieren Sie diese?",
+            "Können Sie eine Entscheidung schildern, die Sie anhand eines Runbooks oder Tickets belegt haben?",
+            "Welche Lessons Learned würden Sie für zukünftige FinOps-Implementierungen bei Novereon ableiten?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28241,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

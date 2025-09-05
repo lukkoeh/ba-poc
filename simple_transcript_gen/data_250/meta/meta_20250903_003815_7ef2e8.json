@@ -1,0 +1,163 @@
+{
+  "id": "20250903_003815_7ef2e8",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 214,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung und Kontext",
+          "goal": "Verstehen, wie der FinOps Analyst in das Vesta FinOps Projekt eingebunden ist und welche Kernaufgaben er übernimmt.",
+          "sample_questions": [
+            "Können Sie mir kurz Ihren aktuellen Verantwortungsbereich im Vesta FinOps Projekt beschreiben?",
+            "Wie sieht ein typischer Arbeitstag für Sie aus, insbesondere in Bezug auf Kostenoptimierung?",
+            "Welche Artefakte oder Runbooks nutzen Sie am häufigsten?"
+          ]
+        },
+        {
+          "title": "Prozesse und Tools",
+          "goal": "Erfassen, welche Prozesse, Tools und Datenquellen für Kostenanalysen und Budgetkontrolle eingesetzt werden.",
+          "sample_questions": [
+            "Welche Tools setzen Sie für die Analyse von Cloud-Kosten ein?",
+            "Wie fließen die Vorgaben aus POL-FIN-007 in Ihre tägliche Arbeit ein?",
+            "Können Sie ein Beispiel geben, wie Sie mit dem Runbook RB-FIN-007 gearbeitet haben?"
+          ]
+        },
+        {
+          "title": "Zusammenarbeit mit anderen Teams",
+          "goal": "Ermitteln, wie der Analyst mit anderen Abteilungen (z.B. SRE, Platform) zusammenarbeitet und welche Kommunikationswege bestehen.",
+          "sample_questions": [
+            "Mit welchen Teams haben Sie die engste Zusammenarbeit im Rahmen von Vesta FinOps?",
+            "Wie werden Budgetüberschreitungen oder Quotenverletzungen kommuniziert?",
+            "Gab es kürzlich ein Beispiel, bei dem eine Quotenänderung schnell umgesetzt werden musste?"
+          ]
+        },
+        {
+          "title": "Herausforderungen und Multi-Hop Szenarien",
+          "goal": "Tiefe Einblicke in komplexe, abteilungsübergreifende Herausforderungen gewinnen, z.B. wenn Kostenanomalien mit Observability-Daten korreliert werden müssen.",
+          "sample_questions": [
+            "Können Sie ein Beispiel nennen, bei dem eine Kostenanomalie nur durch Kombination von FinOps- und Observability-Daten erkannt wurde?",
+            "Wie gehen Sie vor, wenn ein Projekt wie Helios Datalake oder Nimbus Observability indirekt Vesta FinOps beeinflusst?",
+            "Welche Rolle spielt das RFC-1502 in solchen Szenarien?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs und Risiken",
+          "goal": "Verstehen, wie Entscheidungen über Optimierungsmaßnahmen gefällt werden, welche Risiken bestehen und wie diese dokumentiert werden.",
+          "sample_questions": [
+            "Wie wägen Sie kurzfristige Einsparungen gegen langfristige Skalierbarkeit ab?",
+            "Können Sie ein Beispiel für ein dokumentiertes Risiko in einem Audit oder Ticket nennen?",
+            "Wie stellen Sie sicher, dass Optimierungsmaßnahmen im Einklang mit den Unternehmenswerten wie 'Sustainable Velocity' stehen?"
+          ]
+        },
+        {
+          "title": "Abschluss und Ausblick",
+          "goal": "Zusammenfassung der Erkenntnisse und Blick auf zukünftige Entwicklungen im FinOps-Bereich bei Novereon Systems.",
+          "sample_questions": [
+            "Welche Verbesserungen wünschen Sie sich für die FinOps-Prozesse in den nächsten 12 Monaten?",
+            "Gibt es aus Ihrer Sicht Potenzial, UX-Aspekte in FinOps Dashboards zu verbessern?",
+            "Wie könnte die Zusammenarbeit mit UX Research Ihre Arbeit unterstützen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28427,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

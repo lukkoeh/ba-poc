@@ -1,0 +1,154 @@
+{
+  "id": "20250902_171744_df4b2b",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 149,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Ziele",
+          "goal": "Ein gemeinsames Verständnis der Projektziele, des aktuellen Status und der wichtigsten Deliverables herstellen.",
+          "sample_questions": [
+            "Können Sie bitte kurz den Scope vom Orion Edge Gateway im Kontext unseres Portfolios skizzieren?",
+            "Welche Key-Metriken, wie z.B. SLA-ORI-02 p95 Latency, sind für Sie als PO am kritischsten?",
+            "Welche Abhängigkeiten zu anderen Projekten bestehen aktuell?"
+          ]
+        },
+        {
+          "title": "Anforderungen und Priorisierung",
+          "goal": "Ermitteln, wie Anforderungen gesammelt, bewertet und priorisiert werden, um den Kundenwert zu maximieren.",
+          "sample_questions": [
+            "Wie identifizieren Sie die wichtigsten API-Endpoints für das erste Release?",
+            "Welche Trade-offs mussten Sie zwischen Rate Limiting und Latency eingehen?",
+            "Wie fließen Security Policies wie POL-SEC-001 in Ihre Priorisierung ein?"
+          ]
+        },
+        {
+          "title": "Technische Integration und Schnittstellen",
+          "goal": "Verstehen, wie das Gateway mit Auth- und Observability-Systemen interagiert.",
+          "sample_questions": [
+            "Wie ist die MTLS-Integration (GW-4821) aktuell gelöst?",
+            "Welche Rolle spielt Nimbus Observability beim Monitoring des Gateways?",
+            "Wie stellen Sie sicher, dass Änderungen am Auth-Service das Gateway nicht destabilisieren?"
+          ]
+        },
+        {
+          "title": "Risiken, Entscheidungen und Lessons Learned",
+          "goal": "Schlüsselentscheidungen, Risiken und dokumentierte Erfahrungen aufdecken.",
+          "sample_questions": [
+            "Welche Entscheidungen aus RFC-1287 oder RB-GW-011 hatten den größten Einfluss auf die Architektur?",
+            "Gab es kritische Incidents, und wie wurden diese gemäß Runbook behandelt?",
+            "Welche Risiken sehen Sie für den Übergang von Build zu Operate?"
+          ]
+        },
+        {
+          "title": "Kundenfeedback und Roadmap",
+          "goal": "Verstehen, wie Kundenfeedback einfließt und wie die Roadmap gestaltet ist.",
+          "sample_questions": [
+            "Wie wird Kundenfeedback zur API-Usability gesammelt und umgesetzt?",
+            "Welche Milestones sehen Sie in den nächsten zwei Quartalen?",
+            "Wie planen Sie, SLA-ORI-02 nachhaltig einzuhalten?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26270,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "id": "20250902_140038_0ac5ba",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 87,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_sec",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung in Vesta FinOps",
+          "goal": "Verständnis der aktuellen Betriebsphase und der wichtigsten Guardrails schaffen",
+          "sample_questions": [
+            "Können Sie den aktuellen Stand des Vesta FinOps Projekts beschreiben?",
+            "Welche Kernmetriken nutzen Sie, um den Erfolg der Kostenoptimierung zu messen?",
+            "Wie setzen Sie POL-FIN-007 in Ihrem Tagesgeschäft um?"
+          ]
+        },
+        {
+          "title": "Integration mit Security und IAM",
+          "goal": "Zusammenhänge zwischen FinOps-Maßnahmen und Sicherheitsrichtlinien erfassen",
+          "sample_questions": [
+            "Wie wirken sich Least Privilege und JIT Access (POL-SEC-001) auf Ihre Kostenkontrollen aus?",
+            "Gibt es Überschneidungen zwischen Kostenbudgets und Zugriffsbeschränkungen?",
+            "Wie koordinieren Sie sich mit dem Security-Team bei Ressourcenfreigaben?"
+          ]
+        },
+        {
+          "title": "Forecasting & Budgetsteuerung",
+          "goal": "Erfahren, wie Kostenprognosen erstellt und Budgets dynamisch angepasst werden",
+          "sample_questions": [
+            "Welche Tools oder Runbooks (z. B. RB-FIN-007) nutzen Sie für Prognosen?",
+            "Wie gehen Sie mit unerwarteten Kostenanomalien um?",
+            "Wie integrieren Sie Erkenntnisse aus Projekten wie Hyperion Cost Explorer?"
+          ]
+        },
+        {
+          "title": "Multi-Projekt-Abhängigkeiten",
+          "goal": "Verstehen, wie Vesta FinOps mit anderen Plattform- und Datenprojekten interagiert",
+          "sample_questions": [
+            "Welche Abhängigkeiten bestehen zu Quasar Billing oder Helios Datalake?",
+            "Wie beeinflussen SLOs aus Observability-Projekten Ihre Budgetplanung?",
+            "Gibt es Beispiele für Kostenoptimierungen, die mehrere Projekte gleichzeitig betreffen?"
+          ]
+        },
+        {
+          "title": "Trade-offs und Risiken",
+          "goal": "Tiefe Einsicht in Entscheidungen, Abwägungen und Risiken gewinnen",
+          "sample_questions": [
+            "Welche Risiken sehen Sie bei zu aggressiven Kostensenkungen?",
+            "Wie balancieren Sie Kostenoptimierung mit Verfügbarkeit und Sicherheit?",
+            "Können Sie ein Beispiel nennen, wo ein Trade-off dokumentiert wurde (z. B. RFC-1502)?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28608,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

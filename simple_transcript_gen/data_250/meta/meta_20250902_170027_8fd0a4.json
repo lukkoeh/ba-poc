@@ -1,0 +1,164 @@
+{
+  "id": "20250902_170027_8fd0a4",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 133,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_da"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Introduction & Role Context",
+          "goal": "Establish interviewee's background, alignment with company mission and values, and familiarity with Helios Datalake scope.",
+          "sample_questions": [
+            "Can you briefly describe your experience with ELT pipelines and how it relates to our Helios Datalake project?",
+            "How do you typically ensure data model quality and consistency in a regulated industry?",
+            "Which parts of our mission and values resonate most with your work style?"
+          ]
+        },
+        {
+          "title": "Technical Deep Dive: ELT and dbt Modeling",
+          "goal": "Assess technical proficiency in designing and operating ELT pipelines, dbt transformations, and integration with Kafka ingestion.",
+          "sample_questions": [
+            "Walk me through how you would design a dbt model for a new regulated dataset, including lineage tracking.",
+            "How would you handle late-arriving data in Kafka ingestion for Helios?",
+            "Can you give an example of applying a runbook like RB-ING-042 in a real-world failover scenario?"
+          ]
+        },
+        {
+          "title": "SLA/SLO Management and Incident Handling",
+          "goal": "Evaluate understanding of SLA-HEL-01 and how to meet availability targets under operational stress.",
+          "sample_questions": [
+            "Given a 99.9% availability SLA, how do you prioritize incident response for ingestion delays?",
+            "What metrics would you monitor to ensure compliance with SLA-HEL-01?",
+            "How would you coordinate with the SRE team during a high-severity incident?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Explore awareness of dependencies between Helios Datalake and other Novereon projects (e.g., Borealis ETL, Nimbus Observability).",
+          "sample_questions": [
+            "How would changes in Borealis ETL's CDC strategy (RFC-1711) impact Helios ingestion?",
+            "What observability signals from Nimbus would be most valuable to you?",
+            "Describe a scenario where you had to adjust Helios pipelines due to upstream schema evolution."
+          ]
+        },
+        {
+          "title": "Decision-Making, Tradeoffs, and Risk Management",
+          "goal": "Understand how the interviewee makes evidence-based decisions under uncertainty, balancing safety, performance, and compliance.",
+          "sample_questions": [
+            "Can you share a time when you had to choose between faster delivery and stricter data validation?",
+            "How do you document and communicate tradeoffs to stakeholders?",
+            "If you identified a risk that could jeopardize the BLAST_RADIUS containment, what steps would you take?"
+          ]
+        },
+        {
+          "title": "Closing & Candidate Questions",
+          "goal": "Allow the candidate to ask questions, clarify expectations, and demonstrate engagement.",
+          "sample_questions": [
+            "What questions do you have about our data platform roadmap?",
+            "Is there any aspect of the Helios Datalake architecture you'd like to explore further?",
+            "How do you see yourself contributing to sustainable velocity in our context?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26937,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "id": "20250903_002918_69f2c2",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 204,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick und Zieldefinition",
+          "goal": "Verstehen, wie der Product Owner die Ziele des Orion Edge Gateway Projekts formuliert und priorisiert",
+          "sample_questions": [
+            "Können Sie den aktuellen Stand des Orion Edge Gateway kurz zusammenfassen?",
+            "Welche Hauptziele wurden zu Beginn der Build-Phase definiert?",
+            "Wie messen Sie momentan den Fortschritt gegenüber diesen Zielen?"
+          ]
+        },
+        {
+          "title": "SLA- und SLO-Konformität",
+          "goal": "Prüfen, wie SLA-ORI-02 (p95 Latenz < 120ms) in die Produktentscheidungen einfließt",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass die Latenz-Anforderung von SLA-ORI-02 kontinuierlich eingehalten wird?",
+            "Welche Monitoring- oder Observability-Maßnahmen sind implementiert?",
+            "Gab es bisher Abweichungen, und wie wurde darauf reagiert?"
+          ]
+        },
+        {
+          "title": "Abhängigkeiten und Schnittstellenmanagement",
+          "goal": "Analysieren, wie Abhängigkeiten zu anderen Projekten (z.B. Aegis IAM für Auth) gehandhabt werden",
+          "sample_questions": [
+            "Welche externen Systeme sind für das Orion Edge Gateway kritisch?",
+            "Wie koordinieren Sie Änderungen mit dem Aegis IAM Team?",
+            "Gab es schon Fälle, in denen Schnittstellenänderungen zu Verzögerungen geführt haben?"
+          ]
+        },
+        {
+          "title": "Risikomanagement und Incident Response",
+          "goal": "Ermitteln, wie Risiken identifiziert, bewertet und mitigiert werden",
+          "sample_questions": [
+            "Welche Haupt-Risiken sehen Sie aktuell für das Projekt?",
+            "Können Sie einen Vorfall schildern, bei dem RB-GW-011 Rolling Deployments (Blue/Green) angewendet wurde?",
+            "Wie wird sichergestellt, dass Lessons Learned in zukünftige Deployments einfließen?"
+          ]
+        },
+        {
+          "title": "Trade-offs und Priorisierung",
+          "goal": "Verstehen, wie der Product Owner technische und geschäftliche Anforderungen gegeneinander abwägt",
+          "sample_questions": [
+            "Gab es Entscheidungen, bei denen Performance gegen Feature-Umfang abgewogen wurde?",
+            "Wie gehen Sie mit Konflikten zwischen Kundenerwartungen und technischen Limitierungen um?",
+            "Welche Kriterien nutzen Sie, um Backlog-Prioritäten anzupassen?"
+          ]
+        },
+        {
+          "title": "Abschluss und Ausblick",
+          "goal": "Zusammenfassung der wichtigsten Punkte und Blick auf nächste Schritte",
+          "sample_questions": [
+            "Was sind die nächsten Meilensteine für Orion Edge Gateway?",
+            "Welche langfristigen Verbesserungen sind bereits geplant?",
+            "Wie wird der Erfolg des Projekts aus Kundensicht gemessen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27170,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

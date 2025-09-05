@@ -1,0 +1,163 @@
+{
+  "id": "20250903_004347_e5d12c",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 220,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context and Role",
+          "goal": "Establish the interviewee's involvement in Nimbus Observability, their responsibilities, and their understanding of the project's objectives.",
+          "sample_questions": [
+            "Can you walk me through your day-to-day responsibilities on Nimbus Observability?",
+            "What are the primary goals of the OpenTelemetry pipelines in this project?",
+            "How do SLOs and incident analytics fit into the overall architecture?"
+          ]
+        },
+        {
+          "title": "Runbook-Driven Operations",
+          "goal": "Explore how the engineer uses and contributes to runbooks, including RB-OBS-033 Alert Fatigue Tuning.",
+          "sample_questions": [
+            "How do you apply RB-OBS-033 in live incident scenarios?",
+            "Can you describe a recent alert fatigue issue and how you mitigated it?",
+            "What gaps have you identified in our current runbooks and how did you address them?"
+          ]
+        },
+        {
+          "title": "Cross-Subsystem Dependencies",
+          "goal": "Discuss non-trivial dependencies between Nimbus Observability and other systems like Orion Edge Gateway or Helios Datalake.",
+          "sample_questions": [
+            "How does data from Orion Edge Gateway influence our observability metrics?",
+            "Have you encountered issues where ingestion delays from Helios Datalake impacted incident analytics?",
+            "What strategies do you use to trace issues across these subsystems?"
+          ]
+        },
+        {
+          "title": "Performance and Quality Metrics",
+          "goal": "Assess the SRE’s approach to maintaining SLOs and SLAs in a build-phase project.",
+          "sample_questions": [
+            "What’s your process for defining and validating SLOs in Nimbus Observability?",
+            "Can you share how you measure the impact of observability improvements on incident response times?",
+            "How do you balance the need for rich telemetry with performance overhead?"
+          ]
+        },
+        {
+          "title": "Decision-Making, Tradeoffs, and Risks",
+          "goal": "Evaluate the engineer’s reasoning about tradeoffs, risks, and evidence-based decisions, referencing RFC-1114 Sampling Strategy for Traces.",
+          "sample_questions": [
+            "Why did the team choose the sampling strategy outlined in RFC-1114?",
+            "What risks did you identify with that strategy and how did you mitigate them?",
+            "Can you point to specific evidence or incidents that validated your choice?"
+          ]
+        },
+        {
+          "title": "Continuous Improvement and Lessons Learned",
+          "goal": "Identify how the engineer contributes to the evolution of observability practices.",
+          "sample_questions": [
+            "What lessons from recent incidents have influenced your observability practices?",
+            "How do you propose and drive updates to runbooks or RFCs?",
+            "What’s your approach to preventing recurrence of known issues?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26849,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

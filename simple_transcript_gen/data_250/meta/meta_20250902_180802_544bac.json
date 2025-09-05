@@ -1,0 +1,172 @@
+{
+  "id": "20250902_180802_544bac",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 196,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context and QA Role",
+          "goal": "Establish understanding of the Hera QA Platform scope, current phase, and the QA Lead's responsibilities.",
+          "sample_questions": [
+            "Can you describe the primary objectives of the Hera QA Platform in the Build phase?",
+            "What are your main responsibilities as QA Lead on this project?",
+            "How does your role interact with other departments like Platform or SRE?"
+          ]
+        },
+        {
+          "title": "Test Strategy and Risk-Based Testing",
+          "goal": "Explore how the QA Lead applies risk-based testing principles in a unified test orchestration environment.",
+          "sample_questions": [
+            "How do you determine which tests to prioritize under tight timelines?",
+            "Can you walk me through how RFC-1770 influenced your test selection approach?",
+            "What metrics or indicators do you use to adjust your testing scope dynamically?"
+          ]
+        },
+        {
+          "title": "Traceability and Compliance",
+          "goal": "Understand how the project ensures traceability of tests to requirements in line with policy POL-QA-014.",
+          "sample_questions": [
+            "How do you maintain traceability from test cases back to original requirements?",
+            "What tools or processes support you in demonstrating compliance during audits?",
+            "How do you handle changes in requirements mid-sprint with respect to traceability?"
+          ]
+        },
+        {
+          "title": "Flaky Test Analytics and Resolution",
+          "goal": "Dive into the specific challenges and solutions around flaky tests in the Hera QA Platform.",
+          "sample_questions": [
+            "What patterns have you identified in flaky tests across different modules?",
+            "How do you differentiate between environmental issues and code-related flakiness?",
+            "Can you give an example where RB-QA-051 helped mitigate a release risk due to flakiness?"
+          ]
+        },
+        {
+          "title": "Cross-Project Quality Dependencies",
+          "goal": "Investigate interdependencies between Hera QA Platform and other portfolio projects impacting quality.",
+          "sample_questions": [
+            "How does the Hera QA Platform integrate with the Helios Datalake or Nimbus Observability for test data and metrics?",
+            "Have there been any cross-project incidents where QA gaps led to production issues?",
+            "What adjustments have you made to account for upstream or downstream quality risks?"
+          ]
+        },
+        {
+          "title": "Decision-Making under Constraints",
+          "goal": "Evaluate how the QA Lead makes tradeoffs between release timelines, test coverage, and risk mitigation.",
+          "sample_questions": [
+            "Can you describe a situation where you had to cut test scope to meet a delivery date?",
+            "What evidence do you collect to justify such a decision to stakeholders?",
+            "How do you balance the SLA requirements with known quality debt?"
+          ]
+        },
+        {
+          "title": "Future Improvements and Lessons Learned",
+          "goal": "Identify areas for process improvement and key takeaways from the Build phase.",
+          "sample_questions": [
+            "If you could redesign the test orchestration from scratch, what would you change?",
+            "What lessons have you learned from implementing risk-based testing here?",
+            "How do you see the QA Platform evolving to support scaling projects?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26888,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "id": "20250902_152731_dc4c85",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 57,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_da"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rolle",
+          "goal": "Das Verständnis des Kandidaten für die Helios Datalake Anforderungen und seine Rolle darin evaluieren.",
+          "sample_questions": [
+            "Können Sie bitte kurz Ihren bisherigen Beitrag zum Helios Datalake Projekt beschreiben?",
+            "Wie würden Sie die Hauptziele des Projekts in Bezug auf die Unternehmensmission einordnen?",
+            "Welche Schnittstellen zu anderen Projekten oder Abteilungen haben Sie bisher genutzt?"
+          ]
+        },
+        {
+          "title": "Technische Tiefe ELT & dbt",
+          "goal": "Bewertung der technischen Expertise in ELT-Pipelines, dbt-Modellierung und Kafka-Ingestion.",
+          "sample_questions": [
+            "Wie haben Sie die ELT-Pipelines zu Snowflake strukturiert und welche dbt-Konventionen nutzen Sie?",
+            "Können Sie eine konkrete Situation schildern, in der Sie RB-ING-042 angewandt haben?",
+            "Wie stellen Sie sicher, dass Kafka-Ingestionsjobs resilient gegen Ausfälle sind?"
+          ]
+        },
+        {
+          "title": "Datenqualität & Lineage",
+          "goal": "Verstehen, wie der Kandidat Datenqualität und Rückverfolgbarkeit sicherstellt.",
+          "sample_questions": [
+            "Welche Strategien nutzen Sie, um Datenqualität kontinuierlich zu messen?",
+            "Wie dokumentieren Sie Datenflüsse, um sowohl regulatorische Anforderungen als auch interne Policies wie POL-QA-014 zu erfüllen?",
+            "Hatten Sie schon mal einen Fall, bei dem Lineage-Informationen entscheidend für die Problembehebung waren?"
+          ]
+        },
+        {
+          "title": "Schnittstellen & Multi-Hop Abhängigkeiten",
+          "goal": "Fähigkeit prüfen, komplexe Abhängigkeiten zwischen Systemen zu verstehen und zu managen.",
+          "sample_questions": [
+            "Wie beeinflusst die Partitionierungsstrategie aus RFC-1287 Ihre Batch-Loads und nachgelagerte Systeme?",
+            "Gab es einen Fall, bei dem Änderungen in Kafka-Schemas Auswirkungen auf dbt-Modelle hatten?",
+            "Wie koordinieren Sie sich mit SRE oder Security, wenn ein Upstream-System SLA-HEL-01 gefährdet?"
+          ]
+        },
+        {
+          "title": "Betrieb, Monitoring & SLA",
+          "goal": "Verstehen, wie der Kandidat den Betrieb überwacht und SLAs einhält.",
+          "sample_questions": [
+            "Welche Metriken überwachen Sie für SLA-HEL-01 und wie reagieren Sie auf Abweichungen?",
+            "Wie binden Sie Observability-Tools in Ihre Workflows ein?",
+            "Können Sie einen Incident schildern, bei dem Sie BLAST_RADIUS minimieren mussten?"
+          ]
+        },
+        {
+          "title": "Trade-offs, Risiken & Entscheidungen",
+          "goal": "Evaluieren, wie der Kandidat Entscheidungen trifft und Risiken abwägt.",
+          "sample_questions": [
+            "Wie sind Sie bei der Wahl zwischen unterschiedlichen Partitionierungsstrategien vorgegangen?",
+            "Gab es Situationen, in denen Sie Performance gegen Datenkonsistenz abwägen mussten?",
+            "Welche Lessons Learned aus einem kritischen Incident haben Ihre zukünftige Arbeit beeinflusst?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28188,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

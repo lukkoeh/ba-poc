@@ -1,0 +1,164 @@
+{
+  "id": "20250902_163544_ccf46d",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 111,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_da"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Projektkontext",
+          "goal": "Das grundlegende Verständnis des Helios Datalake Projekts, der aktuellen Skalierungsphase und der Rolle des Interviewees klären.",
+          "sample_questions": [
+            "Können Sie mir kurz Ihren Verantwortungsbereich im Helios Datalake beschreiben?",
+            "Welche Meilensteine stehen in der aktuellen Skalierungsphase an?",
+            "Wie ist die Zusammenarbeit mit den anderen Teams, z.B. SRE oder Security, organisiert?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & ELT-Pipelines",
+          "goal": "Tiefe Einblicke in die ELT-Architektur, eingesetzte Tools wie dbt und Airflow, sowie Kafka-Ingestion gewinnen.",
+          "sample_questions": [
+            "Wie ist der aktuelle Datenfluss von der Kafka-Ingestion bis zu Snowflake modelliert?",
+            "Welche dbt-Modellierungsstrategien setzen Sie bei großen Partitionen ein?",
+            "Wie gehen Sie mit Schema-Änderungen in den Quellsystemen um?"
+          ]
+        },
+        {
+          "title": "Betrieb & Runbooks",
+          "goal": "Verständnis der operativen Prozesse, insbesondere der Nutzung von RB-ING-042 Ingestion Failover Runbook.",
+          "sample_questions": [
+            "Können Sie ein Beispiel nennen, wann Sie zuletzt RB-ING-042 einsetzen mussten?",
+            "Wie wird die Einhaltung von SLA-HEL-01 im Tagesgeschäft überwacht?",
+            "Gibt es Lücken in den aktuellen Runbooks, die Sie schließen möchten?"
+          ]
+        },
+        {
+          "title": "Cross-System Abhängigkeiten",
+          "goal": "Multi-hop Abhängigkeiten zwischen Helios Datalake und anderen Projekten wie Borealis ETL oder Nimbus Observability identifizieren.",
+          "sample_questions": [
+            "Wie beeinflussen Änderungen in Borealis ETL Ihre dbt-Modelle?",
+            "Welche Observability-Daten aus Nimbus nutzen Sie zur Fehlerdiagnose?",
+            "Gab es schon Fälle, wo eine Änderung in einem anderen System unerwartete Auswirkungen auf Helios hatte?"
+          ]
+        },
+        {
+          "title": "Optimierung & Skalierungsstrategien",
+          "goal": "Strategien zur Performance-Optimierung, Partitionierung und Kostenkontrolle diskutieren.",
+          "sample_questions": [
+            "Welche Ansätze aus RFC-1287 haben Sie bereits umgesetzt?",
+            "Wie priorisieren Sie zwischen Performance-Optimierung und Kostenersparnis?",
+            "Welche Metriken nutzen Sie, um die Skalierung zu steuern?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Lessons Learned",
+          "goal": "Wichtige Entscheidungen, Risiken und abgewogene Trade-offs im Projektverlauf dokumentieren.",
+          "sample_questions": [
+            "Gab es Entscheidungen, bei denen Sie bewusst ein höheres Risiko eingegangen sind?",
+            "Wie dokumentieren Sie solche Trade-offs für zukünftige Audits?",
+            "Welche Lessons Learned würden Sie an ein neues Teammitglied weitergeben?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27694,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

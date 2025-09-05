@@ -1,0 +1,136 @@
+{
+  "id": "20250902_111705_9fc341",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 52,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Overview & Security Posture",
+          "goal": "Establish a clear understanding of the current operational status of Aegis IAM, its role in the enterprise security architecture, and adherence to policy POL-SEC-001.",
+          "sample_questions": [
+            "Can you briefly outline the current operational scope of Aegis IAM and its critical dependencies?",
+            "How does the system enforce Novereon’s 'Least Privilege & JIT Access' policy in day-to-day operations?",
+            "What are the most recent audit findings from AUD-24-Q2 and how have they been addressed?"
+          ]
+        },
+        {
+          "title": "Integration & Cross-System Dependencies",
+          "goal": "Explore non-trivial links between Aegis IAM and other Novereon projects, with focus on potential cascading security risks.",
+          "sample_questions": [
+            "How does Aegis IAM interact with Orion Edge Gateway for auth integration, and what is the blast radius if that integration fails?",
+            "Can you describe the hand-off of identity events to Nimbus Observability and how that impacts incident response?",
+            "What safeguards are in place to ensure IAM changes do not break access patterns in Borealis ETL or Helios Datalake?"
+          ]
+        },
+        {
+          "title": "Risk Scenarios & Response Tradeoffs",
+          "goal": "Discuss decision-making frameworks for high-risk incidents, referencing specific runbooks and RFCs, and evaluate tradeoffs between security, availability, and operational velocity.",
+          "sample_questions": [
+            "If you had to execute RB-IAM-075 for emergency access revocation during a critical production outage, how would you balance RTO/RPO with security containment?",
+            "What tradeoffs were considered when adopting RFC-903 Policy-as-Code conventions, particularly in relation to deployment velocity?",
+            "Can you walk through a recent incident or drill where IAM controls impacted other SLAs, and what changes resulted from the postmortem?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27450,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

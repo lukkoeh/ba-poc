@@ -1,0 +1,154 @@
+{
+  "id": "20250902_153722_c23d1e",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 64,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Overview & Objectives",
+          "goal": "Understand the high-level goals, customer needs, and success criteria for Orion Edge Gateway.",
+          "sample_questions": [
+            "Can you walk me through the primary business problem Orion Edge Gateway is aiming to solve?",
+            "How do you define success for the Build phase in relation to the SLA-ORI-02 p95 latency target?",
+            "What are the key customer segments and their most critical use cases?"
+          ]
+        },
+        {
+          "title": "SLA Alignment & Operational Constraints",
+          "goal": "Explore how the project aligns with organizational SLAs, policies, and operational requirements.",
+          "sample_questions": [
+            "How are you ensuring compliance with 'POL-SEC-001 Least Privilege & JIT Access' during development?",
+            "What measures are in place to meet SLA-ORI-02 and how will you validate them?",
+            "Can you describe any dependencies on other projects like Poseidon Networking for mTLS?"
+          ]
+        },
+        {
+          "title": "Integration & Cross-Team Dependencies",
+          "goal": "Identify non-trivial dependencies across subsystems and departments.",
+          "sample_questions": [
+            "How does Orion Edge Gateway integrate with Aegis IAM for authentication?",
+            "Are there shared runbooks or RFCs that guide integration points with Nimbus Observability?",
+            "What coordination mechanisms exist with the SRE and Security teams?"
+          ]
+        },
+        {
+          "title": "Risk Management & Tradeoffs",
+          "goal": "Discuss key risks, tradeoffs made during design, and mitigation plans.",
+          "sample_questions": [
+            "What’s the most significant tradeoff you’ve made between feature delivery speed and SLA compliance?",
+            "Can you give an example of a risk identified in a ticket, like GW-4821, and how it was addressed?",
+            "How do you balance rate limiting policies with customer experience?"
+          ]
+        },
+        {
+          "title": "Evidence & Continuous Improvement",
+          "goal": "Assess how decisions are backed by evidence and how learnings are fed back into the process.",
+          "sample_questions": [
+            "What metrics or analytics are you collecting to inform future RFCs?",
+            "How often do you revisit runbooks like RB-GW-011 to ensure they’re up to date?",
+            "Can you share an example where post-incident analysis led to a change in process?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26031,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

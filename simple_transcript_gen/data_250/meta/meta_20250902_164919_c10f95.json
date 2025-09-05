@@ -1,0 +1,154 @@
+{
+  "id": "20250902_164919_c10f95",
+  "language": "mix",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 122,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_ux",
+      "role": "Staff UX Researcher",
+      "interviewer_type": "explorative",
+      "traits": [
+        "neugierig",
+        "empathisch",
+        "offen"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_ux"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Rollenverständnis",
+          "goal": "Verstehen, wie der SRE in das Projekt Nimbus Observability eingebunden ist und welche Hauptaufgaben er übernimmt.",
+          "sample_questions": [
+            "Können Sie mir kurz erzählen, wie Sie zu Novereon Systems gekommen sind und welche Rolle Sie im Nimbus Observability Projekt haben?",
+            "Wie sieht ein typischer Arbeitstag für Sie aus, wenn Sie oncall sind?",
+            "What kind of collaboration do you have with the Data or Security teams in your daily workflow?"
+          ]
+        },
+        {
+          "title": "Tooling & Runbooks",
+          "goal": "Erkunden, wie Runbooks (z. B. RB-OBS-033) im Incident Management eingesetzt werden und wie UX-Aspekte darin berücksichtigt werden.",
+          "sample_questions": [
+            "Können Sie ein Beispiel geben, wann Sie zuletzt RB-OBS-033 benutzt haben?",
+            "How do you usually navigate or search for the right runbook under time pressure?",
+            "Welche Verbesserungen würden Sie sich an den bestehenden Runbooks wünschen, um schneller handeln zu können?"
+          ]
+        },
+        {
+          "title": "Incident Analytics & Cross-System Links",
+          "goal": "Verstehen, wie der SRE Muster erkennt, die mehrere Subsysteme betreffen, und wie Observability-Daten mit anderen Plattformen integriert werden.",
+          "sample_questions": [
+            "Gab es kürzlich einen Vorfall, bei dem Daten aus Nimbus Observability und einem anderen System kombiniert werden mussten?",
+            "How do you correlate trace data from OpenTelemetry with, say, the Atlas Mobile crash reports?",
+            "Welche Hürden haben Sie beim Multi-System Debugging erlebt?"
+          ]
+        },
+        {
+          "title": "SLOs, SLAs und Entscheidungsfindung",
+          "goal": "Ergründen, wie SLOs und SLAs die Priorisierung von Maßnahmen beeinflussen und welche Trade-offs getroffen werden.",
+          "sample_questions": [
+            "Wie wirken sich SLA-Verpflichtungen wie SLA-ORI-02 auf Ihre Arbeit im Observability-Kontext aus?",
+            "Can you describe a time when meeting an SLO meant delaying another important fix?",
+            "Welche Risiken sehen Sie, wenn man bei Alert Fatigue Tuning zu aggressiv vorgeht?"
+          ]
+        },
+        {
+          "title": "Abschluss & Feedback",
+          "goal": "Offenes Feedback zu UX-bezogenen Aspekten der Observability-Tools und -Prozesse sammeln.",
+          "sample_questions": [
+            "Wenn Sie einen Wunsch frei hätten, wie würden Sie die Observability-Konsole umgestalten?",
+            "How can we make the incident analytics dashboard more intuitive for oncall engineers?",
+            "Gibt es ungeschriebene Regeln oder Heuristiken, die neuen Kollegen helfen würden?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "strong"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "mix"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26832,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

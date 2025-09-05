@@ -1,0 +1,163 @@
+{
+  "id": "20250902_111203_17a43d",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 51,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_qa",
+      "role": "QA Lead",
+      "traits": [
+        "test_strategy",
+        "risk_based_testing",
+        "traceability"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HER",
+      "name": "Hera QA Platform",
+      "phase": "Build",
+      "scope": "Unified test orchestration, flaky test analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_qa"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Kontext",
+          "goal": "Rahmenbedingungen und Ziele des Hera QA Platform Projekts verstehen",
+          "sample_questions": [
+            "Können Sie mir bitte kurz den aktuellen Stand von Hera QA Platform beschreiben?",
+            "Welche Hauptziele verfolgt das Projekt in der Build-Phase?",
+            "Wie passt es in die Gesamtstrategie von Novereon Systems für Qualitätssicherung?"
+          ]
+        },
+        {
+          "title": "Teststrategie & Risikoanalyse",
+          "goal": "Die angewandte Risk-Based Testing Methodik und deren Umsetzung nachvollziehen",
+          "sample_questions": [
+            "Wie setzen Sie die Policy POL-QA-014 konkret in der Plattform um?",
+            "Welche Kriterien nutzen Sie zur Priorisierung von Testfällen?",
+            "Wie gehen Sie mit bekannten 'flaky tests' um, um das Fehlerrisiko zu reduzieren?"
+          ]
+        },
+        {
+          "title": "Traceability & Orchestrierung",
+          "goal": "Verstehen, wie Testfälle, Anforderungen und Defects nachvollziehbar verknüpft werden",
+          "sample_questions": [
+            "Welche Tools oder Prozesse sorgen für die End-to-End-Traceability zwischen Anforderungen und Tests?",
+            "Wie wird die Orchestrierung von Tests über verschiedene Subsysteme hinweg koordiniert?",
+            "Können Sie ein Beispiel geben, wie eine Änderung in einem Upstream-Service sich auf die Testplanung auswirkt?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Projekten",
+          "goal": "Zusammenhänge zwischen Hera QA Platform und anderen Novereon Projekten erkennen",
+          "sample_questions": [
+            "Gibt es Schnittstellen zu Projekten wie Helios Datalake oder Nimbus Observability?",
+            "Wie wirken sich Observability-Daten auf Ihre Testentscheidungen aus?",
+            "Nutzen Sie Daten aus Produktionssystemen für Testfall-Optimierung?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs & Risiken",
+          "goal": "Schlüsselentscheidungen und deren Begründung im Hinblick auf Qualität und Risiken erfassen",
+          "sample_questions": [
+            "Welche großen Trade-offs mussten Sie bei der Testarchitektur eingehen?",
+            "Gab es Situationen, in denen Sie bewusst Testabdeckung zugunsten von Time-to-Market reduziert haben?",
+            "Wie dokumentieren Sie diese Entscheidungen, z. B. in RFCs oder Runbooks?"
+          ]
+        },
+        {
+          "title": "Abschluss & Lessons Learned",
+          "goal": "Reflexion über bisherige Erfahrungen und Ableitung von Verbesserungen",
+          "sample_questions": [
+            "Welche Lessons Learned sind bisher aus dem Projekt hervorgegangen?",
+            "Welche KPIs oder Metriken zeigen den größten Einfluss auf die Qualität?",
+            "Was würden Sie in der nächsten Projektphase anders machen?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28030,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

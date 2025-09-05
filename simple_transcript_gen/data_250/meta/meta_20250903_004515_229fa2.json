@@ -1,0 +1,163 @@
+{
+  "id": "20250903_004515_229fa2",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 222,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sre",
+      "role": "Site Reliability Engineer",
+      "traits": [
+        "oncall",
+        "runbook-driven",
+        "pragmatisch"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-NIM",
+      "name": "Nimbus Observability",
+      "phase": "Build",
+      "scope": "OpenTelemetry pipelines, SLOs, incident analytics"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sre"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Rollenklärung",
+          "goal": "Das Verständnis des Kandidaten für die Projektziele und seine Rolle als SRE im Nimbus Observability Projekt ermitteln.",
+          "sample_questions": [
+            "Können Sie bitte kurz Ihren Hintergrund als SRE skizzieren?",
+            "Welche Hauptziele verfolgen wir mit Nimbus Observability aus Ihrer Sicht?",
+            "Wie sehen Sie Ihre Rolle im Build-Phase-Kontext?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Pipelines",
+          "goal": "Verstehen, wie der Kandidat die OpenTelemetry-Pipelines und deren Integration in bestehende Systeme beschreibt.",
+          "sample_questions": [
+            "Wie sind die OpenTelemetry-Pipelines derzeit aufgebaut?",
+            "Welche Herausforderungen sehen Sie bei der Integration mit bestehenden Logging- und Metriksystemen?",
+            "Wie stellen Sie sicher, dass die SLOs aus SLA- und SLO-Artefakten eingehalten werden?"
+          ]
+        },
+        {
+          "title": "Incident Analytics & Alerting",
+          "goal": "Bewerten, wie der Kandidat Alert-Fatigue reduziert und Incident Analytics umsetzt.",
+          "sample_questions": [
+            "Können Sie den Runbook RB-OBS-033 kurz zusammenfassen?",
+            "Wie erkennen Sie, ob ein Alert-Pattern zu Fehlalarmen führt?",
+            "Welche Metriken nutzen Sie, um die Effektivität von Incident Analytics zu messen?"
+          ]
+        },
+        {
+          "title": "Cross-System Abhängigkeiten",
+          "goal": "Feststellen, wie der Kandidat Abhängigkeiten zu anderen Projekten wie Helios Datalake oder Orion Edge Gateway erkennt und managt.",
+          "sample_questions": [
+            "Welche Schnittstellen existieren zwischen Nimbus Observability und Helios Datalake?",
+            "Wie beeinflussen Änderungen im Orion Edge Gateway die Observability-Pipelines?",
+            "Wie priorisieren Sie Cross-Team-Incidents?"
+          ]
+        },
+        {
+          "title": "Risikobewertung & Tradeoffs",
+          "goal": "Diskutieren, wie der Kandidat Entscheidungen trifft, wenn SLOs, Kosten und Implementierungsaufwand in Konflikt stehen.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie bei der Einführung einer neuen Sampling-Strategie (RFC-1114)?",
+            "Wie würden Sie vorgehen, wenn ein Sampling-Ansatz die Kosten senkt, aber die Latenzmetriken verschlechtert?",
+            "Wie dokumentieren Sie solche Tradeoffs für Audits?"
+          ]
+        },
+        {
+          "title": "Abschluss & Lessons Learned",
+          "goal": "Zusammenfassung der wichtigsten Punkte und Reflexion über den bisherigen Projektverlauf.",
+          "sample_questions": [
+            "Was war bisher der größte Erfolg im Nimbus Observability Projekt?",
+            "Welche Lessons Learned würden Sie aus der Build-Phase mitnehmen?",
+            "Wie sollte der Übergang in die Operate-Phase gestaltet werden?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29096,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

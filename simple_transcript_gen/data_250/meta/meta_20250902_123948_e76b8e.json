@@ -1,0 +1,177 @@
+{
+  "id": "20250902_123948_e76b8e",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 69,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_po",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektüberblick und Qualitätsziele",
+          "goal": "Ein klares Verständnis der Projektziele, des aktuellen Status und der relevanten Qualitätsmetriken gewinnen.",
+          "sample_questions": [
+            "Können Sie bitte die Kernziele des Helios Datalake im aktuellen Scale-Phase-Kontext zusammenfassen?",
+            "Welche SLOs oder SLAs sind aktuell für Helios definiert, insbesondere in Bezug auf SLA-HEL-01?",
+            "Wie messen Sie aktuell die Einhaltung der Qualitätsziele im laufenden Betrieb?"
+          ]
+        },
+        {
+          "title": "Technische Architektur und Abhängigkeiten",
+          "goal": "Die Architektur und kritische Abhängigkeiten zu anderen Systemen verstehen.",
+          "sample_questions": [
+            "Wie ist die ELT-Pipeline technisch aufgebaut, und welche Rolle spielt Kafka-Ingestion dabei?",
+            "Welche Abhängigkeiten bestehen zu internen Plattformkomponenten oder externen Services?",
+            "Gab es in der Vergangenheit Engpässe oder Bottlenecks, die durch Architekturentscheidungen bedingt waren?"
+          ]
+        },
+        {
+          "title": "Runbooks, RFCs und Prozessreife",
+          "goal": "Verwendung und Wirksamkeit von Runbooks und RFCs im Projekt evaluieren.",
+          "sample_questions": [
+            "Wie wird das Runbook RB-ING-042 in Incident-Situationen eingesetzt?",
+            "Welche Learnings aus RFC-1287 haben sich als besonders wertvoll erwiesen?",
+            "Wie stellen Sie sicher, dass Runbooks regelmäßig aktualisiert werden?"
+          ]
+        },
+        {
+          "title": "Qualitätsrisiken und Compliance",
+          "goal": "Risikofelder und Compliance-Anforderungen identifizieren und bewerten.",
+          "sample_questions": [
+            "Welche regulatorischen Anforderungen beeinflussen die Datalake-Architektur am stärksten?",
+            "Wie setzen Sie POL-SEC-001 im Helios-Kontext konkret um?",
+            "Gibt es bekannte Qualitätsrisiken, die aktuell nur mit Workarounds adressiert werden?"
+          ]
+        },
+        {
+          "title": "Performance, Skalierung und Nachhaltigkeit",
+          "goal": "Die Nachhaltigkeit der Skalierungsstrategie und Performance-Optimierungen einschätzen.",
+          "sample_questions": [
+            "Welche Maßnahmen wurden ergriffen, um die SLA-HEL-01-Verfügbarkeit bei wachsendem Datenvolumen zu sichern?",
+            "Wie wird BLAST_RADIUS in der Architektur minimiert?",
+            "Welche langfristigen Skalierungsrisiken sehen Sie, und wie werden diese mitigiert?"
+          ]
+        },
+        {
+          "title": "Trade-offs und Entscheidungsfindung",
+          "goal": "Verstehen, wie Entscheidungen gefällt werden, insbesondere bei Zielkonflikten.",
+          "sample_questions": [
+            "Können Sie ein Beispiel nennen, bei dem Sie zwischen Time-to-Market und Datenqualität abwägen mussten?",
+            "Wie dokumentieren Sie solche Entscheidungen, z. B. in RFCs oder Tickets?",
+            "Welche Kriterien sind für Sie entscheidend, wenn Sie technische Schulden akzeptieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28549,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

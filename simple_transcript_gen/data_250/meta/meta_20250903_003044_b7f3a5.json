@@ -1,0 +1,163 @@
+{
+  "id": "20250903_003044_b7f3a5",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 206,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Role Clarity",
+          "goal": "Understand the interviewee's role, responsibilities, and current state of the Orion Edge Gateway project.",
+          "sample_questions": [
+            "Can you walk me through your primary responsibilities on the Orion Edge Gateway project?",
+            "How does the current build phase align with the overall roadmap for this initiative?",
+            "What are the main KPIs or success criteria you are tracking at this stage?"
+          ]
+        },
+        {
+          "title": "Requirements & Stakeholder Alignment",
+          "goal": "Explore how requirements are gathered, prioritized, and aligned with diverse stakeholders, including security and performance teams.",
+          "sample_questions": [
+            "How are you capturing and reconciling input from security, SRE, and client-facing teams?",
+            "What process do you follow when two stakeholders have conflicting priorities?",
+            "Can you give an example of a requirement that evolved significantly during the build phase?"
+          ]
+        },
+        {
+          "title": "Integration with Other Systems",
+          "goal": "Investigate dependencies and integration points with other Novereon Systems GmbH projects and subsystems.",
+          "sample_questions": [
+            "Which other internal platforms or services does Orion Edge Gateway integrate with?",
+            "How do you coordinate with teams working on IAM or Observability when planning API changes?",
+            "Can you describe a situation where integration constraints affected your delivery plan?"
+          ]
+        },
+        {
+          "title": "Risk Management & Mitigation",
+          "goal": "Understand the risk landscape, mitigation strategies, and how they tie into company policies and SLAs.",
+          "sample_questions": [
+            "What are the top three risks you see for the current release?",
+            "How do you ensure compliance with policies like POL-SEC-001 in day-to-day decisions?",
+            "Could you share how the SLA-ORI-02 latency target influences your prioritization of features?"
+          ]
+        },
+        {
+          "title": "Decision Making & Tradeoffs",
+          "goal": "Discuss specific tradeoffs made, the evidence used, and potential long-term implications.",
+          "sample_questions": [
+            "Can you detail a major tradeoff decision you made recently for the Orion Edge Gateway?",
+            "What evidence or runbook references did you rely on for that decision?",
+            "How do you balance short-term delivery pressures with sustainable velocity?"
+          ]
+        },
+        {
+          "title": "Future Outlook & Lessons Learned",
+          "goal": "Capture forward-looking insights and retrospective learnings for continuous improvement.",
+          "sample_questions": [
+            "What are the next big milestones after the build phase for Orion Edge Gateway?",
+            "If you could change one thing about how the project has been run so far, what would it be?",
+            "What lessons from this project could be applied to future gateway or API initiatives?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25654,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

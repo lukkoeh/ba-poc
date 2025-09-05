@@ -1,0 +1,154 @@
+{
+  "id": "20250902_173453_a20d8d",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 165,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_cto",
+      "role": "CTO",
+      "traits": [
+        "visionär",
+        "knapp",
+        "priorisiert"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_cto"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Objectives",
+          "goal": "Understand the high-level vision, business drivers, and success criteria for Orion Edge Gateway.",
+          "sample_questions": [
+            "Can you outline the primary business problem Orion Edge Gateway is solving?",
+            "What are the key success metrics or SLOs for this project?",
+            "How does this project align with Novereon Systems' mission and values?"
+          ]
+        },
+        {
+          "title": "Architecture & Integration",
+          "goal": "Explore the technical design, integration points with other systems, and adherence to internal policies.",
+          "sample_questions": [
+            "What are the core components and their interactions within Orion Edge Gateway?",
+            "How does the gateway integrate with Aegis IAM for authentication?",
+            "In what way have you ensured compliance with POL-SEC-001 Least Privilege & JIT Access?"
+          ]
+        },
+        {
+          "title": "Operational Readiness",
+          "goal": "Assess readiness for deployment, monitoring, and incident response.",
+          "sample_questions": [
+            "What runbooks are in place for deployment and rollback?",
+            "How are you testing the p95 latency SLA-ORI-02 before go-live?",
+            "What’s the plan to limit BLAST_RADIUS during partial outages?"
+          ]
+        },
+        {
+          "title": "Cross-Project Dependencies",
+          "goal": "Identify dependencies on other portfolio projects and their potential impact.",
+          "sample_questions": [
+            "Which other projects in the portfolio does Orion Edge Gateway rely on for functionality?",
+            "How do you coordinate changes with Nimbus Observability for telemetry?",
+            "What’s the contingency if Aegis IAM experiences degraded performance?"
+          ]
+        },
+        {
+          "title": "Risk Management & Tradeoffs",
+          "goal": "Discuss known risks, tradeoffs made, and mitigation strategies supported by evidence.",
+          "sample_questions": [
+            "What key tradeoffs were made between latency and security features?",
+            "Can you reference any RFCs or tickets that influenced these decisions?",
+            "Which risks are you actively monitoring post-deployment and how?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 26443,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

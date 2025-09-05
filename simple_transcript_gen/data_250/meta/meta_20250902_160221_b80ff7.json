@@ -1,0 +1,163 @@
+{
+  "id": "20250902_160221_b80ff7",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 84,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_qm",
+      "role": "Quality Manager",
+      "interviewer_type": "critical",
+      "traits": [
+        "perfektionistisch",
+        "beharrlich",
+        "präzise"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_qm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_devops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung und Projektüberblick",
+          "goal": "Kernfakten zu Orion Edge Gateway, aktuelle Phase, Rolle des Interviewees und Kernverantwortlichkeiten ermitteln.",
+          "sample_questions": [
+            "Können Sie bitte kurz Ihren Verantwortungsbereich im Projekt Orion Edge Gateway beschreiben?",
+            "Welche Hauptziele verfolgt das Team derzeit in der Build-Phase?",
+            "Wie ordnen Sie Ihre Arbeit in die Unternehmenswerte wie 'Safety First' ein?"
+          ]
+        },
+        {
+          "title": "Technische Umsetzung und Automatisierung",
+          "goal": "Verstehen, wie der Interviewee IaC, CI/CD-Pipelines und Automatisierung im Kontext des API-Gateways implementiert.",
+          "sample_questions": [
+            "Welche Infrastructure-as-Code Tools setzen Sie ein und warum?",
+            "Wie gewährleisten Sie, dass Rollouts (siehe RB-GW-011) ohne Downtime erfolgen?",
+            "Wie integrieren Sie Authentifizierungs- und Autorisierungsmechanismen in die Deployment-Pipeline?"
+          ]
+        },
+        {
+          "title": "Qualitätssicherung und Policies",
+          "goal": "Prüfen, wie Policies wie POL-QA-014 oder POL-SEC-001 eingehalten werden und welche QA-Maßnahmen greifen.",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass Änderungen am Gateway den Anforderungen aus POL-SEC-001 entsprechen?",
+            "Welche Teststrategien wenden Sie an, um SLA-ORI-02 p95 Latency < 120ms zu überprüfen?",
+            "Wie dokumentieren Sie Traceability und Risk-Based Testing im Build-Prozess?"
+          ]
+        },
+        {
+          "title": "Subsystem-Integration und Abhängigkeiten",
+          "goal": "Aufdecken von Multi-Hop-Beziehungen zwischen Orion Edge Gateway und anderen Plattformkomponenten.",
+          "sample_questions": [
+            "Welche Schnittstellen bestehen zwischen Orion Edge Gateway und Aegis IAM?",
+            "Wie beeinflussen Änderungen am Gateway die Observability in Nimbus?",
+            "Welche Maßnahmen ergreifen Sie, um den BLAST_RADIUS bei Integrationsfehlern zu minimieren?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Trade-offs und Risiken",
+          "goal": "Diskussion über kritische Entscheidungen, ihre Begründung und das Risikomanagement mit Belegen aus Tickets, RFCs oder Runbooks.",
+          "sample_questions": [
+            "Können Sie eine Entscheidung schildern, bei der Sie zwischen Performance und Sicherheit abwägen mussten?",
+            "Welche Lessons Learned haben Sie aus GW-4821 MTLS Handshake Bug Analysis gezogen?",
+            "Wie fließen Erkenntnisse aus RFC-1287 oder anderen RFCs in Ihre Architekturentscheidungen ein?"
+          ]
+        },
+        {
+          "title": "Abschluss und Ausblick",
+          "goal": "Zusammenfassen der wichtigsten Erkenntnisse und Erfragen der nächsten Schritte im Projekt.",
+          "sample_questions": [
+            "Was sind die größten Herausforderungen für die nächsten zwei Sprints?",
+            "Welche Verbesserungen planen Sie für die Automatisierungsprozesse?",
+            "Wie wollen Sie die SLA-Konformität langfristig sichern?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28621,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "20250902_145914_21f27b",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 45,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_mlops",
+      "role": "MLOps Engineer",
+      "traits": [
+        "feature_store",
+        "model_ci_cd",
+        "drift"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-PHX",
+      "name": "Phoenix Feature Store",
+      "phase": "Build",
+      "scope": "Online/Offline feature serving, drift monitoring"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_mlops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext und Sicherheitsanforderungen",
+          "goal": "Verstehen, wie der Phoenix Feature Store aktuell aufgebaut ist und welche Sicherheitsrichtlinien angewendet werden.",
+          "sample_questions": [
+            "Können Sie mir bitte den aktuellen Stand des Phoenix Feature Store beschreiben?",
+            "Welche Sicherheitsmaßnahmen wurden bereits in der Build-Phase integriert?",
+            "Wie wird POL-SEC-001 (Least Privilege & JIT Access) konkret umgesetzt?"
+          ]
+        },
+        {
+          "title": "Feature Serving und Compliance",
+          "goal": "Tiefe Einsicht in die Datenflüsse und Compliance-Anforderungen für regulierte Industrien gewinnen.",
+          "sample_questions": [
+            "Wie stellen Sie sicher, dass Online- und Offline-Serving denselben Compliance-Standards genügen?",
+            "Welche Rolle spielen RFC-1419 Time-Travel Features im Audit-Kontext?",
+            "Wie werden Zugriffsprotokolle gespeichert und ausgewertet?"
+          ]
+        },
+        {
+          "title": "Drift Monitoring und Incident Response",
+          "goal": "Evaluieren, wie das Team Drift erkennt und auf sicherheitsrelevante Vorfälle reagiert.",
+          "sample_questions": [
+            "Welche Kennzahlen nutzen Sie zum Erkennen von Model Drift?",
+            "Gibt es einen spezifischen Runbook-Prozess für Sicherheitsvorfälle im Kontext von Drift?",
+            "Wie wird SLA-HEL-01 (falls relevant) beim Feature Store berücksichtigt, um Availability zu garantieren?"
+          ]
+        },
+        {
+          "title": "Integration mit anderen Plattformkomponenten",
+          "goal": "Verstehen, wie der Feature Store mit IAM, Observability und Data Lake integriert ist.",
+          "sample_questions": [
+            "Welche Schnittstellen bestehen zwischen Phoenix Feature Store und Aegis IAM?",
+            "Wie werden Observability-Daten aus Nimbus genutzt, um Sicherheitsanomalien zu erkennen?",
+            "Gibt es Abhängigkeiten zu Helios Datalake, die für Security Risk relevant sind?"
+          ]
+        },
+        {
+          "title": "Trade-offs, Risiken und zukünftige Maßnahmen",
+          "goal": "Entscheidungen und Risiken identifizieren, die für den sicheren Betrieb relevant sind.",
+          "sample_questions": [
+            "Welche Security-Risiken wurden in der letzten RFC-Review identifiziert?",
+            "Gab es Abwägungen zwischen Performance und Sicherheit bei der Implementierung von Time-Travel Features?",
+            "Welche Maßnahmen planen Sie, um den BLAST_RADIUS bei einem Feature Store Incident zu minimieren?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27440,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "20250902_162529_3a3a6c",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 102,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_ux",
+      "role": "UX Lead",
+      "traits": [
+        "research",
+        "accessibility",
+        "design_system"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ATL",
+      "name": "Atlas Mobile",
+      "phase": "Pilot",
+      "scope": "Cross-platform app, feature flags, offline sync"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_ux"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Kontext",
+          "goal": "Projektüberblick und UX-Rolle im Atlas Mobile Pilot klären",
+          "sample_questions": [
+            "Können Sie mir kurz den aktuellen Stand von Atlas Mobile aus UX-Perspektive beschreiben?",
+            "Wie ist Ihr Team in die Pilotphase eingebunden?",
+            "Welche Kernziele verfolgen Sie im Hinblick auf Benutzererlebnis und Zugänglichkeit?"
+          ]
+        },
+        {
+          "title": "Designsystem & Feature Flags",
+          "goal": "Verstehen, wie das Designsystem und Feature Flags für schnelle Iterationen genutzt werden",
+          "sample_questions": [
+            "Wie setzen Sie die tokenisierten Komponenten aus DS-ATLAS v2 in der App um?",
+            "Welche Workflows haben Sie, um Feature Flags mit UX-Tests zu verknüpfen?",
+            "Gab es schon Fälle, in denen ein Feature Flag bewusst für eine bestimmte Nutzergruppe aktiviert blieb?"
+          ]
+        },
+        {
+          "title": "Offline Sync & Accessibility",
+          "goal": "Tiefe Einblicke in Offline-Synchronisation und barrierefreie Nutzung gewinnen",
+          "sample_questions": [
+            "Wie testen Sie die Offline-Sync-Funktionalität in realistischen Nutzungsszenarien?",
+            "Welche Accessibility-Standards setzen Sie um und wie überprüfen Sie deren Einhaltung?",
+            "Gab es Herausforderungen bei der Kombination von Offline-Funktionalität und Screen Reader-Kompatibilität?"
+          ]
+        },
+        {
+          "title": "Multi-System-Integration",
+          "goal": "Verstehen, wie Atlas Mobile mit anderen Novereon Plattformen wie Aegis IAM oder Helios Datalake integriert wird",
+          "sample_questions": [
+            "Wie beeinflusst die Integration mit Aegis IAM (SSO, RBAC) Ihre UX-Entscheidungen?",
+            "Welche Datenflüsse aus Helios Datalake sind für personalisierte Inhalte relevant?",
+            "Gab es Fälle, in denen Sicherheits-Policies (z.B. POL-SEC-001) UX-Anpassungen erforderten?"
+          ]
+        },
+        {
+          "title": "Entscheidungen, Risiken & Trade-offs",
+          "goal": "Schlüsselentscheidungen und deren Auswirkungen auf UX und Betrieb dokumentieren",
+          "sample_questions": [
+            "Welche UX-Entscheidungen mussten Sie aufgrund von Performance-Beschränkungen revidieren?",
+            "Wie gehen Sie mit Zielkonflikten zwischen Sicherheit und Benutzerfreundlichkeit um?",
+            "Können Sie ein Beispiel geben, wo ein Runbook (z.B. RB-MOB-021) direkt Ihre Designanpassung beeinflusst hat?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 27772,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

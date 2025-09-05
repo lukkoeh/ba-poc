@@ -1,0 +1,145 @@
+{
+  "id": "20250902_125730_6cc77b",
+  "language": "en",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 73,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_critical_sec",
+      "role": "Security Architect",
+      "interviewer_type": "critical",
+      "traits": [
+        "skeptisch",
+        "risikofokussiert",
+        "hartnäckig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_po",
+      "role": "Product Owner",
+      "traits": [
+        "kundenorientiert",
+        "priorisierung",
+        "tradeoffs"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-ORI",
+      "name": "Orion Edge Gateway",
+      "phase": "Build",
+      "scope": "API gateway, rate limiting, auth integration"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_critical_sec"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_po"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Project Context & Security Requirements",
+          "goal": "Understand the PO's perspective on project scope, security baselines, and regulatory constraints for the Orion Edge Gateway.",
+          "sample_questions": [
+            "Can you walk me through the main functional goals of Orion Edge Gateway and how security is factored in from the outset?",
+            "What regulatory or compliance frameworks are most relevant here, and how do they shape your backlog?",
+            "How do you balance the SLA-ORI-02 latency target with security controls like mTLS?"
+          ]
+        },
+        {
+          "title": "Integration Points & Risk Surfaces",
+          "goal": "Identify cross-system dependencies and potential risk vectors, especially related to authentication and data flow.",
+          "sample_questions": [
+            "Which upstream and downstream systems integrate with Orion, and where do you see the largest attack surface?",
+            "How do you coordinate with the Aegis IAM team to ensure RB-IAM-075 runbook alignment?",
+            "Can you describe a scenario where rate limiting could inadvertently block legitimate traffic due to integration quirks?"
+          ]
+        },
+        {
+          "title": "Incident Handling & Evidence-Based Decisions",
+          "goal": "Explore how the PO approaches incident response, evidence gathering, and post-mortem prioritization for security issues.",
+          "sample_questions": [
+            "When GW-4821 MTLS handshake bug occurred, what was your prioritization rationale for the fix vs other feature work?",
+            "How do you ensure evidence from incidents feeds back into your RFCs and backlog grooming?",
+            "What are your criteria for accepting a security trade-off when under delivery pressure?"
+          ]
+        },
+        {
+          "title": "Trade-offs, Risks, and Long-Term Strategy",
+          "goal": "Discuss strategic planning, risk acceptance, and alignment with company values and policies.",
+          "sample_questions": [
+            "Given POL-SEC-001, how do you handle stakeholder pressure for broader permanent access in dev environments?",
+            "What long-term risks do you foresee if we scale Orion without rethinking our mTLS policy matrix?",
+            "How do you document and communicate these trade-offs to execs and auditors?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "critical",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "en"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 25926,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

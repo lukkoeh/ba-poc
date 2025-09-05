@@ -1,0 +1,178 @@
+{
+  "id": "20250902_175218_71da34",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 182,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_ops",
+      "role": "Service Delivery Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "kundenfokus",
+        "SLA-strikt",
+        "pragmatisch"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_da",
+      "role": "Data Engineer",
+      "traits": [
+        "ELT",
+        "dbt",
+        "airflow",
+        "lineage"
+      ]
+    },
+    "interviewee2": {
+      "persona_id": "ee_devops",
+      "role": "DevOps Engineer",
+      "traits": [
+        "automation",
+        "IaC",
+        "pipelines"
+      ]
+    }
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-HEL",
+      "name": "Helios Datalake",
+      "phase": "Scale",
+      "scope": "Unified ELT to Snowflake, dbt modeling, Kafka ingestion"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_ops"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_da"
+      },
+      {
+        "id": "E2",
+        "role": "Interviewee",
+        "persona_id": "ee_devops",
+        "optional": true
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Projektkontext & Rollenklärung",
+          "goal": "Verstehen, wie die Interviewten im Helios Datalake Projekt eingebunden sind und welche Verantwortlichkeiten sie haben.",
+          "sample_questions": [
+            "Können Sie kurz Ihre Rolle im Helios Datalake Projekt beschreiben?",
+            "Welche Hauptziele verfolgt das Projekt aktuell in der Scale-Phase?",
+            "Wie sind die Schnittstellen zu anderen Teams, z.B. Security oder SRE?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & ELT-Pipelines",
+          "goal": "Details zur Architektur, eingesetzten Tools (Snowflake, dbt, Kafka) und deren Zusammenspiel ermitteln.",
+          "sample_questions": [
+            "Wie ist der aktuelle ELT-Flow vom Kafka-Ingest bis zum Snowflake-Load aufgebaut?",
+            "Welche dbt-Modelle sind kritisch für SLA-HEL-01?",
+            "Gibt es bekannte Bottlenecks in der Airflow-Orchestrierung?"
+          ]
+        },
+        {
+          "title": "Betrieb, SLAs und Runbooks",
+          "goal": "Ermitteln, wie SLAs eingehalten werden und welche Runbooks für Incident Response genutzt werden.",
+          "sample_questions": [
+            "Wie wird im Alltag sichergestellt, dass das 99,9% Availability Ziel erreicht wird?",
+            "Welche Schritte sind im RB-ING-042 Ingestion Failover Runbook definiert?",
+            "Wie erfolgt das Monitoring der Kafka- und Snowflake-Komponenten?"
+          ]
+        },
+        {
+          "title": "Abhängigkeiten & Cross-Team-Koordination",
+          "goal": "Zusammenhänge und Abhängigkeiten zu anderen Projekten oder Systemen aufzeigen.",
+          "sample_questions": [
+            "Welche Abhängigkeiten bestehen zur Nimbus Observability Plattform?",
+            "Wie fließen Änderungen aus RFC-1287 in den Betrieb ein?",
+            "Welche Rolle spielt die IAM-Integration bei Datenzugriffen?"
+          ]
+        },
+        {
+          "title": "Optimierung & Skalierung",
+          "goal": "Mögliche Verbesserungen, Skalierungsstrategien und Automatisierungspotential identifizieren.",
+          "sample_questions": [
+            "Welche Automatisierungen könnten Ausfälle schneller abfangen?",
+            "Wie lässt sich die Partitionierungsstrategie weiter optimieren?",
+            "Gibt es Pläne für Self-Healing Pipelines?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Lessons Learned",
+          "goal": "Verständnis für getroffene Entscheidungen, Risiken und dokumentierte Erkenntnisse gewinnen.",
+          "sample_questions": [
+            "Welche Kompromisse mussten zwischen Datenlatenz und Systemstabilität eingegangen werden?",
+            "Gab es Vorfälle, die zu Anpassungen am Failover-Prozess geführt haben?",
+            "Welche Risiken sehen Sie für die nächsten 6 Monate?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29086,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

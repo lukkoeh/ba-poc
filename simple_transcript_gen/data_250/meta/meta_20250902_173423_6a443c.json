@@ -1,0 +1,154 @@
+{
+  "id": "20250902_173423_6a443c",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 164,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_struct_pm",
+      "role": "Senior Project Manager",
+      "interviewer_type": "structured",
+      "traits": [
+        "entscheidungsfreudig",
+        "prozessgetrieben",
+        "detailorientiert"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_finops",
+      "role": "FinOps Analyst",
+      "traits": [
+        "savings",
+        "budgets",
+        "forecasting"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-VES",
+      "name": "Vesta FinOps",
+      "phase": "Operate",
+      "scope": "Cloud cost optimization & guardrails"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_struct_pm"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_finops"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Rollenverständnis",
+          "goal": "Klären, welche Verantwortung der/die FinOps Analyst:in im Projekt Vesta FinOps trägt und wie diese Rolle in die Unternehmenswerte eingebettet ist.",
+          "sample_questions": [
+            "Können Sie bitte Ihren Verantwortungsbereich im Rahmen von Vesta FinOps skizzieren?",
+            "Wie passen Ihre täglichen Aufgaben zu den Unternehmenswerten wie 'Safety First' oder 'Evidence over Hype'?",
+            "Welche KPIs verfolgen Sie aktuell für das Projekt?"
+          ]
+        },
+        {
+          "title": "Budget- und Quotenmanagement",
+          "goal": "Verstehen, wie Budgets und Quoten gemäß POL-FIN-007 umgesetzt und überwacht werden.",
+          "sample_questions": [
+            "Wie setzen Sie die Cloud Cost Budgets & Quotas Policy (POL-FIN-007) in der Praxis um?",
+            "Wie gehen Sie mit Abweichungen vom Budget um?",
+            "Welche Tools oder Dashboards nutzen Sie für die Budgetüberwachung?"
+          ]
+        },
+        {
+          "title": "Forecasting & Analyse",
+          "goal": "Ermitteln, welche Methoden und Datenquellen für Forecasts verwendet werden und wie diese mit anderen Projekten interagieren.",
+          "sample_questions": [
+            "Wie erstellen Sie Ihre monatlichen Forecasts für Cloud-Kosten?",
+            "Welche Datenquellen fließen ein, und wie sichern Sie deren Genauigkeit?",
+            "Gibt es Abhängigkeiten zu Projekten wie Helios Datalake oder Quasar Billing?"
+          ]
+        },
+        {
+          "title": "Optimierungsinitiativen",
+          "goal": "Identifizieren, welche Optimierungsmaßnahmen durchgeführt wurden und wie deren Erfolg gemessen wird.",
+          "sample_questions": [
+            "Können Sie ein Beispiel für eine erfolgreiche Optimierungsinitiative nennen?",
+            "Wie messen Sie den ROI solcher Maßnahmen?",
+            "Wie dokumentieren Sie Optimierungen in Runbooks oder RFCs?"
+          ]
+        },
+        {
+          "title": "Risiken, Trade-offs & Entscheidungen",
+          "goal": "Diskutieren von Risiken und Abwägungen bei Budget- und Optimierungsentscheidungen mit Bezug auf Belege wie RFCs, Runbooks oder Tickets.",
+          "sample_questions": [
+            "Welche Risiken sehen Sie bei aggressiven Kostensenkungen?",
+            "Wie balancieren Sie zwischen Kosteneffizienz und Performance-SLAs?",
+            "Können Sie eine Entscheidung beschreiben, die auf Basis von RFC-1502 getroffen wurde?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "structured",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 28129,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

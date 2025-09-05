@@ -1,0 +1,163 @@
+{
+  "id": "20250902_112642_d76a26",
+  "language": "de",
+  "params": {
+    "min_turns": 260,
+    "max_turns": 360,
+    "duration_min": 90,
+    "noise": "med",
+    "mode": "long-rollout",
+    "seed": 54,
+    "turns_per_step": 16,
+    "initial_steps": 20,
+    "target_output_tokens": 40000,
+    "max_output_tokens": 32768
+  },
+  "personas": {
+    "interviewer": {
+      "persona_id": "iv_explore_data",
+      "role": "Lead Data Strategist",
+      "interviewer_type": "explorative",
+      "traits": [
+        "analytisch",
+        "systemisch",
+        "experimentierfreudig"
+      ]
+    },
+    "interviewee": {
+      "persona_id": "ee_sec",
+      "role": "Security Engineer",
+      "traits": [
+        "threat_modeling",
+        "vuln_mgmt",
+        "least_privilege"
+      ]
+    },
+    "interviewee2": null
+  },
+  "world_name": "Novereon Systems GmbH",
+  "model": {
+    "provider": "azure-openai",
+    "deployment_env": "gpt-5-chat"
+  },
+  "plan": {
+    "company": {
+      "name": "Novereon Systems GmbH",
+      "industry": "IT/Software"
+    },
+    "project": {
+      "id": "P-AEG",
+      "name": "Aegis IAM",
+      "phase": "Operate",
+      "scope": "Enterprise SSO, RBAC, JIT access"
+    },
+    "participants": [
+      {
+        "id": "I",
+        "role": "Interviewer",
+        "persona_id": "iv_explore_data"
+      },
+      {
+        "id": "E",
+        "role": "Interviewee",
+        "persona_id": "ee_sec"
+      }
+    ],
+    "plan": {
+      "sections": [
+        {
+          "title": "Einführung & Rollenverständnis",
+          "goal": "Verstehen, wie der Security Engineer in das Aegis IAM Projekt eingebunden ist und welche Kernaufgaben er erfüllt.",
+          "sample_questions": [
+            "Können Sie kurz Ihre Rolle im Aegis IAM Projekt beschreiben?",
+            "Welche sicherheitsrelevanten Anforderungen sind in der Operate-Phase besonders kritisch?",
+            "Wie arbeiten Sie mit anderen Abteilungen wie SRE oder Platform zusammen?"
+          ]
+        },
+        {
+          "title": "Technische Architektur & Policy-Umsetzung",
+          "goal": "Tiefe Einblicke in die Architektur des IAM-Systems und die Umsetzung der Unternehmenspolicy POL-SEC-001 gewinnen.",
+          "sample_questions": [
+            "Wie setzen Sie das Prinzip Least Privilege & JIT Access technisch um?",
+            "Welche Komponenten sind am kritischsten für die Policy-as-Code Umsetzung (RFC-903)?",
+            "Wie überwachen Sie Zugriffsrechte über längere Zeiträume hinweg?"
+          ]
+        },
+        {
+          "title": "Incident Response & Runbooks",
+          "goal": "Verstehen, wie Notfallmaßnahmen umgesetzt werden, insbesondere anhand von RB-IAM-075.",
+          "sample_questions": [
+            "Können Sie ein Beispiel geben, wie Sie bei einer Access Revocation Emergency vorgehen?",
+            "Wie testen Sie die Wirksamkeit des Runbooks RB-IAM-075?",
+            "Welche typischen Stolpersteine gibt es bei der Umsetzung dieser Runbooks?"
+          ]
+        },
+        {
+          "title": "Inter-System Abhängigkeiten",
+          "goal": "Analysieren, wie IAM mit anderen Projekten wie Orion Edge Gateway oder Nimbus Observability interagiert.",
+          "sample_questions": [
+            "Welche Schnittstellen bestehen zwischen Aegis IAM und Orion Edge Gateway?",
+            "Wie nutzen Sie Observability-Daten aus Nimbus, um Anomalien im IAM zu erkennen?",
+            "Gab es Fälle, in denen eine IAM-Änderung Latenzprobleme in anderen Systemen verursacht hat?"
+          ]
+        },
+        {
+          "title": "Risikobewertung & Trade-offs",
+          "goal": "Diskutieren, wie Sicherheits-, Performance- und Usability-Anforderungen ausbalanciert werden.",
+          "sample_questions": [
+            "Wie gehen Sie mit dem Zielkonflikt zwischen strengen RBAC-Policies und Nutzerfreundlichkeit um?",
+            "Welche Risiken sehen Sie bei der Einführung neuer Authentifizierungsmechanismen?",
+            "Können Sie ein Beispiel einer Entscheidung nennen, bei der Sie bewusst ein gewisses Risiko akzeptiert haben?"
+          ]
+        },
+        {
+          "title": "Abschluss & Lessons Learned",
+          "goal": "Schlüsselerkenntnisse und Empfehlungen für zukünftige Projekte festhalten.",
+          "sample_questions": [
+            "Welche Lessons Learned aus Aegis IAM würden Sie an ein neues Projektteam weitergeben?",
+            "Welche Verbesserungen planen Sie für die nächste Audit-Periode (AUD-24-Q2)?",
+            "Gibt es ungeschriebene Best Practices, die Sie für besonders wertvoll halten?"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "id": "A-early",
+          "window": "start",
+          "content_hint": "surface core fact early"
+        },
+        {
+          "id": "A-middle",
+          "window": "middle",
+          "content_hint": "non-trivial multi-hop link across subsystems"
+        },
+        {
+          "id": "A-late",
+          "window": "end",
+          "content_hint": "decision/tradeoff/risk with evidence"
+        }
+      ],
+      "style": {
+        "interviewer_type": "explorative",
+        "noise": "med",
+        "code_switch": "none"
+      },
+      "turns": {
+        "min": 260,
+        "max": 360
+      },
+      "duration_min": 90,
+      "language": "de"
+    }
+  },
+  "rollout": {
+    "total_completion_tokens": 29544,
+    "all_turns": 360,
+    "anchors_covered": [
+      "A-early",
+      "A-late",
+      "A-middle"
+    ],
+    "steps_executed": 23
+  }
+}

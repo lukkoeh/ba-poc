@@ -1,0 +1,360 @@
+{"ts": "00:00", "speaker": "I", "text": "Frau Keller, können Sie uns bitte kurz den aktuellen Status des Helios Datalake schildern?"}
+{"ts": "04:50", "speaker": "E", "text": "Ja, gerne. Also, wir sind jetzt klar in der Scale-Phase, das heißt unser ELT-Framework in Snowflake ist stabil, und wir erweitern kontinuierlich den Datenkatalog. Wir haben aktuell 128 aktive Datenquellen, davon 37 über Kafka angebunden."}
+{"ts": "09:20", "speaker": "I", "text": "Und wie definieren Sie in dieser Phase die Scope-Grenzen, um nicht in unkontrolliertes Wachstum zu geraten?"}
+{"ts": "14:05", "speaker": "E", "text": "Das ist wichtig. Wir orientieren uns an der Scope-Matrix SCX-HEL-04, die erlaubt, nur Quellsysteme mit mindestens 500 aktiven Nutzern oder kritischem Reportingbedarf einzubinden. Anything else wird auf eine Warteliste gesetzt."}
+{"ts": "18:35", "speaker": "I", "text": "Welche Stakeholder sind gerade am stärksten involviert?"}
+{"ts": "23:15", "speaker": "E", "text": "Primär das Data Governance Board und die Produktteams der Sales- und IoT-Plattformen. Die Governance-Leute achten stark auf POL-SEC-001 Compliance, während die Produktteams neue Features fordern."}
+{"ts": "28:00", "speaker": "I", "text": "Welche sind die wichtigsten Datenquellen für den Datalake?"}
+{"ts": "32:40", "speaker": "E", "text": "Die Kafka-Topics aus den IoT-Sensoren liefern ca. 60% des Volumens. Then we have ERP exports via SFTP und eine Reihe von REST APIs aus dem CRM."}
+{"ts": "37:30", "speaker": "I", "text": "Wie koordinieren Sie Änderungen in Kafka-Pipelines mit dbt-Modellen?"}
+{"ts": "42:15", "speaker": "E", "text": "Wir haben einen Change-Kalender, der in Confluence gepflegt wird. Jede Kafka-Schema-Änderung muss ein RFC, z.B. RFC-HEL-212, durchlaufen und im dbt-Repo wird parallel ein Feature-Branch erstellt. Deployments passieren synchronisiert über unser Airflow DAG-Update."}
+{"ts": "47:00", "speaker": "I", "text": "Gibt es Abhängigkeiten zu anderen Projekten, die besondere Aufmerksamkeit erfordern?"}
+{"ts": "51:35", "speaker": "E", "text": "Ja, P-ORC, unser Orchestrierungsprojekt. Wenn deren Scheduler-Version geändert wird, müssen wir die Airflow-Operatoren im Datalake anpassen, sonst brechen die Ingestion-Jobs. Das hatten wir bei Incident INC-HEL-078 gesehen."}
+{"ts": "56:20", "speaker": "I", "text": "Wie stellen Sie sicher, dass die SLA-HEL-01 mit 99,9% Availability eingehalten wird?"}
+{"ts": "61:05", "speaker": "E", "text": "Wir nutzen kombinierte Monitoring-Stacks: Prometheus für Pipeline-Metriken, Snowflake Resource Monitors für Query-Failures, und PagerDuty für Alerts. Wenn wir unter 99,95% rutschen, greift Runbook RB-HEL-02 mit Eskalationspfad."}
+{"ts": "66:45", "speaker": "I", "text": "Gab es Trade-offs zwischen Performance und Kosten, die Sie dokumentiert haben?"}
+{"ts": "90:00", "speaker": "E", "text": "Ja, im Q2 haben wir die Auto-Scaling-Policy in Snowflake von 'max 8' auf 'max 4' Warehouses reduziert, um die Compute-Kosten um 27% zu senken. Das führte zu Spitzenlast-Latenzen von bis zu 14 Sekunden, was wir im Post-Mortem TCK-HEL-332 festgehalten haben."}
+{"ts": "90:00", "speaker": "I", "text": "Sie hatten vorhin die Lessons Learned aus Incident #INC-HEL-442 erwähnt. Könnten Sie etwas detaillierter beschreiben, wie diese nun in Ihren aktuellen Deployment-Plan einfließen?"}
+{"ts": "90:15", "speaker": "E", "text": "Ja, klar. Also, aus #INC-HEL-442 haben wir gelernt, dass wir vor einem Major Deploy einen zusätzlichen dry-run im Staging-Cluster brauchen. That means we simulate the full Kafka → dbt → Snowflake pipeline, inklusive Lasttests. Früher haben wir nur unit tests gefahren."}
+{"ts": "90:42", "speaker": "I", "text": "Und wie stellen Sie sicher, dass dieser dry-run nicht die SLA-HEL-01 Availability beeinträchtigt?"}
+{"ts": "90:55", "speaker": "E", "text": "Wir führen den dry-run in einem isolierten Namespace aus. Resources werden dort über ein Quota-Limit gesteuert, documented in Runbook RB-HEL-DEP-03. So vermeiden wir, dass produktive Streams in Kafka-Topic hel_events beeinträchtigt werden."}
+{"ts": "91:20", "speaker": "I", "text": "Gibt es für dieses Quota-Limit auch ein automatisches Alerting?"}
+{"ts": "91:33", "speaker": "E", "text": "Ja, wir haben im Prometheus-Stack einen Alert \u0000hel_dryrun_quota_exceeded\u0000 konfiguriert. The alert notifies both the DevOps channel and my PM dashboard. Das haben wir nach RFC-HEL-055 eingeführt."}
+{"ts": "91:58", "speaker": "I", "text": "RFC-HEL-055, das war das, was auch POL-SEC-001 berücksichtigt hat, korrekt?"}
+{"ts": "92:10", "speaker": "E", "text": "Genau, POL-SEC-001 verlangt network isolation für Testumgebungen. Also mussten wir die Helm-Charts so anpassen, dass der dry-run Namespace keinen Outbound ins Prod-VPC hat. This was a bit tricky with shared services like schema registry."}
+{"ts": "92:34", "speaker": "I", "text": "Wie haben Sie dieses Problem mit dem Schema Registry gelöst?"}
+{"ts": "92:47", "speaker": "E", "text": "Wir haben einen readonly Mirror des Schema Registry in das Staging-VPC deployed, documented in Ticket HEL-DEV-884. Dadurch können dbt und Kafka-Connectoren validieren, ohne Prod zu berühren."}
+{"ts": "93:12", "speaker": "I", "text": "Interessant. Gab es dabei wieder Trade-offs zwischen Aktualität der Schemas und Isolation?"}
+{"ts": "93:25", "speaker": "E", "text": "Absolut. The mirror lags by about 30 minutes, weil wir nur jede halbe Stunde syncen, um Traffic zu sparen. Das bedeutet, dass in seltenen Fällen ein neues Schema nicht im dry-run erkannt wird. Wir haben das als akzeptables Risiko dokumentiert in unserem Risk Log RL-HEL-07."}
+{"ts": "93:53", "speaker": "I", "text": "Und wie kommunizieren Sie dieses Risiko an die Entwicklerteams?"}
+{"ts": "94:05", "speaker": "E", "text": "Wir haben einen Abschnitt im Confluence-Page \u0000Helios Deploy Guidelines\u0000, plus ein wöchentliches Standup, wo wir solche Offsets erwähnen. Additionally, das Release-Checklist-Template hat jetzt einen Punkt: 'Schema mirror lag reviewed'."}
+{"ts": "94:30", "speaker": "I", "text": "Abschließend: Sehen Sie in diesem Bereich weitere Verbesserungsmöglichkeiten?"}
+{"ts": "94:42", "speaker": "E", "text": "Ja, wir evaluieren gerade einen near real-time sync via Debezium-Connector, um den Lag auf unter 5 Minuten zu bringen. Das hätte allerdings höhere Kosten in der VPC-Peer-Bandbreite, da müssen wir noch ein Kosten-Nutzen-Assessment fahren."}
+{"ts": "98:00", "speaker": "I", "text": "Zum Thema Governance noch kurz: wie gehen Sie mit Abweichungen von POL-SEC-001 um, wenn diese im Betrieb auffallen?"}
+{"ts": "98:12", "speaker": "E", "text": "Also, wir haben einen kleinen internen Workflow, den wir als RFC-SEC-014 dokumentiert haben. If there's a deviation detected, we raise a SecDeviation ticket im JIRA-Board HEL-OPS, und innerhalb von 24h muss das Incident Response Team eine Risikoanalyse liefern."}
+{"ts": "98:34", "speaker": "I", "text": "Und diese Risikoanalyse, fließt die dann direkt in Ihre Deployment-Planung ein?"}
+{"ts": "98:41", "speaker": "E", "text": "Ja, genau. Wir taggen das betroffene dbt-Modell mit einem security_flag, und im nächsten Deployment-Window wird das Pipeline-Segment isoliert. This sometimes delays release, but it's necessary."}
+{"ts": "98:58", "speaker": "I", "text": "Gab es in den letzten Monaten Fälle, bei denen SLA-HEL-01 in Gefahr geraten ist?"}
+{"ts": "99:07", "speaker": "E", "text": "Zweimal. Im März hatten wir ein Kafka-Cluster-Upgrade, bei dem ein Broker out-of-sync ging. And in May, Snowflake warehouse scaling lagged. Beide Male sind wir knapp unter der 99,9% Availability geblieben, aber nur für wenige Minuten."}
+{"ts": "99:28", "speaker": "I", "text": "Wie wurde das dokumentiert?"}
+{"ts": "99:32", "speaker": "E", "text": "Incident-Report HEL-INC-2203 und HEL-INC-2205. Die enthalten Root Cause Analysis, Recovery Steps, und einen Verweis auf Runbook RB-HEL-07 für Broker-Recovery und RB-HEL-12 für Warehouse Scaling."}
+{"ts": "99:55", "speaker": "I", "text": "Interessant. Welche Lessons Learned haben Sie aus HEL-INC-2205 gezogen?"}
+{"ts": "100:02", "speaker": "E", "text": "Wir haben den Auto-Scale Threshold in Snowflake um 15% gesenkt und einen zusätzlichen Alert in Grafana aufgesetzt. And we also trained the on-call team on manual scaling procedures."}
+{"ts": "100:19", "speaker": "I", "text": "Gab es dabei Trade-offs?"}
+{"ts": "100:23", "speaker": "E", "text": "Ja, durch den niedrigeren Threshold steigen die Compute-Kosten um ca. 8% monatlich. But in our risk assessment, das ist vertretbar, um die SLA einzuhalten."}
+{"ts": "100:39", "speaker": "I", "text": "Wie kommunizieren Sie solche Kosten-Risiko-Abwägungen an das Management?"}
+{"ts": "100:45", "speaker": "E", "text": "Wir haben ein monatliches Steering Committee. Dort präsentieren wir eine Cost vs. Risk Matrix, mit farblichen Indikatoren. This visual aid helps non-technical stakeholders grasp the trade-offs quickly."}
+{"ts": "101:02", "speaker": "I", "text": "Gibt es aus Ihrer Sicht aktuell noch offene Risiken, die nicht vollständig mitigiert sind?"}
+{"ts": "101:10", "speaker": "E", "text": "Ja, die Abhängigkeit vom externen API-Feed 'SolarMetrics' ist kritisch. We've had intermittent latency spikes, und weil es eine Third-Party ist, können wir nur begrenzt eingreifen. Dafür läuft aktuell ein Risk Mitigation Plan unter HEL-RMP-09."}
+{"ts": "114:00", "speaker": "I", "text": "Vielleicht können wir jetzt noch etwas tiefer auf die Incident-Response-Pläne eingehen—wie verknüpfen Sie die Runbooks mit den Lessons Learned?"}
+{"ts": "114:05", "speaker": "E", "text": "Ja, also wir haben für den Helios Datalake ein spezielles Runbook RBK-HEL-IR-04, das nach dem großen Latenz-Incident vom März aktualisiert wurde. It maps the initial alerting from our Prometheus exporters straight to the Snowflake query queues and then assigns an on-call engineer. Die Lessons Learned aus Ticket INC-HEL-293 sind als Anmerkungen direkt im Runbook verlinkt."}
+{"ts": "114:13", "speaker": "I", "text": "Und wie stellen Sie sicher, dass diese Verknüpfungen auch bei neuen Teammitgliedern bekannt sind?"}
+{"ts": "114:18", "speaker": "E", "text": "We actually have a quarterly onboarding refresher. Dort wird in Confluence die Runbook-Liste durchgegangen, und wir machen ein Tabletop Exercise, bei dem ein simulated Kafka partition lag in dbt downstream getestet wird. So verankern sich die Querverweise zwischen den Systemen im Gedächtnis."}
+{"ts": "114:27", "speaker": "I", "text": "Sie hatten vorhin erwähnt, dass Performance-Kosten-Trade-offs dokumentiert wurden. Gibt es da konkrete KPIs, die Sie regelmäßig monitoren?"}
+{"ts": "114:32", "speaker": "E", "text": "Ja, wir tracken zum Beispiel Cost per Query in Snowflake und Average Kafka Throughput. In Grafana haben wir ein Dashboard HEL-Perf-02, das beides gegenüberstellt. Wenn die Kosten pro Query über 0,05€ steigen, prüfen wir, ob wir das Caching oder die dbt Incremental Models anpassen."}
+{"ts": "114:40", "speaker": "I", "text": "Hat das schon einmal zu einem konkreten Deployment-Change geführt?"}
+{"ts": "114:44", "speaker": "E", "text": "Ja, im April haben wir über RFC-HEL-117 ein Deployment genehmigt, das den Kafka Batch Size Parameter reduziert hat. That lowered throughput slightly but cut Snowflake compute costs by 12%."}
+{"ts": "114:53", "speaker": "I", "text": "Gab es dabei Bedenken wegen der SLA-HEL-01, also der 99,9% Availability?"}
+{"ts": "114:57", "speaker": "E", "text": "Natürlich, wir haben vorab eine Impact Analysis gefahren—dokumentiert in SLA-Check-HEL-22—und die Simulation ergab, dass wir bei Peak Traffic maximal 0,05% mehr Latenz hätten. Das lag noch innerhalb des SLA-Budgets."}
+{"ts": "115:06", "speaker": "I", "text": "Interesting. Würden Sie sagen, dass solche Analysen mittlerweile Standard im Projekt sind?"}
+{"ts": "115:11", "speaker": "E", "text": "Ja, das hat sich etabliert. Früher war das eher ad hoc, now it's part of our Change Management Checklist in the HEL governance framework. Jede RFC muss jetzt einen SLA- und Kosten-Impact-Abschnitt haben."}
+{"ts": "115:19", "speaker": "I", "text": "Wie gehen Sie mit Risiken um, die Sie nicht direkt kontrollieren können, z. B. Upstream-Änderungen in Quellsystemen?"}
+{"ts": "115:24", "speaker": "E", "text": "Da haben wir eine Art Early Warning System: Wir sind in den Release-Kalendern der Quellsystem-Teams eingetragen. We also run daily schema drift checks in Kafka ingestion. Änderungen triggern ein JIRA-Auto-Ticket typu RISK-HEL-*."}
+{"ts": "115:33", "speaker": "I", "text": "Gab es in letzter Zeit so einen Trigger?"}
+{"ts": "115:37", "speaker": "E", "text": "Ja, letzte Woche RISK-HEL-044: Die Marketing-App hat ein neues Feld 'campaign_region' eingeführt. Wir mussten schnell ein dbt-Schema-Update fahren, documented in Runbook RBK-DBT-07, um Null Values downstream zu vermeiden."}
+{"ts": "116:00", "speaker": "I", "text": "Lassen Sie uns noch ein wenig tiefer auf die Lessons Learned eingehen – gibt es spezifische Runbooks, die nach den letzten Incidents angepasst wurden?"}
+{"ts": "116:08", "speaker": "E", "text": "Ja, nach dem Incident vom April, Ticket#HEL-INC-742, haben wir das Runbook RB-HEL-KAF-04 updated. Das enthält jetzt einen zusätzlichen Step für die Pre-Deployment Validierung der Kafka Topic Schemas, um Schema Drift zu vermeiden."}
+{"ts": "116:24", "speaker": "I", "text": "Interesting, und wie fließt das in Ihren Deployment-Prozess ein?"}
+{"ts": "116:29", "speaker": "E", "text": "Wir haben im Jenkins-Pipeline-Job einen Hook, der gegen den Schema Registry Validator läuft. Falls ein inkompatibles Schema detected wird, blockiert der Job und es erzeugt automatisch ein RFC im System – RFC-HEL-DBT-07 – für den Data Modeling Lead."}
+{"ts": "116:46", "speaker": "I", "text": "Das heißt, Sie koppeln DevOps-Mechanismen direkt mit Governance-Prozessen?"}
+{"ts": "116:51", "speaker": "E", "text": "Genau. Das ist ein ungeschriebener Best Practice bei uns: 'Technische Gates enforce auch Policy'. Wir haben das nie formalisiert, aber es hat uns bei SLA-HEL-01 Compliance geholfen."}
+{"ts": "117:06", "speaker": "I", "text": "Gab es Situationen, in denen Sie diesen Gate-Mechanismus bewusst umgangen haben?"}
+{"ts": "117:11", "speaker": "E", "text": "Einmal, ja – in einem Hotfix für eine kritische Kundenintegration. Wir haben einen temporären Bypass genutzt, dokumentiert unter EXC-HEL-02, und danach in der Post-Mortem-Session alle Änderungen reviewed."}
+{"ts": "117:26", "speaker": "I", "text": "Wie bewerten Sie im Nachhinein diesen Trade-off?"}
+{"ts": "117:31", "speaker": "E", "text": "War riskant, aber justified. Wir hatten eine Downtime von 12 Minuten statt potenziell mehreren Stunden. Allerdings haben wir daraus gelernt, dass wir für solche Fälle ein abgesichertes Fast-Track-Runbook brauchen."}
+{"ts": "117:46", "speaker": "I", "text": "Sind schon Schritte in diese Richtung gegangen?"}
+{"ts": "117:50", "speaker": "E", "text": "Ja, Runbook RB-HEL-FAST-01 ist in Draft. Es definiert minimal required Checks, die auch im Notfall nicht entfallen dürfen, zum Beispiel AuthN/AuthZ Verification und Data Consistency Spot-Checks."}
+{"ts": "118:05", "speaker": "I", "text": "Können Sie ein Beispiel für einen Data Consistency Spot-Check geben?"}
+{"ts": "118:09", "speaker": "E", "text": "Sure – wir nehmen eine kleine Sample-Query auf Snowflake, die kritische KPIs aggregiert, und vergleichen diese gegen den letzten bekannten Good State aus dem Monitoring-Dashboard. Abweichungen >1% triggern einen Stop."}
+{"ts": "118:24", "speaker": "I", "text": "Und wie reagieren Stakeholder auf diese neuen Prozesse?"}
+{"ts": "118:28", "speaker": "E", "text": "Positiv, weil sie sehen, dass wir even under pressure die Qualität sichern. Das erhöht das Vertrauen, gerade bei Cross-Projekt-Abhängigkeiten mit Orion Analytics, die auf unsere Daten angewiesen sind."}
+{"ts": "122:00", "speaker": "I", "text": "Lassen Sie uns noch etwas tiefer in die Governance eintauchen – wie setzen Sie konkret POL-SEC-001 bei den Streaming-Pipelines um?"}
+{"ts": "122:05", "speaker": "E", "text": "Also, wir haben da ein internes Pattern etabliert – every Kafka topic that carries PII has to be tagged and encrypted at rest. Wir haben im Runbook RBK-HEL-SEC-12 genau beschrieben, wie die ACLs zwischen Producer- und Consumer-Groups gesetzt werden."}
+{"ts": "122:15", "speaker": "I", "text": "Und wie überprüfen Sie, dass diese ACLs auch wirklich konsistent bleiben?"}
+{"ts": "122:20", "speaker": "E", "text": "Dafür nutzen wir einen wöchentlichen Confluent-ACL-Dump, der via Jenkins-Job mit den Vorgaben aus dem Runbook abgeglichen wird. Zusätzlich gibt's Alerts im Monitoring, wenn ein Topic ohne Tag auftaucht."}
+{"ts": "122:35", "speaker": "I", "text": "In Bezug auf SLA-HEL-01 – wie reagieren Sie, wenn ein Alert potenziell die 99,9% Availability gefährdet?"}
+{"ts": "122:40", "speaker": "E", "text": "Wir haben einen 'Fast Track RFC'-Prozess. RFC-HEL-FT-07 erlaubt innerhalb von 30 Minuten einen Hotfix-Deploy, auch wenn das Change Window eigentlich geschlossen ist. Das hat uns sehr geholfen, z.B. bei Incident INC-HEL-443 im April."}
+{"ts": "122:55", "speaker": "I", "text": "Ah, könnten Sie den Incident kurz beschreiben?"}
+{"ts": "123:00", "speaker": "E", "text": "Sure – it was a malformed schema in a Kafka Avro message, which blocked downstream dbt models. Wir haben dann mit einem Schema Registry Rollback und einem temporären Transform-Script in dbt den Flow wiederhergestellt."}
+{"ts": "123:15", "speaker": "I", "text": "Interessant, das klingt nach enger Verzahnung zwischen Streaming und Warehouse. Gab es da Lessons Learned?"}
+{"ts": "123:20", "speaker": "E", "text": "Definitiv – we added a pre-prod validation step, das Avro-Schemas gegen die dbt-Source-Configs checkt. Das ist jetzt Teil des CI/CD Pipelines, siehe Runbook RBK-HEL-QA-05."}
+{"ts": "123:35", "speaker": "I", "text": "Wie gehen Sie mit Cross-Projekt-Abhängigkeiten um, wenn diese Policies erweitert werden?"}
+{"ts": "123:40", "speaker": "E", "text": "Wir haben ein monatliches Architektur-Board, in dem auch das Projekt Orion DataMesh sitzt. Dort stimmen wir Schema- und Policy-Änderungen ab, um keine Breaking Changes in deren Consumer-Pipelines zu verursachen."}
+{"ts": "123:55", "speaker": "I", "text": "Gab es schon Fälle, wo Sie Performance bewusst zugunsten von Compliance reduziert haben?"}
+{"ts": "124:00", "speaker": "E", "text": "Ja, z.B. beim Einschalten von Field-Level Encryption für ein großes Fact-Table in Snowflake. Das hat Queries um ca. 12% verlangsamt, aber wir wollten den Audit-Findings aus TCK-SEC-2023-17 entsprechen."}
+{"ts": "124:15", "speaker": "I", "text": "Und wie wurde dieser Trade-off intern kommuniziert?"}
+{"ts": "124:20", "speaker": "E", "text": "We prepared a short impact report, zweisprachig, mit Screenshots aus Query Profiler und einer Gegenüberstellung der Compliance-Risiken. So konnten wir das Management Board schnell überzeugen."}
+{"ts": "128:00", "speaker": "I", "text": "Könnten Sie vielleicht noch etwas genauer auf die aktuellen Engpässe beim Data Ingestion eingehen? Maybe with an example aus den letzten zwei Wochen."}
+{"ts": "128:20", "speaker": "E", "text": "Ja, also, der größte Bottleneck war tatsächlich ein Lag im Kafka-Cluster für die Event-Streams aus dem CRM-System. Wir haben gesehen, dass die Consumer-Gruppen im Topic `crm_events_v3` teilweise 15 Minuten hinterherhinkten — laut unserem Runbook RB-HEL-009 sollte das bei maximal 2 Minuten liegen."}
+{"ts": "128:48", "speaker": "I", "text": "Und wie haben Sie da reagiert? Did you involve the dbt modeling team directly?"}
+{"ts": "129:05", "speaker": "E", "text": "Genau, wir haben ein adhoc-Meeting zwischen dem Kafka-Operations-Team und den dbt-Model-Ownern einberufen. Hintergrund: wenn der Lag zu groß wird, geraten die stündlichen Incremental-Loads in Snowflake aus dem Takt, und dann verletzt man potenziell SLA-HEL-01."}
+{"ts": "129:32", "speaker": "I", "text": "Interessant, und haben Sie da eine temporäre Scaling-Lösung angewendet?"}
+{"ts": "129:48", "speaker": "E", "text": "Wir haben kurzfristig die Partition-Anzahl des Topics erhöht und Consumer auf zusätzliche Pods verteilt. Das war im RFC-HEL-2024-117 dokumentiert, mit einem geplanten Rollback nach sieben Tagen."}
+{"ts": "130:15", "speaker": "I", "text": "Gab es dabei besondere Sicherheitsaspekte nach POL-SEC-001 zu beachten?"}
+{"ts": "130:31", "speaker": "E", "text": "Ja, wir mussten sicherstellen, dass die neuen Consumer-Pods korrekt in unserer Service Mesh Policy registriert werden. POL-SEC-001 schreibt vor, dass alle Datenströme zwischen Services TLS 1.3 verwenden, sonst blockt der Ingress-Controller den Traffic."}
+{"ts": "130:54", "speaker": "I", "text": "Switching gears a bit — how do you monitor if your emergency changes don't break downstream analytics?"}
+{"ts": "131:12", "speaker": "E", "text": "Wir nutzen ein Canary-Deployment-Schema für dbt-Jobs. Das heißt, neue Models laufen erst auf einem isolierten Schema `canary_analytics` und werden mit Production-Ergebnissen verglichen. Wenn die Divergenz >1% ist, wird automatisch ein Alert in PagerDuty ausgelöst."}
+{"ts": "131:38", "speaker": "I", "text": "Klingt recht robust. Haben Sie dafür ein spezielles Runbook?"}
+{"ts": "131:52", "speaker": "E", "text": "Ja, RB-HEL-014 beschreibt genau, wie Canary-Tests zu initiieren und auszuwerten sind. Wir haben das nach Incident TIC-HEL-882 eingeführt, wo ein fehlerhafter Incremental-Model-Join 12 Stunden unentdeckt live war."}
+{"ts": "132:20", "speaker": "I", "text": "Ah, das führt mich zu einer Frage zu Lessons Learned — was war die wichtigste Maßnahme nach TIC-HEL-882?"}
+{"ts": "132:36", "speaker": "E", "text": "Die wichtigste Maßnahme war neben den Canary-Tests auch die Einführung eines Change Freeze Windows für Kafka-Schema-Änderungen. Jetzt dürfen solche Änderungen nur noch dienstags und donnerstags zwischen 10:00 und 12:00 deployt werden, wenn alle relevanten Teams on call sind."}
+{"ts": "133:02", "speaker": "I", "text": "Would you say that reduced the risk of performance-impacting schema mismatches?"}
+{"ts": "133:20", "speaker": "E", "text": "Absolut, wir haben seit der Einführung keine SLA-HEL-01 Verletzung mehr durch solche Mismatches gehabt. Die zusätzlichen Koordinationskosten nehmen wir in Kauf, um Stabilität und Compliance sicherzustellen."}
+{"ts": "144:00", "speaker": "I", "text": "Lassen Sie uns noch mal auf die technischen Schnittstellen eingehen. Welche Kafka-Topics sind aktuell am kritischsten für den Helios Datalake?"}
+{"ts": "144:05", "speaker": "E", "text": "Also, die Finance- und IoT-Topics, speziell 'fin_txn_stream' und 'iot_sensor_data', sind sehr sensibel. Any delay there can cascade into dbt model refresh failures."}
+{"ts": "144:15", "speaker": "I", "text": "Und wie monitoren Sie diese in Echtzeit?"}
+{"ts": "144:20", "speaker": "E", "text": "Wir haben ein Prometheus-Setup, kombiniert mit Alertmanager, der auf Latenzen >500ms reagiert. Zusätzlich gibt es ein internes Runbook RB-HEL-22, das beschreibt, wie wir temporär auf einen Backup-Consumer switchen."}
+{"ts": "144:33", "speaker": "I", "text": "Interessant. Und wie koordinieren Sie Änderungen, wenn z. B. das dbt-Team ein neues Modell deployen will, das auf diese Topics zugreift?"}
+{"ts": "144:40", "speaker": "E", "text": "We run a Change Advisory sync, wo sowohl Kafka- als auch dbt-Owner teilnehmen. In der Checkliste ist unter Punkt 4 explizit die Prüfung der SLA-HEL-01 Compliance aufgeführt."}
+{"ts": "144:53", "speaker": "I", "text": "Gibt es Abhängigkeiten zu anderen Projekten, die das erschweren?"}
+{"ts": "145:00", "speaker": "E", "text": "Ja, das Projekt 'Orion Realtime Dashboards' hängt an denselben IoT-Topics. Wenn dort Schema-Änderungen passieren, müssen wir beide Pipelines synchron updaten."}
+{"ts": "145:13", "speaker": "I", "text": "Wie fließen Sicherheitsrichtlinien wie POL-SEC-001 da ein?"}
+{"ts": "145:18", "speaker": "E", "text": "POL-SEC-001 verlangt, dass alle neuen Streams vor dem Go-Live eine Data Classification durchlaufen. That means we sometimes delay deployments to complete the classification review."}
+{"ts": "145:31", "speaker": "I", "text": "Kommt es öfter zu Konflikten zwischen den Security Deadlines und den Business-Zielen?"}
+{"ts": "145:37", "speaker": "E", "text": "Leider ja. We've had cases, e.g., in ticket INC-HEL-482, where delaying a schema change to meet encryption requirements caused a missed analytics window for the marketing team."}
+{"ts": "145:50", "speaker": "I", "text": "Wie gehen Sie mit solchen Zielkonflikten um?"}
+{"ts": "145:55", "speaker": "E", "text": "Wir nutzen einen Risk Acceptance Prozess. Das ist im Runbook RB-HEL-03 dokumentiert, mit einem Approval-Flow über drei Management-Stufen."}
+{"ts": "146:08", "speaker": "I", "text": "Gibt es eine formale Eskalationslinie, falls die drei Stufen nicht schnell genug reagieren?"}
+{"ts": "146:13", "speaker": "E", "text": "Yes, there's an emergency RFC path — RFC-E-HEL-19 — that allows us to proceed if SLA-HEL-01 is at risk, but it requires post-implementation review within 48 hours."}
+{"ts": "146:00", "speaker": "I", "text": "Eine Anschlussfrage zu den Schnittstellen: wie häufig reviewen Sie eigentlich die Kafka-Topic-Konfigurationen im Helios Datalake?"}
+{"ts": "146:05", "speaker": "E", "text": "Ähm, also wir haben einen wöchentlichen Review-Slot im sogenannten Ingestion Board. Da schauen wir jede Topic-Config zusammen mit den dbt-Schema-Änderungen an. Das ist wichtig, um nicht gegen SLA-HEL-01 zu verstoßen, because once you misalign schemas, processing latency skyrockets."}
+{"ts": "146:15", "speaker": "I", "text": "Und wenn Sie da eine kritische Änderung sehen, wie geht es dann weiter?"}
+{"ts": "146:20", "speaker": "E", "text": "Wir triggern sofort ein RFC, meistens unter dem Template RFC-DL-Change-04. Das geht dann durch unser Change Advisory Board, wo auch Security wegen POL-SEC-001 mit am Tisch sitzt."}
+{"ts": "146:32", "speaker": "I", "text": "Sie hatten vorhin erwähnt, dass Security hier mitredet – wie wirkt sich das auf die Deployment-Planung aus?"}
+{"ts": "146:38", "speaker": "E", "text": "Well, es verlängert manchmal die Lead Time. Wir müssen z.B. für Topics mit PII-Daten eine zusätzliche Masking-Stage im dbt einplanen, und das steht auch so im Runbook RB-HEL-SEC-02."}
+{"ts": "146:50", "speaker": "I", "text": "Gibt es Integrationen, die aktuell besonders kritisch sind?"}
+{"ts": "146:54", "speaker": "E", "text": "Ja, die Verbindung zu unserem CRM-Export. Der speist drei Kafka-Topics, und diese werden direkt in Snowflake-Modelle gemappt. Any delay there cascades through the daily customer analytics pipeline."}
+{"ts": "147:05", "speaker": "I", "text": "Wie überwachen Sie solche Kaskaden-Effekte?"}
+{"ts": "147:10", "speaker": "E", "text": "Wir haben ein Grafana-Dashboard, das sowohl Kafka-Lag als auch dbt-Model-Runtime korreliert. Zusätzlich gibt es Alert-Regeln aus Runbook RB-HEL-MON-01, die uns bei >5min Lag direkt pingen."}
+{"ts": "147:22", "speaker": "I", "text": "Wenn es zu so einem Alert kommt, welche Schritte folgen?"}
+{"ts": "147:27", "speaker": "E", "text": "First, wir checken das Incident-Log im Ticket-System. Falls der Incident noch offen ist, greifen wir auf den Quick-Remedy-Abschnitt des Runbooks zurück, um SLA-Breach zu vermeiden. Das steht alles auch in Incident INC-2024-045."}
+{"ts": "147:40", "speaker": "I", "text": "Sie sprachen von SLA-Breach – gab es in letzter Zeit Grenzfälle?"}
+{"ts": "147:45", "speaker": "E", "text": "Ja, vor zwei Wochen hatten wir einen Peak in der Event-Rate. Wir mussten uns entscheiden: scale up Snowflake compute, was teuer ist, oder eine temporäre Batch-Verarbeitung einführen. We chose batch to stay within budget, documented as Decision DEC-HEL-19."}
+{"ts": "147:58", "speaker": "I", "text": "Und was war das Lesson Learned daraus?"}
+{"ts": "148:02", "speaker": "E", "text": "Dass wir einen flexibleren Autoscaling-Plan brauchen, der in POL-SCALE-002 verankert wird. Außerdem haben wir das Runbook RB-HEL-COST-01 ergänzt, um für solche Peaks schneller eine Kosten-Nutzen-Abwägung zu treffen."}
+{"ts": "148:00", "speaker": "I", "text": "Vielleicht können wir jetzt etwas tiefer in die Lessons Learned gehen—gab es ein spezifisches Incident, das Ihre Sicht auf das SLA-Management verändert hat?"}
+{"ts": "148:05", "speaker": "E", "text": "Ja, ähm, im März hatten wir Incident TKT-HEL-342, where a misaligned Kafka schema caused downstream dbt models to fail the nightly build. Das hat uns gezeigt, dass wir das Runbook RB-ING-07 stärker mit den Security-Policies verzahnen müssen."}
+{"ts": "148:14", "speaker": "I", "text": "Interessant, also war das nicht nur ein technisches Problem, sondern auch ein Governance-Gap?"}
+{"ts": "148:18", "speaker": "E", "text": "Genau, die technische Ursache war trivial zu fixen—ein Schema-Field rename—aber wir hatten keine cross-check Steps im Deployment-Plan, um SLA-HEL-01's 99,9% availability zu schützen. That governance link was missing."}
+{"ts": "148:28", "speaker": "I", "text": "Wie haben Sie darauf reagiert? Gab es eine Anpassung im Runbook?"}
+{"ts": "148:33", "speaker": "E", "text": "Ja, wir haben RB-ING-07 Section 4.2 ergänzt: vor jedem Merge von Kafka-Topic-Änderungen muss ein dbt dry-run im Staging-Datalake durchlaufen und von Data Quality Team sign-offed werden. This is now a hard gate in Jenkins."}
+{"ts": "148:46", "speaker": "I", "text": "Und dieser Gate-Prozess, hat er schon gewirkt?"}
+{"ts": "148:50", "speaker": "E", "text": "Seitdem hatten wir zwei ähnliche Changes, beide liefen smooth. The staging dry-run caught a nullability mismatch once, preventing production impact."}
+{"ts": "148:59", "speaker": "I", "text": "Das scheint ja ein pragmatischer Trade-off zu sein—mehr QA-Zeit, aber weniger Risiko. Wie haben Sie diesen Trade-off intern verkauft?"}
+{"ts": "149:05", "speaker": "E", "text": "Wir haben eine kleine Kosten-Nutzen-Rechnung gemacht: jede zusätzliche QA-Session kostet etwa 3 Engineer-Stunden, aber ein SLA-Breach kostet uns laut Verrechnungsmodell etwa 4.500 €. The math spoke for itself."}
+{"ts": "149:16", "speaker": "I", "text": "Gab es Widerstand aus den Teams wegen der längeren Lead Time?"}
+{"ts": "149:20", "speaker": "E", "text": "Ja, minimal. Einige wollten agile velocity nicht opfern. Aber after we shared the TKT-HEL-342 timeline und die Kundeneskalation, war klar: das Vertrauen der Stakeholder ist wichtiger."}
+{"ts": "149:31", "speaker": "I", "text": "Wie fließen solche Erfahrungen in die langfristige Roadmap des Helios Datalake ein?"}
+{"ts": "149:36", "speaker": "E", "text": "Wir planen jetzt ein Policy-Mapping-Dashboard, das jede Pipeline mit den relevanten Policies wie POL-SEC-001 und SLAs verknüpft. That way, bei jeder Änderung sieht man sofort die Governance-Impact-Zone."}
+{"ts": "149:46", "speaker": "I", "text": "Klingt, als würde das nicht nur Compliance, sondern auch die technische Planung verbessern."}
+{"ts": "149:50", "speaker": "E", "text": "Genau, it's about making implicit rules visible. Wenn Engineers die Policy- und SLA-Verknüpfungen sehen, treffen sie bessere Entscheidungen—und wir als PM sparen uns viele Eskalationsrunden."}
+{"ts": "149:36", "speaker": "I", "text": "Zum Thema Lessons Learned — könnten Sie ein Beispiel nennen, wo eine Policy wie POL-SEC-001 tatsächlich einen Deployment-Plan verändert hat?"}
+{"ts": "149:42", "speaker": "E", "text": "Ja, klar. Im März hatten wir ein geplantes Schema-Update für den Customer-Topic in Kafka. According to POL-SEC-001, any PII transformation must be validated pre-deploy. Das hat dazu geführt, dass wir den Cutover um zwei Tage verschieben mussten, weil das Security Review eine Maskierungsregel im dbt-Schema nachziehen wollte."}
+{"ts": "149:51", "speaker": "I", "text": "Und wie haben Sie das mit den Stakeholdern kommuniziert, damit das SLA-HEL-01 nicht gefährdet wird?"}
+{"ts": "149:56", "speaker": "E", "text": "Wir haben ein Change Advisory Board Meeting eingeschoben und die Anpassung im RFC-HEL-2023-044 dokumentiert. This RFC included the revised rollout timeline and a mitigation note stating that partial ingestion would be active to keep availability above 99.9%."}
+{"ts": "150:04", "speaker": "I", "text": "Sie erwähnten vorhin eine partielle Ingestion — wie wird das technisch umgesetzt?"}
+{"ts": "150:10", "speaker": "E", "text": "Technisch nutzen wir zwei parallele Kafka-Consumer-Gruppen. Eine läuft mit dem alten Schema, eine mit dem neuen. The ingestion orchestrator in Airflow merges only non-sensitive columns until the dbt model catches up."}
+{"ts": "150:18", "speaker": "I", "text": "Das heißt, Ihre Airflow-DAGs sind schema-aware?"}
+{"ts": "150:21", "speaker": "E", "text": "Genau. Wir haben ein Modul 'schema_diff_checker' eingebaut, das bei jedem DAG-Run eine JSON-Schema-Diff gegen das im Datalake-Registry gespeicherte Modell fährt. If it detects PII field changes, it triggers the security review hook."}
+{"ts": "150:29", "speaker": "I", "text": "Wie wirkt sich das auf die Latenz aus? Gibt es messbare Einbußen?"}
+{"ts": "150:33", "speaker": "E", "text": "Ein klein wenig. Wir sehen etwa +300 ms per batch zusätzlich. But the trade-off is worth it — wir haben seit Implementierung keinen POL-SEC-001 Verstoß mehr im Monitoring (Ticket IDs SEC-2023-88 bis -90 belegen das)."}
+{"ts": "150:41", "speaker": "I", "text": "Apropos Monitoring: nutzen Sie ein zentrales Dashboard für Kafka und dbt Health?"}
+{"ts": "150:46", "speaker": "E", "text": "Ja, wir haben ein kombiniertes Grafana-Board 'HEL-Integrations-Health'. It pulls metrics from Prometheus for Kafka lag und aus dbt Cloud API für model run success rates. Alarme werden via PagerDuty ausgelöst."}
+{"ts": "150:54", "speaker": "I", "text": "Hat das schon einmal einen größeren Incident verhindert?"}
+{"ts": "150:58", "speaker": "E", "text": "Im Juli, ja. Wir sahen einen plötzlichen Lag-Anstieg auf 5k Messages im Topic 'orders'. Dashboard alerted us within 2 minutes. Laut Runbook RB-HEL-KAF-12 wurde sofort ein Consumer-Scaling durchgeführt, bevor SLA-HEL-01 verletzt wurde."}
+{"ts": "151:06", "speaker": "I", "text": "Gab es bei diesem Scaling irgendwelche negativen Nebeneffekte?"}
+{"ts": "151:11", "speaker": "E", "text": "Minor cost spike — AWS-Billing zeigte für den Tag +18% Compute-Kosten. But das war ein bewusster Trade-off, documented in Incident Report IR-HEL-2023-07-15, mit Freigabe durch den Finance Stakeholder."}
+{"ts": "151:06", "speaker": "I", "text": "Wenn wir jetzt in die Scale-Phase schauen, wie wirken sich die neuen Data Source Integrations auf Ihr Deployment-Window aus?"}
+{"ts": "151:12", "speaker": "E", "text": "Also, wir mussten das Deployment-Window tatsächlich um zwei Stunden verschieben, weil die neuen ERP-Feeds aus Orion ERP in den frühmorgendlichen Kafka-Batches kommen. That means our dbt nightly runs had to be rescheduled to avoid schema lock conflicts."}
+{"ts": "151:22", "speaker": "I", "text": "Und wie haben Sie das mit den Stakeholdern abgestimmt? War das ein formaler RFC-Prozess?"}
+{"ts": "151:28", "speaker": "E", "text": "Ja, wir haben RFC-HEL-224 eingereicht, mit klarer Darstellung der Auswirkungen auf SLA-HEL-01. The change board approved it after we demonstrated via Runbook RB-ING-07 that zero downtime ingestion is feasible."}
+{"ts": "151:39", "speaker": "I", "text": "Gab es technische Abhängigkeiten, die Sie bei diesem Change besonders berücksichtigen mussten?"}
+{"ts": "151:45", "speaker": "E", "text": "Absolut. Orion ERP liefert Daten in Avro, während unser CRM-Stream JSON nutzt. Wir mussten im Kafka Schema Registry duale Compatibility Modes aktivieren, sonst hätte das dbt-Staging-Modell HEL_STAGE_12 gebrochen."}
+{"ts": "151:58", "speaker": "I", "text": "Das klingt nach einer komplexen Multi-Hop-Kette zwischen Source und Model Layer."}
+{"ts": "152:03", "speaker": "E", "text": "Genau, und da kam unsere Monitoring-Chain ins Spiel: Kafka Connect → Snowpipe → dbt run. If one of these fails, SLA breach risk increases; deshalb haben wir einen Alert-Tripwire zwischen Snowpipe und dbt implementiert."}
+{"ts": "152:15", "speaker": "I", "text": "Wie dokumentieren Sie solche Cross-System Alerts?"}
+{"ts": "152:20", "speaker": "E", "text": "In Confluence haben wir das Playbook PB-OBS-03, da steht drin: 'Wenn Snowpipe lag > 5min und dbt run nicht gestartet → escalate L2 within 10min'. That was added after Incident INC-HEL-317 im letzten Quartal."}
+{"ts": "152:34", "speaker": "I", "text": "Können Sie zu INC-HEL-317 ein bisschen mehr Kontext geben?"}
+{"ts": "152:39", "speaker": "E", "text": "Ja, das war ein Trade-off Moment: Wir hatten die Wahl, sofort zusätzliche Snowflake Credits zu kaufen oder 20 Minuten Delay zu tolerieren. We chose the delay to stay within budget, knowing it was a low-impact breach."}
+{"ts": "152:51", "speaker": "I", "text": "Und wie wurde diese Entscheidung im Nachgang bewertet?"}
+{"ts": "152:56", "speaker": "E", "text": "Post-Mortem hat gezeigt, dass die Kunden im Asien-Pazifik-Raum leichte Verzögerungen bei Dashboard-Refresh hatten. Aber laut SLA-HEL-01 Appendix B war das noch im tolerierten Bereich, so no penalties applied."}
+{"ts": "153:08", "speaker": "I", "text": "Gab es daraus eine Runbook-Anpassung?"}
+{"ts": "153:13", "speaker": "E", "text": "Ja, RB-ING-09 wurde ergänzt: 'Bei erwarteter Lastspitze > 120% baseline, prüfen ob Pre-Warming von Warehouses günstiger als on-demand Scaling ist'. That gives PMs a clear decision matrix for cost vs. performance."}
+{"ts": "153:06", "speaker": "I", "text": "Vielleicht können wir noch tiefer auf die Lessons Learned eingehen – was war für Sie bei Helios Datalake der größte Aha-Moment?"}
+{"ts": "153:13", "speaker": "E", "text": "Also, äh, einer der größten Aha-Momente war, dass wir beim Incident INC-HEL-229 gemerkt haben, dass die Snowflake-Query-Optimierung nicht nur ein Data-Engineering-Thema ist, sondern direkt mit Kafka-Batchgrößen zusammenhängt."}
+{"ts": "153:23", "speaker": "I", "text": "Das heißt, Sie mussten gleichzeitig im Streaming und im Warehouse anpassen?"}
+{"ts": "153:28", "speaker": "E", "text": "Genau. Wir haben Runbook RB-HEL-17 aktualisiert, um klarzustellen, dass jede Änderung der Kafka-Producers > batch.size=64k sofort einen RFC für dbt-Modelle nach sich zieht."}
+{"ts": "153:39", "speaker": "I", "text": "Und wie beeinflusst das die SLA-HEL-01 Überwachung?"}
+{"ts": "153:44", "speaker": "E", "text": "Well, we had to extend our Prometheus dashboard to include lag monitoring against the SLA window. If lag > 90 seconds for two consecutive checks, it triggers an automated alert to the on-call engineer per RB-HEL-22."}
+{"ts": "153:56", "speaker": "I", "text": "Gab es dafür besondere Bottlenecks bei den Stakeholdern?"}
+{"ts": "154:01", "speaker": "E", "text": "Ja, der schwierigste Teil war, die BI-Teams zu überzeugen, dass eine kurzfristige Reduktion der Aggregations-Jobs nötig ist. They were worried about delayed dashboards, but the trade-off prevented a breach of availability."}
+{"ts": "154:12", "speaker": "I", "text": "Das klingt nach einem klaren Trade-off zwischen Nutzererwartung und Systemstabilität."}
+{"ts": "154:16", "speaker": "E", "text": "Absolutely. Wir haben das im Post-Mortem dokumentiert, inklusive einer Kostenanalyse: 15% weniger Snowflake-Compute-Ausgaben, aber 5 Minuten Verzögerung bei einigen Reports."}
+{"ts": "154:27", "speaker": "I", "text": "Wie wurde das von der Geschäftsleitung bewertet?"}
+{"ts": "154:31", "speaker": "E", "text": "They accepted it, weil der SLA-HEL-01 gehalten wurde. Außerdem hat POL-SEC-001 Vorrang vor reinen Convenience-Faktoren, und der verkürzte Load hat das Security-Window eingehalten."}
+{"ts": "154:42", "speaker": "I", "text": "Gab es noch andere Policies, die in dieser Situation relevant waren?"}
+{"ts": "154:46", "speaker": "E", "text": "Ja, die interne Policy POL-DATA-004 zur Datenklassifizierung. We had to ensure sensitive fields were masked before any ad-hoc rerun, even unter Zeitdruck."}
+{"ts": "154:56", "speaker": "I", "text": "Das heißt, selbst in Incident-Szenarien bleibt der Compliance-Check Pflicht?"}
+{"ts": "155:02", "speaker": "E", "text": "Exactly. Das hat uns einmal 20 Minuten extra gekostet, aber ohne diesen Schritt hätten wir gegen externe Audit-Anforderungen verstoßen."}
+{"ts": "154:42", "speaker": "I", "text": "Lassen Sie uns noch etwas tiefer in die Incident-Historie eintauchen. Could you walk me through a concrete example where a Kafka pipeline change triggered downstream model adjustments?"}
+{"ts": "154:48", "speaker": "E", "text": "Ja, das war im März, Ticket INC-HEL-239. Wir haben Topics für Sensor-Daten neu partitioniert, um den Throughput zu erhöhen. That inadvertently broke a dbt incremental model because the partition key semantics changed."}
+{"ts": "154:58", "speaker": "I", "text": "Und wie haben Sie das erkannt? War das ein Alert aus dem Monitoring oder ein Stakeholder-Report?"}
+{"ts": "155:04", "speaker": "E", "text": "Primär aus dem SLA-Monitor, Rule MON-HEL-14, der auf Row Count Deltas prüft. Zusätzlich meldete das Data Science Team anomalies in their daily load verification script."}
+{"ts": "155:15", "speaker": "I", "text": "Was sagt denn das Runbook RB-DBT-05 zu so einem Fall?"}
+{"ts": "155:20", "speaker": "E", "text": "RB-DBT-05 empfiehlt sofortige Pausierung der betroffenen DAG und ein Schema-Drift-Check via dbt test. Then we apply hotfix macros to realign the partition filters."}
+{"ts": "155:33", "speaker": "I", "text": "Gab es da einen Trade-off zwischen schneller Wiederherstellung und nachhaltiger Lösung?"}
+{"ts": "155:38", "speaker": "E", "text": "Ja, wir haben damals quick and dirty gefixt, um SLA-HEL-01 zu halten. Die nachhaltige Lösung – Refactoring des Staging Layer – folgte erst im nächsten Sprint, RFC-HEL-77."}
+{"ts": "155:50", "speaker": "I", "text": "Klingt nach einer bewussten Entscheidung unter Zeitdruck. How did you document that for future reference?"}
+{"ts": "155:55", "speaker": "E", "text": "Wir haben im Confluence-Log das Incident-Postmortem angehängt, inklusive der Metriken aus Snowflake Query History und Kafka Lag Monitor, damit Lessons Learned transparent sind."}
+{"ts": "156:07", "speaker": "I", "text": "Und haben diese Lessons Learned bereits praktische Wirkung gezeigt in späteren Changes?"}
+{"ts": "156:12", "speaker": "E", "text": "Definitiv. Beim letzten Schema-Update im Mai haben wir vorab einen Shadow-Topic-Test gefahren. That caught an ordering issue before it hit production."}
+{"ts": "156:23", "speaker": "I", "text": "Sehr gut. Gibt es innerhalb von Novereon Systems eigentlich eine Art ungeschriebene Regel, wie man solche Cross-System-Änderungen timet?"}
+{"ts": "156:29", "speaker": "E", "text": "Ja, die \"Don’t deploy after 15:00\"-Regel am Donnerstag. Because Friday is our SLA window for month-end loads, and any ripple could breach it."}
+{"ts": "156:39", "speaker": "I", "text": "Das ist interessant – also eine Balance aus formalen Policies wie POL-SEC-001 und diesen heuristischen Regeln."}
+{"ts": "156:44", "speaker": "E", "text": "Genau. Formal sichern wir Security und Availability, und informell schützen wir uns vor avoidable firefights. Those complement each other quite well."}
+{"ts": "158:42", "speaker": "I", "text": "Lassen Sie uns kurz auf die aktuelle Situation eingehen: Wo stehen wir genau im Scale-Phase-Scope des Helios Datalake gerade?"}
+{"ts": "158:47", "speaker": "E", "text": "Aktuell sind wir bei etwa 85 % der geplanten Integrationen. The unified ELT to Snowflake ist stable, wir haben aber noch zwei kritische Kafka topics, die aus den IoT-Sensoren der Fertigung kommen, im Onboarding."}
+{"ts": "158:55", "speaker": "I", "text": "Und diese beiden Topics – fallen die noch unter den ursprünglichen Scope oder sind das Erweiterungen?"}
+{"ts": "158:59", "speaker": "E", "text": "Sie sind Teil des ursprünglichen Scope, aber weil die Quellsysteme erst jetzt bereit sind, haben wir sie als 'late onboarding' klassifiziert."}
+{"ts": "159:06", "speaker": "I", "text": "Welche Stakeholder sind hier aktuell am stärksten involviert?"}
+{"ts": "159:10", "speaker": "E", "text": "Vor allem das Manufacturing Analytics Team und unsere Data Governance Unit. Sie stimmen die Schema-Änderungen mit den dbt-Modellverantwortlichen ab."}
+{"ts": "159:18", "speaker": "I", "text": "Speaking of schema changes – wie koordinieren Sie diese Änderungen genau zwischen Kafka-Ingestion und dbt?"}
+{"ts": "159:23", "speaker": "E", "text": "Wir nutzen eine Kombination aus dem Runbook RB-HEL-17 und einem Pre-merge-Check im GitLab pipeline. This check runs automated schema diff scripts gegen Snowflake und blockt Deployments, wenn breaking changes detected werden."}
+{"ts": "159:34", "speaker": "I", "text": "Gibt es Abhängigkeiten zu anderen Projekten, die das beeinflussen?"}
+{"ts": "159:38", "speaker": "E", "text": "Ja, das Projekt P-ORC für Order-Tracking liefert Daten, die wir in Helios aggregieren. Änderungen dort triggern teilweise Rebuilds unserer dbt models."}
+{"ts": "159:46", "speaker": "I", "text": "Wie stellen Sie sicher, dass SLA-HEL-01 eingehalten bleibt, wenn solche Rebuilds stattfinden?"}
+{"ts": "159:51", "speaker": "E", "text": "Wir schedulen Rebuilds in Wartungsfenstern zwischen 01:00–03:00 CET und nutzen den Failover-Mechanismus aus RB-HEL-05, welcher einen read-only Mirror im Secondary Cluster aktiviert."}
+{"ts": "160:02", "speaker": "I", "text": "Gab es schon Situationen, in denen Sie Performance gegen Kosten abgewogen haben?"}
+{"ts": "160:07", "speaker": "E", "text": "Ja, etwa im Incident INC-HEL-422. Wir hätten die Cluster auf XL hochfahren können, um eine Query backlog abzubauen, haben aber aufgrund der Cloud-Kosten entschieden, targeted Materializations zu fahren."}
+{"ts": "160:18", "speaker": "I", "text": "Welche Lessons Learned haben Sie daraus gezogen?"}
+{"ts": "160:22", "speaker": "E", "text": "Dass wir bei Backlogs zuerst prüfen sollten, ob wir durch Optimierung der dbt run order und Caching die SLA halten können, bevor wir teure Scale-ups buchen – dokumentiert in Post-Mortem DOC-HEL-LL-09."}
+{"ts": "160:18", "speaker": "I", "text": "Lassen Sie uns nochmal auf die Governance-Themen zurückkommen – wie gehen Sie aktuell mit der Policy POL-SEC-001 in der Scale-Phase um?"}
+{"ts": "160:23", "speaker": "E", "text": "Ja, also POL-SEC-001 ist bei uns sozusagen der, äh, Leitstern für Data Governance. We enforce encryption at rest und in transit, und wir haben ein internes Checklist-Tool, das vor jedem Deployment prüft, ob die policy-konformen Settings gesetzt sind."}
+{"ts": "160:34", "speaker": "I", "text": "Nutzen Sie dafür ein festes Runbook, oder ist das eher ad hoc?"}
+{"ts": "160:38", "speaker": "E", "text": "Es gibt ein Runbook, RB-HEL-05, das beschreibt, wie wir Secrets rotieren und auditieren. Zusätzlich haben wir im Incident-Management-Tool Alerts, die auf Basis von POL-SEC-001 triggern, wenn z. B. ein S3-Bucket versehentlich public gesetzt würde."}
+{"ts": "160:50", "speaker": "I", "text": "Wie fließt das in die SLA-HEL-01 Einhaltung ein?"}
+{"ts": "160:54", "speaker": "E", "text": "Indirectly. Wenn wir Security Breaches vermeiden, vermeiden wir auch Downtime. SLA-HEL-01 verlangt 99,9% availability, und Security Incidents können das schnell gefährden. Deshalb ist Security bei uns nicht nur Compliance, sondern auch Availability-Driver."}
+{"ts": "161:06", "speaker": "I", "text": "Gibt es Abhängigkeiten zu anderen Projekten, die bei Security-Themen kritisch sind?"}
+{"ts": "161:10", "speaker": "E", "text": "Ja, das Projekt 'Orion Stream' z. B., das auch Kafka nutzt. Wenn dort Schema Changes passieren, müssen wir in Helios die dbt-Modelle anpassen und gleichzeitig Security-Validierungen fahren, damit keine PII unverschlüsselt durchrutscht."}
+{"ts": "161:22", "speaker": "I", "text": "Hatten Sie vor kurzem ein Beispiel, wo so eine Koordination nötig war?"}
+{"ts": "161:26", "speaker": "E", "text": "Ja, Ticket INC-HEL-284 vom letzten Monat: Orion hat ein optionales Feld 'user_geo' eingeführt. Wir mussten in RB-HEL-17 die Transformation erweitern und in RB-HEL-05 die Field-Level-Encryption ergänzen."}
+{"ts": "161:39", "speaker": "I", "text": "Klingt nach einem Multi-Team-Effort. Gab es dabei Performance-Trade-offs?"}
+{"ts": "161:44", "speaker": "E", "text": "Absolutely. Encryption auf Feldebene erhöht die Latenz in den dbt-Jobs um ~8%. Wir haben uns aber against optimisations entschieden, um Compliance nicht zu riskieren. Das ist ein klassischer Security über Performance Trade-off."}
+{"ts": "161:56", "speaker": "I", "text": "Wie dokumentieren Sie solche Entscheidungen?"}
+{"ts": "162:00", "speaker": "E", "text": "Im RFC-Log, z. B. RFC-HEL-092, steht die Entscheidung, die Messwerte vor und nach der Änderung, und die Abwägung. Das wird dann im Quarterly Review mit Stakeholdern geteilt."}
+{"ts": "162:09", "speaker": "I", "text": "Und Lessons Learned daraus?"}
+{"ts": "162:13", "speaker": "E", "text": "Dass wir frühzeitig, also schon beim Schema-Change-Announcement, ein Security-Review einplanen. Das minimiert Last-Minute-Anpassungen und hält den SLA-Impact minimal."}
+{"ts": "161:54", "speaker": "I", "text": "Bevor wir in den nächsten Abschnitt gehen, wollte ich nachhaken: wie haben sich die Lessons Learned aus Incident #INC-HEL-203 konkret auf eure letzten Deployments ausgewirkt?"}
+{"ts": "161:59", "speaker": "E", "text": "Ähm, ja, also… das war schon ein turning point. Wir haben nach diesem Incident ein Pre-Deployment Checklist Item ergänzt, das explizit die Offsets in Kafka-Topics gegen die dbt-Model Dependencies matched. Das steht jetzt auch in RB-HEL-22, Abschnitt 4."}
+{"ts": "162:07", "speaker": "I", "text": "So eine Checkliste – ist das eher formell in den Policies verankert oder läuft das noch unter Best Practice?"}
+{"ts": "162:12", "speaker": "E", "text": "Formalisiert, ja. Wir haben es als Appendix in POL-SEC-001 aufgenommen, damit es auch sicherheitsrelevant reviewed wird. The idea was to make sure operational hygiene is not optional."}
+{"ts": "162:21", "speaker": "I", "text": "Inwiefern beeinflusst das eure Koordination mit dem DataOps-Team?"}
+{"ts": "162:25", "speaker": "E", "text": "Well, deren Release-Window musste leicht verschoben werden. Unsere Deployment-Runs starten jetzt erst, wenn deren Offset-Validation durch ist. Das hat bei SLA-HEL-01 keine negativen Effekte gezeigt, laut unserem letzten Availability Report."}
+{"ts": "162:34", "speaker": "I", "text": "Gab es dazu auch ein RFC-Dokument?"}
+{"ts": "162:37", "speaker": "E", "text": "Ja, RFC-HEL-58. Enthält die Metriken und einen Change-Timeline-Plan. Wir mussten darin auch die Eventual Consistency zwischen Kafka und Snowflake sauber dokumentieren, damit der Governance-Kreis es abzeichnen konnte."}
+{"ts": "162:46", "speaker": "I", "text": "Spannend. Wie messt ihr aktuell, ob diese Consistency gewährleistet ist?"}
+{"ts": "162:51", "speaker": "E", "text": "Wir haben ein Monitoring-Skript, integriert in Grafana, das die Lag-Werte pro Topic mit den Timestamps der dbt-Model-Runs korreliert. If the lag exceeds 90 seconds, ein Alert geht direkt an PagerDuty-HEL-Data."}
+{"ts": "163:01", "speaker": "I", "text": "Und wie oft tritt so ein Alert im Schnitt pro Monat auf?"}
+{"ts": "163:04", "speaker": "E", "text": "Zuletzt nur zweimal im Quartal, seit wir RB-HEL-22 eingeführt haben. Davor waren es im Schnitt fünf bis sechs pro Monat – das war echt kritisch."}
+{"ts": "163:12", "speaker": "I", "text": "Hat diese Reduktion auch Auswirkungen auf eure Kostenstruktur gehabt?"}
+{"ts": "163:16", "speaker": "E", "text": "Yes, absolutely. Weniger Alerts heißt weniger Overprovisioning in Snowflake, weil wir nicht mehr ständig Reprocesses fahren müssen. Wir haben laut FinOps-Report vom April etwa 12% Compute-Kosten eingespart."}
+{"ts": "163:25", "speaker": "I", "text": "Gab es intern Diskussionen, ob man diese Einsparung eher in weitere Performance-Investments steckt oder als Budget-Reserve behält?"}
+{"ts": "163:30", "speaker": "E", "text": "Ja, das war ein klassischer Trade-off. Wir haben uns entschieden, 60% der Einsparung in ein POC für Echtzeit-Transformation zu stecken, der Rest bleibt als Reserve für SLA-Risiken. Das ist auch im Board-Protokoll vom 14. Mai vermerkt."}
+{"ts": "163:26", "speaker": "I", "text": "Vielleicht können wir nochmal konkret werden: wie genau wird denn der SLA-HEL-01 im täglichen Monitoring eingebunden?"}
+{"ts": "163:31", "speaker": "E", "text": "Also, wir haben dafür ein kombinierte Dashboard in unserem internen HeliosControl, das mit Prometheus-Metriken arbeitet – uptime, ingestion lag, und auch dbt run success rates. Every morning, the on-call checks RB-HEL-09 to verify thresholds, before any standup."}
+{"ts": "163:44", "speaker": "I", "text": "Und wenn ein Threshold verletzt wird, gibt es automatische Eskalationen?"}
+{"ts": "163:48", "speaker": "E", "text": "Ja, genau. PagerDuty wird getriggert, und parallel öffnet unser IncidentBot direkt ein Ticket im HEL-SYS-Board. Das verlinkt dann auch direkt die relevanten Runbooks, meistens RB-HEL-02 oder RB-HEL-17."}
+{"ts": "163:59", "speaker": "I", "text": "Wie oft kommt das aktuell vor?"}
+{"ts": "164:02", "speaker": "E", "text": "Sehr selten – vielleicht einmal pro Quartal. But when it happens, it's usually tied to a misaligned Kafka schema change that wasn't communicated, causing downstream dbt models to fail."}
+{"ts": "164:13", "speaker": "I", "text": "Das klingt nach einer klaren Abhängigkeit. Gibt es einen festgelegten Change-Request-Prozess?"}
+{"ts": "164:17", "speaker": "E", "text": "Ja, wir nutzen das RFC-HEL-33 Template. Every change to ingestion topics must be scheduled in the weekly sync with data modeling, and security reviews it under POL-SEC-001 if PII fields are touched."}
+{"ts": "164:30", "speaker": "I", "text": "Wie wird die Security-Policy konkret angewendet, wenn neue Felder auftauchen?"}
+{"ts": "164:34", "speaker": "E", "text": "Wir haben in dbt ein Macro, das alle Felder gegen unsere Classification-Tabelle prüft. If any field is 'sensitive', the pipeline will fail in staging until masking is configured per RB-HEL-21."}
+{"ts": "164:46", "speaker": "I", "text": "Gab es da schon einmal ein spannendes Beispiel?"}
+{"ts": "164:50", "speaker": "E", "text": "Ja, im März, Ticket HEL-INC-442. A new marketing feed added an 'email' field, which triggered staging failure. Wir mussten in der Nacht eine Masking-Policy deployen, sonst hätten wir das SLA verfehlt."}
+{"ts": "165:02", "speaker": "I", "text": "Und wie haben Sie die Entscheidung getroffen, den Masking-Deploy sofort zu machen?"}
+{"ts": "165:06", "speaker": "E", "text": "Das war ein klassischer Trade-off: waiting for full regression tests would risk breaching SLA-HEL-01. Wir haben uns auf Basis von RB-RISK-05 und einem schnellen QA-Check für Immediate-Deploy entschieden."}
+{"ts": "165:18", "speaker": "I", "text": "Das klingt nach einer Lehre, die Sie ins Team zurückgespielt haben?"}
+{"ts": "165:22", "speaker": "E", "text": "Absolut. Wir haben daraus eine Lesson Learned Session gemacht und RFC-HEL-33 ergänzt: Now schema changes must include a PII risk flag, so wir den Masking-Check schon vor Staging einplanen können."}
+{"ts": "165:02", "speaker": "I", "text": "Lassen Sie uns bitte genauer auf die Lessons Learned aus Incident-Ticket INC-HEL-442 eingehen. Welche konkreten Änderungen haben Sie daraus im Deployment-Prozess abgeleitet?"}
+{"ts": "165:07", "speaker": "E", "text": "Ja, also aus INC-HEL-442 — das war der Fall mit der fehlerhaften Kafka-Topic-Konfiguration — haben wir die Pre-Deployment-Checks in RB-HEL-17 erweitert. Specifically, we added an automated schema validation step before dbt transformations kick in."}
+{"ts": "165:13", "speaker": "I", "text": "War das eher eine technische Anpassung oder auch ein organisatorischer Prozess?"}
+{"ts": "165:18", "speaker": "E", "text": "Beides. Technisch haben wir in den Jenkins-Pipelines einen zusätzlichen Stage eingefügt, organisatorisch haben wir im Change Advisory Board ein Pflichtfeld für 'Schema Diff Approval' aufgenommen. That way, even if the schema changes, both dev and ops are aware before merge."}
+{"ts": "165:25", "speaker": "I", "text": "Gab es dabei Konflikte mit der Einhaltung der SLA-HEL-01, gerade bezüglich der Downtime in Deployments?"}
+{"ts": "165:31", "speaker": "E", "text": "Kurzfristig ja, weil die zusätzlichen Checks die Deployment-Zeit um etwa 6 Minuten verlängerten. Allerdings haben wir im SLA-HEL-01 Runbook, Abschnitt 3.4, eine Ausnahme für Maintenance-Windows dokumentiert. So konnten wir die Availability von 99,9% trotzdem halten."}
+{"ts": "165:38", "speaker": "I", "text": "Und wie haben Sie das Monitoring angepasst?"}
+{"ts": "165:42", "speaker": "E", "text": "Wir haben eine neue Prometheus-Rule 'KafkaSchemaMismatchAlert' eingeführt, die auf dem gleichen Validator basiert. Plus, wir haben im Grafana-Dashboard HEL-MON-21 einen neuen Panel hinzugefügt, der den Status der letzten fünf Schema-Validierungen zeigt."}
+{"ts": "165:49", "speaker": "I", "text": "Können Sie ein Beispiel nennen, wo diese Änderung schon proaktiv gewirkt hat?"}
+{"ts": "165:54", "speaker": "E", "text": "Ja, Ticket WARN-HEL-509. There was an upstream change from the CRM data source — they added a nullable column. Our validator caught it in staging, so we avoided a runtime error in the dbt job 'customer_metrics_agg'."}
+{"ts": "166:00", "speaker": "I", "text": "Das klingt nach einem klaren Mehrwert. Haben Sie überlegt, diese Validator-Logik auch für andere Pipelines im Portfolio einzusetzen?"}
+{"ts": "166:05", "speaker": "E", "text": "Ja, im RFC-HEL-78 ist vorgesehen, die Logik auch auf das Orion-Streaming-Projekt auszuweiten. But there we have to adapt it for Avro schemas, whereas Helios mostly uses JSON payloads."}
+{"ts": "166:12", "speaker": "I", "text": "Gab es Bedenken bezüglich zusätzlicher Komplexität?"}
+{"ts": "166:16", "speaker": "E", "text": "Auf jeden Fall. Mehr Checks bedeuten mehr Moving Parts. Wir haben daher im Risk Register RISK-HEL-14 festgehalten, dass der Validator selbst ein Single Point of Failure werden könnte. Deshalb läuft er redundant in zwei Kubernetes-Pods und wir haben ein Fallback auf manuelle Checks."}
+{"ts": "166:24", "speaker": "I", "text": "Also ist das ein klassischer Trade-off zwischen Robustheit und Geschwindigkeit?"}
+{"ts": "166:29", "speaker": "E", "text": "Genau. Wir akzeptieren eine leichte Verzögerung im Deployment, um dafür Ausfälle im laufenden Betrieb zu vermeiden. The cost impact is minimal compared to the potential downtime costs, as calculated in Cost-Benefit-Calc HEL-CBC-12."}
+{"ts": "166:38", "speaker": "I", "text": "Lassen Sie uns noch etwas tiefer einsteigen, ähm, in die letzten Änderungen an den Snowflake-Schemata. How did you coordinate that with the Kafka teams?"}
+{"ts": "166:45", "speaker": "E", "text": "Wir haben eine wöchentliche Sync-Session mit den Kafka-Owners, in der wir geplante Schema-Änderungen abgleichen. Zusätzlich nutzen wir das interne Tool 'SchemaBridge', um automatisch dbt-Models zu validieren, bevor sie in den Staging-Bereich von Snowflake deployt werden."}
+{"ts": "166:59", "speaker": "I", "text": "Und was passiert, wenn—äh—eine Änderung in Kafka kommt, bevor dbt angepasst wurde? Is there a fallback?"}
+{"ts": "167:06", "speaker": "E", "text": "Ja, wir haben einen Fallback-Mechanismus: über RB-HEL-21 ist definiert, dass inkompatible Messages in einen Quarantine-Topic umgeleitet werden. Das erlaubt uns, die Models nachzuziehen, ohne SLA-HEL-01 zu verletzen."}
+{"ts": "167:20", "speaker": "I", "text": "Interessant. That suggests a pretty tight coupling between ingestion monitoring and SLA compliance."}
+{"ts": "167:27", "speaker": "E", "text": "Genau. Die Monitoring-Alerts aus unserem Kafka-Lag-Dashboard sind direkt mit dem Runbook RB-HEL-17 verknüpft. Dieses Runbook beschreibt, wie wir in maximal 15 Minuten reagieren, um die 99,9% Availability einzuhalten."}
+{"ts": "167:42", "speaker": "I", "text": "Wie fließen Sicherheitsaspekte, also z. B. POL-SEC-001, in diese Change-Prozesse ein?"}
+{"ts": "167:49", "speaker": "E", "text": "POL-SEC-001 verlangt, dass jede neue Datenquelle vor Integration einen Security Assessment Report hat. Das ist ein zusätzlicher Gate in unserem RFC-Prozess – ohne diesen Report gibt es keinen Merge ins Main-Branch."}
+{"ts": "168:03", "speaker": "I", "text": "So even under pressure, you cannot bypass that gate?"}
+{"ts": "168:08", "speaker": "E", "text": "Richtig, das ist quasi in unseren CI/CD-Pipelines hart verdrahtet. Selbst Hotfixes gehen durch eine Light-Version des Assessments, dokumentiert im Tickettemplate TPL-SEC-05."}
+{"ts": "168:21", "speaker": "I", "text": "Gab es denn mal einen Vorfall, bei dem dieser Security-Gate den Rollout verzögert hat, aber ein Risiko vermieden wurde?"}
+{"ts": "168:28", "speaker": "E", "text": "Ja, Incident INC-HEL-142. Da wollte das Data Science Team kurzfristig ein externes Dataset anbinden. Das Assessment stellte fest, dass die API PII-Daten enthielt, die nicht verschlüsselt waren. Rollout wurde gestoppt, bis TLS enforced war."}
+{"ts": "168:44", "speaker": "I", "text": "Das klingt nach einer klaren Trade-off-Entscheidung zwischen Time-to-Market und Compliance."}
+{"ts": "168:50", "speaker": "E", "text": "Absolut. Wir haben damals zwei Sprints Verzögerung in Kauf genommen, um Compliance-Risiken auszuschließen. Langfristig hat sich das ausgezahlt, da wir sonst eine SLA-Verletzung durch regulatorische Maßnahmen riskiert hätten."}
+{"ts": "169:03", "speaker": "I", "text": "Würden Sie sagen, dass solche Entscheidungen jetzt leichter fallen, weil es dokumentierte Lessons Learned gibt?"}
+{"ts": "169:10", "speaker": "E", "text": "Ja, wir pflegen ein Confluence-Board 'HEL-Lessons', in dem alle Incidents mit Root Cause, Impact und Decision-Rationale verlinkt sind. Diese Dokumentation hilft, ähnliche Situationen schneller zu bewerten und Stakeholder zu überzeugen."}
+{"ts": "174:38", "speaker": "I", "text": "Lassen Sie uns nochmal auf die Integrationen zurückkommen – wie genau haben Sie die Kafka-Ingestion in Helios mit den Snowflake-ELT-Prozessen synchronisiert?"}
+{"ts": "174:44", "speaker": "E", "text": "Wir haben einen orchestrated schedule im Airflow, der sowohl die Kafka-Consumer-Jobs als auch die dbt-Transformationen triggert.\nDas bedeutet, die latency-sensitive topics werden zuerst in ein Raw-Layer-Table geschrieben, dann gibt es ein dependency flag im metadata schema, bevor der nächste dbt Run beginnt."}
+{"ts": "174:58", "speaker": "I", "text": "Ah, und diese dependency flags, sind die in irgendeiner Form auch in den Runbooks dokumentiert?"}
+{"ts": "175:03", "speaker": "E", "text": "Ja, in RB-HEL-21, Abschnitt 4.2.\nDort ist festgehalten, wie das Flag 'ready_for_model' gesetzt wird und welche Checks – etwa Schema-Drift-Detection – davor laufen müssen."}
+{"ts": "175:14", "speaker": "I", "text": "Verstehe. Und welche anderen Projekte im Portfolio beeinflussen diese Pipeline aktuell?"}
+{"ts": "175:18", "speaker": "E", "text": "Ein Beispiel ist Projekt Orion-Feeds, das liefert Bulk-Daten via S3-landing zone.\nWir mussten dort eine RFC-Überlappung (RFC-ORF-09) beachten, um nicht den dbt-Model-Build von Helios zu blockieren."}
+{"ts": "175:32", "speaker": "I", "text": "Also eine Art multi-hop coordination zwischen Kafka, S3-Feeds und dbt?"}
+{"ts": "175:36", "speaker": "E", "text": "Genau, das ist der 'cross-stream alignment' Prozess.\nWir haben ihn eingeführt, nachdem im Februar ein Incident (INC-HEL-242) auftrat, weil Orion-Feeds verspätet waren und dadurch unsere incremental models falsche Aggregationen berechneten."}
+{"ts": "175:50", "speaker": "I", "text": "Wie wirkt sich dabei die SLA-HEL-01 auf Ihre Entscheidungen aus?"}
+{"ts": "175:55", "speaker": "E", "text": "Die 99,9 % Availability zwingt uns, fallback paths zu definieren.\nWenn ein externer Feed fehlt, fahren wir mit stale data weiter – dokumentiert in RB-HEL-17 und abgesegnet im letzten Steering Committee."}
+{"ts": "176:08", "speaker": "I", "text": "Das heißt, Sie nehmen bewusst veraltete Daten in Kauf, um die SLA zu halten?"}
+{"ts": "176:12", "speaker": "E", "text": "Ja, das war ein Trade-off.\nIn Incident Review IR-HEL-58 haben wir entschieden, dass temporäre Data Staleness weniger Impact hat als ein SLA-Breach, der Vertragsstrafen auslösen würde."}
+{"ts": "176:24", "speaker": "I", "text": "Gab es dafür auch Kostenimplikationen?"}
+{"ts": "176:27", "speaker": "E", "text": "Sicher, stale data bedeutet weniger Rechenlast für kurzfristige Rebuilds.\nAllerdings müssen wir später einen Catch-up-Lauf starten, der Snowflake Credits frisst.\nDas haben wir unter Cost Impact ID-CI-HEL-73 protokolliert."}
+{"ts": "176:41", "speaker": "I", "text": "Und wie mitigieren Sie das Risiko, dass solche Catch-up Läufe die Performance für andere Queries beeinträchtigen?"}
+{"ts": "176:47", "speaker": "E", "text": "Wir schedulen sie in low-traffic Windows, meist zwischen 02:00 und 04:00 UTC.\nDas steht zwar nicht explizit in einer Policy, ist aber eine bewährte Praxis im Team, um sowohl SLA-HEL-01 als auch die internen Performance-Ziele einzuhalten."}
+{"ts": "181:58", "speaker": "I", "text": "Lassen Sie uns nochmal konkret auf die Integration zwischen Kafka und Snowflake eingehen – gab es da in den letzten Wochen besondere Herausforderungen?"}
+{"ts": "182:06", "speaker": "E", "text": "Ja, äh, tatsächlich hatten wir vor zwei Wochen ein Batch-Delay, caused by a schema evolution in one of the Kafka topics, das nicht rechtzeitig in den dbt-Modellen reflektiert wurde."}
+{"ts": "182:18", "speaker": "I", "text": "Und wie haben Sie das gelöst – über ein Runbook oder eher ad hoc?"}
+{"ts": "182:23", "speaker": "E", "text": "Wir haben RB-HEL-17 befolgt, das ist unser Incident-Runbook für ingestion-model mismatches. Schritt eins ist der Freeze der betroffenen dbt-Jobs, dann Anpassung der models.yml, und parallel die Abstimmung mit dem Kafka-Team."}
+{"ts": "182:39", "speaker": "I", "text": "Das klingt koordiniert. How did SLAs come into play here?"}
+{"ts": "182:43", "speaker": "E", "text": "SLA-HEL-01 gibt 99,9% Availability vor, gemessen über Pipeline-Durchläufe. Wir mussten im Monitoring-Dashboard einen Downtime-Window von 42 Minuten dokumentieren, das war noch innerhalb der tolerierten Error-Budget."}
+{"ts": "182:58", "speaker": "I", "text": "Gibt es Abhängigkeiten zu anderen Projekten, die das verzögert haben?"}
+{"ts": "183:03", "speaker": "E", "text": "Ja, das DataStream-X Projekt liefert einen Teil der Events, die wir ingestieren. Deren Deployments folgen einer anderen RFC-Prozedur (RFC-DSX-12), die manchmal nicht synchron mit unseren Release-Fenstern ist."}
+{"ts": "183:18", "speaker": "I", "text": "Wie koordinieren Sie diese Cross-Project Releases derzeit?"}
+{"ts": "183:23", "speaker": "E", "text": "Wir haben seit März ein gemeinsames Release-Board eingerichtet, wo alle Major Changes mit mindestens zwei Wochen Vorlauf eingetragen werden. In der Praxis nutzen wir dafür unser internes ConOps-Portal."}
+{"ts": "183:36", "speaker": "I", "text": "Und wie fließen Sicherheitsrichtlinien wie POL-SEC-001 in diese Planung ein?"}
+{"ts": "183:41", "speaker": "E", "text": "POL-SEC-001 verlangt, dass jede neue Datenquelle ein Security-Assessment durchläuft. Das heißt, wir müssen vor Go-Live eine Data Classification durchführen und Encryption-at-Rest sowie in-transit nachweisen."}
+{"ts": "183:55", "speaker": "I", "text": "Gab es hier schon einmal einen Trade-off zwischen Geschwindigkeit und Security?"}
+{"ts": "184:00", "speaker": "E", "text": "Ja, im Ticket INC-HEL-442 haben wir eine Quelle zwei Wochen später angebunden, um erst die Key-Rotation-Mechanismen einzurichten. That delayed some analytics use cases, but avoided a non-compliance risk."}
+{"ts": "184:15", "speaker": "I", "text": "Welche Lessons Learned haben Sie daraus gezogen?"}
+{"ts": "184:20", "speaker": "E", "text": "Dass wir Security-Reviews parallel zum Schema-Mapping starten müssen, nicht erst danach. Und wir haben im Confluence eine Checklist 'HEL-SRC-SEC' erstellt, die jetzt fester Bestandteil des Onboarding-Prozesses ist."}
+{"ts": "188:18", "speaker": "I", "text": "Lassen Sie uns mal auf die Incident-Dokumentation zurückkommen. How do you ensure that every relevant detail from a Kafka ingestion issue flows into the Helios runbooks?"}
+{"ts": "188:29", "speaker": "E", "text": "Wir haben einen festen Abschnitt in RB-HEL-17, wo jede Pipeline-impacting Incident-ID eingetragen wird. Then, during our weekly Ops-Sync, we cross-check mit den dbt-Teamleads, ob etwaige Modellanpassungen nötig sind."}
+{"ts": "188:46", "speaker": "I", "text": "Also fließen die Lessons Learned quasi in beide Richtungen? From ingestion back to modelling und umgekehrt?"}
+{"ts": "188:54", "speaker": "E", "text": "Genau, das ist ein bidirektionaler Prozess. For example, bei Incident TCK-HEL-445 mussten wir ein dbt-Macro refactoren, weil das Upstream-Schema via Kafka geändert wurde."}
+{"ts": "189:11", "speaker": "I", "text": "Und wie schnell schaffen Sie es, solche Änderungen in Produktion zu bringen, ohne die SLA-HEL-01 zu gefährden?"}
+{"ts": "189:19", "speaker": "E", "text": "Unser Ziel ist unter 4 Stunden für kritische Fixes. We use a hotfix deployment lane in Jenkins, die durch POL-SEC-001 abgesichert ist, inklusive approval durch Security."}
+{"ts": "189:35", "speaker": "I", "text": "Gab es Fälle, wo Sie bewusst länger gebraucht haben, um Compliance nicht zu riskieren?"}
+{"ts": "189:43", "speaker": "E", "text": "Ja, beim Schema-Change im März haben wir 6 Stunden gebraucht. That was a trade-off: lieber SLA leicht reißen, als gegen die Verschlüsselungsrichtlinie aus POL-SEC-001 zu verstoßen."}

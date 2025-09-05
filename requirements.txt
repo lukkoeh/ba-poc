@@ -1,0 +1,9 @@
+openai>=1.37.0
+python-dotenv>=1.0.1
+numpy>=1.24.0
+pandas>=2.1.0
+langdetect>=1.0.9
+tqdm>=4.66.0
+rich>=13.7.0
+orjson>=3.10.0
+jsonlines>=4.0.0
